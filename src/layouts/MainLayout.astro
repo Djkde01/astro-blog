@@ -1,9 +1,17 @@
 ---
 import MainHead from "./MainHead.astro";
+
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
 const {
   title = "Sergio Estrella",
   description = "Portafolio web de Sergio Estrella @djkde",
-} = Astro.props;
+} = Astro.props as Props;
 ---
 
 <html lang="en">
