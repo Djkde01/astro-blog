@@ -1,0 +1,22 @@
+---
+import MainHead from "./MainHead.astro";
+const {
+  title = "Sergio Estrella",
+  description = "Portafolio web de Sergio Estrella @djkde",
+} = Astro.props;
+---
+
+<html lang="en">
+  <MainHead {title} {description} />
+  <body>
+    <slot>
+      <h1>Hello, world!</h1>
+      <p>
+        This is an Astro app.{" "}
+        <a href="https://docs.astro.build/getting-started">
+          Learn more about Astro.
+        </a>
+      </p>
+    </slot>
+  </body>
+</html>
