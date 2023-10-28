@@ -1,0 +1,11 @@
+---
+const date = new Date();
+---
+
+<footer>
+  <small>&copy; <span id="year"></span> - Made with <span class="heart">&hearts;</span> by <a href="https://linkedin.com/in/djkde">Djkde</a></small>
+</footer>
+
+<script>
+    document.querySelector('#year').textContent = new Date().getFullYear().toString();
+    </script>
