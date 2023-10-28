@@ -1,0 +1,26 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Link from "../components/Link.astro";
+---
+
+<MainLayout title="Página no encontrada" description="Página no encontrada">
+  <div
+    class="container"
+    style={{
+      display: "grid",
+      placeItems: "center",
+      textAlign: "center",
+      gap: "var(--space-sm)",
+    }}
+  >
+    <h1 class="h1">Este no lo encontramos...</h1>
+    <p>La página que buscas no existe, o está en otro lado</p>
+    <Link
+      text="Volver al inicio"
+      href="/"
+      style="primary"
+      icon={{ name: "mdi:home", side: "left" }}
+      }}
+    />
+  </div>
+</MainLayout>
