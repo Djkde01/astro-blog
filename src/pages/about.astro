@@ -1,0 +1,59 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Link from "../components/Link.astro";
+---
+
+<MainLayout title="Acerca - Sergio Estrella">
+  <section class="container about" aria-label="About Me">
+    <img
+      src="/images/profile.jpeg"
+      alt="Sergio Estrella"
+      width="300"
+      height="300"
+    />
+    <div class="content">
+      <h1>Hola! <span aria-hidden="true">👋</span></h1>
+      <p>
+        ¡Que bueno verte! Soy Sergio Estrella, también conocido en internet como
+        Djkde, un Web Dev con la misión de mejorar la vida de las personas a
+        través de la tecnología.
+        <br />
+        <br />
+         Actualmente trabajo en Selaski, haciendo el comercio exterior más fácil
+        y en mi tiempo libre comparto mi conocimiento en lugares como este blog.
+
+
+        <br />
+        <br />
+         Además, soy mentor y líder en Backbone, un grupo de investigación que
+        busca promover el uso de tecnologías Open Source en la academia.
+      </p>
+      <span class="contact">
+        <Link
+          text=""
+          href="https://linkedin.com/in/djkde"
+          style="primary"
+          icon={{ name: "mdi:linkedin", side: "left" }}
+        />
+        <Link
+          text=""
+          href="https://twitter.com/djkde"
+          style="primary"
+          icon={{ name: "mdi:twitter", side: "left" }}
+        />
+        <Link
+          text=""
+          href="https://github.com/Djkde01"
+          style="primary"
+          icon={{ name: "mdi:github", side: "left" }}
+        />
+        <Link
+          text=""
+          href="mailto:djkde.co@gmail.com"
+          style="primary"
+          icon={{ name: "mdi:email", side: "left" }}
+        />
+      </span>
+    </div>
+  </section>
+</MainLayout>

@@ -405,7 +405,7 @@ button {
 
   & img {
     border-radius: var(--radius-full);
-    height: 400px;
+    height: 300px;
     width: min(300px, 100%);
     box-shadow: var(--shadow-lg);
     object-fit: cover;
@@ -420,6 +420,10 @@ button {
     display: grid;
     gap: var(--space-xs);
     max-width: var(--content-md);
+    & .contact {
+      display: flex;
+      gap: var(--space-xs);
+    }
   }
 }
 
