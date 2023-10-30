@@ -1,7 +1,51 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
+import PostCard from "../components/PostCard.astro";
+import Link from "../components/Link.astro";
+import { formatBlogPosts } from "../js/utils";
+
+const allPosts = await Astro.glob("./blog/*.md");
+
+const posts = formatBlogPosts(allPosts, { limit: 3 });
 ---
 
 <MainLayout title="Home - Sergio Estrella">
-  <h1>Home</h1>
+  <section class="container about" aria-label="About Me">
+    <img
+      src="/images/profile.jpeg"
+      alt="Sergio Estrella"
+      width="300"
+      height="300"
+    />
+    <div class="content">
+      <h2 class="h2">Bienvenido/a! <span aria-hidden="true">👋</span></h2>
+      <p>
+        ¡Que bueno verte! Soy Sergio Estrella, también conocido en internet como
+        Djkde, un Web Dev con la misión de mejorar la vida de las personas a
+        través de la tecnología.
+      </p>
+      <span class="contact">
+        <Link
+          text="Conoceme más"
+          href="/about"
+          style="secondary"
+          icon={{ name: "mdi:arrow-right", side: "right" }}
+        />
+      </span>
+    </div>
+  </section>
+  <section class="container" aria-label="New Blog posts">
+    <h2 class="h2">Últimos posts</h2>
+    <div class="post-container">
+      {
+        posts.map((post) => (
+          <PostCard
+            frontmatter={post.frontmatter}
+            url={post.url}
+            tagType="h3"
+          />
+        ))
+      }
+    </div>
+  </section>
 </MainLayout>
