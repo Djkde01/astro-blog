@@ -1,0 +1,32 @@
+---
+import Link from "./Link.astro";
+
+const { prev, next } = Astro.props;
+---
+
+<nav aria-label="Blog pages">
+  {
+    prev && (
+      <Link
+        href={prev}
+        text="Anterior"
+        style="primary"
+        borderVisible={true}
+        isFilled={false}
+        icon={{ name: "mdi:arrow-left-bold-outline", side: "left" }}
+      />
+    )
+  }
+  {
+    next && (
+      <Link
+        href={next}
+        text="Siguiente"
+        style="primary"
+        borderVisible={true}
+        isFilled={false}
+        icon={{ name: "mdi:arrow-right-bold-outline", side: "right" }}
+      />
+    )
+  }
+</nav>
