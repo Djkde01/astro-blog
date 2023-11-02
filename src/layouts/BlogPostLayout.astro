@@ -9,7 +9,7 @@ const { frontmatter } = Astro.props;
 const { title, description, date, category, image } = frontmatter;
 ---
 
-<MainLayout {title} {description}>
+<MainLayout title={title + " - Sergio Estrella"} {description}>
   <PostHeader {title} {description} {date} {category} {image} />
   <div class="post-content">
     <div class="content">

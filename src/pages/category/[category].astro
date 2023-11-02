@@ -1,0 +1,52 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import PostCard from "../../components/PostCard.astro";
+
+import { slugify, formatBlogPosts } from "../../js/utils";
+
+export async function getStaticPaths() {
+  const allPosts = await Astro.glob(`../blog/*.md`);
+
+  const formattedPosts = formatBlogPosts(allPosts);
+
+  const categories = [
+    ...new Set(formattedPosts.map((post) => post.frontmatter.category)),
+  ];
+
+  return categories.map((category) => {
+    const categoryPosts = formattedPosts.filter(
+      (post) => post.frontmatter.category === category
+    );
+    return {
+      params: {
+        category: slugify(category),
+      },
+      props: {
+        posts: categoryPosts,
+        name: category,
+      },
+    };
+  });
+}
+
+const { posts, name } = Astro.props;
+
+const title = `Posts - ${name} - Sergio Estrella`;
+---
+
+<MainLayout title={title} description=`Posts para aprender acerca de ${name}`>
+  <section class="container" aria-label=`${name} Posts`>
+    <h1 class="h1">Posts acerca de <span>{name}</span></h1>
+    <div class="post-container">
+      {
+        posts.map((post) => (
+          <PostCard
+            frontmatter={post.frontmatter}
+            url={post.url}
+            tagType="h3"
+          />
+        ))
+      }
+    </div>
+  </section>
+</MainLayout>
