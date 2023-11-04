@@ -1,6 +1,6 @@
 ---
 layout: "../../layouts/BlogPostLayout.astro"
-title: Beginning with CSS
+title: Beginning with CSS 01
 date: 2022-12-03
 author: Darnell McClure
 image: { src: "/images/profile.jpeg", alt: "A picture of a coder" }

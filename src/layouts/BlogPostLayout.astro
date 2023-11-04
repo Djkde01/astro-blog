@@ -4,10 +4,22 @@ import "../styles/global.css";
 import MainLayout from "./MainLayout.astro";
 import PostHeader from "../components/PostHeader.astro";
 import CategoryCloud from "../components/CategoryCloud.astro";
+import { formatBlogPosts } from "../js/utils";
+import RelatedPosts from "../components/RelatedPosts.astro";
 
 const { frontmatter } = Astro.props;
 
 const { title, description, date, category, image } = frontmatter;
+
+const allPosts = await Astro.glob("../pages/blog/*.md");
+const formattedPosts = formatBlogPosts(allPosts);
+
+const relatedPosts = formattedPosts
+  .filter(
+    (post) =>
+      post.frontmatter.category === category && post.frontmatter.title !== title
+  )
+  .slice(0, 3);
 ---
 
 <MainLayout title={title + " - Sergio Estrella"} {description}>
@@ -21,6 +33,16 @@ const { title, description, date, category, image } = frontmatter;
         <h3 class="h3">Todas las categorías</h3>
         <CategoryCloud withCount={false} />
       </aside>
+      {
+        relatedPosts.length > 0 && (
+          <aside class="container" aria-label="Related posts">
+            <h3 class="h3">Artículos relacionados</h3>
+            <ul class="related-posts">
+              <RelatedPosts {relatedPosts} />
+            </ul>
+          </aside>
+        )
+      }
     </div>
   </div>
 </MainLayout>
