@@ -502,13 +502,12 @@ header {
   place-items: center;
   gap: var(--space-sm);
   text-align: center;
-
+  margin-block: var(--space-lg);
   & .container {
     display: grid;
     place-items: center;
     gap: var(--space-sm);
     text-align: center;
-    margin-block: var(--space-lg) var(--space-sm);
   }
 }
 

@@ -4,12 +4,13 @@ import PostCard from "../../components/PostCard.astro";
 import Pagination from "../../components/Pagination.astro";
 
 import { formatBlogPosts } from "../../js/utils";
+import CategoryCloud from "../../components/CategoryCloud.astro";
 
 export async function getStaticPaths({ paginate }) {
   const allPosts = await Astro.glob("./*.md");
   const posts = formatBlogPosts(allPosts);
 
-  return paginate(posts, { pageSize: 1 });
+  return paginate(posts, { pageSize: 6 });
 }
 
 const { page }: { page: { data: any; url: any } } = Astro.props;
@@ -18,7 +19,10 @@ console.log(page);
 
 <MainLayout title="Blog - Sergio Estrella">
   <section class="container" aria-label="New Blog posts">
-    <h1 class="h1">Últimos posts</h1>
+    <h1 class="h1">Todos los posts</h1>
+    <aside class="container" aria-label="Blog categories">
+      <CategoryCloud withCount={true} />
+    </aside>
     <div class="post-container">
       {
         page.data.map((post) => (
