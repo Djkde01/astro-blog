@@ -8,16 +8,26 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  frontmatter?: {
+    title?: string;
+    description?: string;
+    image?: string;
+  };
+  robots?: string;
 }
 
 const {
   title = "Sergio Estrella",
   description = "Portafolio web de Sergio Estrella @djkde",
+  image,
+  frontmatter,
+  robots,
 } = Astro.props as Props;
 ---
 
 <html lang="en">
-  <MainHead {title} {description} />
+  <MainHead {title} {description} {image} {frontmatter} {robots} />
   <body>
     <Nav />
     <main>
