@@ -525,6 +525,26 @@ header {
     gap: var(--space-sm);
   }
 
+  & blockquote {
+    padding: var(--space-md);
+    background-color: hsl(var(--muted));
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    font-style: italic;
+    font-size: var(--fs-lg);
+    line-height: var(--lh-1-4);
+    max-width: var(--content-md);
+    margin-inline: auto;
+  }
+
+  & strong {
+    font-weight: 700;
+  }
+
+  & em {
+    font-style: italic;
+  }
+
   & .sidebar {
     display: flex;
     flex-wrap: wrap;

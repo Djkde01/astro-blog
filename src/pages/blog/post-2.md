@@ -1,22 +1,27 @@
 ---
 layout: "../../layouts/BlogPostLayout.astro"
-title: Beginning with CSS 01
-date: 2022-12-03
-author: Darnell McClure
-image: { src: "/images/profile.jpeg", alt: "A picture of a coder" }
-description: CSS is a great way to style your website. In fact, there are no alternatives! Learn how to use it here.
-draft: false
-category: CSS
+title: Software Freedom Day
+date: 2023-09-07
+author: Sergio Estrella
+image: { src: "/images/post-2.jpg", alt: "Portada del Software Freedom Day" }
+description: Evento sobre sobre la importancia del software libre en desarrollo de videojuegos, neuroinformática, análisis de datos, diseño 3D, etc.
+category: Charlas
 ---
 
-Nisi duis ex aliqua eu officia eiusmod duis magna pariatur. Irure laborum qui aliqua nulla esse cillum laborum aliquip nulla elit. Id id Lorem duis irure cillum culpa. Nulla sint et aliqua velit do. Nulla sit sit proident consectetur enim ullamco aliqua in reprehenderit ullamco officia.
+El Software Freedom Day fue un evento donde, de la mano de expertos, se aprendió sobre la importancia del software libre y de código abierto en campos como el desarrollo de videojuegos, la neuroinformática, el análisis de datos, el diseño 3D y mucho más.
 
-## Well, then. Let’s talk.
+Se contó con el apoyo de distintos semilleros y comunidades tecnológicas de la UTP para que descubrir el apasionante mundo de la investigación y cómo es tener una red de aprendizaje.
 
-Ad ipsum velit sint enim exercitation mollit consequat elit mollit qui commodo aute. Laboris culpa voluptate aliquip incididunt duis. Cupidatat aliquip et sunt aute fugiat cupidatat irure voluptate. Occaecat officia et sunt.
+Disfruta de las charlas que se transmitieron desde el auditorio 15C-S108 de la Universidad Tecnológica de Pereira
 
-Officia tempor voluptate enim consequat cillum aute fugiat cupidatat incididunt magna labore in commodo. Eiusmod nostrud non deserunt. Incididunt excepteur pariatur magna. Proident aute ad in velit labore enim sit cillum ad mollit proident et qui. Esse sunt ullamco ullamco ipsum enim eu esse id eu exercitation laboris magna Lorem. Anim nostrud officia anim velit do exercitation labore mollit excepteur excepteur ex.
+### ¿No quieres perderte eventos como este?
 
-Ipsum adipisicing exercitation dolor pariatur labore qui. Culpa cupidatat ea elit eiusmod tempor ea qui dolor Lorem laborum adipisicing. Ad ea laboris qui cupidatat deserunt culpa. Nulla ex velit adipisicing proident fugiat deserunt sunt eu adipisicing sint incididunt quis qui. Nulla fugiat labore duis ullamco reprehenderit excepteur laboris tempor ullamco aliquip laborum aliqua. Est tempor nisi magna ut elit pariatur commodo.
+Si quieres estar al tanto de cuándo ocurren estos eventos y asistir en vivo, sigue a Backbone en [Instagram](https://www.instagram.com/backboneutp/)
 
-Labore commodo do incididunt amet ad et exercitation magna veniam veniam aute laboris excepteur occaecat Lorem. Fugiat in magna commodo magna nulla eu. Fugiat nulla aliqua sunt duis enim irure aliquip fugiat aliqua Lorem ad tempor incididunt proident incididunt. Labore fugiat tempor esse cillum voluptate culpa anim sunt consequat. Ipsum minim nostrud laborum sit aliquip duis officia consequat est. Fugiat mollit elit nulla. Sit minim est elit labore. Sunt eu pariatur pariatur ut deserunt nulla labore in non sit tempor voluptate ex.
+## Mira la retransmisión acá
+
+<iframe width="560" height="315"
+src="https://www.youtube.com/embed/b3xiS602YKY" 
+frameborder="0" 
+allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+allowfullscreen></iframe>
