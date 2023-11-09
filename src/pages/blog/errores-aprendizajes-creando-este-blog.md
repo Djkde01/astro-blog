@@ -1,10 +1,10 @@
 ---
 layout: "../../layouts/BlogPostLayout.astro"
-title: "Astro: El impulso que necesitas para tu blog"
-date: 2023-11-08
+title: "Errores y Aprendizajes para crear este Blog"
+date: 2023-11-09
 author: Sergio Estrella
 image: { src: "/images/post-3.jpeg", alt: "Portada de blog hecha con IA" }
-description: CSS is a great way to style your website. In fact, there are no alternatives! Learn how to use it here.
+description: Aprende de los errores y lecciones al crear este blog para impulsar tu propio proyecto.
 category: Marca Personal
 ---
 
