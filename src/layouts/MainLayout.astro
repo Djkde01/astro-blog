@@ -4,6 +4,8 @@ import Footer from "../components/Footer.astro";
 import Nav from "../components/Nav.astro";
 
 import "../styles/global.css";
+// Supports weights 100-900
+import "@fontsource-variable/montserrat";
 
 interface Props {
   title?: string;
@@ -26,7 +28,7 @@ const {
 } = Astro.props as Props;
 ---
 
-<html lang="en">
+<html lang="es">
   <MainHead {title} {description} {image} {frontmatter} {robots} />
   <body>
     <Nav />

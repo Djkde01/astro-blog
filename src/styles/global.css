@@ -180,7 +180,7 @@ body {
   color: hsl(var(--txt));
   font-size: var(--fs-md);
   line-height: var(--lh-1-4);
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat Variable", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-synthesis: none;
