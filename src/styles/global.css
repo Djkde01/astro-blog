@@ -48,6 +48,7 @@ h6 {
   --muted--dark: var(--_hue) 20% 2%;
 
   --bkg: var(--bkg--light);
+  --bkg-circle: var(--_hue) 20% 80%;
   --txt: var(--txt--light);
   --accent: var(--accent--light);
   --muted: var(--muted--light);
@@ -131,6 +132,7 @@ h6 {
 @media (prefers-color-scheme: dark) {
   :root {
     --bkg: var(--bkg--dark);
+    --bkg-circle: var(--_hue) 30% 30%;
     --txt: var(--txt--dark);
     --accent: var(--accent--dark);
     --muted: var(--muted--dark);
@@ -176,7 +178,11 @@ body {
   display: grid;
   place-items: center;
   grid-template-rows: auto 1fr auto;
-  background-color: hsl(var(--bkg));
+  background: radial-gradient(
+    circle at 50%,
+    hsl(var(--bkg-circle)) 0%,
+    hsl(var(--bkg)) 100%
+  );
   color: hsl(var(--txt));
   font-size: var(--fs-md);
   line-height: var(--lh-1-4);
