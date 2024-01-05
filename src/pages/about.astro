@@ -1,9 +1,15 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import Link from "../components/Link.astro";
+
+const workStatus = {
+  openToWork: "Disponible para trabajar",
+  openToProjects: "Disponible para proyectos",
+  working: "Trabajando en Selaski",
+};
 ---
 
-<MainLayout title="Acerca - Sergio Estrella">
+<MainLayout title="Acerca - Sergio Estrella (Djkde)">
   <section class="container about" aria-label="About Me">
     <img
       src="/images/profile.jpeg"
@@ -15,18 +21,15 @@ import Link from "../components/Link.astro";
       <h1>Hola! <span aria-hidden="true">👋</span></h1>
       <p>
         ¡Que bueno verte! Soy Sergio Estrella, también conocido en internet como
-        Djkde, un Web Dev con la misión de mejorar la vida de las personas a
-        través de la tecnología.
+        Djkde, un
+        <span class="focus-primary">Desarrollador Web</span> con
+        <span class="focus-primary"> +3 años de experiencia</span>.
         <br />
         <br />
-         Actualmente trabajo en Selaski, haciendo el comercio exterior más fácil
-        y en mi tiempo libre comparto mi conocimiento en lugares como este blog.
-
-
+        Mi misión es mejorar la vida de las personas a través de la tecnología y
+        en mi tiempo libre comparto mi conocimiento en lugares como este blog.
         <br />
         <br />
-         Además, soy mentor y líder en Backbone, un grupo de investigación que
-        busca promover el uso de tecnologías Open Source en la academia.
       </p>
       <span class="contact">
         <Link

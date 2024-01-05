@@ -34,7 +34,7 @@ h6 {
 /* CSS variables inspired by https://open-props.style/ */
 :root {
   /* colors */
-  --_hue: 165;
+  --_hue: 145;
 
   /* Light Mode */
   --bkg--light: var(--_hue) 25% 97%;
@@ -426,6 +426,13 @@ button {
     display: grid;
     gap: var(--space-xs);
     max-width: var(--content-md);
+    & .focus-primary {
+      color: hsl(var(--accent));
+    }
+    &-secondary {
+      color: hsl(var(--txt));
+    }
+
     & .contact {
       display: flex;
       gap: var(--space-xs);
