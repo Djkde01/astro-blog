@@ -403,7 +403,7 @@ button {
     display: flex;
     align-items: center;
     gap: var(--space-xs);
-    justify-content: start;
+    justify-content: flex-start;
     margin-bottom: var(--space-sm);
   }
   & ol {
