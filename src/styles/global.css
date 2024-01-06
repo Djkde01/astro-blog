@@ -397,6 +397,50 @@ button {
   }
 }
 
+/* Work experience */
+.experience {
+  & .title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    justify-content: start;
+    margin-bottom: var(--space-sm);
+  }
+  & ol {
+    list-style: none;
+    position: relative;
+    margin-left: 12px;
+    border-left: var(--border-sm) solid hsl(var(--txt));
+
+    & li {
+      margin-bottom: 40px;
+      margin-inline-start: 16px;
+      & .timeline {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border-radius: var(--radius-full);
+        margin-top: 8px;
+        border: 1px, solid, hsl(var(--txt));
+        background-color: hsl(var(--txt));
+        inset-inline-start: -6px;
+      }
+      & time {
+        margin-bottom: 4px;
+        color: hsl(var(--accent));
+        line-height: var(--lh-1);
+        font-size: var(--fs-sm);
+        font-weight: 400;
+      }
+      & p {
+        margin-bottom: 16px;
+        font-size: var(--fs-md);
+        text-wrap: pretty;
+      }
+    }
+  }
+}
+
 /* about */
 .about {
   display: grid;
