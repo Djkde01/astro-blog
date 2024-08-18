@@ -34,7 +34,7 @@ h6 {
 /* CSS variables inspired by https://open-props.style/ */
 :root {
   /* colors */
-  --_hue: 145;
+  --_hue: 219;
 
   /* Light Mode */
   --bkg--light: var(--_hue) 25% 97%;
@@ -697,4 +697,63 @@ header {
 
 .sidebar [aria-label="Blog categories"] {
   margin-block: 0;
+}
+
+.projects {
+  & .title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    justify-content: flex-start;
+    margin-bottom: var(--space-sm);
+  }
+  & .content {
+    margin-block: var(--space-md);
+    display: grid;
+    gap: var(--space-md);
+    align-items: start;
+    @media (--md) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media (--lg) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+  & .project-card {
+    display: grid;
+    gap: var(--space-md);
+    padding: var(--space-md);
+  }
+
+  & img {
+    box-shadow: var(--shadow-sm);
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    &:hover {
+      border-color: var(--color-gray-700);
+      background-color: var(--color-gray-800-50);
+    }
+  }
+  .text-container {
+    display: grid;
+    gap: var(--space-xs);
+  }
+  .description {
+    margin-top: var(--space-md);
+    color: var(--color-gray-700);
+    @media (prefers-color-scheme: dark) {
+      color: var(--color-gray-400);
+    }
+  }
+
+  .project-link {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    margin-top: var(--space-lg);
+    gap: var(--space-lg);
+  }
 }
