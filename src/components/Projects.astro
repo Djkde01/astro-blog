@@ -1,0 +1,70 @@
+---
+import Link from "./Link.astro";
+import { Image } from "astro:assets";
+const PROJECTS = [
+  {
+    title: "STS - Selaski Tracking System",
+    description:
+      "Sistema de tracking de envíos marítimos y aéreos, junto a mapas interactivos y notificaciones en tiempo real. Creado con Angular, NestJS y Tailwind CSS.",
+    link: "https://welcome.selaski.com/tracking/",
+    image: "/images/selaski.png",
+  },
+  {
+    title: "Semillero y Comunidad Backbone UTP",
+    description:
+      "Comunidad de la Universidad Tecnológica de Pereira, con información acerca de eventos, talleres y charlas. Página web creada con Angular y Cloudfare.",
+    github: "https://github.com/Backbone-UTP/main-page",
+    link: "https://backboneutp.com/events/software-freedom-day-2024",
+    image: "/images/backbone.png",
+  },
+  {
+    title: "Plugin Tarot Latinoamérica",
+    description:
+      "Plugin para Wordpress, con cartas personalizadas y un sistema mesajería. Operativo en +10 países de Latinoamérica. Creado con Vite, SASS y PHP.",
+    link: "https://tarotlatinoamerica.com",
+    image: "/images/default.png",
+  },
+];
+---
+
+<div class="content">
+  {
+    PROJECTS.map(({ image, title, description, link, github }) => (
+      <article class="project-card">
+        <Image
+          src={image}
+          alt={title}
+          width="400"
+          height="250"
+          format="avif"
+          quality={80}
+        />
+
+        <div class="text-container">
+          <h3 class="h3">{title}</h3>
+          <p class="description">{description}</p>
+          <section class="project-link">
+            {github && (
+              <Link
+                text="Código"
+                href={github}
+                style="primary"
+                target="_blank"
+                icon={{ name: "mdi:github", side: "left" }}
+              />
+            )}
+            {link && (
+              <Link
+                text="Proyecto"
+                href={link}
+                style="primary"
+                target="_blank"
+                icon={{ name: "mdi:open-in-new", side: "left" }}
+              />
+            )}
+          </section>
+        </div>
+      </article>
+    ))
+  }
+</div>
