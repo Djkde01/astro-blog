@@ -1,10 +1,10 @@
 ---
 layout: "../../layouts/BlogPostLayout.astro"
-title: Software Freedom Day
+title: Software Freedom Day 2023
 date: 2023-09-07
 author: Sergio Estrella
 image: { src: "/images/post-2.jpg", alt: "Portada del Software Freedom Day" }
-description: Evento sobre sobre la importancia del software libre en desarrollo de videojuegos, neuroinformática, análisis de datos, diseño 3D, etc.
+description: Evento sobre sobre software libre en videojuegos, neuroinformática, análisis de datos, diseño 3D, etc.
 category: Charlas
 ---
 
