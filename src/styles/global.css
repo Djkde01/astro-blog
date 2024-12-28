@@ -680,6 +680,7 @@ header {
   & .post {
     background-color: hsl(var(--muted));
     padding: var(--space-xs);
+    margin: var(--space-2xs) 0;
     gap: var(--space-2xs);
     border-radius: var(--radius-sm);
     box-shadow: var(--shadow-sm);
