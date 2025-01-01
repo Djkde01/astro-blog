@@ -8,6 +8,8 @@ description: Por qué pertenecer a una comunidad puede ser lo mejor para tu carr
 category: Productividad
 ---
 
+_Este post fue escrito originalmente en Medium [(link acá)](https://djkde.medium.com/empieza-as%C3%AD-sea-con-algo-simple-pero-empieza-ya-c12a35f104a9)_
+
 Hace más o menos un mes, estuve en una [Hackathon](https://platzi.com/blog/hackathon/) que fue de mis mejores experiencias del 2020.
 
 Un equipo increíble (Tanto profesionalmente, como personalmente) una idea ambiciosa en la que estábamos todos de acuerdo y que, sabíamos qué hacía falta y que la iban a usar.
