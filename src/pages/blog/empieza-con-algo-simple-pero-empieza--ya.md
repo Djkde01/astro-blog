@@ -4,7 +4,7 @@ title: "Empieza con algo simple, pero empieza ya."
 date: 2021-01-26
 author: Sergio Estrella
 image: { src: "/images/post-5.webp", alt: "Portada de blog hecha con IA" }
-description: Por qué pertenecer a una comunidad puede ser lo mejor para tu carrera.
+description: Iniciar con algo simple ya, es mejor que tener algo elaborado después. Te cuento cómo lo aprendí.
 category: Productividad
 ---
 

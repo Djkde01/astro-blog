@@ -4,7 +4,7 @@ title: Software Freedom Day 2024
 date: 2024-10-10
 author: Sergio Estrella
 image: { src: "/images/post-4.png", alt: "Portada del Software Freedom Day" }
-description: Evento sobre sobre software libre en videojuegos, neuroinformática, análisis de datos, diseño 3D, etc.
+description: Segunda edición del evento que celebra el software libre y código abierto en Pereira.
 category: Charlas
 ---
 
