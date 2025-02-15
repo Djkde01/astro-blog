@@ -11,8 +11,10 @@ const { frontmatter } = Astro.props;
 
 const { title, description, date, category, image } = frontmatter;
 
-const allPosts = await Astro.glob("../pages/blog/*.md");
-const formattedPosts = formatBlogPosts(allPosts);
+const allPosts = import.meta.glob("../pages/blog/*.md", {
+  eager: true, // This ensures we get the module content directly
+});
+const formattedPosts = await formatBlogPosts(allPosts);
 
 const relatedPosts = formattedPosts
   .filter(

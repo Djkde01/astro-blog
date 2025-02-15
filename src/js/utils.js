@@ -9,8 +9,7 @@ export function formatDate(date) {
     year: "numeric",
   });
 }
-
-export function formatBlogPosts(
+export async function formatBlogPosts(
   posts,
   {
     filterOutDrafts = true,
@@ -19,7 +18,14 @@ export function formatBlogPosts(
     limit = undefined,
   } = {}
 ) {
-  const filteredPosts = posts.reduce((acc, post) => {
+  // Convert the object of modules to an array of post data
+  const postsArray = Object.values(posts).map((post) => ({
+    frontmatter: post.frontmatter,
+    url: post.url,
+    ...post,
+  }));
+
+  const filteredPosts = postsArray.reduce((acc, post) => {
     const { date, draft } = post.frontmatter;
 
     if (filterOutDrafts && draft) {

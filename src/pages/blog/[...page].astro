@@ -7,14 +7,15 @@ import { formatBlogPosts } from "../../js/utils";
 import CategoryCloud from "../../components/CategoryCloud.astro";
 
 export async function getStaticPaths({ paginate }) {
-  const allPosts = await Astro.glob("./*.md");
-  const posts = formatBlogPosts(allPosts);
+  const allPosts = import.meta.glob("./*.md", {
+    eager: true, // This ensures we get the module content directly
+  });
+  const posts = await formatBlogPosts(allPosts);
 
   return paginate(posts, { pageSize: 6 });
 }
 
 const { page }: { page: { data: any; url: any } } = Astro.props;
-console.log(page);
 ---
 
 <MainLayout title="Blog - Sergio Estrella (Djkde)">
