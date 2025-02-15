@@ -4,9 +4,11 @@ import PostCard from "../components/PostCard.astro";
 import Link from "../components/Link.astro";
 import { formatBlogPosts } from "../js/utils";
 
-const allPosts = await Astro.glob("./blog/*.md");
+const allPosts = import.meta.glob("./blog/*.md", {
+  eager: true, // This ensures we get the module content directly
+});
 
-const posts = formatBlogPosts(allPosts, { limit: 3 });
+const posts = await formatBlogPosts(allPosts, { limit: 3 });
 ---
 
 <MainLayout title="Home - Sergio Estrella (Djkde)">

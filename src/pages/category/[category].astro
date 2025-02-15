@@ -5,9 +5,11 @@ import PostCard from "../../components/PostCard.astro";
 import { slugify, formatBlogPosts } from "../../js/utils";
 
 export async function getStaticPaths() {
-  const allPosts = await Astro.glob(`../blog/*.md`);
+  const allPosts = import.meta.glob(`../blog/*.md`, {
+    eager: true, // This ensures we get the module content directly
+  });
 
-  const formattedPosts = formatBlogPosts(allPosts);
+  const formattedPosts = await formatBlogPosts(allPosts);
 
   const categories = [
     ...new Set(formattedPosts.map((post) => post.frontmatter.category)),

@@ -1,8 +1,10 @@
 ---
 import { formatBlogPosts, slugify } from "../js/utils";
 
-const allPosts = await import.meta.glob("../pages/blog/*.md");
-const posts = formatBlogPosts(allPosts);
+const allPosts = import.meta.glob("../pages/blog/*.md", {
+  eager: true, // This ensures we get the module content directly
+});
+const posts = await formatBlogPosts(allPosts);
 
 const categories = posts
   .map((post) => post.frontmatter.category.toLowerCase())
