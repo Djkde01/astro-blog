@@ -5,7 +5,7 @@ date: 2023-06-28
 author: Sergio Estrella
 image:
   {
-    src: "/images/post-1.jpg",
+    src: "/images/post-1.webp",
     alt: "La IA no te quitará el trabajo, pero YO Sí",
   }
 description: La IA ha logrado crear soluciones innovadoras que desafían los paradigmas establecidos.
@@ -21,9 +21,4 @@ Nos habló de los retos y oportunidades que ofrece la AI para el futuro del trab
 Si quieres estar al tanto de cuándo ocurren estos eventos y asistir en vivo, sigue a Backbone en [Instagram](https://www.instagram.com/backboneutp/)
 
 ## Mira la charla acá
-
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/VOIkS-9JMpg" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
+<lite-youtube videoid="VOIkS-9JMpg">

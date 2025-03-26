@@ -3,8 +3,8 @@ layout: "../../layouts/BlogPostLayout.astro"
 title: Software Freedom Day 2023
 date: 2023-09-07
 author: Sergio Estrella
-image: { src: "/images/post-2.jpg", alt: "Portada del Software Freedom Day" }
-description: Evento sobre sobre software libre en videojuegos, neuroinformática, análisis de datos, diseño 3D, etc.
+image: { src: "/images/post-2.webp", alt: "Portada del Software Freedom Day" }
+description: Evento sobre software libre en videojuegos, neuroinformática, análisis de datos, diseño 3D, etc.
 category: Charlas
 ---
 
@@ -19,9 +19,4 @@ Disfruta de las charlas que se transmitieron desde el auditorio 15C-S108 de la U
 Si quieres estar al tanto de cuándo ocurren estos eventos y asistir en vivo, sigue a Backbone en [Instagram](https://www.instagram.com/backboneutp/)
 
 ## Mira la retransmisión acá
-
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/b3xiS602YKY" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
+<lite-youtube videoid="b3xiS602YKY">

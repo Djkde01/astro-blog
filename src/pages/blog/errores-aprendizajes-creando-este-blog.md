@@ -3,7 +3,7 @@ layout: "../../layouts/BlogPostLayout.astro"
 title: "Errores y Aprendizajes para crear este Blog"
 date: 2023-11-09
 author: Sergio Estrella
-image: { src: "/images/post-3.jpeg", alt: "Portada de blog hecha con IA" }
+image: { src: "/images/post-3.webp", alt: "Portada de blog hecha con IA" }
 description: Aprende de los errores y lecciones al crear este blog para impulsar tu propio proyecto.
 category: Marca Personal
 ---
@@ -24,7 +24,7 @@ El que estuvo más cerca de ser completado fue la versión inmediatamente anteri
 
 Acá te dejo una imagen de cómo se veía:
 
-![Versión anterior de esta página djkde.com](/images/post-3-page-next.png)
+![Versión anterior de esta página djkde.com](/images/post-3-page-next.webp)
 
 Luego de fracasar estrepitosamente, decidí intentar usar un CMS (Content Management System o Sistema de Gestión de Contenido) y crear la página en Angular, que es el framework que uso a diario en mi trabajo. Pero a medida que avanzaba, pensaba: ¿cómo y cuándo voy a escribir todo lo que quiero? Y ese miedo fue suficiente para dejar ese proyecto abandonado.
 
@@ -49,7 +49,7 @@ Astro es un framework que es brutalmente veloz, al solo cargar el HTML, prioriza
 
 Con esto, podía tener una página sin tanto problema, útil y con buenos resultados. Acá te muestro los resultados de una prueba en Lighthouse de este mismo post:
 
-![Resultados pruebas de rendimiento de este post](/images/post-3-test.png)
+![Resultados pruebas de rendimiento de este post](/images/post-3-test.webp)
 
 Aún hay cosas por mejorar (y veremos cómo hacerlo en futuros posts) pero para una primera versión, no está nada mal.
 
