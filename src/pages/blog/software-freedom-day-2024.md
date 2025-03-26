@@ -32,8 +32,8 @@ Si quieres estar al tanto de cuándo ocurren estos eventos y asistir en vivo, si
 
 ### (Jornada AM)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/NJoeUs4pkZE?si=9j8SUdjlgtmAKBdE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<lite-youtube videoid="NJoeUs4pkZE"></lite-youtube>
 
 ### (Jornada PM)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/5_qyNXwqpE8?si=q-q2lkC9NeBbYFgu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<lite-youtube videoid="5_qyNXwqpE8"></lite-youtube>

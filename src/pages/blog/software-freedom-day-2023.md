@@ -19,9 +19,4 @@ Disfruta de las charlas que se transmitieron desde el auditorio 15C-S108 de la U
 Si quieres estar al tanto de cuándo ocurren estos eventos y asistir en vivo, sigue a Backbone en [Instagram](https://www.instagram.com/backboneutp/)
 
 ## Mira la retransmisión acá
-
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/b3xiS602YKY" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
+<lite-youtube videoid="b3xiS602YKY">
