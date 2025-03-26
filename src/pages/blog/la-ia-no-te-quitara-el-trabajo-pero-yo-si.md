@@ -5,7 +5,7 @@ date: 2023-06-28
 author: Sergio Estrella
 image:
   {
-    src: "/images/post-1.jpg",
+    src: "/images/post-1.webp",
     alt: "La IA no te quitará el trabajo, pero YO Sí",
   }
 description: La IA ha logrado crear soluciones innovadoras que desafían los paradigmas establecidos.
