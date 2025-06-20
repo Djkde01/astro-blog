@@ -6,8 +6,9 @@ import Pagination from "../../components/Pagination.astro";
 import { formatBlogPosts } from "../../js/utils";
 import CategoryCloud from "../../components/CategoryCloud.astro";
 import type { Post } from "../../types/posts";
+import type { PathPagination } from "../../types/pagination";
 
-export async function getStaticPaths({ paginate }: { paginate: any }) {
+export async function getStaticPaths({ paginate }: PathPagination) {
   const allPosts = import.meta.glob("./*.md", {
     eager: true, // This ensures we get the module content directly
   });
