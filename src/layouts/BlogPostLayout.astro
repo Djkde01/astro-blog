@@ -6,6 +6,7 @@ import PostHeader from "../components/PostHeader.astro";
 import CategoryCloud from "../components/CategoryCloud.astro";
 import { formatBlogPosts } from "../js/utils";
 import RelatedPosts from "../components/RelatedPosts.astro";
+import type { Post } from "../types/posts";
 
 const { frontmatter } = Astro.props;
 
@@ -18,7 +19,7 @@ const formattedPosts = await formatBlogPosts(allPosts);
 
 const relatedPosts = formattedPosts
   .filter(
-    (post) =>
+    (post: Post) =>
       post.frontmatter.category === category && post.frontmatter.title !== title
   )
   .slice(0, 3);

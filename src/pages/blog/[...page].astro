@@ -5,8 +5,9 @@ import Pagination from "../../components/Pagination.astro";
 
 import { formatBlogPosts } from "../../js/utils";
 import CategoryCloud from "../../components/CategoryCloud.astro";
+import type { Post } from "../../types/posts";
 
-export async function getStaticPaths({ paginate }) {
+export async function getStaticPaths({ paginate }: { paginate: any }) {
   const allPosts = import.meta.glob("./*.md", {
     eager: true, // This ensures we get the module content directly
   });
@@ -26,7 +27,7 @@ const { page }: { page: { data: any; url: any } } = Astro.props;
     </aside>
     <div class="post-container">
       {
-        page.data.map((post) => (
+        page.data.map((post: Post) => (
           <PostCard
             frontmatter={post.frontmatter}
             url={post.url}
