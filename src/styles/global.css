@@ -528,6 +528,7 @@ button {
   padding: var(--space-md);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
+  align-self: stretch;
 
   & .badge {
     --accent: var(--txt);
@@ -712,20 +713,25 @@ header {
   & .content {
     margin-block: var(--space-md);
     display: grid;
-    gap: var(--space-md);
+    gap: var(--space-xs);
     align-items: start;
-    @media (--md) {
-      grid-template-columns: 1fr 1fr;
-    }
 
     @media (--lg) {
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (--xl) {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-lg);
     }
   }
   & .project-card {
     display: grid;
     gap: var(--space-md);
     padding: var(--space-md);
+    align-self: stretch;
+    @media (--lg) {
+      padding: var(--space-xs);
+    }
   }
 
   & img {
@@ -757,5 +763,8 @@ header {
     justify-content: flex-start;
     margin-top: var(--space-lg);
     gap: var(--space-lg);
+    @media (--lg) {
+      margin-top: var(--space-md);
+    }
   }
 }

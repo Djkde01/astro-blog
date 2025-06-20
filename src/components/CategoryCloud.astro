@@ -1,27 +1,31 @@
 ---
 import { formatBlogPosts, slugify } from "../js/utils";
+import type { Post } from "../types/posts";
 
 const allPosts = import.meta.glob("../pages/blog/*.md", {
   eager: true, // This ensures we get the module content directly
 });
 const posts = await formatBlogPosts(allPosts);
 
-const categories = posts
-  .map((post) => post.frontmatter.category.toLowerCase())
-  .flat();
+const categories = posts.map((post: Post) =>
+  post.frontmatter.category.toLowerCase()
+);
 
-const uniqueCategories = categories.reduce((acc, curr) => {
-  const value = acc[curr] || 0;
+const categoryCount = categories.reduce(
+  (acc: Record<string, number>, curr: string) => {
+    const value = acc[curr] || 0;
 
-  return { ...acc, [curr]: value + 1 };
-}, []);
+    return { ...acc, [curr]: value + 1 };
+  },
+  {}
+);
 
 const { withCount } = Astro.props;
 ---
 
 <ul class="categories">
   {
-    Object.entries(uniqueCategories).map(([category, count]) => (
+    Object.entries(categoryCount).map(([category, count]) => (
       <li>
         <a href={`/category/${slugify(category)}`} class="badge">
           {category} {withCount && `(${count})`}
