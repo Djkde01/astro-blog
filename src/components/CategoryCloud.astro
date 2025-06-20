@@ -7,11 +7,11 @@ const allPosts = import.meta.glob("../pages/blog/*.md", {
 });
 const posts = await formatBlogPosts(allPosts);
 
-const categories = posts
-  .map((post: Post) => post.frontmatter.category.toLowerCase())
-  .flat();
+const categories = posts.map((post: Post) =>
+  post.frontmatter.category.toLowerCase()
+);
 
-const uniqueCategories = categories.reduce(
+const categoryCount = categories.reduce(
   (acc: Record<string, number>, curr: string) => {
     const value = acc[curr] || 0;
 
@@ -25,7 +25,7 @@ const { withCount } = Astro.props;
 
 <ul class="categories">
   {
-    Object.entries(uniqueCategories).map(([category, count]) => (
+    Object.entries(categoryCount).map(([category, count]) => (
       <li>
         <a href={`/category/${slugify(category)}`} class="badge">
           {category} {withCount && `(${count})`}
