@@ -21,4 +21,5 @@ Nos habló de los retos y oportunidades que ofrece la AI para el futuro del trab
 Si quieres estar al tanto de cuándo ocurren estos eventos y asistir en vivo, sigue a Backbone en [Instagram](https://www.instagram.com/backboneutp/)
 
 ## Mira la charla acá
+
 <lite-youtube videoid="VOIkS-9JMpg">
