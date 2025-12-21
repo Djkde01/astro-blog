@@ -34,7 +34,8 @@ h6 {
 /* CSS variables inspired by https://open-props.style/ */
 :root {
   /* colors */
-  --_hue: 37;
+  --_hue: 44;
+  --_successHue: 138;
 
   /* Light Mode */
   --bkg--light: var(--_hue) 25% 97%;
@@ -52,6 +53,11 @@ h6 {
   --txt: var(--txt--light);
   --accent: var(--accent--light);
   --muted: var(--muted--light);
+
+  --bkg-warning: var(--_hue) 50% 50%;
+  --bkg-success: var(--_successHue) 120% 50%;
+  --text-warning: var(--_hue) 50% 10%;
+  --text-success: var(--_successHue) 120% 10%;
   color-scheme: light;
 
   /* dynamic spacing adapted from utopia.fyi */
@@ -136,6 +142,10 @@ h6 {
     --txt: var(--txt--dark);
     --accent: var(--accent--dark);
     --muted: var(--muted--dark);
+    --bkg-warning: var(--_hue) 50% 30%;
+    --bkg-success: var(--_successHue) 120% 30%;
+    --text-warning: var(--_hue) 50% 90%;
+    --text-success: var(--_successHue) 120% 90%;
     color-scheme: dark;
     --_shadow-strength: 0.75;
     --_shadow-saturation: 75%;
@@ -720,18 +730,43 @@ header {
       grid-template-columns: 1fr 1fr;
     }
     @media (--xl) {
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(3, minmax(200px, 1fr));
       gap: var(--space-lg);
     }
   }
   & .project-card {
     display: grid;
+    position: relative;
     gap: var(--space-md);
     padding: var(--space-md);
     align-self: stretch;
     @media (--lg) {
       padding: var(--space-xs);
     }
+  }
+  & .project-tag {
+    margin: var(--space-md);
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: var(--space-2xs) var(--space-xs);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+  & .project-deployed {
+    color: hsl(var(--text-success));
+    font-weight: 700;
+    font-size: var(--fs-sm);
+    background-color: hsl(var(--bkg-success));
+  }
+  & .project-development {
+    color: hsl(var(--text-warning));
+    font-weight: 700;
+    font-size: var(--fs-sm);
+    background-color: hsl(var(--bkg-warning));
   }
 
   & img {
