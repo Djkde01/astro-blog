@@ -24,11 +24,11 @@ Este año, las charlas y talleres se enfocaron en cuatro temáticas:
 
 Disfruta de las charlas que se transmitieron desde el auditorio de la facultad de Mecánica de la Universidad Tecnológica de Pereira
 
-### ¿No quieres perderte eventos como este?
+## ¿No quieres perderte eventos como este?
 
 Si quieres estar al tanto de cuándo ocurren estos eventos y asistir en vivo, sigue a Backbone en [Instagram](https://www.instagram.com/backboneutp/)
 
-## Mira la retransmisión acá
+### Mira la retransmisión acá
 
 ### (Jornada AM)
 
