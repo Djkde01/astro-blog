@@ -55,9 +55,9 @@ h6 {
   --muted: var(--muted--light);
 
   --bkg-warning: var(--_hue) 50% 50%;
-  --bkg-success: var(--_successHue) 120% 50%;
+  --bkg-success: var(--_successHue) 50% 50%;
   --text-warning: var(--_hue) 50% 10%;
-  --text-success: var(--_successHue) 120% 10%;
+  --text-success: var(--_successHue) 50% 10%;
   color-scheme: light;
 
   /* dynamic spacing adapted from utopia.fyi */
@@ -143,9 +143,9 @@ h6 {
     --accent: var(--accent--dark);
     --muted: var(--muted--dark);
     --bkg-warning: var(--_hue) 50% 30%;
-    --bkg-success: var(--_successHue) 120% 30%;
+    --bkg-success: var(--_successHue) 50% 30%;
     --text-warning: var(--_hue) 50% 90%;
-    --text-success: var(--_successHue) 120% 90%;
+    --text-success: var(--_successHue) 50% 90%;
     color-scheme: dark;
     --_shadow-strength: 0.75;
     --_shadow-saturation: 75%;

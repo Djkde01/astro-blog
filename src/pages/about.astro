@@ -43,10 +43,17 @@ const workExperience = [
 ];
 
 const getExperienceInYears = () => {
-  // Calculate the number of years of experience based on the current date and the start date of the first job (July 2021)
+  // Calculate the number of full years of experience based on the current date and the start date of the first job (July 2021)
   const startDate = new Date("2021-07-01");
   const currentDate = new Date();
-  const years = currentDate.getFullYear() - startDate.getFullYear();
+  let years = currentDate.getFullYear() - startDate.getFullYear();
+  const hasHadAnniversaryThisYear =
+    currentDate.getMonth() > startDate.getMonth() ||
+    (currentDate.getMonth() === startDate.getMonth() &&
+      currentDate.getDate() >= startDate.getDate());
+  if (!hasHadAnniversaryThisYear) {
+    years -= 1;
+  }
   return years;
 };
 ---
