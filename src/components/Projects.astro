@@ -3,12 +3,39 @@ import Link from "./Link.astro";
 import { Image } from "astro:assets";
 const PROJECTS = [
   {
+    title: "Backbone Events",
+    description:
+      "Plataforma de gestión y difusión eventos y workshops de la comunidad Backbone UTP. Creado con NextJS, Tailwind CSS, MongoDB y Vercel Cloud Functions.",
+    link: "https://backboneutp.com/events/software-freedom-day-2024",
+    image: "/images/backbone.webp",
+    status: {
+      text: "En desarrollo",
+      class: "project-development",
+    },
+    github: "https://github.com/Djkde01/backbone-events",
+  },
+  {
+    title: "Selaski Footprint Calculator",
+    description:
+      "Calculadora de huella de carbono para Selaski, que permite a los usuarios calcular su huella de carbono. Creado con Angular, NestJS, MySQL y Tailwind CSS.",
+    link: "https://welcome.selaski.com/plataforma-comex/",
+    image: "/images/selaski.webp",
+    status: {
+      text: "Publicado",
+      class: "project-deployed",
+    },
+  },
+  {
     title: "Sirius - Platzi Hackaton 2024",
     description:
       "Proyecto ganador del Platzi Hackaton 2024, retos prácticos con repetición espaciada, generados con AI. Creado con React, Vite, Tailwind CSS, y Django.",
     link: "https://aprendeconsirius.com",
     github: "https://github.com/SiriusTeam7",
     image: "/images/sirius.webp",
+    status: {
+      text: "Publicado",
+      class: "project-deployed",
+    },
   },
   {
     title: "STS - Selaski Tracking System",
@@ -16,6 +43,10 @@ const PROJECTS = [
       "Sistema de tracking de envíos marítimos y aéreos, junto a mapas interactivos y notificaciones en tiempo real. Creado con Angular, NestJS y Tailwind CSS.",
     link: "https://welcome.selaski.com/tracking/",
     image: "/images/selaski.webp",
+    status: {
+      text: "Publicado",
+      class: "project-deployed",
+    },
   },
   {
     title: "Semillero y Comunidad Backbone UTP",
@@ -24,14 +55,19 @@ const PROJECTS = [
     github: "https://github.com/Backbone-UTP/main-page",
     link: "https://backboneutp.com/events/software-freedom-day-2024",
     image: "/images/backbone.webp",
+    status: {
+      text: "Publicado",
+      class: "project-deployed",
+    },
   },
 ];
 ---
 
 <div class="content">
   {
-    PROJECTS.map(({ image, title, description, link, github }) => (
+    PROJECTS.map(({ image, title, description, link, github, status }) => (
       <article class="project-card">
+        <span class={`project-tag ${status.class}`}>{status.text}</span>
         <Image
           src={image}
           alt={title}
