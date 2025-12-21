@@ -7,6 +7,13 @@ import Projects from "../components/Projects.astro";
 
 const workExperience = [
   {
+    title: "Fullstack Developer - Curoo",
+    period: "Julio 2025 - Actualidad",
+    description:
+      "Parte del equipo fundador de Curoo, una startup que brinda transcripciones médicas automáticas con IA para profesionales de la salud.",
+    link: "https://curoo.co/",
+  },
+  {
     title: "Mentor, Líder - Backbone",
     period: "Agosto 2022 - Actualidad",
     description:
@@ -17,7 +24,7 @@ const workExperience = [
     title: "Fullstack Developer - Selaski",
     period: "Noviembre 2022 - Junio 2025",
     description:
-      "Trabajé haciendo el comercio exterior más barato y fácil para las empresas. Creo features clave usando Angular, Nest.js, MySQL, TailwindCSS, AWS, entre otras tecnologías.",
+      "Trabajé haciendo el comercio exterior más barato y fácil para las empresas. Creando features clave usando Angular, Nest.js, MySQL, TailwindCSS, AWS, entre otras tecnologías.",
     link: "https://selaski.com",
   },
   {
@@ -34,6 +41,14 @@ const workExperience = [
       "Trabajé en una plataforma de streaming con +25M de usuarios, creando una suite completa de pruebas de carga y performance con K6 además de observabilidad con New Relic, logrando reducir el tiempo de respuesta de la API en un 50%.",
   },
 ];
+
+const getExperienceInYears = () => {
+  // Calculate the number of years of experience based on the current date and the start date of the first job (July 2021)
+  const startDate = new Date("2021-07-01");
+  const currentDate = new Date();
+  const years = currentDate.getFullYear() - startDate.getFullYear();
+  return years;
+};
 ---
 
 <MainLayout title="Acerca - Sergio Estrella (Djkde)">
@@ -49,12 +64,14 @@ const workExperience = [
       <p>
         ¡Que bueno verte! Soy Sergio Estrella, también conocido en internet como
         Djkde, un
-        <span class="focus-primary">Desarrollador Web</span> con
-        <span class="focus-primary"> +4 años de experiencia</span>.
+        <span class="focus-primary">Desarrollador Fullstack</span> con
+        <span class="focus-primary"
+          >+{getExperienceInYears()} años de experiencia</span
+        >.
         <br />
         <br />
-        Mi misión es mejorar la vida de las personas a través de la tecnología y
-        en mi tiempo libre comparto mi conocimiento en lugares como este blog.
+        Mi misión es mejorar la vida de las personas a través de la tecnología y en
+        mi tiempo libre comparto mi conocimiento en lugares como este blog.
         <br />
         <br />
       </p>
