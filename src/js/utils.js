@@ -15,7 +15,7 @@ export async function formatBlogPosts(
     filterOutDrafts = true,
     filterFuturePosts = true,
     sortBy = "date",
-    limit = undefined,
+    limit = 0,
   } = {}
 ) {
   // Convert the object of modules to an array of post data
@@ -39,7 +39,7 @@ export async function formatBlogPosts(
 
   const sortedPosts = sortPosts(sortBy, filteredPosts);
 
-  return limit ? sortedPosts.slice(0, limit) : sortedPosts;
+  return limit > 0 ? sortedPosts.slice(0, limit) : sortedPosts;
 }
 
 function sortPosts(sortType, posts) {
