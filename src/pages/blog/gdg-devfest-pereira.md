@@ -3,7 +3,11 @@ layout: "../../layouts/BlogPostLayout.astro"
 title: GDG DevFest Pereira 2025
 date: 2025-11-29
 author: Sergio Estrella
-image: { src: "/images/post-devfest.webp", alt: "Portada del Software Freedom Day 2025" }
+image:
+  {
+    src: "/images/post-devfest.webp",
+    alt: "Portada del GDG DevFest Pereira 2025",
+  }
 description: Primera edición del GDG DevFest en la ciudad de Pereira. Con expertos hablando de IA, Cloud y más.
 category: Charlas
 ---
