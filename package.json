@@ -2,15 +2,23 @@
   "name": "djkde-blog-astro",
   "type": "module",
   "version": "0.0.1",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.1.3",
+      "onFail": "error"
+    }
+  },
   "browserslist": [
     "defaults"
   ],
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "preinstall": "node scripts/require-pnpm.mjs",
+    "dev": "node scripts/require-pnpm.mjs && astro dev",
+    "start": "node scripts/require-pnpm.mjs && astro dev",
+    "build": "node scripts/require-pnpm.mjs && astro build",
+    "preview": "node scripts/require-pnpm.mjs && astro preview",
+    "astro": "node scripts/require-pnpm.mjs && astro"
   },
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.6",
