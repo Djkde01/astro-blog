@@ -88,7 +88,7 @@ DWP standard: 7.0.0 (onboarded 2026-11-04; skill 7.9.0)
 - Do not add `Co-Authored-By` or any AI attribution to commits.
 - A plan contract may grant commits on a feature branch. Push, pull requests, merges and releases belong to the owner.
 - Plan contracts grant only `gate_command_exec`, `fs_write_plan_scope`, `fs_write_repo_scope` and `git_operations`. Add `network_access` only if a task needs it.
-- After each work-unit commit, run `gentle-ai review assess` and follow its result. When a review is due, write the task and its criteria to a file under `tmp/` and pass its path as `--request-context` on the preflight `gentle-ai review status`.
+- After each work-unit commit, run `gentle-ai review assess` and follow its result. Without the tool, see [Owner's tools](docs/DEVELOPMENT_COMMANDS.md#owners-tools). When a review is due, write the task and its criteria to a file under `tmp/` and pass its path as `--request-context` on the preflight `gentle-ai review status`.
 
 ### Package manager
 

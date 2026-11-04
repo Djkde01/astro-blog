@@ -12,7 +12,7 @@ One owner supervises, validates and approves, and agents do the implementation. 
 | Closing a criterion | The gate runner or the owner's sign-off, never an agent's report |
 | Reviewing each commit | Gentle AI receipt-driven review, when its assessment says it is due |
 | Reviewing the whole plan | AI Diff Reviewer, in the Final Review |
-| Long-term decisions and discoveries | Engram memory; task state stays in the plan journal |
+| Long-term decisions and discoveries | Engram memory, when installed (see [Owner's tools](DEVELOPMENT_COMMANDS.md#owners-tools)); task state stays in the plan journal |
 
 ## Branches
 

@@ -70,6 +70,13 @@ mkdir -p .dwp/plans tmp
 
 On 2026-11-04 the installed files matched the owner's global copies byte for byte.
 
+## Owner's tools
+
+These run on the owner's machine and are configured outside this repository. Nothing in the build or the gates needs them.
+
+- **Gentle AI** (`gentle-ai`, 4.3.1 on 2026-11-04) provides the per-commit review, from [Gentleman-Programming/gentle-ai](https://github.com/Gentleman-Programming/gentle-ai). Without it, skip that review and say so when reporting. The plan's Final Review with AI Diff Reviewer still applies.
+- **Engram** is a persistent memory for agents. Without it, keep decisions in the plan journal.
+
 ## Dependencies
 
 | Task | Command |

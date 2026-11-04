@@ -34,7 +34,7 @@ All commands run from the repository root.
 
 ## End-to-end evidence
 
-`scripts/e2e-gate.sh` sets `DWP_EVIDENCE_DIR`, which defaults to `tmp/e2e-evidence/<id>`. It fails when a test fails, when a `test.only` narrows the run, when no test is selected, when a video is missing, or when a selected test's title does not start with the id. Playwright's `--grep` matches anywhere in a title, so that last check stops a test that only mentions a criterion from closing it. Each run writes a video, a trace and a screenshot per test. `E2E_GATE_CONFIG` repoints the gate at another Playwright configuration, and exists only for `scripts/test-e2e-gate.sh`.
+`scripts/e2e-gate.sh` sets `DWP_EVIDENCE_DIR`, which defaults to `tmp/e2e-evidence/<id>`. It fails when a test fails or is skipped, when a `test.only` narrows the run, when no test is selected, when a video is missing, or when a selected test's title does not start with the id. Playwright's `--grep` matches anywhere in a title, so that last check stops a test that only mentions a criterion from closing it. Each run writes a video, a trace and a screenshot per test. `E2E_GATE_CONFIG` repoints the gate at another Playwright configuration, and exists only for `scripts/test-e2e-gate.sh`.
 
 Playwright builds the site and serves it with `astro preview` on port 4322, so tests see the same output that ships. Use the `e2e-evidence` skill to write one.
 

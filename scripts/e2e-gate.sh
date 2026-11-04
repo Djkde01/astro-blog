@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Evidence gate. Usage: e2e-gate.sh <AC-id> | --all
-# Fails when a selected test fails, when a test.only narrows the run, when no test is
+# Fails when a selected test fails or is skipped, when a test.only narrows the run, when no test is
 # selected, when a video is missing, or when a selected test's title does not start with the id.
 # E2E_GATE_CONFIG exists only for scripts/test-e2e-gate.sh, which points the gate at its fixtures.
 set -euo pipefail

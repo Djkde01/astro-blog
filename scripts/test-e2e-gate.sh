@@ -41,6 +41,7 @@ E2E_GATE_EXPECT="usage:" check fail "a second argument is rejected" AC-fixture-p
 E2E_GATE_FIXTURE_MATCH=mention.spec.ts E2E_GATE_EXPECT="title does not start with" check fail "a test that only mentions the criterion in its title does not close it" AC-fixture-mentioned
 E2E_GATE_EXPECT="an id holds only" check fail "an id with regex characters is rejected" "AC-fixture-.*"
 E2E_GATE_FIXTURE_MATCH=only.fixture.ts E2E_GATE_EXPECT="--forbid-only" check fail "--all fails when a test.only narrows the run" --all
+E2E_GATE_FIXTURE_MATCH=skipped.fixture.ts E2E_GATE_EXPECT="final status is skipped" check fail "a skipped test does not close its criterion" AC-fixture-skip
 
 # Playwright stops on its own when nothing matches, so the checker's guard is proved directly.
 echo '{"suites":[]}' >"$evidence/empty.json"

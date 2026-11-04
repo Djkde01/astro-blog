@@ -33,4 +33,4 @@ draft: true
 - `draft: true` or a future `date` hides a post from every page and from RSS. The post's own URL is still built.
 - `robots` with any value makes the page `noindex, nofollow`.
 
-Then run `pnpm run build` and check the post on the home page, the blog index, its category and `/rss.xml`.
+Then run `pnpm run build`. While the post is a draft, check it at its own URL with `pnpm run preview`; it appears nowhere else. Once the owner publishes it, also check the blog index, its category and `/rss.xml`. The home page shows only the latest three posts, so an older date can keep a published post off it.
