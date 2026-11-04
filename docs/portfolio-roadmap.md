@@ -84,7 +84,7 @@ These are the exact files and patterns the roadmap builds on. Each phase below c
 
 ### Tooling
 
-- [`package.json`](../package.json) — `dev`, `build`, `preview`, `astro`, `check`, `test`, `test:e2e`. **No** lint or format script. Gates are described in [`docs/TESTING_GUIDE.md`](TESTING_GUIDE.md).
+- [`package.json`](../package.json) — `dev`, `build`, `preview`, `astro`, `check`, `lint`, `test`, `test:e2e`. **No** format script. Gates are described in [`docs/TESTING_GUIDE.md`](TESTING_GUIDE.md).
 - [`astro.config.mjs`](../astro.config.mjs) — MDX, sitemap, Partytown, `astro-icon`.
 - Content is **not** in a content collection; everything goes through `import.meta.glob("...blog/*.md")` + `formatBlogPosts()`. Any change to discovery or path shape must be applied to **all** consumers (homepage, blog index, category, related, RSS).
 
@@ -329,10 +329,10 @@ This phase has no dependency on the others, and every later phase benefits from 
 ### Changes
 
 - **Node:** add `.nvmrc` with `26`, and replace `corepack enable` in `README.md`, `AGENTS.md`, `docs/DEVELOPMENT_COMMANDS.md` and `scripts/require-pnpm.mjs`. If a host cannot build on 26, return to `24` everywhere, so CI and production stay on one version.
-- **Lint:** add `pnpm run lint`, with the tool chosen in Phase 0. Fix the findings on the existing code in a commit of their own, with no change in `dist/`. The `arguments` use in the Google Analytics snippet in `MainHead.astro` stays, with an inline exception and its reason. Formatting stays out of scope.
+- **Lint:** add `pnpm run lint`, with the tool chosen in Phase 0. Fix the findings on the existing code in a commit of their own, with no change in `dist/`. The `arguments` use in the Google Analytics snippet in `MainHead.astro` stays, with a config exception and its reason. Formatting stays out of scope.
 - **CI:** add `.github/workflows/ci.yml`, triggered on pull requests and on pushes to `main`:
-  - `static` job: `pnpm run lint`, `pnpm run check`, `pnpm run test`, and `bash scripts/test-e2e-gate.sh`.
-  - `e2e` job: install Chromium with its system dependencies, run `pnpm run test:e2e`, and upload `tmp/e2e-evidence/` as an artifact with a short retention.
+  - `static` job: `pnpm run lint`, `pnpm run check`, `pnpm run test`, and `bash scripts/test-lint-setup.sh`.
+  - `e2e` job: install Chromium with its system dependencies, run `pnpm run test:e2e` and `bash scripts/test-e2e-gate.sh`, and upload `tmp/e2e-evidence/` as an artifact with a short retention.
   - Both install with `pnpm install --frozen-lockfile`. `pnpm/action-setup` can read the version from `devEngines.packageManager`, so the pin stays in one place.
 - **Pre-push hook:** add `.githooks/pre-push`, which runs `pnpm run lint`, and a `prepare` script that sets `core.hooksPath` to `.githooks`. Git supports this natively, so no hook manager is needed.
 - **Docs:** update `AGENTS.md`, `README.md`, `docs/TESTING_GUIDE.md`, `docs/DEVELOPMENT_COMMANDS.md`, section 2 of this file, and the line in `.review/extension.md` that accepts the missing linter.
@@ -456,7 +456,7 @@ Each phase's plan selects its gates from [`docs/TESTING_GUIDE.md`](TESTING_GUIDE
 
 For every phase:
 
-- Run `pnpm run check && pnpm run test && pnpm run test:e2e`, which also builds the site.
+- Run `pnpm run lint && pnpm run check && pnpm run test && pnpm run test:e2e`, which also builds the site.
 - Prove each user-visible behavior with a Playwright test titled with its `AC-*` id, with video. For a layout or an animation that must be judged by eye, add a second criterion for the owner's sign-off.
 
 These checks have no automated gate, so run them by hand or ask for the owner's sign-off:

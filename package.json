@@ -20,6 +20,7 @@
     "preview": "node scripts/require-pnpm.mjs && astro preview",
     "astro": "node scripts/require-pnpm.mjs && astro",
     "check": "node scripts/require-pnpm.mjs && astro check",
+    "lint": "node scripts/require-pnpm.mjs && eslint .",
     "test": "node scripts/require-pnpm.mjs && node --test \"tests/**/*.test.mjs\"",
     "test:e2e": "node scripts/require-pnpm.mjs && bash scripts/e2e-gate.sh --all"
   },
@@ -43,8 +44,15 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
+    "@eslint/js": "10.0.1",
     "@playwright/test": "^1.64.1",
+    "astro-eslint-parser": "3.2.0",
+    "eslint": "10.14.0",
+    "eslint-plugin-astro": "3.2.1",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "globals": "^17.14.0",
     "typescript": "^5.9.3",
+    "typescript-eslint": "8.72.1",
     "vite": "^7.3.0"
   }
 }

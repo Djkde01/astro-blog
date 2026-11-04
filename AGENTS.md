@@ -153,6 +153,7 @@ Work with autonomy, ownership and sound judgment. Pursue correctness, clarity, s
 | Install dependencies | `pnpm install` | full | Verified |
 | Run the dev server | `pnpm run dev` | full | Verified |
 | Build the site | `pnpm run build` | full | Verified |
+| Lint | `pnpm run lint` | full | Verified |
 | Type-check | `pnpm run check` | full | Verified |
 | Unit tests | `pnpm run test` | full | Verified |
 | One unit test file | `node --test tests/utils.test.mjs` | scoped | Verified |
@@ -160,10 +161,11 @@ Work with autonomy, ownership and sound judgment. Pursue correctness, clarity, s
 | End-to-end evidence | `pnpm run test:e2e` | full | Verified |
 | One end-to-end criterion | `bash scripts/e2e-gate.sh AC-site-smoke` | scoped | Verified |
 | Prove the evidence gate | `bash scripts/test-e2e-gate.sh` | full | Verified |
+| Prove the lint setup | `bash scripts/test-lint-setup.sh` | full | Verified |
 | Check harness conformance | `bash .agents/skills/deepworkplan/verify/conformance.sh --repo-only .` | full | Verified |
 | Install third-party skills | See [docs/DEVELOPMENT_COMMANDS.md](docs/DEVELOPMENT_COMMANDS.md#third-party-skills) | full | Verified |
 
-There is no lint or format script.
+There is no format script.
 
 ## Deep Work Plans: invocation
 

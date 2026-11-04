@@ -24,7 +24,8 @@ This is a **single-package Astro site** (not a monorepo). The site is actively m
 **Tooling**
 
 - Unit tests with `node:test`, type-checking with `astro check`, and end-to-end tests with Playwright that record a video per test
-- No `lint` or format script
+- ESLint with JavaScript, TypeScript, Astro and accessibility rules
+- No format script
 
 ## Tech Stack
 
@@ -40,7 +41,7 @@ This is a **single-package Astro site** (not a monorepo). The site is actively m
 | Media | [`@justinribeiro/lite-youtube`](https://github.com/justinribeiro/lite-youtube), [`sharp`](https://sharp.pixelplumbing.com/) |
 | Styles | PostCSS + [`postcss-preset-env`](https://preset-env.cssdb.org/) |
 | Fonts | [`@fontsource-variable/montserrat`](https://fontsource.org/fonts/montserrat) |
-| Testing | `node:test`, [`@astrojs/check`](https://docs.astro.build/en/reference/cli-reference/#astro-check), [Playwright](https://playwright.dev) |
+| Testing | `node:test`, [`@astrojs/check`](https://docs.astro.build/en/reference/cli-reference/#astro-check), [Playwright](https://playwright.dev), [ESLint](https://eslint.org) |
 
 ## Architecture
 
@@ -110,6 +111,7 @@ All commands run from the project root:
 | `pnpm run build` | Build the production site to `./dist/` |
 | `pnpm run preview` | Preview the production build locally |
 | `pnpm run astro ...` | Run Astro CLI commands (e.g. `pnpm run astro add`) |
+| `pnpm run lint` | Lint the project |
 | `pnpm run check` | Type-check the project |
 | `pnpm run test` | Run the unit tests |
 | `pnpm run test:e2e` | Build the site and run the end-to-end tests, with video |
@@ -117,10 +119,10 @@ All commands run from the project root:
 ### Verify changes
 
 ```sh
-pnpm run check && pnpm run test && pnpm run test:e2e
+pnpm run lint && pnpm run check && pnpm run test && pnpm run test:e2e
 ```
 
-This type-checks the project, runs the unit tests, then builds the site and tests it in a browser. The first Playwright run on a machine may need `pnpm exec playwright install chromium`. See [`docs/TESTING_GUIDE.md`](docs/TESTING_GUIDE.md).
+This lints and type-checks the project, runs the unit tests, then builds the site and tests it in a browser. The first Playwright run on a machine may need `pnpm exec playwright install chromium`. See [`docs/TESTING_GUIDE.md`](docs/TESTING_GUIDE.md).
 
 ## Contributing
 

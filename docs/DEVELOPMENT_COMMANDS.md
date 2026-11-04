@@ -35,6 +35,9 @@ pnpm exec playwright install chromium
 
 | Task | Command | Kind |
 |------|---------|------|
+| Lint | `pnpm run lint` | full |
+| Lint one path | `pnpm exec eslint <path>` | scoped |
+| Prove the lint rules are active | `bash scripts/test-lint-setup.sh` | full |
 | Type-check and Astro diagnostics | `pnpm run check` | full |
 | Unit tests | `pnpm run test` | full |
 | One unit test file | `node --test tests/utils.test.mjs` | scoped |
@@ -44,7 +47,7 @@ pnpm exec playwright install chromium
 | Prove the evidence gate can fail | `bash scripts/test-e2e-gate.sh` | full |
 | Harness conformance | `bash .agents/skills/deepworkplan/verify/conformance.sh --repo-only .` | full |
 
-`pnpm run check` also prints two hints for unused imports, which do not fail it. See [TESTING_GUIDE.md](TESTING_GUIDE.md) for which gate to run when.
+See [TESTING_GUIDE.md](TESTING_GUIDE.md) for which gate to run when.
 
 ## Third-party skills
 

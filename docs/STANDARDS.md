@@ -1,6 +1,6 @@
 # Standards
 
-No linter or formatter is configured, so these conventions come from the existing code. Match the file you are in.
+`pnpm run lint` enforces the rules in `eslint.config.mjs`. No formatter is configured, so the other conventions come from the existing code. Match the file you are in.
 
 ## Files and naming
 
