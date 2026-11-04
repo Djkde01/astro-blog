@@ -92,7 +92,7 @@ DWP standard: 7.0.0 (onboarded 2026-11-04; skill 7.9.0)
 
 ### Package manager
 
-- This project requires pnpm, at the exact version pinned in `package.json` under `devEngines`. Run `corepack enable` once, then use `pnpm install`. Any other version fails.
+- This project requires pnpm, at the exact version pinned in `package.json` under `devEngines`. Install it once with `npm install -g pnpm@11.21.0`, then use `pnpm install`. Any other version fails.
 - Do not use `npx` here: npm rejects the `devEngines` pin. Use `pnpm dlx`.
 
 ### Source of truth

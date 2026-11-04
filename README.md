@@ -88,15 +88,15 @@ Details are in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). For agent-oriente
 
 ### Prerequisites
 
-- Node.js (LTS recommended)
-- [Corepack](https://nodejs.org/api/corepack.html) enabled for pnpm
+- Node.js 26, the version in `.nvmrc`
+- pnpm 11.21.0
 
 This project **requires pnpm** at the version pinned in `package.json`. npm, yarn, and bun are rejected by `scripts/require-pnpm.mjs`.
 
 ### Setup
 
 ```sh
-corepack enable
+npm install -g pnpm@11.21.0
 pnpm install
 ```
 

@@ -1,6 +1,6 @@
 # Testing guide
 
-Use this guide to turn a task's touched surface into a validation gate. Every command below ran on 2026-11-04, with Node 24.19.0, pnpm 11.21.0 and Playwright 1.64.1.
+Use this guide to turn a task's touched surface into a validation gate. Every command below ran on 2026-11-04, with Node 26.13.0, pnpm 11.21.0 and Playwright 1.64.1.
 
 The whole suite is cheap, at well under a minute, so prefer running all of it over careful selection. Use scoped commands while iterating.
 

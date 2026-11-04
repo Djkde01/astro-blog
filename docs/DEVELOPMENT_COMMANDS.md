@@ -1,13 +1,15 @@
 # Development commands
 
-Run these from the repository root. Each one ran on 2026-11-04, except `corepack enable` and the browser install, which are first-time setup and were already in place on that machine.
+Run these from the repository root. Each one ran on 2026-11-04, except the pnpm install and the browser install, which are first-time setup and were already in place on that machine.
 
 ## Setup
 
 This project requires pnpm at the exact version in `package.json`, under `devEngines` (11.21.0). `scripts/require-pnpm.mjs` rejects npm, yarn and bun, and pnpm itself rejects any other version.
 
+The Node version is in `.nvmrc` (26). Node 25 and later no longer ship Corepack, so install pnpm with npm:
+
 ```bash
-corepack enable
+npm install -g pnpm@11.21.0
 ```
 
 ```bash
