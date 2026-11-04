@@ -2,7 +2,7 @@
 
 | File | Purpose | Tested by |
 |------|---------|-----------|
-| `utils.js` | `formatBlogPosts()`, `slugify()` and `formatDate()` | `tests/utils.test.mjs` |
+| `utils.js` | `formatBlogPosts()`, `slugify()` and `formatDate()` | `tests/utils.test.mjs` covers `formatBlogPosts()` and `slugify()`. `formatDate()` has no test |
 | `jsonLD.js` | Builds the JSON-LD script for `Seo.astro`, without escaping | The build; it reads `import.meta.env` and cannot load under plain Node |
 | `nav.js` | Marks the current navigation link with `aria-current` | Not tested |
 

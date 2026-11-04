@@ -5,11 +5,11 @@
 # E2E_GATE_CONFIG exists only for scripts/test-e2e-gate.sh, which points the gate at its fixtures.
 set -euo pipefail
 
-target=${1:-}
-if [ -z "$target" ]; then
+if [ "$#" -ne 1 ]; then
   echo "usage: e2e-gate.sh <AC-id> | --all" >&2
   exit 2
 fi
+target=$1
 
 repo=$(cd "$(dirname "$0")/.." && pwd)
 select_tests=()

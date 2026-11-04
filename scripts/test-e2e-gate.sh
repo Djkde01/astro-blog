@@ -30,13 +30,14 @@ check() {
 }
 
 E2E_GATE_EXPECT="1 test(s) passed" check pass "one criterion passes with its video" AC-fixture-pass
-E2E_GATE_FIXTURE_MATCH=failing.spec.ts E2E_GATE_EXPECT="Playwright exited" check fail "one criterion fails when its test fails" AC-fixture-fail
+E2E_GATE_FIXTURE_MATCH=failing.spec.ts E2E_GATE_EXPECT="1 failed" check fail "one criterion fails when its test fails" AC-fixture-fail
 E2E_GATE_FIXTURE_VIDEO=off E2E_GATE_EXPECT="video is missing" check fail "one criterion fails when its video is missing" AC-fixture-pass
 E2E_GATE_EXPECT="No tests found" check fail "one criterion fails when no test matches" AC-fixture-none
 E2E_GATE_EXPECT="test(s) passed" check pass "--all passes with videos" --all
-E2E_GATE_FIXTURE_MATCH="*.spec.ts" E2E_GATE_EXPECT="Playwright exited" check fail "--all fails when a test fails" --all
+E2E_GATE_FIXTURE_MATCH="*.spec.ts" E2E_GATE_EXPECT="1 failed" check fail "--all fails when a test fails" --all
 E2E_GATE_FIXTURE_VIDEO=off E2E_GATE_EXPECT="video is missing" check fail "--all fails when a video is missing" --all
 E2E_GATE_EXPECT="usage:" check fail "no argument is rejected"
+E2E_GATE_EXPECT="usage:" check fail "a second argument is rejected" AC-fixture-pass AC-fixture-none
 E2E_GATE_FIXTURE_MATCH=mention.spec.ts E2E_GATE_EXPECT="title does not start with" check fail "a test that only mentions the criterion in its title does not close it" AC-fixture-mentioned
 E2E_GATE_EXPECT="an id holds only" check fail "an id with regex characters is rejected" "AC-fixture-.*"
 E2E_GATE_FIXTURE_MATCH=only.fixture.ts E2E_GATE_EXPECT="--forbid-only" check fail "--all fails when a test.only narrows the run" --all

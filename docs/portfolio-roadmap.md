@@ -157,7 +157,7 @@ Goal: keep the article in one column at all breakpoints; move category and relat
 
 ### Risks / guardrails
 
-- `.post-content` styles also affect `blockquote`, `strong`, `em`. Verify all 8 existing posts visually after the change.
+- `.post-content` styles also affect `blockquote`, `strong`, `em`. Verify all existing posts visually after the change.
 - Do not move `CategoryCloud` to a place that requires a new glob; it already shares the same discovery path.
 
 ---
