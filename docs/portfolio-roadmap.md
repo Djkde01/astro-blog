@@ -1,6 +1,18 @@
 # Portfolio Roadmap
 
-A phased, implementation-ready plan for evolving `sergioestrella.com` along four axes: **UX**, **UI**, **new sections**, and **content workflow**. The roadmap is intentionally additive: it preserves the current Astro static-site architecture, the existing routes, and the file-based blog so that nothing breaks unless a content-model change is explicitly approved.
+A phased, implementation-ready backlog for evolving `sergioestrella.com` along four axes: **UX**, **UI**, **new sections**, and **content workflow**. The roadmap is intentionally additive: it preserves the current Astro static-site architecture, the existing routes, and the file-based blog so that nothing breaks unless a content-model change is explicitly approved.
+
+## How This Roadmap Is Executed
+
+This file is a **product backlog**, not a plan. It says what the site should become. How the work runs is set by the owner's way of working, recorded in [`AGENTS.md`](../AGENTS.md):
+
+1. Pick the next phase.
+2. Run `/grilling` on it until no decision is open. The Phase 0 decisions that phase depends on are settled here.
+3. Run `/dwp-create` with the outcome. The Deep Work Plan becomes the only planning document, with its criteria (`AC-*`), its tasks and their state. Do not copy tasks or progress back into this file.
+4. Execute with `/dwp-execute`. Each task writes a failing test, implements, runs its gate, commits on the feature branch and runs `gentle-ai review assess`.
+5. Close with the Final Review, using AI Diff Reviewer. The owner pushes, opens the pull request and merges.
+
+When a plan changes what a phase should deliver, update the phase here so the backlog stays true.
 
 ---
 
@@ -72,7 +84,7 @@ These are the exact files and patterns the roadmap builds on. Each phase below c
 
 ### Tooling
 
-- [`package.json`](../package.json) — only `dev`, `build`, `preview`, `astro`. **No** `lint`, `test`, or `typecheck` scripts. `pnpm run build` is the de facto verification gate (per `AGENTS.md`).
+- [`package.json`](../package.json) — `dev`, `build`, `preview`, `astro`, `check`, `test`, `test:e2e`. **No** lint or format script. Gates are described in [`docs/TESTING_GUIDE.md`](TESTING_GUIDE.md).
 - [`astro.config.mjs`](../astro.config.mjs) — MDX, sitemap, Partytown, `astro-icon`.
 - Content is **not** in a content collection; everything goes through `import.meta.glob("...blog/*.md")` + `formatBlogPosts()`. Any change to discovery or path shape must be applied to **all** consumers (homepage, blog index, category, related, RSS).
 
@@ -145,7 +157,7 @@ Goal: keep the article in one column at all breakpoints; move category and relat
 
 ### Risks / guardrails
 
-- `.post-content` styles also affect `blockquote`, `strong`, `em`. Verify all 9 existing posts visually after the change.
+- `.post-content` styles also affect `blockquote`, `strong`, `em`. Verify all 8 existing posts visually after the change.
 - Do not move `CategoryCloud` to a place that requires a new glob; it already shares the same discovery path.
 
 ---
@@ -291,7 +303,7 @@ Goal: a repeatable command that turns a `.txt` transcript into a draft `src/page
 ### Guardrails
 
 - Output **must** be flat under `src/pages/blog/*.md`. Nested paths would mismatch the globs in [`src/pages/index.astro`](../src/pages/index.astro), [`src/pages/blog/[...page].astro`](../src/pages/blog/[...page].astro), [`src/pages/category/[category].astro`](../src/pages/category/[category].astro), and [`src/layouts/BlogPostLayout.astro`](../src/layouts/BlogPostLayout.astro), even though `rss.xml.js` would still pick them up.
-- Default `draft: true` so a half-finished post never reaches the index/RSS (because `formatBlogPosts` filters drafts, and `rss.xml.js` is expected to filter the same way; verify before relying on it).
+- Default `draft: true` so a half-finished post never reaches the index/RSS (because `formatBlogPosts` filters drafts, and `rss.xml.js` goes through it too).
 - Refuse to overwrite an existing slug; require `--force`.
 - No network calls in the default mode. AI-assisted mode (later) goes behind a `--ai` flag and an env var.
 
@@ -371,9 +383,15 @@ flowchart TD
 
 ## 11. Validation Plan
 
+Each phase's plan selects its gates from [`docs/TESTING_GUIDE.md`](TESTING_GUIDE.md). A criterion closes only on a gate or on the owner's sign-off.
+
 For every phase:
 
-- Run `pnpm run build` (the documented verification step) and confirm `dist/` is generated without errors.
+- Run `pnpm run check && pnpm run test && pnpm run test:e2e`, which also builds the site.
+- Prove each user-visible behavior with a Playwright test titled with its `AC-*` id, with video. For a layout or an animation that must be judged by eye, add a second criterion for the owner's sign-off.
+
+These checks have no automated gate, so run them by hand or ask for the owner's sign-off:
+
 - Run `pnpm run dev` and visit at minimum:
   - `/` (landing)
   - `/about`

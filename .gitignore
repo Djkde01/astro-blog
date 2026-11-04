@@ -21,3 +21,25 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# DeepWorkPlan: plans stay local, the addon registry is shared
+.dwp/*
+!.dwp/config.json
+
+# Scratch space
+tmp/
+
+# Local Gentle AI registry, holds machine-specific paths
+.atl/
+
+# Local agent caches and settings
+.codegraph/
+.agents/settings.local.json
+
+# Third-party skills, installed with pinned versions (docs/DEVELOPMENT_COMMANDS.md)
+.agents/skills/deepworkplan/
+.agents/skills/ai-diff-reviewer/
+
+# Test evidence
+test-results/
+playwright-report/
