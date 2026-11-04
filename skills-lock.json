@@ -6,10 +6,24 @@
       "sourceType": "autoskills-registry",
       "computedHash": "bffe3d08cfe92ebad63699f74ce29e35c19850ebfbf474c1463183cfe34d6a09"
     },
+    "ai-diff-reviewer": {
+      "source": "DailybotHQ/ai-diff-reviewer",
+      "ref": "v3.3.16",
+      "sourceType": "github",
+      "skillPath": "skills/ai-diff-reviewer/SKILL.md",
+      "computedHash": "bf441b47b88ff1250702da4d55bc49a0ddabf7078fa65b48eac1cca947f7dcb8"
+    },
     "astro": {
       "source": "astrolicious/agent-skills",
       "sourceType": "autoskills-registry",
       "computedHash": "2afd3a02edf4374598ce471dabb1ab5638851dbf7b82d0bb36f1019331eafb54"
+    },
+    "deepworkplan": {
+      "source": "DailybotHQ/deepworkplan-skill",
+      "ref": "v7.9.0",
+      "sourceType": "github",
+      "skillPath": "skills/deepworkplan/SKILL.md",
+      "computedHash": "bbc42d1db71fc0355bc582b2aa51bed0956cbcfa10f425267b69640b06e9191d"
     },
     "frontend-design": {
       "source": "anthropics/skills",

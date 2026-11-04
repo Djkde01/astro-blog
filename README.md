@@ -4,7 +4,7 @@ Personal blog and portfolio site for [sergioestrella.com](https://sergioestrella
 
 ## Project Status
 
-This is a **single-package Astro site** (not a monorepo). The site is actively maintained and evolving toward a richer editorial portfolio. Planned work is tracked in [`docs/portfolio-roadmap.md`](docs/portfolio-roadmap.md).
+This is a **single-package Astro site** (not a monorepo). The site is actively maintained and evolving toward a richer editorial portfolio. The product backlog is in [`docs/portfolio-roadmap.md`](docs/portfolio-roadmap.md), and each phase runs as a Deep Work Plan.
 
 **What exists today**
 
@@ -21,11 +21,10 @@ This is a **single-package Astro site** (not a monorepo). The site is actively m
 - There is **no** Astro Content Collection; posts are discovered with `import.meta.glob(...)` and normalized through `formatBlogPosts()` in `src/js/utils.js`
 - Draft and future-dated posts are filtered out by default
 
-**Tooling gaps**
+**Tooling**
 
-- No `test`, `lint`, or dedicated `typecheck` scripts in `package.json`
-- `pnpm run build` is the main verification step
-- `pnpm run astro -- check` is not ready in a fresh checkout until `@astrojs/check` is added
+- Unit tests with `node:test`, type-checking with `astro check`, and end-to-end tests with Playwright that record a video per test
+- No `lint` or format script
 
 ## Tech Stack
 
@@ -33,7 +32,7 @@ This is a **single-package Astro site** (not a monorepo). The site is actively m
 | --- | --- |
 | Framework | [Astro](https://astro.build) 5 |
 | Build tool | [Vite](https://vite.dev) |
-| Package manager | [pnpm](https://pnpm.io) 11.x (required) |
+| Package manager | [pnpm](https://pnpm.io) 11.21.0 (required, pinned in `package.json`) |
 | Content | Markdown + [`@astrojs/mdx`](https://docs.astro.build/en/guides/integrations-guide/mdx/) |
 | SEO & discovery | [`@astrojs/sitemap`](https://docs.astro.build/en/guides/integrations-guide/sitemap/), [`@astrojs/rss`](https://docs.astro.build/en/guides/rss/), custom JSON-LD |
 | Analytics | [`@astrojs/partytown`](https://docs.astro.build/en/guides/integrations-guide/partytown/) (Google Analytics) |
@@ -41,11 +40,15 @@ This is a **single-package Astro site** (not a monorepo). The site is actively m
 | Media | [`@justinribeiro/lite-youtube`](https://github.com/justinribeiro/lite-youtube), [`sharp`](https://sharp.pixelplumbing.com/) |
 | Styles | PostCSS + [`postcss-preset-env`](https://preset-env.cssdb.org/) |
 | Fonts | [`@fontsource-variable/montserrat`](https://fontsource.org/fonts/montserrat) |
+| Testing | `node:test`, [`@astrojs/check`](https://docs.astro.build/en/reference/cli-reference/#astro-check), [Playwright](https://playwright.dev) |
 
 ## Architecture
 
 ```text
 /
+├── docs/                   Product, roadmap and engineering guides
+├── e2e/                    Playwright tests
+├── tests/                  Unit tests
 ├── public/                 Static assets copied as-is (images, RSS stylesheet)
 ├── src/
 │   ├── components/         Reusable UI (Nav, PostCard, Seo, LiteYoutube, etc.)
@@ -61,7 +64,7 @@ This is a **single-package Astro site** (not a monorepo). The site is actively m
 │   ├── styles/             Global CSS
 │   └── types/              TypeScript interfaces
 ├── astro.config.mjs        Astro config (site URL, integrations)
-├── scripts/require-pnpm.mjs  Enforces pnpm for install and scripts
+├── scripts/                pnpm guard and the end-to-end evidence gate
 └── dist/                   Production build output (generated)
 ```
 
@@ -79,7 +82,7 @@ This is a **single-package Astro site** (not a monorepo). The site is actively m
   - `src/components/CategoryCloud.astro`
   - `src/pages/rss.xml.js`
 
-For agent-oriented project notes, see [`AGENTS.md`](AGENTS.md).
+Details are in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). For agent-oriented project notes, see [`AGENTS.md`](AGENTS.md).
 
 ## Local Development
 
@@ -88,7 +91,7 @@ For agent-oriented project notes, see [`AGENTS.md`](AGENTS.md).
 - Node.js (LTS recommended)
 - [Corepack](https://nodejs.org/api/corepack.html) enabled for pnpm
 
-This project **requires pnpm**. npm, yarn, and bun are rejected by `scripts/require-pnpm.mjs`.
+This project **requires pnpm** at the version pinned in `package.json`. npm, yarn, and bun are rejected by `scripts/require-pnpm.mjs`.
 
 ### Setup
 
@@ -107,14 +110,17 @@ All commands run from the project root:
 | `pnpm run build` | Build the production site to `./dist/` |
 | `pnpm run preview` | Preview the production build locally |
 | `pnpm run astro ...` | Run Astro CLI commands (e.g. `pnpm run astro add`) |
+| `pnpm run check` | Type-check the project |
+| `pnpm run test` | Run the unit tests |
+| `pnpm run test:e2e` | Build the site and run the end-to-end tests, with video |
 
 ### Verify changes
 
 ```sh
-pnpm run build
+pnpm run check && pnpm run test && pnpm run test:e2e
 ```
 
-A successful build confirms the static site generates correctly, including sitemap output.
+This type-checks the project, runs the unit tests, then builds the site and tests it in a browser. The first Playwright run on a machine may need `pnpm exec playwright install chromium`. See [`docs/TESTING_GUIDE.md`](docs/TESTING_GUIDE.md).
 
 ## Contributing
 
@@ -123,8 +129,8 @@ A successful build confirms the static site generates correctly, including sitem
 1. Use **pnpm** for all installs and scripts
 2. Create a branch for your change
 3. Make focused edits
-4. Run `pnpm run build` before opening a PR
-5. Keep commit messages clear and scoped to the change
+4. Run the checks under [Verify changes](#verify-changes) before opening a PR
+5. Use Conventional Commits, scoped to the change
 
 ### Adding or editing blog posts
 
@@ -161,7 +167,7 @@ Do not hand-edit:
 
 ### Roadmap and larger changes
 
-For planned UX, content, and architecture work, read [`docs/portfolio-roadmap.md`](docs/portfolio-roadmap.md) before proposing structural changes.
+For planned UX, content, and architecture work, read [`docs/portfolio-roadmap.md`](docs/portfolio-roadmap.md) before proposing structural changes. Larger work runs as a Deep Work Plan; see [`AGENTS.md`](AGENTS.md).
 
 ## License
 

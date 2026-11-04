@@ -19,7 +19,7 @@ import { Icon } from "astro-icon/components";
 </footer>
 
 <script>
-  document.querySelector("#year").textContent = new Date()
+  document.querySelector("#year")!.textContent = new Date()
     .getFullYear()
     .toString();
 </script>
