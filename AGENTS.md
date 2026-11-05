@@ -49,7 +49,9 @@ DWP standard: 7.0.0 (onboarded 2026-11-04; skill 7.9.0)
 ├── tests/                    # Unit tests, run with node:test
 ├── e2e/                      # Playwright evidence
 ├── e2e-gate-fixtures/        # Fixtures that prove the evidence gate can fail
-├── scripts/                  # pnpm guard and the evidence gate
+├── scripts/                  # pnpm guard, hook setup and the evidence gate
+├── .github/workflows/ci.yml  # Lint, types, unit and end-to-end checks on pull requests
+├── .githooks/pre-push        # Lints before a push; pnpm install activates it
 ├── .agents/                  # Agent kit; .claude is a symlink to it
 ├── .cursor/                  # Cursor agents and plugin settings, kept as they were
 ├── .codex/skills/            # Symlinks into .agents/skills
@@ -80,6 +82,7 @@ DWP standard: 7.0.0 (onboarded 2026-11-04; skill 7.9.0)
 - Each behavior criterion names one Playwright test, titled with its `AC-*` id. The gate fails if the test fails or its video is missing.
 - Specs import `test` from `e2e/fixtures.ts`, which keeps test runs away from the production analytics property.
 - Select validation gates from the change's touched surface using the mapping in [docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md), with its documented fallback to the full suite.
+- CI runs on pull requests and is the real gate for delivery; `git push --no-verify` skips the local hook. A green CI run does not close a plan criterion.
 - Never close a criterion by reporting a result: run the gate. An agent never signs off for the owner.
 
 ### Commits and delivery

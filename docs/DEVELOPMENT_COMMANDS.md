@@ -57,6 +57,10 @@ In a clone that already has its dependencies, `pnpm install` reports `Already up
 
 `git push --no-verify` skips the hook, so CI is the real gate.
 
+## Continuous integration
+
+`.github/workflows/ci.yml` runs the checks on pull requests and on pushes to `main`. [TESTING_GUIDE.md](TESTING_GUIDE.md#continuous-integration) says what each job runs. There is no command to run it locally.
+
 ## Third-party skills
 
 `deepworkplan` and `ai-diff-reviewer` are gitignored, and `skills-lock.json` records their pinned versions and hashes. Install them on a fresh clone with `pnpm dlx`, because `npx` fails here on the `devEngines` pin:

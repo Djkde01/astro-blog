@@ -35,6 +35,19 @@ All commands run from the repository root.
 
 `node --test` needs the quoted glob. Passing `tests/` as a directory is not the supported form.
 
+## Continuous integration
+
+`.github/workflows/ci.yml` runs on every pull request and on pushes to `main`, on the Node version in `.nvmrc`. It has two jobs:
+
+| Job | Runs |
+|-----|------|
+| `static` | `pnpm run lint`, `pnpm run check`, `pnpm run test`, `bash scripts/test-lint-setup.sh` |
+| `e2e` | `pnpm run test:e2e`, `bash scripts/test-e2e-gate.sh` |
+
+`static` needs no browser, so it stays fast. `e2e` installs Chromium, and always uploads `tmp/e2e-evidence/` as the `e2e-evidence` artifact, kept for 7 days. Open it to watch the video of a failed test.
+
+CI does not replace a plan's gate: a criterion still closes through the gate runner. The harness conformance check stays local, because the skill it lives in is gitignored.
+
 ## End-to-end evidence
 
 `scripts/e2e-gate.sh` sets `DWP_EVIDENCE_DIR`, which defaults to `tmp/e2e-evidence/<id>`. It fails when a test fails or is skipped, when a `test.only` narrows the run, when no test is selected, when a video is missing, or when a selected test's title does not start with the id. Playwright's `--grep` matches anywhere in a title, so that last check stops a test that only mentions a criterion from closing it. Each run writes a video, a trace and a screenshot per test. `E2E_GATE_CONFIG` repoints the gate at another Playwright configuration, and exists only for `scripts/test-e2e-gate.sh`.
@@ -71,6 +84,7 @@ Run the full suite when any of these change:
 - `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml`, `astro.config.mjs`, `postcss.config.cjs` or `tsconfig.json`.
 - `src/js/utils.js`, `src/layouts/` or the frontmatter shape.
 - `playwright.config.ts`, `e2e/fixtures.ts` or anything in `scripts/`. For the gate scripts, also run `bash scripts/test-e2e-gate.sh`.
+- `.github/workflows/ci.yml`. CI is the only place that really runs it, so check the run on the pull request.
 - `eslint.config.mjs`, `.githooks/` or `scripts/setup-git-hooks.sh`. Also run `bash scripts/test-lint-setup.sh`.
 
 ## Fallback

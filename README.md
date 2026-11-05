@@ -24,7 +24,8 @@ This is a **single-package Astro site** (not a monorepo). The site is actively m
 **Tooling**
 
 - Unit tests with `node:test`, type-checking with `astro check`, and end-to-end tests with Playwright that record a video per test
-- ESLint with JavaScript, TypeScript, Astro and accessibility rules
+- ESLint with JavaScript, TypeScript, Astro and accessibility rules, run by a pre-push hook
+- GitHub Actions running lint, types, unit and end-to-end tests on every pull request
 - No format script
 
 ## Tech Stack
@@ -122,7 +123,7 @@ All commands run from the project root:
 pnpm run lint && pnpm run check && pnpm run test && pnpm run test:e2e
 ```
 
-This lints and type-checks the project, runs the unit tests, then builds the site and tests it in a browser. The first Playwright run on a machine may need `pnpm exec playwright install chromium`. See [`docs/TESTING_GUIDE.md`](docs/TESTING_GUIDE.md).
+This lints and type-checks the project, runs the unit tests, then builds the site and tests it in a browser. CI runs the same checks on every pull request. The first Playwright run on a machine may need `pnpm exec playwright install chromium`. See [`docs/TESTING_GUIDE.md`](docs/TESTING_GUIDE.md).
 
 ## Contributing
 
