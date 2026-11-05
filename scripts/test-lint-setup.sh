@@ -90,7 +90,7 @@ export const value = 1;'
 
 git init -q "$scratch/repo"
 setup_succeeds_in "$scratch/repo" "in a fresh repository"
-if [ "$(git -C "$scratch/repo" config core.hooksPath)" = .githooks ]; then
+if [ "$(git -C "$scratch/repo" config --local core.hooksPath)" = .githooks ]; then
   echo "ok: setup sets core.hooksPath"
 else
   not_ok "setup should set core.hooksPath"
@@ -99,7 +99,7 @@ fi
 git init -q "$scratch/parent"
 mkdir "$scratch/parent/export"
 setup_succeeds_in "$scratch/parent/export" "where there is no .git"
-if [ -z "$(git -C "$scratch/parent" config core.hooksPath)" ]; then
+if [ -z "$(git -C "$scratch/parent" config --local core.hooksPath)" ]; then
   echo "ok: setup does nothing where there is no .git"
 else
   not_ok "setup should do nothing where there is no .git"
