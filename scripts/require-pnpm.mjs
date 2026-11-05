@@ -28,7 +28,7 @@ if (manager !== "pnpm") {
       `This project requires pnpm. Detected ${label}.`,
       "",
       "Use:",
-      "  corepack enable",
+      "  npm install -g pnpm@11.21.0",
       "  pnpm install",
       "  pnpm run build",
       "",

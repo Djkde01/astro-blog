@@ -1,13 +1,15 @@
 # Development commands
 
-Run these from the repository root. Each one ran on 2026-11-04, except `corepack enable` and the browser install, which are first-time setup and were already in place on that machine.
+Run these from the repository root. Each one ran on 2026-11-04, except the pnpm install and the browser install, which are first-time setup and were already in place on that machine.
 
 ## Setup
 
 This project requires pnpm at the exact version in `package.json`, under `devEngines` (11.21.0). `scripts/require-pnpm.mjs` rejects npm, yarn and bun, and pnpm itself rejects any other version.
 
+The Node version is in `.nvmrc` (26). Node 25 and later no longer ship Corepack, so install pnpm with npm:
+
 ```bash
-corepack enable
+npm install -g pnpm@11.21.0
 ```
 
 ```bash
@@ -33,6 +35,9 @@ pnpm exec playwright install chromium
 
 | Task | Command | Kind |
 |------|---------|------|
+| Lint | `pnpm run lint` | full |
+| Lint one path | `pnpm exec eslint <path>` | scoped |
+| Prove the lint rules and the pre-push hook work | `bash scripts/test-lint-setup.sh` | full |
 | Type-check and Astro diagnostics | `pnpm run check` | full |
 | Unit tests | `pnpm run test` | full |
 | One unit test file | `node --test tests/utils.test.mjs` | scoped |
@@ -42,7 +47,21 @@ pnpm exec playwright install chromium
 | Prove the evidence gate can fail | `bash scripts/test-e2e-gate.sh` | full |
 | Harness conformance | `bash .agents/skills/deepworkplan/verify/conformance.sh --repo-only .` | full |
 
-`pnpm run check` also prints two hints for unused imports, which do not fail it. See [TESTING_GUIDE.md](TESTING_GUIDE.md) for which gate to run when.
+See [TESTING_GUIDE.md](TESTING_GUIDE.md) for which gate to run when.
+
+## Pre-push hook
+
+`.githooks/pre-push` runs `pnpm run lint` before each push and stops the push when it fails. `pnpm install` activates it on a fresh clone through the `prepare` script, which links that one hook into git's hooks directory and keeps a `pre-push` hook you already have. Where there is no `.git`, as on a deploy from an export, setup does nothing.
+
+Do not point `core.hooksPath` at `.githooks`: any branch could then run its own hooks on a plain `git checkout`.
+
+In a clone that already has its dependencies, `pnpm install` reports `Already up to date` and skips `prepare`. Run `pnpm run prepare` once there.
+
+The hook lints the working tree, not the commits being pushed, so an uncommitted file can stop a push. `git push --no-verify` skips the hook, so CI is the real gate.
+
+## Continuous integration
+
+`.github/workflows/ci.yml` runs the checks on pull requests and on pushes to `main`. [TESTING_GUIDE.md](TESTING_GUIDE.md#continuous-integration) says what each job runs. There is no command to run it locally.
 
 ## Third-party skills
 

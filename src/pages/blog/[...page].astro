@@ -17,7 +17,8 @@ export async function getStaticPaths({ paginate }: PathPagination) {
   return paginate(posts, { pageSize: 6 });
 }
 
-const { page }: { page: { data: any; url: any } } = Astro.props;
+const { page }: { page: { data: Post[]; url: { prev?: string; next?: string } } } =
+  Astro.props;
 ---
 
 <MainLayout title="Blog - Sergio Estrella (Djkde)">

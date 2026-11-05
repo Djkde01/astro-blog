@@ -8,6 +8,7 @@ One owner supervises, validates and approves, and agents do the implementation. 
 |-----|-------|
 | Product decisions, plan approval, sign-off on how a page looks | The owner |
 | Push, pull requests, merges, releases | The owner |
+| Required checks and other GitHub settings on `main` | The owner |
 | Plan authoring and task execution | Agents, within the plan contract |
 | Closing a criterion | The gate runner or the owner's sign-off, never an agent's report |
 | Reviewing each commit | Gentle AI receipt-driven review, when its assessment says it is due |

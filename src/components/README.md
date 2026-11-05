@@ -18,4 +18,4 @@ Astro components for the site's UI. Styles live in `src/styles/global.css`, so m
 
 `PostCard` and `PostHeader` need a post's `image.src` and `image.alt`, and the build fails without them.
 
-These have no component tests. They are covered by `pnpm run check`, the build and the end-to-end suite.
+These have no component tests. They are covered by `pnpm run lint`, `pnpm run check`, the build and the end-to-end suite.

@@ -1,6 +1,6 @@
 # Portfolio Roadmap
 
-A phased, implementation-ready backlog for evolving `sergioestrella.com` along four axes: **UX**, **UI**, **new sections**, and **content workflow**. The roadmap is intentionally additive: it preserves the current Astro static-site architecture, the existing routes, and the file-based blog so that nothing breaks unless a content-model change is explicitly approved.
+A phased, implementation-ready backlog for evolving `sergioestrella.com` along five axes: **UX**, **UI**, **new sections**, **content workflow**, and **delivery tooling**. The roadmap is intentionally additive: it preserves the current Astro static-site architecture, the existing routes, and the file-based blog so that nothing breaks unless a content-model change is explicitly approved.
 
 ## How This Roadmap Is Executed
 
@@ -84,7 +84,7 @@ These are the exact files and patterns the roadmap builds on. Each phase below c
 
 ### Tooling
 
-- [`package.json`](../package.json) — `dev`, `build`, `preview`, `astro`, `check`, `test`, `test:e2e`. **No** lint or format script. Gates are described in [`docs/TESTING_GUIDE.md`](TESTING_GUIDE.md).
+- [`package.json`](../package.json) — `dev`, `build`, `preview`, `astro`, `check`, `lint`, `test`, `test:e2e`. **No** format script. Gates are described in [`docs/TESTING_GUIDE.md`](TESTING_GUIDE.md).
 - [`astro.config.mjs`](../astro.config.mjs) — MDX, sitemap, Partytown, `astro-icon`.
 - Content is **not** in a content collection; everything goes through `import.meta.glob("...blog/*.md")` + `formatBlogPosts()`. Any change to discovery or path shape must be applied to **all** consumers (homepage, blog index, category, related, RSS).
 
@@ -100,6 +100,7 @@ These should be answered before opening implementation PRs. None require code ch
 - **Community**: organizations where Sergio is an organizer (Backbone UTP, GDG, etc.) with role, period, links, logo.
 - **Clients showcase**: split into **employee work** (Globant, Selaski, Curoo, etc.) and **freelance/independent**. For each: client name, scope, role, period, logo, link, and a short outcome line. Be careful with wording to avoid implying ownership of employer projects.
 - **Testimonials**: name, role, company, photo (optional), quote, source link or proof. Decide which can be published with names/photos.
+- **Link hub**: label, URL, stable id and order for each link.
 
 ### Product/technical decisions
 
@@ -114,6 +115,13 @@ These should be answered before opening implementation PRs. None require code ch
 - **GSAP scope**: confirm motion is acceptable on landing/about/blog index, and that **post pages stay calm** (only header/meta micro-interactions).
 - **Accessibility floor**: respect `prefers-reduced-motion`, keep keyboard focus, do not animate text content during reading.
 - **i18n**: site stays Spanish-only; new copy must match.
+- **Link hub route**: choose between `/enlaces` and `/links`. Existing routes are in English (`/about`, `/blog/`, `/category/`), while the copy is in Spanish. Default recommendation: `/enlaces`, because this URL is read by people in a public bio.
+- **Link hub click metrics**: choose between
+  - (a) **Google Analytics events** on the property the site already uses. No backend and no new vendor, but ad blockers hide some clicks and delivery through Partytown is unproven (see Phase 8).
+  - (b) **Counting redirects** (`/l/<id>`) in a host function. Counts every click, but it adds a server, ties the site to one host, and goes against the non-goals in section 1 and in `docs/PRODUCT_SPEC.md`.
+  - Default recommendation: ship (a), and consider (b) only if (a) proves unreliable and the owner lifts those non-goals.
+- **Lint tool**: settled in Phase 7: ESLint with `eslint-plugin-astro`, because most of this site's markup lives in `.astro` files. Biome was the alternative, but it documents its Astro support as experimental.
+- **Node version**: settled in Phase 7: `.nvmrc` holds `26`, the LTS line since 2026-10-28, and CI reads it. Node 25 and later no longer ship Corepack, so setup uses `npm install -g pnpm@<pinned version>`.
 
 ---
 
@@ -309,7 +317,62 @@ Goal: a repeatable command that turns a `.txt` transcript into a draft `src/page
 
 ---
 
-## 10. Suggested Architecture (Visual)
+## 10. Phase 7 — CI Pipelines and Lint Hook
+
+Goal: run the existing gates on every pull request, and add a linter that also runs before each push. Nothing here changes what the site ships.
+
+This phase has no dependency on the others, and every later phase benefits from it, so it can run first.
+
+### Changes
+
+- **Node:** add `.nvmrc` with `26`, and replace `corepack enable` in `README.md`, `AGENTS.md`, `docs/DEVELOPMENT_COMMANDS.md` and `scripts/require-pnpm.mjs`. If a host cannot build on 26, return to `24` everywhere, so CI and production stay on one version.
+- **Lint:** add `pnpm run lint`, with ESLint. Fix the findings on the existing code in a commit of their own, with no change in `dist/`. The `arguments` use in the Google Analytics snippet in `MainHead.astro` stays, with a config exception and its reason. Formatting stays out of scope.
+- **CI:** add `.github/workflows/ci.yml`, triggered on pull requests and on pushes to `main`:
+  - `static` job: `pnpm run lint`, `pnpm run check`, `pnpm run test`, and `bash scripts/test-lint-setup.sh`.
+  - `e2e` job: install Chromium with its system dependencies, run `pnpm run test:e2e` and `bash scripts/test-e2e-gate.sh`, and upload `tmp/e2e-evidence/` as an artifact with a short retention.
+  - Both install with `pnpm install --frozen-lockfile`. `pnpm/action-setup` can read the version from `devEngines.packageManager`, so the pin stays in one place.
+- **Pre-push hook:** add `.githooks/pre-push`, which runs `pnpm run lint`, and a `prepare` script that links only that hook into git's hooks directory. No hook manager is needed, and `core.hooksPath` stays unset, because on a tracked directory it would let a branch run hooks on checkout.
+- **Docs:** update `AGENTS.md`, `README.md`, `docs/TESTING_GUIDE.md`, `docs/DEVELOPMENT_COMMANDS.md`, section 2 of this file, and the line in `.review/extension.md` that accepts the missing linter.
+
+### Risks / guardrails
+
+- `git push --no-verify` skips a hook, so CI is the gate and the hook is only a fast warning. Keep the hook to lint: the end-to-end suite is too slow for it.
+- `prepare` also runs on the hosts' builds and in CI, where `.git` may be missing. It must not fail there. The Netlify and Cloudflare Pages previews on the pull request prove this.
+- Give the workflow `permissions: contents: read`, and pin third-party actions to a commit SHA.
+- Test evidence goes to CI artifacts and is never committed.
+- CI does not deploy. Hosting stays as it is, per the non-goals in section 1.
+- Making CI a required check is a GitHub setting that belongs to the owner.
+
+---
+
+## 11. Phase 8 — Link Hub with Click Metrics
+
+Goal: one public page at a descriptive route that gathers the owner's links for use in social bios, and shows how people reach it and which links they open.
+
+### Changes
+
+- `src/pages/enlaces.astro` (route per Phase 0) renders the links on the existing layout. It adds no client framework or new library.
+- `src/data/links.ts` holds the links, following the data layer convention from Phase 1. Each entry has a stable `id`, so metrics survive a change of label or URL. This phase does not need Phase 1 to land first.
+- A small script sends one `link_click` event with the `link_id` when a link is opened.
+- Link to the hub from each profile with `utm_source` (for example `?utm_source=instagram`). This needs no code, and Google Analytics then reports where visits came from.
+
+### What the metrics can answer
+
+- **Who visits:** aggregate figures only, such as visits, country, device and traffic source. The site cannot and should not identify individual visitors. Google Analytics already collects these figures for every page.
+- **Which links are opened:** clicks per `link_id`, from the new event, as a minimum and not an exact count. Ad blockers hide part of the traffic.
+
+### Risks / guardrails
+
+- **Delivery is unproven.** Google Analytics runs in a Partytown worker, and the link click starts a navigation away from the page, so an event may be lost. A public report also describes custom events not reaching Google Analytics through Partytown. Start the plan with a spike that confirms the event in DebugView, on real links, on a deploy preview.
+- **End-to-end tests cannot prove arrival.** `playwright.config.ts` blocks service workers and `e2e/fixtures.ts` aborts analytics requests, by design. A test can assert the event is handed over with the right `link_id`, and that the link still opens. Arrival in Google Analytics needs a criterion with the owner's sign-off.
+- A blocked or failed analytics call must never stop a link from opening.
+- Send only the link id. No personal data goes into event parameters.
+- Each link is a real `<a>` that works by keyboard and without JavaScript.
+- No post consumer is touched, so `formatBlogPosts()` and its six consumers stay out of scope.
+
+---
+
+## 12. Suggested Architecture (Visual)
 
 ```mermaid
 flowchart TD
@@ -319,6 +382,7 @@ flowchart TD
     community[community.ts]
     clients[clients.ts]
     testimonials[testimonials.ts]
+    links[links.ts]
   end
 
   subgraph components [src/components]
@@ -336,6 +400,7 @@ flowchart TD
     About[about.astro]
     BlogIndex["blog/[...page].astro"]
     PostLayout[layouts/BlogPostLayout.astro]
+    Enlaces[enlaces.astro]
   end
 
   subgraph motion [src/js]
@@ -352,6 +417,7 @@ flowchart TD
   community --> SectionCommunity
   clients --> SectionClients
   testimonials --> SectionTestimonials
+  links --> Enlaces
 
   SectionTalks --> Card
   SectionCommunity --> Card
@@ -381,13 +447,13 @@ flowchart TD
 
 ---
 
-## 11. Validation Plan
+## 13. Validation Plan
 
 Each phase's plan selects its gates from [`docs/TESTING_GUIDE.md`](TESTING_GUIDE.md). A criterion closes only on a gate or on the owner's sign-off.
 
 For every phase:
 
-- Run `pnpm run check && pnpm run test && pnpm run test:e2e`, which also builds the site.
+- Run `pnpm run lint && pnpm run check && pnpm run test && pnpm run test:e2e`, which also builds the site.
 - Prove each user-visible behavior with a Playwright test titled with its `AC-*` id, with video. For a layout or an animation that must be judged by eye, add a second criterion for the owner's sign-off.
 
 These checks have no automated gate, so run them by hand or ask for the owner's sign-off:
@@ -412,7 +478,7 @@ These checks have no automated gate, so run them by hand or ask for the owner's 
 
 ---
 
-## 12. Sequencing Summary
+## 14. Sequencing Summary
 
 | Phase | Scope | Breaking? | Depends on |
 |-------|-------|-----------|------------|
@@ -423,5 +489,9 @@ These checks have no automated gate, so run them by hand or ask for the owner's 
 | 4 | Landing/About refresh + `Card.astro` | No | 1, 3 |
 | 5 | Talks/Community/Clients/Testimonials | No | 1, 4 |
 | 6 | Transcript → post tool | No | 0 |
+| 7 | CI pipelines + lint + pre-push hook | No | — |
+| 8 | Link hub + click metrics | No | 0 |
+
+Phase numbers identify the work, and this table sets the dependencies. Phases 7 and 8 do not depend on Phases 1 to 6, and Phase 7 should run first so that later phases land with CI.
 
 The only optional **breaking-ish** change is moving from `category` to multi-`tags` (Phase 2 option b). It is deferred until clearly justified.

@@ -4,7 +4,7 @@ Personal blog and portfolio of Sergio Estrella (Djkde), built with Astro as a st
 
 DWP standard: 7.0.0 (onboarded 2026-11-04; skill 7.9.0)
 
-> **State of the repository:** the site is live and maintained. Product work is listed in [docs/portfolio-roadmap.md](docs/portfolio-roadmap.md), and none of its phases has started. Each phase becomes a Deep Work Plan when work begins.
+> **State of the repository:** the site is live and maintained. Product work is listed in [docs/portfolio-roadmap.md](docs/portfolio-roadmap.md), and apart from Phase 7, none of its phases has started. Each phase becomes a Deep Work Plan when work begins.
 
 ## Documentation index
 
@@ -49,7 +49,9 @@ DWP standard: 7.0.0 (onboarded 2026-11-04; skill 7.9.0)
 ├── tests/                    # Unit tests, run with node:test
 ├── e2e/                      # Playwright evidence
 ├── e2e-gate-fixtures/        # Fixtures that prove the evidence gate can fail
-├── scripts/                  # pnpm guard and the evidence gate
+├── scripts/                  # pnpm guard, hook setup and the evidence gate
+├── .github/workflows/ci.yml  # Lint, types, unit and end-to-end checks on pull requests
+├── .githooks/pre-push        # Lints before a push; pnpm install activates it
 ├── .agents/                  # Agent kit; .claude is a symlink to it
 ├── .cursor/                  # Cursor agents and plugin settings, kept as they were
 ├── .codex/skills/            # Symlinks into .agents/skills
@@ -80,6 +82,7 @@ DWP standard: 7.0.0 (onboarded 2026-11-04; skill 7.9.0)
 - Each behavior criterion names one Playwright test, titled with its `AC-*` id. The gate fails if the test fails or its video is missing.
 - Specs import `test` from `e2e/fixtures.ts`, which keeps test runs away from the production analytics property.
 - Select validation gates from the change's touched surface using the mapping in [docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md), with its documented fallback to the full suite.
+- CI runs on pull requests and is the real gate for delivery; `git push --no-verify` skips the local hook. A green CI run does not close a plan criterion.
 - Never close a criterion by reporting a result: run the gate. An agent never signs off for the owner.
 
 ### Commits and delivery
@@ -92,8 +95,8 @@ DWP standard: 7.0.0 (onboarded 2026-11-04; skill 7.9.0)
 
 ### Package manager
 
-- This project requires pnpm, at the exact version pinned in `package.json` under `devEngines`. Run `corepack enable` once, then use `pnpm install`. Any other version fails.
-- Do not use `npx` here: npm rejects the `devEngines` pin. Use `pnpm dlx`.
+- This project requires pnpm, at the exact version pinned in `package.json` under `devEngines`. Install it once with `npm install -g pnpm@11.21.0`, then use `pnpm install`. Any other version fails.
+- Do not use `npx` here: npm rejects the `devEngines` pin on local commands, though the global install above works from any directory. Use `pnpm dlx`.
 
 ### Source of truth
 
@@ -153,6 +156,7 @@ Work with autonomy, ownership and sound judgment. Pursue correctness, clarity, s
 | Install dependencies | `pnpm install` | full | Verified |
 | Run the dev server | `pnpm run dev` | full | Verified |
 | Build the site | `pnpm run build` | full | Verified |
+| Lint | `pnpm run lint` | full | Verified |
 | Type-check | `pnpm run check` | full | Verified |
 | Unit tests | `pnpm run test` | full | Verified |
 | One unit test file | `node --test tests/utils.test.mjs` | scoped | Verified |
@@ -160,10 +164,11 @@ Work with autonomy, ownership and sound judgment. Pursue correctness, clarity, s
 | End-to-end evidence | `pnpm run test:e2e` | full | Verified |
 | One end-to-end criterion | `bash scripts/e2e-gate.sh AC-site-smoke` | scoped | Verified |
 | Prove the evidence gate | `bash scripts/test-e2e-gate.sh` | full | Verified |
+| Prove the lint setup | `bash scripts/test-lint-setup.sh` | full | Verified |
 | Check harness conformance | `bash .agents/skills/deepworkplan/verify/conformance.sh --repo-only .` | full | Verified |
 | Install third-party skills | See [docs/DEVELOPMENT_COMMANDS.md](docs/DEVELOPMENT_COMMANDS.md#third-party-skills) | full | Verified |
 
-There is no lint or format script.
+There is no format script.
 
 ## Deep Work Plans: invocation
 
