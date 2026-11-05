@@ -23,6 +23,10 @@ The Google Analytics ID in `src/layouts/MainHead.astro` is public by design.
 - Each action is pinned to a full commit SHA, with its version in a comment. Update the SHA and the comment together.
 - Test runs do not reach Google Analytics, for the reason above.
 
+## Git hooks
+
+Setup links only `pre-push` into git's hooks directory. A branch controls the files in `.githooks/`, so that hook's code comes from the checkout, but it runs only on a push. Pointing `core.hooksPath` at that directory would run a branch's `post-checkout` on a plain `git checkout`, so do not do that.
+
 ## Untrusted content
 
 Post frontmatter is written by the owner, so it is trusted today, but it is not escaped:

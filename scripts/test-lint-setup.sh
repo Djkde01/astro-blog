@@ -72,6 +72,20 @@ setup_succeeds_in() {
   fi
 }
 
+check() {
+  local label=$1
+  shift
+  if test "$@"; then
+    echo "ok: $label"
+  else
+    not_ok "$label"
+  fi
+}
+
+git_in() {
+  git -C "$scratch/repo" -c user.name=probe -c user.email=probe@example.com "$@"
+}
+
 gtag_script='<script>function gtag() { return arguments; } gtag();</script>'
 
 passes src/lint-probe.ts 'export const value = 1;'
@@ -85,25 +99,52 @@ passes src/layouts/MainHead.astro "$gtag_script"
 
 hook_passes
 hook_fails_on @typescript-eslint/no-explicit-any 'export const value: any = 1;'
+# The unused directive is what warns: ESLint reports it, and --max-warnings=0 turns that into a failure.
 hook_fails_on "too many warnings" '// eslint-disable-next-line no-undef
 export const value = 1;'
 
 git init -q "$scratch/repo"
 setup_succeeds_in "$scratch/repo" "in a fresh repository"
-if [ "$(git -C "$scratch/repo" config --local core.hooksPath)" = .githooks ]; then
-  echo "ok: setup sets core.hooksPath"
-else
-  not_ok "setup should set core.hooksPath"
-fi
-# An export can sit inside another repository, whose settings setup must leave alone.
+check "setup links pre-push" "$(readlink "$scratch/repo/.git/hooks/pre-push")" = ../../.githooks/pre-push
+check "setup leaves core.hooksPath unset" -z "$(git -C "$scratch/repo" config --local core.hooksPath)"
+
+# A branch controls .githooks, so it must not be able to run a hook on checkout.
+mkdir "$scratch/repo/.githooks"
+printf '#!/bin/sh\ntouch "%s/checkout-ran"\n' "$scratch" >"$scratch/repo/.githooks/post-checkout"
+printf '#!/bin/sh\necho stub-hook-ran\nexit 1\n' >"$scratch/repo/.githooks/pre-push"
+chmod +x "$scratch/repo/.githooks/post-checkout" "$scratch/repo/.githooks/pre-push"
+git_in add .
+git_in commit -qm probe
+git_in checkout -qb other
+check "a branch cannot run a hook on checkout" ! -e "$scratch/checkout-ran"
+
+git init -q --bare "$scratch/remote.git"
+git_in push "$scratch/remote.git" HEAD:refs/heads/probe >"$output" 2>&1
+code=$?
+check "a real push runs the linked hook and stops on its failure" "$code" -ne 0 -a -n "$(grep -F stub-hook-ran "$output")"
+
+# Runs the package script's own command, because its fallback would hide a broken entry from the cases above.
+# Not through `pnpm run`, which first checks the dependencies that this scratch repository does not have.
+git init -q "$scratch/prepared"
+mkdir "$scratch/prepared/scripts"
+cp package.json "$scratch/prepared/"
+cp scripts/setup-git-hooks.sh "$scratch/prepared/scripts/"
+prepare=$(node -p "require('./package.json').scripts.prepare")
+(cd "$scratch/prepared" && sh -c "$prepare") >"$output" 2>&1
+check "the prepare script links the hook" -L "$scratch/prepared/.git/hooks/pre-push"
+
+git init -q "$scratch/custom"
+echo custom >"$scratch/custom/.git/hooks/pre-push"
+setup_succeeds_in "$scratch/custom" "where a pre-push hook already exists"
+check "setup keeps an existing pre-push hook" "$(cat "$scratch/custom/.git/hooks/pre-push")" = custom
+
+# An export can sit inside another repository, whose hooks setup must leave alone.
 git init -q "$scratch/parent"
 mkdir "$scratch/parent/export"
 setup_succeeds_in "$scratch/parent/export" "where there is no .git"
-if [ -z "$(git -C "$scratch/parent" config --local core.hooksPath)" ]; then
-  echo "ok: setup does nothing where there is no .git"
-else
-  not_ok "setup should do nothing where there is no .git"
-fi
-setup_succeeds_in "$scratch/repo" "where git is not installed" PATH=/nonexistent
+check "setup does nothing where there is no .git" ! -e "$scratch/parent/.git/hooks/pre-push"
+
+git init -q "$scratch/nogit"
+setup_succeeds_in "$scratch/nogit" "where git is not installed" PATH=/nonexistent
 
 [ "$failures" -eq 0 ] || { echo "$failures case(s) failed"; exit 1; }

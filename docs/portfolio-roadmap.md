@@ -331,7 +331,7 @@ This phase has no dependency on the others, and every later phase benefits from 
   - `static` job: `pnpm run lint`, `pnpm run check`, `pnpm run test`, and `bash scripts/test-lint-setup.sh`.
   - `e2e` job: install Chromium with its system dependencies, run `pnpm run test:e2e` and `bash scripts/test-e2e-gate.sh`, and upload `tmp/e2e-evidence/` as an artifact with a short retention.
   - Both install with `pnpm install --frozen-lockfile`. `pnpm/action-setup` can read the version from `devEngines.packageManager`, so the pin stays in one place.
-- **Pre-push hook:** add `.githooks/pre-push`, which runs `pnpm run lint`, and a `prepare` script that sets `core.hooksPath` to `.githooks`. Git supports this natively, so no hook manager is needed.
+- **Pre-push hook:** add `.githooks/pre-push`, which runs `pnpm run lint`, and a `prepare` script that links only that hook into git's hooks directory. No hook manager is needed, and `core.hooksPath` stays unset, because on a tracked directory it would let a branch run hooks on checkout.
 - **Docs:** update `AGENTS.md`, `README.md`, `docs/TESTING_GUIDE.md`, `docs/DEVELOPMENT_COMMANDS.md`, section 2 of this file, and the line in `.review/extension.md` that accepts the missing linter.
 
 ### Risks / guardrails

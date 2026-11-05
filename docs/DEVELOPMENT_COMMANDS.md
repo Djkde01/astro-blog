@@ -51,11 +51,13 @@ See [TESTING_GUIDE.md](TESTING_GUIDE.md) for which gate to run when.
 
 ## Pre-push hook
 
-`.githooks/pre-push` runs `pnpm run lint` before each push and stops the push when it fails. `pnpm install` activates it on a fresh clone through the `prepare` script, which sets `core.hooksPath`. Where there is no `.git`, as on a deploy from an export, setup does nothing.
+`.githooks/pre-push` runs `pnpm run lint` before each push and stops the push when it fails. `pnpm install` activates it on a fresh clone through the `prepare` script, which links that one hook into git's hooks directory and keeps a `pre-push` hook you already have. Where there is no `.git`, as on a deploy from an export, setup does nothing.
+
+Do not point `core.hooksPath` at `.githooks`: any branch could then run its own hooks on a plain `git checkout`.
 
 In a clone that already has its dependencies, `pnpm install` reports `Already up to date` and skips `prepare`. Run `pnpm run prepare` once there.
 
-`git push --no-verify` skips the hook, so CI is the real gate.
+The hook lints the working tree, not the commits being pushed, so an uncommitted file can stop a push. `git push --no-verify` skips the hook, so CI is the real gate.
 
 ## Continuous integration
 
