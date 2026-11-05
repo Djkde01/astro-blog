@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "preinstall": "node scripts/require-pnpm.mjs",
-    "prepare": "bash scripts/setup-git-hooks.sh",
+    "prepare": "sh scripts/setup-git-hooks.sh || exit 0",
     "dev": "node scripts/require-pnpm.mjs && astro dev",
     "start": "node scripts/require-pnpm.mjs && astro dev",
     "build": "node scripts/require-pnpm.mjs && astro build",

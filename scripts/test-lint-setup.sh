@@ -8,6 +8,7 @@ output=$(mktemp)
 scratch=$(mktemp -d)
 hook=.githooks/pre-push
 setup=$PWD/scripts/setup-git-hooks.sh
+sh_path=$(command -v sh)
 probe=src/lint-hook-probe.ts
 trap 'rm -rf "$output" "$scratch" "$probe"' EXIT
 failures=0
@@ -64,7 +65,7 @@ hook_fails_on() {
 setup_succeeds_in() {
   local dir=$1 label=$2
   shift 2
-  if ! (cd "$dir" && env "$@" "$BASH" "$setup") >"$output" 2>&1; then
+  if ! (cd "$dir" && env "$@" "$sh_path" "$setup") >"$output" 2>&1; then
     not_ok "setup should exit 0 $label"
   else
     echo "ok: setup exits 0 $label"
@@ -94,8 +95,15 @@ if [ "$(git -C "$scratch/repo" config core.hooksPath)" = .githooks ]; then
 else
   not_ok "setup should set core.hooksPath"
 fi
-mkdir "$scratch/export"
-setup_succeeds_in "$scratch/export" "where there is no .git"
+# An export can sit inside another repository, whose settings setup must leave alone.
+git init -q "$scratch/parent"
+mkdir "$scratch/parent/export"
+setup_succeeds_in "$scratch/parent/export" "where there is no .git"
+if [ -z "$(git -C "$scratch/parent" config core.hooksPath)" ]; then
+  echo "ok: setup does nothing where there is no .git"
+else
+  not_ok "setup should do nothing where there is no .git"
+fi
 setup_succeeds_in "$scratch/repo" "where git is not installed" PATH=/nonexistent
 
 [ "$failures" -eq 0 ] || { echo "$failures case(s) failed"; exit 1; }
