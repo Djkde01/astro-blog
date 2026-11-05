@@ -31,8 +31,9 @@ Setup links only `pre-push` into git's hooks directory. A branch controls the fi
 
 Post frontmatter is written by the owner, so it is trusted today, but it is not escaped:
 
-- `src/js/jsonLD.js` builds a JSON-LD string by interpolating `title`, `description` and `image.src`, and `src/components/Seo.astro` writes it with `set:html`. A double quote in a title breaks the JSON-LD, and markup could inject a script. Keep this in mind if posts ever come from anywhere else, such as the planned transcript tool with AI mode. Generate that JSON with `JSON.stringify` and escape `<` when this code next changes.
+- `src/js/jsonLD.js` builds a JSON-LD string by interpolating `title` and `description`, and `src/components/Seo.astro` writes it with `set:html`. The image is safe there: `image.src` must name a file in `src/assets/images/`, or `resolveImage()` stops the build, and the value interpolated is the URL Astro generates for that file. A double quote in a title breaks the JSON-LD, and markup could inject a script. Keep this in mind if posts ever come from anywhere else, such as the planned transcript tool with AI mode. Generate that JSON with `JSON.stringify` and escape `<` when this code next changes.
 - Never pass a value that comes from outside the repository to `set:html`.
+- The build decodes every image in `src/assets/images/` with `sharp`, through Astro's optional dependency. Commit only images you made or trust, and keep `astro` current, since an image decoder is where parser bugs live.
 
 ## Personal data and consent
 
