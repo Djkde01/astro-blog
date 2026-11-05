@@ -1,0 +1,9 @@
+---
+// A post page that exists only in the end-to-end build; see e2e/astro.config.mjs.
+import BlogPostLayout from "../../src/layouts/BlogPostLayout.astro";
+import { fixturePost } from "../jsonld-fixture";
+---
+
+<BlogPostLayout frontmatter={fixturePost}>
+  <p>Fixture post for the JSON-LD tests.</p>
+</BlogPostLayout>
