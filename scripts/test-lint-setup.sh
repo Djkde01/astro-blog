@@ -146,5 +146,6 @@ check "setup does nothing where there is no .git" ! -e "$scratch/parent/.git/hoo
 
 git init -q "$scratch/nogit"
 setup_succeeds_in "$scratch/nogit" "where git is not installed" PATH=/nonexistent
+check "setup warns when it could not activate the hook" -n "$(grep -F "Could not activate" "$output")"
 
 [ "$failures" -eq 0 ] || { echo "$failures case(s) failed"; exit 1; }
