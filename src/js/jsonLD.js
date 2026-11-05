@@ -1,4 +1,5 @@
 import siteData from "../data/siteData.json";
+import { socialImageUrl } from "./images";
 
 export default function jsonLDGenerator({ type, post, url }) {
   if (type === "post") {
@@ -12,7 +13,7 @@ export default function jsonLDGenerator({ type, post, url }) {
         },
         "headline": "${post.title}",
         "description": "${post.description}",
-        "image": "${post.image.src}",
+        "image": "${socialImageUrl(post.image.src)}",
         "author": {
           "@type": "Person",
           "name": "Sergio Estrella",

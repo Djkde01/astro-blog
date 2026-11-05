@@ -51,8 +51,9 @@ This is a **single-package Astro site** (not a monorepo). The site is actively m
 ├── docs/                   Product, roadmap and engineering guides
 ├── e2e/                    Playwright tests
 ├── tests/                  Unit tests
-├── public/                 Static assets copied as-is (images, RSS stylesheet)
+├── public/                 Static assets copied as-is (profile and inline images, RSS stylesheet)
 ├── src/
+│   ├── assets/images/      Post covers and project images, served as AVIF with a WebP fallback
 │   ├── components/         Reusable UI (Nav, PostCard, Seo, LiteYoutube, etc.)
 │   ├── data/               Site metadata and navigation data
 │   ├── js/                 Utilities (formatBlogPosts, slugify, JSON-LD)
@@ -149,7 +150,7 @@ date: 2025-11-29
 author: Sergio Estrella
 image:
   {
-    src: "/images/post-example.webp",
+    src: "/src/assets/images/post-example.webp",
     alt: "Descriptive alt text",
   }
 description: Short summary for cards, SEO, and RSS.

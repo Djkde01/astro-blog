@@ -3,7 +3,7 @@ layout: "../../layouts/BlogPostLayout.astro"
 title: "Errores y Aprendizajes para crear este Blog"
 date: 2023-11-09
 author: Sergio Estrella
-image: { src: "/images/post-3.webp", alt: "Portada de blog hecha con IA" }
+image: { src: "/src/assets/images/post-3.webp", alt: "Portada de blog hecha con IA" }
 description: Aprende de los errores y lecciones al crear este blog para impulsar tu propio proyecto.
 category: Marca Personal
 ---

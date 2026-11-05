@@ -50,7 +50,11 @@ A change to discovery or to the frontmatter shape must reach all six. RSS is the
 
 ## Images
 
-Static images live in `public/images/`. `PostCard` and `PostHeader` pass them through `astro:assets` to produce AVIF, using `sharp`.
+Post covers and project images live in `src/assets/images/`. A post's `image.src` names its file there, such as `/src/assets/images/post-1.webp`, and `resolveImage()` in `src/js/images.js` turns it into an imported image. An unknown path throws and stops the build.
+
+`PostCard`, `PostHeader` and `Projects` render those images with `<Picture>`, which emits AVIF with a WebP fallback at two widths each, using Astro's optional `sharp` at build time. Their public URLs are hashed files under `/_astro/`. `Seo.astro` and `jsonLD.js` use `socialImageUrl()` for absolute social image URLs.
+
+Everything else stays in `public/images/` and is served as-is: `default.webp`, the social fallback, `profile.webp`, and the images inside post bodies.
 
 ## Agent harness
 

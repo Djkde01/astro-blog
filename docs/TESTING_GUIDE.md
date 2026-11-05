@@ -60,7 +60,7 @@ Plan gates may set `DWP_EVIDENCE_DIR` to the plan's `analysis_results/e2e/<AC id
 
 ## Mapping
 
-- **Source to test:** `src/js/<module>.js` maps to `tests/<module>.test.mjs`. Only `utils.js` has tests today. `jsonLD.js` reads `import.meta.env` and cannot load under plain Node, so it is covered through the build.
+- **Source to test:** `src/js/<module>.js` maps to `tests/<module>.test.mjs`. Only `utils.js` has tests today. `jsonLD.js` reads `import.meta.env` and `images.js` reads `import.meta.glob`, so neither can load under plain Node. Both are covered through the build, and `images.js` also through `e2e/images.spec.ts` and `e2e/images-phone.spec.ts`.
 - **Behavior criterion to test:** each `AC-*` behavior criterion maps to one Playwright test whose title starts with that id.
 - **Consumers:** no affected-tests tool exists. A change to `src/js/utils.js`, `src/layouts/` or a post's frontmatter shape reaches every post consumer listed in [ARCHITECTURE.md](ARCHITECTURE.md#post-discovery), so run the full suite.
 - **A change in `src/components/` or `src/pages/`:** run `pnpm run lint`, `pnpm run check`, `pnpm run build` and the end-to-end suite.
@@ -72,7 +72,7 @@ No automated check sees these, so check them by hand or with an owner sign-off:
 
 - **Appearance.** Tests do not compare screenshots. CSS in `global.css` can break a layout with every test passing, and dark mode is not exercised.
 - **Motion and reduced motion.** Passing tests say nothing about how an animation feels.
-- **SEO output.** Nothing asserts the Open Graph tags, the sitemap, or that the JSON-LD parses.
+- **SEO output.** `e2e/images.spec.ts` asserts the social image URLs. Nothing asserts the other Open Graph tags, the sitemap, or that the JSON-LD parses.
 - **Analytics.** It is blocked in tests, so a broken tag would not show up.
 - **Lighthouse scores and rendered accessibility.** Neither runs automatically. The lint rules check accessibility in templates only, not contrast, focus or the built page.
 - **Date-dependent posts.** A post dated in the future appears only after a later build.
@@ -82,7 +82,7 @@ No automated check sees these, so check them by hand or with an owner sign-off:
 Run the full suite when any of these change:
 
 - `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml`, `astro.config.mjs`, `postcss.config.cjs` or `tsconfig.json`.
-- `src/js/utils.js`, `src/layouts/` or the frontmatter shape.
+- `src/js/utils.js`, `src/js/images.js`, `src/layouts/` or the frontmatter shape.
 - `playwright.config.ts`, `e2e/fixtures.ts` or anything in `scripts/`. For the gate scripts, also run `bash scripts/test-e2e-gate.sh`.
 - `.github/workflows/ci.yml`. CI is the only place that really runs it, so check the run on the pull request.
 - `eslint.config.mjs`, `.githooks/` or `scripts/setup-git-hooks.sh`. Also run `bash scripts/test-lint-setup.sh`.

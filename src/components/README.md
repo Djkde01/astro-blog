@@ -16,6 +16,6 @@ Astro components for the site's UI. Styles live in `src/styles/global.css`, so m
 | `Seo` | Canonical, social and JSON-LD tags |
 | `LiteYoutube` | Registers the Lite YouTube element |
 
-`PostCard` and `PostHeader` need a post's `image.src` and `image.alt`, and the build fails without them.
+`PostCard` and `PostHeader` need a post's `image.src` and `image.alt`, and the build fails without them or when `image.src` names no file in `src/assets/images/`. They and `Projects` render `<Picture>` with AVIF and a WebP fallback, through `resolveImage()` in `src/js/images.js`.
 
 These have no component tests. They are covered by `pnpm run lint`, `pnpm run check`, the build and the end-to-end suite.

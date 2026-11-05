@@ -1,5 +1,6 @@
 ---
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
+import { resolveImage } from "../js/images";
 import { slugify, formatDate } from "../js/utils";
 import Link from "../components/Link.astro";
 
@@ -13,13 +14,16 @@ const Tag = tagType;
     <a href={`/category/${slugify(category)}`} class="badge">{category}</a>
   </small>
   <a href={url} aria-hidden="true" tabindex="-1">
-    <Image
-      src={image.src}
+    <Picture
+      src={resolveImage(image.src)}
       alt={image.alt}
       width="400"
       height="250"
-      format="avif"
-      quality={80}
+      widths={[400, 800]}
+      sizes="(min-width: 1024px) 400px, 100vw"
+      formats={["avif"]}
+      fallbackFormat="webp"
+      quality={60}
     />
   </a>
   <div class="content">
