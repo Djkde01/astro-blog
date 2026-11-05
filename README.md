@@ -8,7 +8,7 @@ This is a **single-package Astro site** (not a monorepo). The site is actively m
 
 **What exists today**
 
-- Static site generation with Astro 5
+- Static site generation with Astro 7
 - Home page with intro and latest posts
 - About page with bio, experience, and projects
 - Paginated blog index, category archives, and related posts
