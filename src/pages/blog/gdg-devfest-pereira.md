@@ -5,7 +5,7 @@ date: 2025-11-29
 author: Sergio Estrella
 image:
   {
-    src: "/images/post-devfest.webp",
+    src: "/src/assets/images/post-devfest.webp",
     alt: "Portada del GDG DevFest Pereira 2025",
   }
 description: Primera edición del GDG DevFest en la ciudad de Pereira. Con expertos hablando de IA, Cloud y más.

@@ -3,7 +3,7 @@ layout: "../../layouts/BlogPostLayout.astro"
 title: "Empieza con algo simple, pero empieza ya."
 date: 2021-01-26
 author: Sergio Estrella
-image: { src: "/images/post-5.webp", alt: "Portada de blog hecha con IA" }
+image: { src: "/src/assets/images/post-5.webp", alt: "Portada de blog hecha con IA" }
 description: Iniciar con algo simple ya, es mejor que tener algo elaborado después. Te cuento cómo lo aprendí.
 category: Productividad
 ---

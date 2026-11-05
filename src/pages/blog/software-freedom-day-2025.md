@@ -3,7 +3,7 @@ layout: "../../layouts/BlogPostLayout.astro"
 title: Software Freedom Day 2025
 date: 2025-10-10
 author: Sergio Estrella
-image: { src: "/images/post-sfd-2025.webp", alt: "Portada del Software Freedom Day 2025" }
+image: { src: "/src/assets/images/post-sfd-2025.webp", alt: "Portada del Software Freedom Day 2025" }
 description: Tercera edición del evento más grande el software libre y código abierto en Pereira.
 category: Charlas
 ---

@@ -39,6 +39,7 @@ DWP standard: 7.0.0 (onboarded 2026-11-04; skill 7.9.0)
 ├── docs/                     # Product, roadmap and engineering guides
 ├── public/                   # Static assets: images, RSS stylesheet, favicon
 ├── src/
+│   ├── assets/images/        # Post covers and project images, optimized by astro:assets
 │   ├── components/           # UI components
 │   ├── data/                 # Site metadata and navigation
 │   ├── js/                   # Post helpers, JSON-LD, nav script

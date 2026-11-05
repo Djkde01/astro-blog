@@ -1,19 +1,25 @@
 ---
 import { slugify, formatDate } from "../js/utils";
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
+import { resolveImage } from "../js/images";
 
 const { category, title, date, image } = Astro.props;
 ---
 
 <header>
-  <Image
-    src={image.src}
+  <Picture
+    src={resolveImage(image.src)}
     alt={image.alt}
     width="1200"
     height="550"
-    format="avif"
+    widths={[640, 1280]}
+    sizes="100vw"
+    formats={["avif"]}
+    fallbackFormat="webp"
     class="hero-image"
-    quality={80}
+    loading="eager"
+    fetchpriority="high"
+    quality={60}
   />
   <h2 class="h2">{title}</h2>
   <p><a href={`/about`}>Sergio Estrella</a> - {formatDate(date)}</p>

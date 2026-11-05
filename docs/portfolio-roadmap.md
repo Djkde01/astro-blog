@@ -248,7 +248,7 @@ Goal: add the four sections, reusing the data layer and `Card.astro` from earlie
 ### Guardrails
 
 - Empty data arrays must render gracefully (section hidden, not empty).
-- Logos/photos go under `public/images/` to keep the asset story consistent with current posts.
+- Logos/photos go under `src/assets/images/` and render through `<Picture>`, as post covers do.
 - Testimonials require explicit consent from the person quoted before publishing.
 
 ---
@@ -287,7 +287,7 @@ Goal: a repeatable command that turns a `.txt` transcript into a draft `src/page
    title: "<Derived title>"
    date: <today, ISO>
    author: Sergio Estrella
-   image: { src: "/images/<slug>.webp", alt: "TODO: alt" }
+   image: { src: "/src/assets/images/<slug>.webp", alt: "TODO: alt" }
    description: "TODO: meta description (≤160 chars)"
    category: "TODO"
    draft: true

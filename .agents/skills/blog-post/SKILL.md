@@ -17,7 +17,7 @@ date: 2026-11-04
 author: Sergio Estrella
 image:
   {
-    src: "/images/post-example.webp",
+    src: "/src/assets/images/post-example.webp",
     alt: "Descriptive alt text in Spanish",
   }
 description: One sentence for cards, SEO and RSS.
@@ -29,7 +29,8 @@ draft: true
 - `layout`, `title`, `date`, `image.src`, `image.alt`, `description` and `category` are required by the layouts. A missing `image` breaks the build.
 - Reuse an existing category where one fits: `Charlas`, `Marca Personal` or `Productividad`. A new category creates a new route.
 - Avoid a double quote in `title` and `description`. `src/js/jsonLD.js` does not escape them, and one would break the page's JSON-LD.
-- Put images in `public/images/`, in WebP.
+- Put the cover in `src/assets/images/`, in WebP, and point `image.src` at it as `/src/assets/images/<file>.webp`. The build serves it as AVIF with a WebP fallback, and fails if the file is missing.
+- Images inside the post body go in `public/images/` and are served as-is.
 - `draft: true` or a future `date` hides a post from every page and from RSS. The post's own URL is still built.
 - `robots` with any value makes the page `noindex, nofollow`.
 

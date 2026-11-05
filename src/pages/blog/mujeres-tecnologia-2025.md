@@ -3,7 +3,7 @@ layout: "../../layouts/BlogPostLayout.astro"
 title: GDG Pereira - Mujeres en Tecnología
 date: 2025-03-08
 author: Sergio Estrella
-image: { src: "/images/post-6.webp", alt: "Portada del Software Freedom Day" }
+image: { src: "/src/assets/images/post-6.webp", alt: "Portada del Software Freedom Day" }
 description: Celebrando y destacando el papel de mujeres líderes en tecnología a través de charlas inspiradoras.
 category: Charlas
 ---
