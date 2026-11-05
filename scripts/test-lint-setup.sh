@@ -1,10 +1,15 @@
 #!/usr/bin/env bash
-# Proves the lint rules are active: a clean run alone cannot tell a clean repository from rules that never ran.
+# Proves the lint rules are active and the pre-push hook works: a clean run alone cannot tell a clean repository
+# from rules that never ran.
 set -uo pipefail
 
 cd "$(dirname "$0")/.." || exit 1
 output=$(mktemp)
-trap 'rm -f "$output"' EXIT
+scratch=$(mktemp -d)
+hook=.githooks/pre-push
+setup=$PWD/scripts/setup-git-hooks.sh
+probe=src/lint-hook-probe.ts
+trap 'rm -rf "$output" "$scratch" "$probe"' EXIT
 failures=0
 
 not_ok() {
@@ -33,13 +38,64 @@ passes() {
   fi
 }
 
+hook_passes() {
+  if ! "$hook" </dev/null >"$output" 2>&1; then
+    not_ok "the hook should pass on a clean repository"
+  else
+    echo "ok: the hook passes on a clean repository"
+  fi
+}
+
+# Expects the hook to stop the push because of what the temporary file holds.
+hook_fails_on() {
+  local reason=$1 source=$2
+  printf '%s\n' "$source" >"$probe"
+  "$hook" </dev/null >"$output" 2>&1
+  local code=$?
+  rm -f "$probe"
+  if [ "$code" -eq 0 ] || ! grep -qF -- "$reason" "$output"; then
+    not_ok "the hook should stop on $reason"
+  else
+    echo "ok: the hook stops on $reason"
+  fi
+}
+
+# Runs setup in a directory and expects it to exit 0, whatever that directory lacks.
+setup_succeeds_in() {
+  local dir=$1 label=$2
+  shift 2
+  if ! (cd "$dir" && env "$@" "$BASH" "$setup") >"$output" 2>&1; then
+    not_ok "setup should exit 0 $label"
+  else
+    echo "ok: setup exits 0 $label"
+  fi
+}
+
 gtag_script='<script>function gtag() { return arguments; } gtag();</script>'
 
 passes src/lint-probe.ts 'export const value = 1;'
 fails_on astro/jsx-a11y/alt-text src/pages/lint-probe.astro '<img src="a.png" />'
+fails_on astro/jsx-a11y/anchor-has-content src/pages/lint-probe.astro '<a href="/x"></a>'
+fails_on astro/jsx-a11y/aria-role src/pages/lint-probe.astro '<div role="banana"></div>'
 fails_on @typescript-eslint/no-explicit-any src/lint-probe.ts 'export const value: any = 1;'
 fails_on no-undef src/js/lint-probe.js 'export const value = missingName;'
 fails_on prefer-rest-params src/pages/lint-probe.astro "$gtag_script"
 passes src/layouts/MainHead.astro "$gtag_script"
+
+hook_passes
+hook_fails_on @typescript-eslint/no-explicit-any 'export const value: any = 1;'
+hook_fails_on "too many warnings" '// eslint-disable-next-line no-undef
+export const value = 1;'
+
+git init -q "$scratch/repo"
+setup_succeeds_in "$scratch/repo" "in a fresh repository"
+if [ "$(git -C "$scratch/repo" config core.hooksPath)" = .githooks ]; then
+  echo "ok: setup sets core.hooksPath"
+else
+  not_ok "setup should set core.hooksPath"
+fi
+mkdir "$scratch/export"
+setup_succeeds_in "$scratch/export" "where there is no .git"
+setup_succeeds_in "$scratch/repo" "where git is not installed" PATH=/nonexistent
 
 [ "$failures" -eq 0 ] || { echo "$failures case(s) failed"; exit 1; }

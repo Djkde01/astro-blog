@@ -37,7 +37,7 @@ pnpm exec playwright install chromium
 |------|---------|------|
 | Lint | `pnpm run lint` | full |
 | Lint one path | `pnpm exec eslint <path>` | scoped |
-| Prove the lint rules are active | `bash scripts/test-lint-setup.sh` | full |
+| Prove the lint rules and the pre-push hook work | `bash scripts/test-lint-setup.sh` | full |
 | Type-check and Astro diagnostics | `pnpm run check` | full |
 | Unit tests | `pnpm run test` | full |
 | One unit test file | `node --test tests/utils.test.mjs` | scoped |
@@ -48,6 +48,14 @@ pnpm exec playwright install chromium
 | Harness conformance | `bash .agents/skills/deepworkplan/verify/conformance.sh --repo-only .` | full |
 
 See [TESTING_GUIDE.md](TESTING_GUIDE.md) for which gate to run when.
+
+## Pre-push hook
+
+`.githooks/pre-push` runs `pnpm run lint` before each push and stops the push when it fails. `pnpm install` activates it on a fresh clone through the `prepare` script, which sets `core.hooksPath`. Where there is no `.git`, as on a deploy from an export, setup does nothing.
+
+In a clone that already has its dependencies, `pnpm install` reports `Already up to date` and skips `prepare`. Run `pnpm run prepare` once there.
+
+`git push --no-verify` skips the hook, so CI is the real gate.
 
 ## Third-party skills
 

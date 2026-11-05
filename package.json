@@ -14,13 +14,14 @@
   ],
   "scripts": {
     "preinstall": "node scripts/require-pnpm.mjs",
+    "prepare": "bash scripts/setup-git-hooks.sh",
     "dev": "node scripts/require-pnpm.mjs && astro dev",
     "start": "node scripts/require-pnpm.mjs && astro dev",
     "build": "node scripts/require-pnpm.mjs && astro build",
     "preview": "node scripts/require-pnpm.mjs && astro preview",
     "astro": "node scripts/require-pnpm.mjs && astro",
     "check": "node scripts/require-pnpm.mjs && astro check",
-    "lint": "node scripts/require-pnpm.mjs && eslint .",
+    "lint": "node scripts/require-pnpm.mjs && eslint . --max-warnings=0",
     "test": "node scripts/require-pnpm.mjs && node --test \"tests/**/*.test.mjs\"",
     "test:e2e": "node scripts/require-pnpm.mjs && bash scripts/e2e-gate.sh --all"
   },

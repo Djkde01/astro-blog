@@ -71,7 +71,7 @@ Run the full suite when any of these change:
 - `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml`, `astro.config.mjs`, `postcss.config.cjs` or `tsconfig.json`.
 - `src/js/utils.js`, `src/layouts/` or the frontmatter shape.
 - `playwright.config.ts`, `e2e/fixtures.ts` or anything in `scripts/`. For the gate scripts, also run `bash scripts/test-e2e-gate.sh`.
-- `eslint.config.mjs`. Also run `bash scripts/test-lint-setup.sh`.
+- `eslint.config.mjs`, `.githooks/` or `scripts/setup-git-hooks.sh`. Also run `bash scripts/test-lint-setup.sh`.
 
 ## Fallback
 

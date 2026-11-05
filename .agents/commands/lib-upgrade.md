@@ -13,6 +13,6 @@ Bring this repository's dependencies up to date without breaking the build. This
 
 - Package manager: pnpm, from `pnpm-lock.yaml`. `pnpm-workspace.yaml` holds back releases younger than one day.
 - `typescript` stays on 5.x while Astro's dependencies `tsconfck` and `zod-to-ts` accept only up to 5.x. Run `pnpm peers check` after a batch.
-- `eslint-plugin-jsx-a11y` 6.10.2 declares peers only up to ESLint 9, so `pnpm peers check` reports it. Its rules run on ESLint 10, and `bash scripts/test-lint-setup.sh` proves it. Run that script after any lint upgrade.
+- `eslint-plugin-jsx-a11y` 6.10.2 declares peers only up to ESLint 9, so `pnpm peers check` reports it. Three of its rules are proven to run on ESLint 10 by `bash scripts/test-lint-setup.sh`, which is a sample and not the whole plugin. Run that script after any lint upgrade.
 - Majors need the owner's approval before they join a batch.
 - pnpm regenerates the lockfile. Never hand-edit it.
