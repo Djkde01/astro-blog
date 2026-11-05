@@ -15,6 +15,8 @@ export default [
       ".cursor/",
       ".dwp/",
       "dist/",
+      "playwright-report/",
+      "test-results/",
       "tmp/",
     ],
   },

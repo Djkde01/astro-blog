@@ -47,4 +47,4 @@ Conventional Commits, `type(scope): description`, with the scopes `blog`, `ui`, 
 - Nesting a post in a subfolder under `src/pages/blog/`.
 - Building a `<script>` or JSON string from frontmatter without escaping it.
 - Adding a client framework or a dependency for what CSS or a few lines can do.
-- Using `npm` or `npx` here. `devEngines` rejects them.
+- Using `npm` or `npx` for local commands. `devEngines` rejects them. The global pnpm install in the setup steps is the exception.
