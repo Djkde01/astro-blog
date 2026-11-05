@@ -1,6 +1,6 @@
 # Architecture
 
-A static Astro 5 site. `pnpm run build` turns Markdown posts and Astro pages into HTML in `dist/`. There is no server, database or client framework. The repository holds no deployment configuration, so hosting is outside its scope.
+A static Astro 7 site. `pnpm run build` turns Markdown posts and Astro pages into HTML in `dist/`. There is no server, database or client framework. The repository holds no deployment configuration, so hosting is outside its scope.
 
 ```text
 src/pages/blog/*.md ──> import.meta.glob ──> formatBlogPosts() ──> pages, cards, RSS

@@ -31,6 +31,8 @@ pnpm exec playwright install chromium
 | Serve the build | `pnpm run preview` | full |
 | Any Astro CLI command | `pnpm run astro <command>` | full |
 
+Under an AI agent, `pnpm run preview` starts in the background and keeps running. End it with `pnpm exec astro preview stop`.
+
 ## Validation
 
 | Task | Command | Kind |

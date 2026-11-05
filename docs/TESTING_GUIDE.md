@@ -52,7 +52,7 @@ CI does not replace a plan's gate: a criterion still closes through the gate run
 
 `scripts/e2e-gate.sh` sets `DWP_EVIDENCE_DIR`, which defaults to `tmp/e2e-evidence/<id>`. It fails when a test fails or is skipped, when a `test.only` narrows the run, when no test is selected, when a video is missing, or when a selected test's title does not start with the id. Playwright's `--grep` matches anywhere in a title, so that last check stops a test that only mentions a criterion from closing it. Each run writes a video, a trace and a screenshot per test. `E2E_GATE_CONFIG` repoints the gate at another Playwright configuration, and exists only for `scripts/test-e2e-gate.sh`.
 
-Playwright builds the site and serves it with `astro preview` on port 4322, so tests see the same output that ships. Use the `e2e-evidence` skill to write one.
+Playwright builds the site and serves it with `astro preview` on port 4322, so tests see the same output that ships. The command passes `--ignore-lock` because Astro otherwise starts the preview in the background under an AI agent: the server would outlive the run, and every later run would fail on the busy port. Use the `e2e-evidence` skill to write one.
 
 Specs import `test` from `e2e/fixtures.ts`, not from `@playwright/test`. The fixture aborts requests to Google Analytics, and the configuration blocks service workers because Partytown's would hide those requests. A probe on 2026-11-04 saw zero analytics requests in 12 seconds on the home page.
 

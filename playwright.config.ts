@@ -14,8 +14,10 @@ export default defineConfig({
     screenshot: "on",
   },
   webServer: {
-    // Test the built site, not the dev server.
-    command: `pnpm run build && pnpm exec astro preview --port ${port}`,
+    // Test the built site, not the dev server. Astro starts the preview in the
+    // background under an AI agent, which would outlive this run; --ignore-lock
+    // keeps it in the foreground so Playwright owns it.
+    command: `pnpm run build && pnpm exec astro preview --ignore-lock --port ${port}`,
     port,
     reuseExistingServer: false,
     timeout: 120_000,
