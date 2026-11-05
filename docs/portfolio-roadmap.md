@@ -120,11 +120,8 @@ These should be answered before opening implementation PRs. None require code ch
   - (a) **Google Analytics events** on the property the site already uses. No backend and no new vendor, but ad blockers hide some clicks and delivery through Partytown is unproven (see Phase 8).
   - (b) **Counting redirects** (`/l/<id>`) in a host function. Counts every click, but it adds a server, ties the site to one host, and goes against the non-goals in section 1 and in `docs/PRODUCT_SPEC.md`.
   - Default recommendation: ship (a), and consider (b) only if (a) proves unreliable and the owner lifts those non-goals.
-- **Lint tool**: choose between
-  - (a) **ESLint** with `eslint-plugin-astro`, which lints `.astro` templates through a dedicated plugin.
-  - (b) **Biome**, which is faster and has fewer dependencies, but documents its Astro support as experimental.
-  - Default recommendation: (a), since most of this site's markup lives in `.astro` files.
-- **Node version**: nothing pins one today. CI needs it, so pin it in one file that CI reads. Default recommendation: `.nvmrc` with `26`, the current LTS line since 2026-10-28. Node 25 and later no longer ship Corepack, so setup moves to `npm install -g pnpm@<pinned version>`.
+- **Lint tool**: settled in Phase 7: ESLint with `eslint-plugin-astro`, because most of this site's markup lives in `.astro` files. Biome was the alternative, but it documents its Astro support as experimental.
+- **Node version**: settled in Phase 7: `.nvmrc` holds `26`, the LTS line since 2026-10-28, and CI reads it. Node 25 and later no longer ship Corepack, so setup uses `npm install -g pnpm@<pinned version>`.
 
 ---
 
@@ -329,7 +326,7 @@ This phase has no dependency on the others, and every later phase benefits from 
 ### Changes
 
 - **Node:** add `.nvmrc` with `26`, and replace `corepack enable` in `README.md`, `AGENTS.md`, `docs/DEVELOPMENT_COMMANDS.md` and `scripts/require-pnpm.mjs`. If a host cannot build on 26, return to `24` everywhere, so CI and production stay on one version.
-- **Lint:** add `pnpm run lint`, with the tool chosen in Phase 0. Fix the findings on the existing code in a commit of their own, with no change in `dist/`. The `arguments` use in the Google Analytics snippet in `MainHead.astro` stays, with a config exception and its reason. Formatting stays out of scope.
+- **Lint:** add `pnpm run lint`, with ESLint. Fix the findings on the existing code in a commit of their own, with no change in `dist/`. The `arguments` use in the Google Analytics snippet in `MainHead.astro` stays, with a config exception and its reason. Formatting stays out of scope.
 - **CI:** add `.github/workflows/ci.yml`, triggered on pull requests and on pushes to `main`:
   - `static` job: `pnpm run lint`, `pnpm run check`, `pnpm run test`, and `bash scripts/test-lint-setup.sh`.
   - `e2e` job: install Chromium with its system dependencies, run `pnpm run test:e2e` and `bash scripts/test-e2e-gate.sh`, and upload `tmp/e2e-evidence/` as an artifact with a short retention.

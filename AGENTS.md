@@ -4,7 +4,7 @@ Personal blog and portfolio of Sergio Estrella (Djkde), built with Astro as a st
 
 DWP standard: 7.0.0 (onboarded 2026-11-04; skill 7.9.0)
 
-> **State of the repository:** the site is live and maintained. Product work is listed in [docs/portfolio-roadmap.md](docs/portfolio-roadmap.md), and none of its phases has started. Each phase becomes a Deep Work Plan when work begins.
+> **State of the repository:** the site is live and maintained. Product work is listed in [docs/portfolio-roadmap.md](docs/portfolio-roadmap.md), and apart from Phase 7, none of its phases has started. Each phase becomes a Deep Work Plan when work begins.
 
 ## Documentation index
 
@@ -96,7 +96,7 @@ DWP standard: 7.0.0 (onboarded 2026-11-04; skill 7.9.0)
 ### Package manager
 
 - This project requires pnpm, at the exact version pinned in `package.json` under `devEngines`. Install it once with `npm install -g pnpm@11.21.0`, then use `pnpm install`. Any other version fails.
-- Do not use `npx` here: npm rejects the `devEngines` pin. Use `pnpm dlx`.
+- Do not use `npx` here: npm rejects the `devEngines` pin on local commands, though the global install above works from any directory. Use `pnpm dlx`.
 
 ### Source of truth
 
