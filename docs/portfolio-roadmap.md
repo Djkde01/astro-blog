@@ -148,21 +148,19 @@ Goal: keep the article in one column at all breakpoints; move category and relat
 
 ### Changes
 
-- In [`src/styles/global.css`](../src/styles/global.css), **remove or override** the two-column rules on `.post-content` (lines 648–656 above) so the article stays single-column. Tighten `.content` typography:
-  - Cap measure with `max-width: var(--content-lg)` (already 65ch) on the article, not on every `<p>`.
-  - Increase vertical rhythm (`margin-block` on headings/lists) and inter-paragraph spacing.
-  - Style code blocks (currently no rules) with `hsl(var(--muted))` background and `--radius-md`.
-- In [`src/layouts/BlogPostLayout.astro`](../src/layouts/BlogPostLayout.astro):
-  - Keep the DOM order (article → sidebar) — the sidebar will naturally stack below.
-  - Rework `.sidebar` to render as a **horizontal "post footer"** with two blocks: **Tags/Category chips** and **Artículos relacionados**.
-  - Add a small "share" row (copy link, X/LinkedIn) below the footer, optional.
-- In [`src/components/PostHeader.astro`](../src/components/PostHeader.astro), keep the category badge but move the tag/category cloud out of the post and only into the blog index page if desired.
-- If decision (b) on tags is taken later: extend `formatBlogPosts` consumers and `relatedPosts` logic in [`src/layouts/BlogPostLayout.astro`](../src/layouts/BlogPostLayout.astro) to match by `tags` overlap as a fallback to category.
+The design reference is `designs/phase-2-post-page.pen`, signed by the owner.
+
+- In [`src/styles/global.css`](../src/styles/global.css), drop the two-column grid on `.post-content`. The article and its footer are capped at `var(--content-lg)` (65ch) and centred.
+- In [`src/layouts/BlogPostLayout.astro`](../src/layouts/BlogPostLayout.astro), replace the sidebar with a post footer under the article, `<aside aria-label="Sigue leyendo">`: a thin divider, the chip of this post's category only, then three posts. On desktop the posts sit in a row of three, each under a gold top line; on a phone they stack.
+- `selectRelatedPosts()` in [`src/js/utils.js`](../src/js/utils.js) picks the three posts: the same category first, newest first, then the newest posts from any category, never the current post. The block reads "Artículos relacionados" when all three are from its category and "Más artículos" otherwise, so a post alone in its category never ends empty.
+- The cloud of all categories leaves the post page and stays on the blog index. The category badge in [`src/components/PostHeader.astro`](../src/components/PostHeader.astro) stays.
+- The post title becomes the page's only `h1`, with class `h2`, so it looks the same.
+- Left out: social sharing links, and styles for code (no post contains code).
 
 ### Risks / guardrails
 
 - `.post-content` styles also affect `blockquote`, `strong`, `em`. Verify all existing posts visually after the change.
-- Do not move `CategoryCloud` to a place that requires a new glob; it already shares the same discovery path.
+- Do not move `CategoryCloud` to a place that requires a new glob; it already uses the same discovery path.
 
 ---
 

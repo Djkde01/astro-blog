@@ -31,7 +31,7 @@ There is no content collection. Each consumer finds posts with its own `import.m
 | `src/pages/index.astro` | `./blog/*.md` | Latest posts |
 | `src/pages/blog/[...page].astro` | `./*.md` | Blog index |
 | `src/pages/category/[category].astro` | `../blog/*.md` | Category routes |
-| `src/layouts/BlogPostLayout.astro` | `../pages/blog/*.md` | Related posts, same category |
+| `src/layouts/BlogPostLayout.astro` | `../pages/blog/*.md` | Posts under the article, through `selectRelatedPosts()` |
 | `src/components/CategoryCloud.astro` | `../pages/blog/*.md` | Category list and counts |
 | `src/pages/rss.xml.js` | `./blog/**/*.md` | Feed |
 
@@ -42,7 +42,7 @@ A change to discovery or to the frontmatter shape must reach all six. RSS is the
 - `MainLayout` wraps every page with `MainHead`, `Nav` and `Footer`, and imports the font and `global.css`.
 - `MainHead` holds the Google Analytics tag, which runs in a worker through Partytown, and loads the Lite YouTube helper globally.
 - `Seo` writes canonical, Open Graph and Twitter tags, plus JSON-LD from `src/js/jsonLD.js`.
-- `BlogPostLayout` adds the post header, content and sidebar. Astro picks it through each post's `layout` frontmatter.
+- `BlogPostLayout` adds the post header, the content in one column, and a footer with the post's category and three posts to read next. Astro picks it through each post's `layout` frontmatter.
 
 ## Styling
 
