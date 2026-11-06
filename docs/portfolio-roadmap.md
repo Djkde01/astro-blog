@@ -176,14 +176,14 @@ Goal: add subtle but distinctive motion that respects accessibility and performa
 
 ### Where motion applies
 
-- **Cards only:** post cards on the landing, `/blog/` and its pages and `/category/*`, and About's project cards. Each card below the fold at load reveals once as it scrolls in: `autoAlpha` and `y: 20`, 0.6 s, a 0.1 s stagger, `power2.out`. Cards already on screen stay still, so nothing visible flashes, and if the script fails every card stays visible.
+- **Cards only:** post cards on the landing, `/blog/` and its pages and `/category/*`, and About's project cards. Each card below the fold at load reveals once as it scrolls in: opacity and `y: 20`, 0.6 s, a 0.1 s stagger, `power2.out`. Cards already on screen stay still, so nothing visible flashes, and if the script fails every card stays visible.
 - **Hover lift:** CSS on the same cards, `transform` and `box-shadow` on `:hover` and `:focus-within`.
 - **Not animated:** section headings and paragraphs, the landing hero (Phase 4 animates its new hero), and post pages, which load no motion code.
 - **Every width:** one configuration; reduced motion is the only branch.
 
 ### Guardrails
 
-- Animate transforms and `autoAlpha` only, and clear them after the reveal so the CSS hover still applies.
+- Animate transforms and `opacity` only, never `autoAlpha`: `visibility: hidden` would drop waiting cards from the tab order and the accessibility tree. Clear the inline styles after the reveal so the CSS hover still applies.
 - Keep every trigger inside `matchMedia`, so it reverts on its own.
 - Never animate text being read (Phase 0).
 - Playwright runs every spec with reduced motion; `e2e/motion.spec.ts` opts out to prove the reveal, and also proves that reduced motion keeps every card still and that post pages run no GSAP.
