@@ -9,7 +9,7 @@ Astro components for the site's UI. Styles live in `src/styles/global.css`, so m
 | `PostCard` | A post's card; `tagType` sets the heading level |
 | `PostHeader` | Hero image, title (the page's `h1`), date and category of a post |
 | `CategoryCloud` | Category badges, with optional counts, on the blog index. It finds posts itself |
-| `RelatedPosts` | List items for the posts under an article, chosen by `selectRelatedPosts()` |
+| `RelatedPosts` | List items for the posts under an article, chosen by `selectRelatedPosts()`: title, one-line description, author, date and a thumbnail of the cover |
 | `Pagination` | Previous and next links on the blog index |
 | `Projects` | Project cards, from `src/data/projects.ts`; maps each `status` to its label and class |
 | `Section` | A section of About: `title`, `icon` and `class` props, and a slot for its content |

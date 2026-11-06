@@ -151,7 +151,7 @@ Goal: keep the article in one column at all breakpoints; move category and relat
 The design reference is `designs/phase-2-post-page.pen`, signed by the owner.
 
 - In [`src/styles/global.css`](../src/styles/global.css), drop the two-column grid on `.post-content`. The article and its footer are capped at `var(--content-lg)` (65ch) and centred.
-- In [`src/layouts/BlogPostLayout.astro`](../src/layouts/BlogPostLayout.astro), replace the sidebar with a post footer under the article, `<aside aria-label="Sigue leyendo">`: a thin divider, the chip of this post's category only, then three posts. On desktop the posts sit in a row of three, each under a gold top line; on a phone they stack.
+- In [`src/layouts/BlogPostLayout.astro`](../src/layouts/BlogPostLayout.astro), replace the sidebar with a post footer under the article, `<aside aria-label="Sigue leyendo">`: a thin divider, the chip of this post's category only, then three posts. The posts stack under a gold top line each: the title, the description cut to one line, the author and date, and the cover image on the right.
 - `selectRelatedPosts()` in [`src/js/utils.js`](../src/js/utils.js) picks the three posts: the same category first, newest first, then the newest posts from any category, never the current post. The block reads "Artículos relacionados" when all three are from its category and "Más artículos" otherwise, so a post alone in its category never ends empty.
 - The cloud of all categories leaves the post page and stays on the blog index. The category badge in [`src/components/PostHeader.astro`](../src/components/PostHeader.astro) stays.
 - The post title becomes the page's only `h1`, with class `h2`, so it looks the same.

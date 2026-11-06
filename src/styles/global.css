@@ -644,21 +644,40 @@ header {
   margin: 0;
   padding: 0;
 
-  @media (--md) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-md);
-  }
-
   & .post {
     display: grid;
-    align-content: start;
-    gap: var(--space-2xs);
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: var(--space-sm);
     padding-block-start: var(--space-xs);
     border-block-start: var(--border-sm) solid hsl(var(--accent));
 
     & a {
       text-decoration: none;
     }
+  }
+
+  & .text {
+    display: grid;
+    gap: var(--space-2xs);
+    min-width: 0;
+  }
+
+  & p {
+    margin: 0;
+    max-width: none;
+    font-size: var(--fs-sm);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  & img {
+    display: block;
+    width: 120px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
   }
 }
 

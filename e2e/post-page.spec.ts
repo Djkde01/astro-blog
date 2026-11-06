@@ -74,6 +74,47 @@ test("AC-related-fill: a post alone in its category lists the 3 newest posts und
   expect(footer).toEqual(newest.filter((title) => title !== current).slice(0, 3));
 });
 
+test("AC-related-list: the footer posts stack, each with its title, a one-line description, author, date and an image on the right", async ({ page }) => {
+  for (const width of [1280, 375]) {
+    await test.step(`at ${width} px`, async () => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto(CHARLAS_POST);
+      const items = postFooter(page).getByRole("listitem");
+      await expect(items).toHaveCount(3);
+      for (const item of await items.all()) {
+        await expect(item.getByRole("heading")).toBeVisible();
+        await expect(item.locator("p")).not.toBeEmpty();
+        await expect(item.locator("small")).toContainText("Sergio Estrella");
+        await expect(item.locator("img")).toBeVisible();
+      }
+
+      // Measured in one pass, so scrolling between measurements cannot shift the boxes.
+      const layout = await items.evaluateAll((elements) =>
+        elements.map((li) => {
+          const box = (selector: string) => li.querySelector(selector)!.getBoundingClientRect();
+          const description = getComputedStyle(li.querySelector("p")!);
+          return {
+            top: li.getBoundingClientRect().top,
+            bottom: li.getBoundingClientRect().bottom,
+            titleRight: box("h3").right,
+            imageLeft: box("img").left,
+            descriptionHeight: box("p").height,
+            lineHeight: parseFloat(description.lineHeight),
+            ellipsis: description.textOverflow,
+          };
+        }),
+      );
+      layout.forEach((item, index) => {
+        if (index > 0) expect(item.top).toBeGreaterThanOrEqual(layout[index - 1].bottom);
+        // One line, cut with an ellipsis.
+        expect(item.descriptionHeight).toBeLessThan(item.lineHeight * 2);
+        expect(item.ellipsis).toBe("ellipsis");
+        expect(item.imageLeft).toBeGreaterThanOrEqual(item.titleRight);
+      });
+    });
+  }
+});
+
 test("AC-single-h1: every post page has one h1, the post's title", async ({ page, request }) => {
   const sitemap = await (await request.get("/sitemap-0.xml")).text();
   const posts = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)]
