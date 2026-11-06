@@ -6,6 +6,13 @@ const PRODUCTIVIDAD_POST = "/blog/empieza-con-algo-simple-pero-empieza--ya/";
 
 // The footer under the article: the category chip and the posts to read next.
 const postFooter = (page: Page) => page.getByRole("complementary", { name: "Sigue leyendo" });
+// Post titles in the order a listing page shows them: newest first, as the footer must.
+const listedTitles = async (page: Page, path: string) => {
+  await page.goto(path);
+  return (await page.locator("article.card h3 a").allTextContents()).map((title) =>
+    title.trim(),
+  );
+};
 const footerPostTitles = async (page: Page) =>
   (await postFooter(page).getByRole("listitem").getByRole("heading").allTextContents()).map((title) => title.trim());
 
@@ -49,22 +56,22 @@ test("AC-footer-category: the footer links only this post's category, with no cl
 
 test("AC-related-same-category: a Charlas post lists 3 other Charlas posts under Artículos relacionados", async ({ page }) => {
   await page.goto(CHARLAS_POST);
+  const current = (await page.locator("h1").textContent())!.trim();
   await expect(postFooter(page).getByRole("heading", { name: "Artículos relacionados" })).toBeVisible();
-  expect(await footerPostTitles(page)).toEqual([
-    "GDG DevFest Pereira 2025",
-    "GDG Pereira - Mujeres en Tecnología",
-    "Software Freedom Day 2024",
-  ]);
+  const footer = await footerPostTitles(page);
+  const charlas = await listedTitles(page, "/category/charlas/");
+  expect(footer).toEqual(charlas.filter((title) => title !== current).slice(0, 3));
 });
 
 test("AC-related-fill: a post alone in its category lists the 3 newest posts under Más artículos", async ({ page }) => {
   await page.goto(PRODUCTIVIDAD_POST);
+  const current = (await page.locator("h1").textContent())!.trim();
   await expect(postFooter(page).getByRole("heading", { name: "Más artículos" })).toBeVisible();
-  expect(await footerPostTitles(page)).toEqual([
-    "GDG DevFest Pereira 2025",
-    "Software Freedom Day 2025",
-    "GDG Pereira - Mujeres en Tecnología",
-  ]);
+  const footer = await footerPostTitles(page);
+  // The post is alone in Productividad, so the footer is the newest posts on the blog index.
+  expect(await listedTitles(page, "/category/productividad/")).toEqual([current]);
+  const newest = await listedTitles(page, "/blog/");
+  expect(footer).toEqual(newest.filter((title) => title !== current).slice(0, 3));
 });
 
 test("AC-single-h1: every post page has one h1, the post's title", async ({ page, request }) => {
