@@ -4,7 +4,7 @@ Personal blog and portfolio of Sergio Estrella (Djkde), built with Astro as a st
 
 DWP standard: 7.0.0 (onboarded 2026-11-04; skill 7.9.0)
 
-> **State of the repository:** the site is live and maintained. Product work is listed in [docs/portfolio-roadmap.md](docs/portfolio-roadmap.md), Phase 0's decisions are settled, Phases 1, 2 and 7 are done, and none of the other phases has started. Each phase becomes a Deep Work Plan when work begins.
+> **State of the repository:** the site is live and maintained. Product work is listed in [docs/portfolio-roadmap.md](docs/portfolio-roadmap.md), Phase 0's decisions are settled, Phases 1, 2, 3 and 7 are done, and none of the other phases has started. Each phase becomes a Deep Work Plan when work begins.
 
 ## Documentation index
 

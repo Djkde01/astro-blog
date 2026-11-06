@@ -108,7 +108,7 @@ Phase 0 settles the decisions only. Each piece of content is gathered before the
 
 - **Tags vs. categories**: settled: **visual chips built from `category`**, with no content-model change. The site has 8 posts in 3 categories, so multi-tag frontmatter (`tags: ["a", "b"]`) would change posts, types, related-posts logic and routes for little gain. It stays deferred until there are enough posts for a tag to say something a category does not.
 - **Transcript-to-post tool**: settled: **template-only first**, a deterministic Node script that scaffolds a Markdown file with frontmatter, headings and image/video placeholders from a `.txt` transcript, with no LLM, key or network. An AI-assisted body comes later behind an opt-in flag, with its own security decision, since it needs an API key.
-- **GSAP scope**: settled: motion on the landing page, About and the blog index. **Post pages stay calm**, with only header and meta micro-interactions, because motion competes with reading.
+- **GSAP scope**: settled: motion on the landing page, About and the blog index. **Post pages stay calm**, with no motion at all (settled in Phase 3), because motion competes with reading.
 - **Accessibility floor**: settled for every animation: respect `prefers-reduced-motion` with no motion when it is set, keep keyboard focus, and never animate text being read. Each phase that adds motion proves it with a Playwright test that emulates reduced motion.
 - **i18n**: settled: the site stays Spanish-only and new copy must match. Code and docs stay in English.
 - **Link hub route**: settled: **`/enlaces`**, because people read this URL in a public bio. Existing routes are in English (`/about`, `/blog/`, `/category/`), while the copy is in Spanish.
@@ -170,29 +170,23 @@ Goal: add subtle but distinctive motion that respects accessibility and performa
 
 ### Setup
 
-- Add `gsap` as a runtime dependency: `pnpm add gsap`.
-- Create `src/js/motion.ts` with:
-  - A single `gsap.matchMedia()` instance per page, with conditions `isDesktop`, `isMobile`, and `reduceMotion`.
-  - A small `revealOnScroll(selector, opts)` helper using `ScrollTrigger.batch()` for staggered entrances.
-  - A `heroIntro()` helper for the landing page.
-- Register `ScrollTrigger` once: `gsap.registerPlugin(ScrollTrigger)`.
-- Use Astro's `<script>` (default = type="module", deferred, bundled) inside the components that need motion. Do **not** route GSAP through Partytown.
+- `gsap` is a runtime dependency, with ScrollTrigger.
+- [`src/js/motion.js`](../src/js/motion.js) exports `revealCards(selector)`: one `gsap.matchMedia()` with `(prefers-reduced-motion: no-preference)`, so reduced motion reverts every change, and `ScrollTrigger.batch()` for the staggered reveal.
+- The components that animate call it from Astro's bundled `<script>`, so only their pages load GSAP. GSAP never goes through Partytown.
 
-### Where to apply motion
+### Where motion applies
 
-- **Landing hero** ([`src/pages/index.astro`](../src/pages/index.astro)): staggered reveal of avatar, headline, subline, and CTA on first paint.
-- **Section reveals**: fade/translate-up on every `<section class="container">` as it enters the viewport (use `autoAlpha` + `y: 20`).
-- **Project / client / talk cards**: batch reveal with stagger; subtle hover lift via CSS (transform + shadow), not JS.
-- **Blog index**: staggered card entrance only.
-- **Post page**: keep calm — only animate `PostHeader` meta (title fade-in + small underline grow). No body animation.
-- **Reduced motion**: in `matchMedia`, set `duration: 0` or skip animations when `reduceMotion` is true.
+- **Cards only:** post cards on the landing, `/blog/` and its pages and `/category/*`, and About's project cards. Each card below the fold at load reveals once as it scrolls in: `autoAlpha` and `y: 20`, 0.6 s, a 0.1 s stagger, `power2.out`. Cards already on screen stay still, so nothing visible flashes, and if the script fails every card stays visible.
+- **Hover lift:** CSS on the same cards, `transform` and `box-shadow` on `:hover` and `:focus-within`.
+- **Not animated:** section headings and paragraphs, the landing hero (Phase 4 animates its new hero), and post pages, which load no motion code.
+- **Every width:** one configuration; reduced motion is the only branch.
 
 ### Guardrails
 
-- Always use transform aliases (`x`, `y`, `scale`, `autoAlpha`) — not `width`/`top`/`opacity`.
-- Kill ScrollTriggers on view-transitions (if added later) by relying on the `useGSAP`-equivalent pattern: keep all triggers within `matchMedia` so they auto-revert.
-- Do not animate elements that contain headings being read aloud by screen readers.
-- A Playwright test emulates `prefers-reduced-motion: reduce` and proves nothing moves (Phase 0).
+- Animate transforms and `autoAlpha` only, and clear them after the reveal so the CSS hover still applies.
+- Keep every trigger inside `matchMedia`, so it reverts on its own.
+- Never animate text being read (Phase 0).
+- Playwright runs every spec with reduced motion; `e2e/motion.spec.ts` opts out to prove the reveal, and also proves that reduced motion keeps every card still and that post pages run no GSAP.
 
 ---
 
@@ -204,6 +198,7 @@ Goal: lift the landing and about pages from "simple" to "intentional", reusing e
 
 - **Landing** ([`src/pages/index.astro`](../src/pages/index.astro)):
   - Replace the single avatar + paragraph with a richer hero: name + role + 1-line value prop + CTA cluster (Conoceme más, Contáctame, GitHub).
+  - Animate the new hero with a staggered intro on first paint, through `src/js/motion.js`, with no flash before it runs (moved from Phase 3).
   - Add a "Ahora" / "Now" strip (1–2 lines about current focus, e.g., Curoo + Backbone).
   - Add a "Métricas" mini-strip: years of experience, talks delivered, communities, posts (computed from data).
   - Keep "Últimos posts" but reduce to 3 with consistent card height.
