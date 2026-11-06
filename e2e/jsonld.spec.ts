@@ -28,7 +28,7 @@ test("AC-jsonld-parses: every page's JSON-LD parses, and each post's names the p
     const data = JSON.parse(blocks[0]);
     if (/^\/blog\/(?!\d+\/$)[^/]+\/$/.test(path)) expect(data["@type"], path).toBe("BlogPosting");
     if (data["@type"] === "BlogPosting") {
-      expect(data.headline, path).toBe((await page.locator("header h2.h2").textContent())?.trim());
+      expect(data.headline, path).toBe((await page.locator("main header h1").textContent())?.trim());
     } else {
       expect(data["@type"], path).toBe("WebSite");
     }
