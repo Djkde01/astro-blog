@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { formatBlogPosts, slugify } from "../src/js/utils.js";
+import { formatBlogPosts, selectRelatedPosts, slugify } from "../src/js/utils.js";
 
 const post = (title, date, extra = {}) => ({
   url: `/blog/${title}`,
@@ -44,6 +44,43 @@ describe("formatBlogPosts", () => {
   it("accepts the object that import.meta.glob returns", async () => {
     const modules = { "./a.md": post("a", "2025-01-01") };
     assert.deepEqual(titles(await formatBlogPosts(modules)), ["a"]);
+  });
+});
+
+describe("selectRelatedPosts", () => {
+  // Newest first, as formatBlogPosts returns them.
+  const site = [
+    post("talk-new", "2025-05-01", { category: "Charlas" }),
+    post("other-new", "2025-04-01", { category: "Productividad" }),
+    post("talk-mid", "2025-03-01", { category: "Charlas" }),
+    post("current", "2025-02-01", { category: "Charlas" }),
+    post("other-old", "2024-01-01", { category: "Marca Personal" }),
+    post("talk-old", "2023-01-01", { category: "Charlas" }),
+  ];
+  const current = site[3];
+
+  it("picks same-category posts, newest first, without the current post", () => {
+    const { posts, sameCategory } = selectRelatedPosts(site, current);
+    assert.deepEqual(titles(posts), ["talk-new", "talk-mid", "talk-old"]);
+    assert.equal(sameCategory, true);
+  });
+
+  it("fills with the newest posts from any category when the category runs short", () => {
+    const lonely = site[1];
+    const { posts, sameCategory } = selectRelatedPosts(site, lonely);
+    assert.deepEqual(titles(posts), ["talk-new", "talk-mid", "current"]);
+    assert.equal(sameCategory, false);
+  });
+
+  it("puts same-category posts before the fill and never repeats one", () => {
+    const { posts, sameCategory } = selectRelatedPosts(site, current, 5);
+    assert.deepEqual(titles(posts), ["talk-new", "talk-mid", "talk-old", "other-new", "other-old"]);
+    assert.equal(sameCategory, false);
+  });
+
+  it("returns every other post when the site has fewer than asked for", () => {
+    const { posts } = selectRelatedPosts(site.slice(0, 2), site[0]);
+    assert.deepEqual(titles(posts), ["other-new"]);
   });
 });
 

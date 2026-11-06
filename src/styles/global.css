@@ -581,7 +581,6 @@ header {
 
 .post-content {
   display: grid;
-  justify-content: center;
   padding: var(--space-md);
   margin-block: var(--space-lg);
   margin-inline: auto;
@@ -614,45 +613,52 @@ header {
     font-style: italic;
   }
 
-  & .sidebar {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: var(--space-lg);
-    margin-block-start: var(--space-xl);
-
-    @media (--md) {
-      margin: 0;
-    }
-
-    & aside {
-      display: grid;
-      gap: var(--space-2xs);
-      padding: 0;
-
-      @media (--sm) {
-        flex: 1 1 40%;
-      }
-
-      @media (--md) {
-        text-align: left;
-        justify-content: start;
-        justify-items: start;
-        & .categories {
-          justify-content: start;
-        }
-      }
-    }
+  & .content,
+  & .post-footer {
+    width: 100%;
+    max-width: var(--content-lg);
+    margin-inline: auto;
   }
+}
+
+/* post footer: this post's category and the posts to read next */
+.post-footer {
+  display: grid;
+  gap: var(--space-sm);
+  justify-items: start;
+  margin-block-start: var(--space-lg);
+  padding-block-start: var(--space-lg);
+  border-block-start: var(--border-sm) solid hsl(var(--txt) / 0.15);
+
+  & section {
+    display: grid;
+    gap: var(--space-sm);
+    width: 100%;
+  }
+}
+
+.related-posts {
+  list-style: none;
+  display: grid;
+  gap: var(--space-sm);
+  margin: 0;
+  padding: 0;
 
   @media (--md) {
-    grid-template-columns: 1fr minmax(auto, 220px);
-    gap: var(--space-lg);
-    align-items: start;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
   }
 
-  @media (--lg) {
-    grid-template-columns: 1fr minmax(auto, 300px);
+  & .post {
+    display: grid;
+    align-content: start;
+    gap: var(--space-2xs);
+    padding-block-start: var(--space-xs);
+    border-block-start: var(--border-sm) solid hsl(var(--accent));
+
+    & a {
+      text-decoration: none;
+    }
   }
 }
 
@@ -681,35 +687,16 @@ header {
   }
 }
 
-[aria-label="Blog categories"],
-[aria-label="Related posts"] {
+[aria-label="Blog categories"] {
   padding: 0;
   text-align: center;
   display: grid;
   gap: var(--space-sm);
   justify-items: center;
-
-  & .post {
-    background-color: hsl(var(--muted));
-    padding: var(--space-xs);
-    margin: var(--space-2xs) 0;
-    gap: var(--space-2xs);
-    border-radius: var(--radius-sm);
-    box-shadow: var(--shadow-sm);
-    width: fit-content;
-
-    & a {
-      text-decoration: none;
-    }
-  }
 }
 
 :where([aria-label="Blog categories"]) {
   margin-block-end: var(--space-lg);
-}
-
-.sidebar [aria-label="Blog categories"] {
-  margin-block: 0;
 }
 
 .projects {

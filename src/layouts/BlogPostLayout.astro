@@ -3,12 +3,10 @@ import "../styles/global.css";
 
 import MainLayout from "./MainLayout.astro";
 import PostHeader from "../components/PostHeader.astro";
-import CategoryCloud from "../components/CategoryCloud.astro";
-import { formatBlogPosts } from "../js/utils";
+import { formatBlogPosts, selectRelatedPosts, slugify } from "../js/utils";
 import RelatedPosts from "../components/RelatedPosts.astro";
-import type { Post } from "../types/posts";
 
-const { frontmatter } = Astro.props;
+const { frontmatter, url } = Astro.props;
 
 const { title, description, date, category, image } = frontmatter;
 
@@ -17,12 +15,7 @@ const allPosts = import.meta.glob("../pages/blog/*.md", {
 });
 const formattedPosts = await formatBlogPosts(allPosts);
 
-const relatedPosts = formattedPosts
-  .filter(
-    (post: Post) =>
-      post.frontmatter.category === category && post.frontmatter.title !== title
-  )
-  .slice(0, 3);
+const { posts: relatedPosts, sameCategory } = selectRelatedPosts(formattedPosts, { url, frontmatter });
 ---
 
 <MainLayout
@@ -37,21 +30,22 @@ const relatedPosts = formattedPosts
     <div class="content">
       <slot />
     </div>
-    <div class="sidebar">
-      <aside class="container" aria-label="Blog categories">
-        <h3 class="h3">Todas las categorías</h3>
-        <CategoryCloud withCount={false} />
-      </aside>
+    <aside class="post-footer" aria-label="Sigue leyendo">
+      <small>
+        <a href={`/category/${slugify(category)}`} class="badge">{category}</a>
+      </small>
       {
         relatedPosts.length > 0 && (
-          <aside class="container" aria-label="Related posts">
-            <h3 class="h3">Artículos relacionados</h3>
+          <section aria-labelledby="related-posts-title">
+            <h2 id="related-posts-title" class="h3">
+              {sameCategory ? "Artículos relacionados" : "Más artículos"}
+            </h2>
             <ul class="related-posts">
               <RelatedPosts {relatedPosts} />
             </ul>
-          </aside>
+          </section>
         )
       }
-    </div>
+    </aside>
   </div>
 </MainLayout>

@@ -42,6 +42,18 @@ export async function formatBlogPosts(
   return limit > 0 ? sortedPosts.slice(0, limit) : sortedPosts;
 }
 
+// Picks the posts shown under an article. `posts` comes from formatBlogPosts, newest first.
+// Same-category posts go first; when they run short, the newest posts from any category fill in.
+// `sameCategory` is true only when every picked post shares the current post's category.
+export function selectRelatedPosts(posts, current, count = 3) {
+  const others = posts.filter((post) => post.url !== current.url);
+  const { category } = current.frontmatter;
+  const same = others.filter((post) => post.frontmatter.category === category);
+  const fill = others.filter((post) => post.frontmatter.category !== category);
+  const picked = [...same, ...fill].slice(0, count);
+  return { posts: picked, sameCategory: picked.length > 0 && picked.length <= same.length };
+}
+
 function sortPosts(sortType, posts) {
   switch (sortType) {
     case "date":
