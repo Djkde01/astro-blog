@@ -31,7 +31,6 @@ A static Astro blog and portfolio with no server or database. The risks here are
 - The absence of a formatter. It is a known choice for now.
 - Vendored stack skills under `.agents/skills/` and anything under `public/`.
 - The GA measurement ID in `MainHead.astro`, which is public by design.
-- The inline data in `Projects.astro` and `about.astro`. Phase 1 of the roadmap moves it.
 
 ## Repo-specific conventions
 

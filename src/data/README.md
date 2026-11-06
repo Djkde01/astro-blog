@@ -4,5 +4,7 @@
 |------|---------|---------|
 | `navData.js` | Navigation links | `Nav.astro` |
 | `siteData.json` | Default title, description and social image | `Seo.astro`, `jsonLD.js` |
+| `projects.ts` | Project cards on About. `status` is `"deployed"` or `"development"`; the component maps it to its label and class | `Projects.astro` |
+| `experience.ts` | Work experience on About | `about.astro` |
 
-Phase 1 of the [roadmap](../../docs/portfolio-roadmap.md) adds projects, talks, community, clients and testimonials here. These have no tests of their own and are covered by the build.
+The `.ts` files are typed with `src/types/sections.ts`. Phase 5 of the [roadmap](../../docs/portfolio-roadmap.md) adds talks, community, clients and testimonials here. These files have no tests of their own: the build and `pnpm run check` cover them.

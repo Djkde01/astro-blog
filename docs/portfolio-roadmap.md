@@ -96,7 +96,7 @@ The decisions below were settled with the owner on 2026-11-05. None require code
 
 ### Content prerequisites
 
-Phase 0 settles the decisions only. Each piece of content is gathered before the phase that uses it, not up front: talks, community, clients and testimonials before Phase 5, and the links before Phase 8. Phase 1 creates the data files as empty, typed arrays and does not wait for content.
+Phase 0 settles the decisions only. Each piece of content is gathered before the phase that uses it, not up front: talks, community, clients and testimonials before Phase 5, and the links before Phase 8. Phase 1 moves only the content that already exists, projects and work experience, and does not wait for the rest. Phase 5 creates the talks, community, clients and testimonials files and their types once their content and shape are settled.
 
 - **Talks**: list of delivered talks with title, event, date, location/online, slides URL, recording URL, language, optional thumbnail.
 - **Community**: organizations where Sergio is an organizer (Backbone UTP, GDG, etc.) with role, period, links, logo.
@@ -126,17 +126,19 @@ Goal: make later phases trivial and additive. No user-visible change.
 ### Changes
 
 - Create a `src/data/` data layer:
-  - `src/data/projects.ts` — move the inline `PROJECTS` array from [`src/components/Projects.astro`](../src/components/Projects.astro) here, typed.
-  - `src/data/talks.ts`, `src/data/community.ts`, `src/data/clients.ts`, `src/data/testimonials.ts` — empty arrays + types, ready for content.
-- Expand [`src/types/posts.ts`](../src/types/posts.ts) to reflect the real frontmatter (`author`, `robots`, `image: { src, alt }`, optional `tags`, optional `draft`).
-- Add `src/types/sections.ts` with shared types: `Talk`, `CommunityRole`, `Client`, `Testimonial`, `Project`.
-- Introduce a small reusable `Section.astro` (title + icon + intro slot + content slot) to avoid copy-pasting the `<span class="title">…</span>` pattern from `about.astro`.
+  - `src/data/projects.ts` — move the inline `PROJECTS` array from [`src/components/Projects.astro`](../src/components/Projects.astro) here, typed. A project's `status` is `"deployed"` or `"development"`, and `Projects.astro` maps it to its Spanish label and CSS class, so the data names no CSS.
+  - `src/data/experience.ts` — move the inline `workExperience` array from [`src/pages/about.astro`](../src/pages/about.astro) here, typed.
+  - The talks, community, clients and testimonials files wait for Phase 5, because their types depend on decisions that phase makes. `navData.js` and `siteData.json` stay as they are.
+- Expand [`src/types/posts.ts`](../src/types/posts.ts) to reflect the real frontmatter (`author`, `image: { src, alt }`, optional `robots`, optional `draft`). No `tags`: Phase 0 deferred multi-tag.
+- Add `src/types/sections.ts` with shared types: `Project`, `ProjectStatus`, `Experience`.
+- Introduce a small reusable `Section.astro` (title + icon + one slot) to avoid copy-pasting the `<span class="title">…</span>` pattern from `about.astro`.
 - Refactor [`src/components/Projects.astro`](../src/components/Projects.astro) to consume `src/data/projects.ts` (no markup change).
+- Prove there is no visible change: the build is byte-identical to `main`.
 
 ### Risks / guardrails
 
 - Do not change the public API of `Projects.astro` — `about.astro` keeps importing it the same way.
-- Keep the `Post` interface backward-compatible (all new fields optional).
+- Keep the `Post` interface true to the posts: required fields are the ones every post has.
 
 ---
 
@@ -230,6 +232,7 @@ Goal: add the four sections, reusing the data layer and `Card.astro` from earlie
 
 ### Components and data
 
+- Create `src/data/talks.ts`, `src/data/community.ts`, `src/data/clients.ts` and `src/data/testimonials.ts`, with their types in `src/types/sections.ts` (deferred from Phase 1).
 - `src/components/sections/Talks.astro` — consumes the posts in the category `Charlas` plus `src/data/talks.ts` for talks without a post (Phase 0), renders cards (title, event, date, slides, recording link, language).
 - `src/components/sections/Community.astro` — consumes `src/data/community.ts`, renders organizer roles with logo, role, period, link.
 - `src/components/sections/Clients.astro` — consumes `src/data/clients.ts`, split into two subgroups: **Empresa** and **Freelance**. Each card lists role + outcome.
@@ -373,6 +376,7 @@ Goal: one public page at a descriptive route that gathers the owner's links for 
 flowchart TD
   subgraph data [src/data]
     projects[projects.ts]
+    experience[experience.ts]
     talks[talks.ts]
     community[community.ts]
     clients[clients.ts]
@@ -408,6 +412,7 @@ flowchart TD
   end
 
   projects --> Projects
+  experience --> About
   talks --> SectionTalks
   community --> SectionCommunity
   clients --> SectionClients

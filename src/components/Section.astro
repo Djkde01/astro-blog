@@ -1,0 +1,18 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  title: string;
+  icon: string;
+  class: string;
+}
+
+const { title, icon, class: className } = Astro.props;
+// The slot touches its neighbours: whitespace around it would add a space to the output.
+---
+
+<section class={`container ${className}`}>
+  <span class="title">
+    <Icon name={icon} width={40} height={40} />
+    <h2 class="h2">{title}</h2>
+  </span><slot /></section>
