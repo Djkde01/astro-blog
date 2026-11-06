@@ -11,6 +11,8 @@ export default defineConfig({
     baseURL: `http://localhost:${port}`,
     // Partytown's service worker would hide analytics requests from context.route.
     serviceWorkers: "block",
+    // Cards hidden until they scroll in would break visibility checks; e2e/motion.spec.ts opts out.
+    contextOptions: { reducedMotion: "reduce" },
     video: "on",
     trace: "on",
     screenshot: "on",

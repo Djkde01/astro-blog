@@ -532,6 +532,20 @@ button {
 }
 
 /* cards */
+/* hover lift on post and project cards; the reduced-motion rule zeroes the transition */
+.card,
+.project-card {
+  transition:
+    transform var(--transition-ease-fast),
+    box-shadow var(--transition-ease-fast);
+
+  &:hover,
+  &:focus-within {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
 .card {
   display: grid;
   background-color: hsl(var(--muted));
