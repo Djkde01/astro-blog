@@ -52,7 +52,7 @@ CI does not replace a plan's gate: a criterion still closes through the gate run
 
 `scripts/e2e-gate.sh` sets `DWP_EVIDENCE_DIR`, which defaults to `tmp/e2e-evidence/<id>`. It fails when a test fails or is skipped, when a `test.only` narrows the run, when no test is selected, when a video is missing, or when a selected test's title does not start with the id. Playwright's `--grep` matches anywhere in a title, so that last check stops a test that only mentions a criterion from closing it. Each run writes a video, a trace and a screenshot per test. `E2E_GATE_CONFIG` repoints the gate at another Playwright configuration, and exists only for `scripts/test-e2e-gate.sh`.
 
-Playwright builds the site and serves it with `astro preview` on port 4322, so tests see the same output that ships. The command passes `--ignore-lock` because Astro otherwise starts the preview in the background under an AI agent: the server would outlive the run, and every later run would fail on the busy port. Use the `e2e-evidence` skill to write one.
+Playwright builds the site and serves it with `astro preview` on port 4322, so tests see the output that ships, plus fixture pages. It builds with `e2e/astro.config.mjs`, which extends the real config, injects fixture pages from `e2e/pages/`, such as `/e2e/jsonld-fixture/`, and writes to `tmp/e2e-dist/` instead of `dist/`. The fixtures exist only in that build and its sitemap; `pnpm run build` never sees them. The command passes `--ignore-lock` because Astro otherwise starts the preview in the background under an AI agent: the server would outlive the run, and every later run would fail on the busy port. Use the `e2e-evidence` skill to write one.
 
 Specs import `test` from `e2e/fixtures.ts`, not from `@playwright/test`. The fixture aborts requests to Google Analytics, and the configuration blocks service workers because Partytown's would hide those requests. A probe on 2026-11-04 saw zero analytics requests in 12 seconds on the home page.
 
@@ -60,7 +60,7 @@ Plan gates may set `DWP_EVIDENCE_DIR` to the plan's `analysis_results/e2e/<AC id
 
 ## Mapping
 
-- **Source to test:** `src/js/<module>.js` maps to `tests/<module>.test.mjs`. Only `utils.js` has tests today. `jsonLD.js` reads `import.meta.env` and `images.js` reads `import.meta.glob`, so neither can load under plain Node. Both are covered through the build, and `images.js` also through `e2e/images.spec.ts` and `e2e/images-phone.spec.ts`.
+- **Source to test:** `src/js/<module>.js` maps to `tests/<module>.test.mjs`. Only `utils.js` has tests today. `jsonLD.js` reads `import.meta.env` and `images.js` reads `import.meta.glob`, so neither can load under plain Node. Both are covered through the build: `images.js` also through `e2e/images.spec.ts` and `e2e/images-phone.spec.ts`, and `jsonLD.js` through `e2e/jsonld.spec.ts`.
 - **Behavior criterion to test:** each `AC-*` behavior criterion maps to one Playwright test whose title starts with that id.
 - **Consumers:** no affected-tests tool exists. A change to `src/js/utils.js`, `src/layouts/` or a post's frontmatter shape reaches every post consumer listed in [ARCHITECTURE.md](ARCHITECTURE.md#post-discovery), so run the full suite.
 - **A change in `src/components/` or `src/pages/`:** run `pnpm run lint`, `pnpm run check`, `pnpm run build` and the end-to-end suite.
@@ -72,7 +72,7 @@ No automated check sees these, so check them by hand or with an owner sign-off:
 
 - **Appearance.** Tests do not compare screenshots. CSS in `global.css` can break a layout with every test passing, and dark mode is not exercised.
 - **Motion and reduced motion.** Passing tests say nothing about how an animation feels.
-- **SEO output.** `e2e/images.spec.ts` asserts the social image URLs. Nothing asserts the other Open Graph tags, the sitemap, or that the JSON-LD parses.
+- **SEO output.** `e2e/images.spec.ts` asserts the social image URLs. `e2e/jsonld.spec.ts` asserts that every page's JSON-LD parses. Nothing asserts the other Open Graph tags or the sitemap.
 - **Analytics.** It is blocked in tests, so a broken tag would not show up.
 - **Lighthouse scores and rendered accessibility.** Neither runs automatically. The lint rules check accessibility in templates only, not contrast, focus or the built page.
 - **Date-dependent posts.** A post dated in the future appears only after a later build.
