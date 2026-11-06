@@ -2,73 +2,20 @@
 import Link from "./Link.astro";
 import { Picture } from "astro:assets";
 import { resolveImage } from "../js/images";
-const PROJECTS = [
-  {
-    title: "Backbone Events",
-    description:
-      "Plataforma de gestión y difusión eventos y workshops de la comunidad Backbone UTP. Creado con NextJS, Tailwind CSS, MongoDB y Vercel Cloud Functions.",
-    link: "https://backboneutp.com/events",
-    image: "/src/assets/images/backbone.webp",
-    status: {
-      text: "En desarrollo",
-      class: "project-development",
-    },
-    github: "https://github.com/Djkde01/backbone-events",
-  },
-  {
-    title: "Selaski Footprint Calculator",
-    description:
-      "Calculadora de huella de carbono para Selaski, que permite a los usuarios calcular sus emisiones. Creado con Angular, NestJS, MySQL y Tailwind CSS.",
-    link: "https://welcome.selaski.com/plataforma-comex/",
-    image: "/src/assets/images/selaski-footprint.webp",
-    status: {
-      text: "Publicado",
-      class: "project-deployed",
-    },
-  },
-  {
-    title: "Sirius - Platzi Hackaton 2024",
-    description:
-      "Proyecto ganador del Platzi Hackaton 2024, retos prácticos con repetición espaciada, generados con AI. Creado con React, Vite, Tailwind CSS, y Django.",
-    link: "https://aprendeconsirius.com",
-    github: "https://github.com/SiriusTeam7",
-    image: "/src/assets/images/sirius.webp",
-    status: {
-      text: "Publicado",
-      class: "project-deployed",
-    },
-  },
-  {
-    title: "STS - Selaski Tracking System",
-    description:
-      "Sistema de tracking de envíos marítimos y aéreos, junto a mapas interactivos y notificaciones en tiempo real. Creado con Angular, NestJS y Tailwind CSS.",
-    link: "https://welcome.selaski.com/tracking/",
-    image: "/src/assets/images/selaski.webp",
-    status: {
-      text: "Publicado",
-      class: "project-deployed",
-    },
-  },
-  {
-    title: "Semillero y Comunidad Backbone UTP",
-    description:
-      "Comunidad de la Universidad Tecnológica de Pereira, con información acerca de eventos, talleres y charlas. Página web creada con Angular y Cloudfare.",
-    github: "https://github.com/Backbone-UTP/main-page",
-    link: "https://backboneutp.com",
-    image: "/src/assets/images/backbone.webp",
-    status: {
-      text: "Publicado",
-      class: "project-deployed",
-    },
-  },
-];
+import { projects } from "../data/projects";
+import type { ProjectStatus } from "../types/sections";
+
+const STATUS_LABELS: Record<ProjectStatus, string> = {
+  deployed: "Publicado",
+  development: "En desarrollo",
+};
 ---
 
 <div class="content">
   {
-    PROJECTS.map(({ image, title, description, link, github, status }) => (
+    projects.map(({ image, title, description, link, github, status }) => (
       <article class="project-card">
-        <span class={`project-tag ${status.class}`}>{status.text}</span>
+        <span class={`project-tag project-${status}`}>{STATUS_LABELS[status]}</span>
         <Picture
           src={resolveImage(image)}
           alt={title}

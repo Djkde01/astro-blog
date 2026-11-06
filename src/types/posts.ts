@@ -4,7 +4,10 @@ export interface Post {
     description: string;
     date: string;
     category: string;
-    image: string;
+    author: string;
+    image: { src: string; alt: string };
+    robots?: string;
+    draft?: boolean;
   };
   url: string;
 }
