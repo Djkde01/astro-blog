@@ -11,7 +11,8 @@ Astro components for the site's UI. Styles live in `src/styles/global.css`, so m
 | `CategoryCloud` | Category badges, with optional counts. It finds posts itself |
 | `RelatedPosts` | List items for posts in the same category |
 | `Pagination` | Previous and next links on the blog index |
-| `Projects` | Project cards. The data is an inline array for now |
+| `Projects` | Project cards, from `src/data/projects.ts`; maps each `status` to its label and class |
+| `Section` | A section of About: `title`, `icon` and `class` props, and a slot for its content |
 | `ExperienceItem` | One job on the about page |
 | `Seo` | Canonical, social and JSON-LD tags |
 | `LiteYoutube` | Registers the Lite YouTube element |
