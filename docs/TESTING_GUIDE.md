@@ -54,6 +54,8 @@ CI does not replace a plan's gate: a criterion still closes through the gate run
 
 Playwright builds the site and serves it with `astro preview` on port 4322, so tests see the output that ships, plus fixture pages. It builds with `e2e/astro.config.mjs`, which extends the real config, injects fixture pages from `e2e/pages/`, such as `/e2e/jsonld-fixture/`, and writes to `tmp/e2e-dist/` instead of `dist/`. The fixtures exist only in that build and its sitemap; `pnpm run build` never sees them. The command passes `--ignore-lock` because Astro otherwise starts the preview in the background under an AI agent: the server would outlive the run, and every later run would fail on the busy port. Use the `e2e-evidence` skill to write one.
 
+`playwright.config.ts` runs every spec with `contextOptions: { reducedMotion: "reduce" }`, so cards that GSAP hides until they scroll in never break a visibility check. A spec that tests motion opts out with `test.use({ contextOptions: { reducedMotion: "no-preference" } })`, as `e2e/motion.spec.ts` does.
+
 Specs import `test` from `e2e/fixtures.ts`, not from `@playwright/test`. The fixture aborts requests to Google Analytics, and the configuration blocks service workers because Partytown's would hide those requests. A probe on 2026-11-04 saw zero analytics requests in 12 seconds on the home page.
 
 Plan gates may set `DWP_EVIDENCE_DIR` to the plan's `analysis_results/e2e/<AC id>/`.
