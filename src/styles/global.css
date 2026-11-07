@@ -764,9 +764,6 @@ header {
     background-color: hsl(var(--muted));
     border: var(--border-sm) solid hsl(var(--txt) / 0.08);
     border-radius: var(--radius-lg);
-    @media (--lg) {
-      padding: var(--space-xs);
-    }
     &:hover,
     &:focus-within {
       box-shadow: var(--shadow-md);
