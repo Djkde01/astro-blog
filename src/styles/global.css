@@ -760,8 +760,16 @@ header {
     gap: var(--space-md);
     padding: var(--space-md);
     align-self: stretch;
+    /* a subtle surface, so the card reads apart from the page without a heavy shadow */
+    background-color: hsl(var(--muted));
+    border: var(--border-sm) solid hsl(var(--txt) / 0.08);
+    border-radius: var(--radius-lg);
     @media (--lg) {
       padding: var(--space-xs);
+    }
+    &:hover,
+    &:focus-within {
+      box-shadow: var(--shadow-md);
     }
   }
   & .project-tag {
@@ -793,8 +801,7 @@ header {
     box-shadow: var(--shadow-sm);
     object-fit: cover;
     overflow: hidden;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-md);
     &:hover {
       border-color: var(--color-gray-700);
       background-color: var(--color-gray-800-50);
