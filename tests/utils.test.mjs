@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { formatBlogPosts, selectRelatedPosts, slugify } from "../src/js/utils.js";
+import { formatBlogPosts, getExperienceInYears, selectRelatedPosts, slugify } from "../src/js/utils.js";
 
 const post = (title, date, extra = {}) => ({
   url: `/blog/${title}`,
@@ -87,5 +87,13 @@ describe("selectRelatedPosts", () => {
 describe("slugify", () => {
   it("lowercases and joins words the way category routes expect", () => {
     assert.equal(slugify("Marca Personal"), "marca-personal");
+  });
+});
+
+describe("getExperienceInYears", () => {
+  it("counts full years from May 2021", () => {
+    assert.equal(getExperienceInYears(new Date(2026, 3, 30)), 4);
+    assert.equal(getExperienceInYears(new Date(2026, 4, 1)), 5);
+    assert.equal(getExperienceInYears(new Date(2026, 10, 9)), 5);
   });
 });

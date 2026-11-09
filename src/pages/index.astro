@@ -1,53 +1,103 @@
 ---
+import { Picture } from "astro:assets";
 import MainLayout from "../layouts/MainLayout.astro";
 import PostCard from "../components/PostCard.astro";
 import Link from "../components/Link.astro";
-import { formatBlogPosts } from "../js/utils";
+import profile from "../assets/images/profile.webp";
+import { landing } from "../data/landing";
+import { formatBlogPosts, getExperienceInYears } from "../js/utils";
 import type { Post } from "../types/posts";
 
 const allPosts = import.meta.glob("./blog/*.md", {
   eager: true, // This ensures we get the module content directly
 });
 
-const posts = await formatBlogPosts(allPosts, { limit: 3 });
+const posts: Post[] = await formatBlogPosts(allPosts);
+const { hero, now, metrics, latestPosts } = landing;
+const talks = posts.filter((post) => post.frontmatter.category === metrics.talksCategory).length;
+const stats = [
+  { value: `${talks}`, label: metrics.talks, highlight: true },
+  { value: `+${getExperienceInYears()}`, label: metrics.years, highlight: false },
+  { value: `${posts.length}`, label: metrics.posts, highlight: false },
+];
 ---
 
-<MainLayout title="Home - Sergio Estrella (Djkde)">
-  <section class="container about" aria-label="About Me">
-    <img
-      src="/images/profile.webp"
-      alt="Sergio Estrella"
-      width="300"
-      height="300"
-    />
-    <div class="content">
-      <h2 class="h2">Bienvenido/a! <span aria-hidden="true">👋</span></h2>
-      <p>
-        ¡Que bueno verte! Soy Sergio Estrella, también conocido en internet como
-        Djkde, un Fullstack Dev con la misión de mejorar la vida de las personas
-        a través de la tecnología.
-      </p>
-      <span class="contact">
-        <Link
-          text="Conoceme más"
-          href="/about"
-          style="secondary"
-          icon={{ name: "mdi:arrow-right", side: "right" }}
+<MainLayout title={landing.title}>
+  <section class="hero">
+    <div class="container">
+      <div class="intro">
+        <Picture
+          src={profile}
+          alt={hero.photoAlt}
+          width="300"
+          height="300"
+          widths={[300, 600]}
+          sizes="300px"
+          formats={["avif"]}
+          fallbackFormat="webp"
+          quality={70}
+          loading="eager"
+          fetchpriority="high"
         />
-      </span>
+      </div>
+      <div class="content">
+        <h1 class="intro" style="--step: 1">{hero.name}</h1>
+        <p class="role intro" style="--step: 2">{hero.role}</p>
+        <p class="value intro" style="--step: 3">{hero.value}</p>
+        <div class="actions intro" style="--step: 4">
+          {
+            hero.buttons.map(({ text, href, variant, icon }) => (
+              <Link
+                text={text}
+                href={href}
+                style="primary"
+                icon={icon}
+                isFilled={variant === "solid"}
+                borderVisible={variant === "outline"}
+              />
+            ))
+          }
+        </div>
+        <div class="communities intro" style="--step: 5">
+          <p>{hero.communitiesLabel}</p>
+          <ul class="chips">
+            {hero.communities.map((community) => <li class="chip">{community}</li>)}
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
-  <section class="container" aria-label="New Blog posts">
-    <h2 class="h2">Últimos posts</h2>
+  <section class="now">
+    <div class="container">
+      <span class="label">{now.label}</span>
+      <p>{now.text}</p>
+    </div>
+  </section>
+  <section class="container metrics" aria-label={metrics.label}>
+    <ul>
+      {
+        stats.map(({ value, label, highlight }) => (
+          <li class:list={{ highlight }}>
+            <strong>{value}</strong>
+            <span>{label}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+  <section class="container">
+    <h2 class="h2">{latestPosts.title}</h2>
     <div class="post-container">
       {
-        posts.map((post: Post) => (
-          <PostCard
-            frontmatter={post.frontmatter}
-            url={post.url}
-            tagType="h3"
-          />
-        ))
+        posts
+          .slice(0, latestPosts.count)
+          .map((post) => (
+            <PostCard
+              frontmatter={post.frontmatter}
+              url={post.url}
+              tagType="h3"
+            />
+          ))
       }
     </div>
   </section>

@@ -72,3 +72,10 @@ function sortPosts(sortType, posts) {
       return posts;
   }
 }
+
+// Full years since the first job, in May 2021. `now` is a parameter so a test can pin it.
+export function getExperienceInYears(now = new Date()) {
+  const start = new Date(2021, 4, 1);
+  const hadAnniversary = now >= new Date(now.getFullYear(), start.getMonth(), start.getDate());
+  return now.getFullYear() - start.getFullYear() - (hadAnniversary ? 0 : 1);
+}
