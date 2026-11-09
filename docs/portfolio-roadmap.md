@@ -198,7 +198,7 @@ Goal: lift the landing and about pages from "simple" to "intentional", reusing e
 
 - **Landing** ([`src/pages/index.astro`](../src/pages/index.astro)):
   - Replace the single avatar + paragraph with a richer hero: name + role + 1-line value prop + CTA cluster (Conoceme más, Contáctame, GitHub).
-  - Animate the new hero with a staggered intro on first paint, through `src/js/motion.js`, with no flash before it runs (moved from Phase 3).
+  - Animate the new hero with a staggered intro on first paint, using CSS keyframes so nothing flashes before it runs and no script is needed (moved from Phase 3).
   - Add a "Ahora" / "Now" strip (1–2 lines about current focus, e.g., Curoo + Backbone).
   - Add a "Métricas" mini-strip: years of experience, talks delivered, communities, posts (computed from data).
   - Keep "Últimos posts" but reduce to 3 with consistent card height.
@@ -206,11 +206,7 @@ Goal: lift the landing and about pages from "simple" to "intentional", reusing e
   - Promote `getExperienceInYears()` into a reusable helper in `src/js/utils.js`.
   - Replace bare social icon row with a labeled "Encuéntrame" block (icon + handle text).
   - Add a "Stack actual" chip group (typed in `src/data/`).
-- **Icons & color**:
-  - Audit `astro-icon` usages; introduce a small set of semantic icons per section (briefcase, mic, users, code-tags, message-quote, presentation).
-  - In [`src/styles/global.css`](../src/styles/global.css), define accent variants per section (e.g., `--accent-talks`, `--accent-community`) all derived from `--_hue` so both light/dark stay coherent.
-- **Cards**:
-  - Unify project/talk/client/testimonial cards under a single `Card.astro` primitive (image + tag + title + description + CTAs).
+- **Editable copy**: every string on both pages lives in typed files under `src/data/`.
 
 ### Guardrails
 
@@ -221,7 +217,7 @@ Goal: lift the landing and about pages from "simple" to "intentional", reusing e
 
 ## 8. Phase 5 — New Sections (Talks, Community, Clients, Testimonials)
 
-Goal: add the four sections, reusing the data layer and `Card.astro` from earlier phases.
+Goal: add the four sections, reusing the data layer from earlier phases.
 
 ### Components and data
 
@@ -230,6 +226,8 @@ Goal: add the four sections, reusing the data layer and `Card.astro` from earlie
 - `src/components/sections/Community.astro` — consumes `src/data/community.ts`, renders organizer roles with logo, role, period, link.
 - `src/components/sections/Clients.astro` — consumes `src/data/clients.ts`, split into two subgroups: **Empresa** and **Freelance**. Each card lists role + outcome.
 - `src/components/sections/Testimonials.astro` — consumes `src/data/testimonials.ts`, renders quote cards with attribution.
+- Unify project, talk, client and testimonial cards under a single `Card.astro` primitive (image + tag + title + description + CTAs), once those cards exist (moved from Phase 4).
+- Introduce a small set of semantic icons per section (mic, users, message-quote, presentation) and, in [`src/styles/global.css`](../src/styles/global.css), accent variants per section (e.g., `--accent-talks`, `--accent-community`) all derived from `--_hue` so light and dark stay coherent (moved from Phase 4).
 
 ### Placement
 

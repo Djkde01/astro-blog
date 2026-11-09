@@ -4,7 +4,7 @@ Personal blog and portfolio of Sergio Estrella (Djkde), built with Astro as a st
 
 DWP standard: 7.0.0 (onboarded 2026-11-04; skill 7.9.0)
 
-> **State of the repository:** the site is live and maintained. Product work is listed in [docs/portfolio-roadmap.md](docs/portfolio-roadmap.md), Phase 0's decisions are settled, Phases 1, 2, 3 and 7 are done, and none of the other phases has started. Each phase becomes a Deep Work Plan when work begins.
+> **State of the repository:** the site is live and maintained. Product work is listed in [docs/portfolio-roadmap.md](docs/portfolio-roadmap.md), Phase 0's decisions are settled, Phases 1, 2, 3, 4 and 7 are done, and none of the other phases has started. Each phase becomes a Deep Work Plan when work begins.
 
 ## Documentation index
 
@@ -12,6 +12,7 @@ DWP standard: 7.0.0 (onboarded 2026-11-04; skill 7.9.0)
 |----------|-------------|
 | [docs/README.md](docs/README.md) | Index of all guides |
 | [docs/PRODUCT_SPEC.md](docs/PRODUCT_SPEC.md) | What the site is and why it exists |
+| [PRODUCT.md](PRODUCT.md) | Users, positioning, voice and evidence, for design work |
 | [docs/portfolio-roadmap.md](docs/portfolio-roadmap.md) | Product backlog, by phase |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Routes, post discovery and build |
 | [docs/STANDARDS.md](docs/STANDARDS.md) | Coding conventions and anti-patterns |
@@ -35,6 +36,7 @@ DWP standard: 7.0.0 (onboarded 2026-11-04; skill 7.9.0)
 .
 ├── AGENTS.md                 # This file; CLAUDE.md is a symlink to it
 ├── README.md                 # Human-facing overview
+├── PRODUCT.md                # Product truth for design work
 ├── astro.config.mjs          # Site URL and integrations
 ├── docs/                     # Product, roadmap and engineering guides
 ├── public/                   # Static assets: images, RSS stylesheet, favicon

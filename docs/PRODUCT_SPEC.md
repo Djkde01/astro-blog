@@ -16,8 +16,8 @@ It gives Sergio one place to publish what he learns, share his talks and show hi
 
 ## What it does today
 
-- A home page with an introduction and the three latest posts.
-- An about page with his bio, work experience and projects.
+- A home page with a hero, his current focus, metrics and the three latest posts.
+- An about page with his bio, contact links, current stack, work experience and projects.
 - A paginated blog, category pages and related posts.
 - An RSS feed, a sitemap, and metadata for search engines and social sharing.
 

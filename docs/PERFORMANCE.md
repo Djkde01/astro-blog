@@ -29,7 +29,7 @@ Then run Lighthouse on `/` and on one post.
 
 ## Where the weight comes from
 
-- **Images:** the largest assets. Post covers and project images live in WebP under `src/assets/images/`, and `<Picture>` serves them as AVIF with a WebP fallback, at 400 and 800 px for cards and projects and 640 and 1280 px for the post hero, at quality 60. The hero loads eagerly with high priority. `profile.webp`, `default.webp` and images inside post bodies stay in `public/images/` and are served as-is.
+- **Images:** the largest assets. Post covers and project images live in WebP under `src/assets/images/`, and `<Picture>` serves them as AVIF with a WebP fallback, at 400 and 800 px for cards and projects and 640 and 1280 px for the post hero, at quality 60. The hero loads eagerly with high priority. The profile photo renders the same way at 300 and 600 px, at quality 70, eagerly. `default.webp` and images inside post bodies stay in `public/images/` and are served as-is.
 - **Font:** `@fontsource-variable/montserrat`, a variable font loaded on every page.
 - **Global scripts:** the Lite YouTube helper loads on every page through `MainHead`, whether or not the page has a video.
 - **GSAP:** `gsap` with ScrollTrigger, 111 KB raw and 43 KB gzip in one chunk (measured 2026-11-06, gsap 3.15.1). Only pages that render `PostCard` or `Projects` load it: the landing, `/blog/` and its pages, `/category/*` and `/about`. Post pages do not, and `e2e/motion.spec.ts` checks it.
