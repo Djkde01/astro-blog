@@ -37,7 +37,7 @@ const years = `${getExperienceInYears()}`;
           intro.paragraphs.map((segments) => (
             <p>
               {segments.map(({ text, highlight }) => {
-                const filled = text.replace("{years}", years);
+                const filled = text.replaceAll("{years}", years);
                 return highlight ? <span class="focus-primary">{filled}</span> : filled;
               })}
             </p>
@@ -52,12 +52,12 @@ const years = `${getExperienceInYears()}`;
         findMe.links.map(({ network, handle, href, icon }) => (
           <li>
             <a href={href}>
-              <span class="icon-box"><Icon name={icon} /></span>
+              <span class="icon-box"><Icon name={icon} aria-hidden="true" /></span>
               <span class="text">
                 <small>{network}</small>
                 <strong>{handle}</strong>
               </span>
-              <Icon name="mdi:arrow-top-right" class="arrow" />
+              <Icon name="mdi:arrow-top-right" class="arrow" aria-hidden="true" />
             </a>
           </li>
         ))

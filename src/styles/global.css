@@ -507,11 +507,6 @@ button {
     &-secondary {
       color: hsl(var(--txt));
     }
-
-    & .contact {
-      display: flex;
-      gap: var(--space-xs);
-    }
   }
 }
 

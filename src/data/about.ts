@@ -26,6 +26,7 @@ export const about: AboutPage = {
   findMe: {
     title: "Encuéntrame",
     icon: "mdi:at",
+    // The last card is the widest at desktop width, so keep the longest handle last.
     links: [
       { network: "LinkedIn", handle: "/in/djkde", href: "https://linkedin.com/in/djkde", icon: "mdi:linkedin" },
       { network: "X", handle: "@djkde", href: "https://twitter.com/djkde", icon: "mdi:alpha-x-box" },

@@ -190,7 +190,7 @@ Goal: add subtle but distinctive motion that respects accessibility and performa
 
 ---
 
-## 7. Phase 4 — UI Refresh (Landing, About, Icons, Color)
+## 7. Phase 4 — UI Refresh (Landing, About)
 
 Goal: lift the landing and about pages from "simple" to "intentional", reusing existing tokens.
 
@@ -200,7 +200,7 @@ Goal: lift the landing and about pages from "simple" to "intentional", reusing e
   - Replace the single avatar + paragraph with a richer hero: name + role + 1-line value prop + CTA cluster (Conoceme más, Contáctame, GitHub).
   - Animate the new hero with a staggered intro on first paint, using CSS keyframes so nothing flashes before it runs and no script is needed (moved from Phase 3).
   - Add a "Ahora" / "Now" strip (1–2 lines about current focus, e.g., Curoo + Backbone).
-  - Add a "Métricas" mini-strip: years of experience, talks delivered, communities, posts (computed from data).
+  - Add a "Métricas" mini-strip: talks delivered, years of experience, posts (computed from data).
   - Keep "Últimos posts" but reduce to 3 with consistent card height.
 - **About** ([`src/pages/about.astro`](../src/pages/about.astro)):
   - Promote `getExperienceInYears()` into a reusable helper in `src/js/utils.js`.
@@ -477,7 +477,7 @@ These checks have no automated gate, so run them by hand or ask for the owner's 
 | 1 | Data layer + types + `Section.astro` | No | 0 |
 | 2 | One-column post + tags below | No (visual) | 1 |
 | 3 | GSAP motion + reduced-motion | No | 1 |
-| 4 | Landing/About refresh + `Card.astro` | No | 1, 3 |
+| 4 | Landing/About refresh | No | 1, 3 |
 | 5 | Talks/Community/Clients/Testimonials | No | 1, 4 |
 | 6 | Transcript → post tool | No | 0 |
 | 7 | CI pipelines + lint + pre-push hook | No | — |

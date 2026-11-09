@@ -3,7 +3,7 @@ import { expect, test } from "./fixtures";
 import { about } from "../src/data/about";
 import { landing } from "../src/data/landing";
 import { stack } from "../src/data/stack";
-import { getExperienceInYears } from "../src/js/utils.js";
+import { getExperienceInYears, slugify } from "../src/js/utils.js";
 
 const WIDTHS = [1280, 375];
 const trimmed = (texts: string[]) => texts.map((text) => text.replace(/\s+/g, " ").trim());
@@ -32,12 +32,12 @@ test("AC-landing-hero: the landing has one h1, the role, the value line, three b
 });
 
 test("AC-profile-picture: the profile photo is an optimized picture, and the old file is not requested", async ({ page }) => {
-  for (const path of ["/", "/about"]) {
+  for (const [path, alt] of [["/", landing.hero.photoAlt], ["/about", about.intro.photoAlt]]) {
     await test.step(path, async () => {
       const requested: string[] = [];
       page.on("request", (request) => requested.push(request.url()));
       await page.goto(path, { waitUntil: "load" });
-      const picture = page.locator("main picture").filter({ has: page.locator(`img[alt="${landing.hero.photoAlt}"]`) });
+      const picture = page.locator("main picture").filter({ has: page.locator(`img[alt="${alt}"]`) });
       await expect(picture).toHaveCount(1);
       await expect(picture.locator('source[type="image/avif"]')).toHaveCount(1);
       const image = picture.locator("img");
@@ -57,13 +57,13 @@ test("AC-now-strip: the Ahora strip sits between the hero and the metrics", asyn
   expect(order.map((name) => name.match(/hero|now|metrics/)![0])).toEqual(["hero", "now", "metrics"]);
 });
 
-test("AC-metrics-computed: the metrics are computed from the posts and the start date, charlas first", async ({ page, request }) => {
-  await page.goto("/category/charlas/");
+test("AC-metrics-computed: the metrics are computed from the posts and the start date, charlas first", async ({ page }) => {
+  await page.goto(`/category/${slugify(landing.metrics.talksCategory)}/`);
   const charlas = await page.locator("article.card").count();
-  const sitemap = await (await request.get("/sitemap-0.xml")).text();
-  const posts = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)]
-    .map((match) => new URL(match[1]).pathname)
-    .filter((path) => /^\/blog\/(?!\d+\/$)[^/]+\/$/.test(path)).length;
+  let posts = 0;
+  for (let number = 1; (await page.goto(number === 1 ? "/blog/" : `/blog/${number}/`))?.ok(); number++) {
+    posts += await page.locator("article.card").count();
+  }
 
   await page.goto("/");
   const metrics = page.locator("section.metrics li");
@@ -72,13 +72,22 @@ test("AC-metrics-computed: the metrics are computed from the posts and the start
     `+${getExperienceInYears()} ${landing.metrics.years}`,
     `${posts} ${landing.metrics.posts}`,
   ]);
+
+  await page.goto("/about");
+  const intro = page.locator(".about .content");
+  await expect(intro).toContainText(`+${getExperienceInYears()}`);
+  await expect(intro).not.toContainText("{years}");
 });
 
 test("AC-latest-posts: the three latest posts follow the metrics, with equal heights and aligned buttons", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
+  const titles = () => page.locator("article.card").getByRole("heading").allTextContents();
+  await page.goto("/blog/");
+  const newest = (await titles()).slice(0, landing.latestPosts.count);
   await page.goto("/");
   const cards = page.locator("article.card");
   await expect(cards).toHaveCount(landing.latestPosts.count);
+  expect(await titles()).toEqual(newest);
   await expect(page.locator("section.metrics + section").getByRole("heading", { name: landing.latestPosts.title })).toBeVisible();
   const boxes = await cards.evaluateAll((elements) =>
     elements.map((card) => ({
@@ -100,6 +109,8 @@ test.describe("with motion allowed", () => {
     const names = await animationName(page, "section.hero .intro");
     expect(names.length).toBeGreaterThan(1);
     for (const name of names) expect(name).not.toBe("none");
+    const delays = await page.locator("section.hero .intro").evaluateAll((blocks) => blocks.map((block) => parseFloat(getComputedStyle(block).animationDelay)));
+    for (const [index, delay] of delays.entries()) if (index > 0) expect(delay).toBeGreaterThan(delays[index - 1]);
     await expect
       .poll(() => page.locator("section.hero .intro").evaluateAll((blocks) => blocks.every((block) => getComputedStyle(block).opacity === "1")))
       .toBe(true);

@@ -7,7 +7,7 @@
 - Components and layouts are `PascalCase.astro`, in `src/components/` and `src/layouts/`.
 - Helpers are plain modules in `src/js/`, with `camelCase` functions.
 - Types go in `src/types/`, and are imported with `import type`.
-- Site data goes in `src/data/`. Some data still lives inline in `Projects.astro` and `about.astro`, and Phase 1 of the roadmap moves it.
+- Site data and page copy go in `src/data/`.
 - Post files are lowercase words joined by hyphens, directly under `src/pages/blog/`.
 
 ## Code style
