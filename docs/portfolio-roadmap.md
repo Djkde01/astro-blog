@@ -199,13 +199,14 @@ Goal: lift the landing and about pages from "simple" to "intentional", reusing e
 - **Landing** ([`src/pages/index.astro`](../src/pages/index.astro)):
   - Replace the single avatar + paragraph with a richer hero: name + role + 1-line value prop + CTA cluster (Conoceme más, Contáctame, GitHub).
   - Animate the new hero with a staggered intro on first paint, using CSS keyframes so nothing flashes before it runs and no script is needed (moved from Phase 3).
-  - Add a "Ahora" / "Now" strip (1–2 lines about current focus, e.g., Curoo + Backbone).
-  - Add a "Métricas" mini-strip: talks delivered, years of experience, posts (computed from data).
+  - Add a full-width "Ahora" / "Now" strip between the hero and the metrics. `selectNow()` in `src/js/utils.js` picks its text: with a current job in `src/data/experience.ts` (a period ending in "Actualidad"), it names the job and the community; with none, it names the community, says he is open to collaborations and links "Hablemos" to the email.
+  - Add a "Métricas" strip: talks delivered, years of experience, posts, computed from data and shown as large centered numbers. With motion allowed, each number counts up from 0 in about 400 ms, staggered, once the strip scrolls into view; the HTML keeps the final values, and reduced motion shows them at once.
   - Keep "Últimos posts" but reduce to 3 with consistent card height.
 - **About** ([`src/pages/about.astro`](../src/pages/about.astro)):
   - Promote `getExperienceInYears()` into a reusable helper in `src/js/utils.js`.
   - Replace bare social icon row with a labeled "Encuéntrame" block (icon + handle text).
-  - Add a "Stack actual" chip group (typed in `src/data/`).
+  - Add a "Servicios" section of four cards (icon, title, description, evidence line), typed in `src/data/services.ts`. It replaced the earlier "Stack actual" chip group.
+  - Update "Mi Experiencia" to the CV: five jobs, Fuse to Globant, with "Saber más" only where a link exists.
 - **Editable copy**: every string on both pages lives in typed files under `src/data/`.
 
 ### Guardrails
@@ -226,6 +227,9 @@ Goal: add the four sections, reusing the data layer from earlier phases.
 - `src/components/sections/Community.astro` — consumes `src/data/community.ts`, renders organizer roles with logo, role, period, link.
 - `src/components/sections/Clients.astro` — consumes `src/data/clients.ts`, split into two subgroups: **Empresa** and **Freelance**. Each card lists role + outcome.
 - `src/components/sections/Testimonials.astro` — consumes `src/data/testimonials.ts`, renders quote cards with attribution.
+- Move Backbone from the About experience timeline to the community section; Phase 4 removed it from the timeline.
+- Bring back the community chips that Phase 4 removed from the landing hero (Backbone UTP, GDG Pereira, Software Freedom Day) in the community section, each linked to its community or to its talks.
+- Give the landing's Ahora strip an upcoming-talk case: when a talk or event is coming up, `selectNow()` invites to it ahead of the job and community text.
 - Unify project, talk, client and testimonial cards under a single `Card.astro` primitive (image + tag + title + description + CTAs), once those cards exist (moved from Phase 4).
 - Introduce a small set of semantic icons per section (mic, users, message-quote, presentation) and, in [`src/styles/global.css`](../src/styles/global.css), accent variants per section (e.g., `--accent-talks`, `--accent-community`) all derived from `--_hue` so light and dark stay coherent (moved from Phase 4).
 

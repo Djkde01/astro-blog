@@ -13,7 +13,7 @@ src/pages/blog/*.md ──> import.meta.glob ──> formatBlogPosts() ──> p
 | Route | Source | Notes |
 |-------|--------|-------|
 | `/` | `src/pages/index.astro` | Hero, current focus, metrics and the 3 latest posts, with all copy from `src/data/landing.ts` |
-| `/about` | `src/pages/about.astro` | Bio, contact links, stack, experience, projects, with all copy from `src/data/about.ts` |
+| `/about` | `src/pages/about.astro` | Bio, contact links, services, experience, projects, with all copy from `src/data/about.ts` |
 | `/blog/`, `/blog/2/` | `src/pages/blog/[...page].astro` | Pagination, 6 posts per page |
 | `/blog/<file>` | `src/pages/blog/<file>.md` | One route per Markdown file |
 | `/category/<slug>` | `src/pages/category/[category].astro` | One route per category in use |

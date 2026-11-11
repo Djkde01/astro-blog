@@ -32,7 +32,7 @@ Community and talks are what set him apart (owner, 2026-11-06). He organizes and
 
 ## Capabilities and Constraints
 
-- Today: a home with a hero, current focus, metrics and the three latest posts; an About page with bio, contact links, stack, experience and projects; a paginated blog, category pages, related posts; RSS, sitemap, SEO and social metadata.
+- Today: a home with a hero, current focus, metrics and the three latest posts; an About page with bio, contact links, services, experience and projects; a paginated blog, category pages, related posts; RSS, sitemap, SEO and social metadata.
 - Planned, in order of the roadmap: talks, community, clients and testimonials sections (Phase 5), a transcript-to-post tool (Phase 6) and a link hub at `/enlaces` with click metrics (Phase 8).
 - All site copy is Spanish; code and docs are English. No other languages.
 - Non-goals: a CMS or database, comments, accounts, anything needing a server, and a full visual rewrite. The roadmap adds to the current design rather than replacing it.
