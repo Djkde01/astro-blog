@@ -31,10 +31,15 @@ export interface Landing {
     role: string;
     value: string;
     buttons: HeroButton[];
-    communitiesLabel: string;
-    communities: string[];
   };
-  now: { label: string; text: string };
+  now: {
+    label: string;
+    // "{job}" is replaced by the current job, as "<role> en <company>".
+    working: string;
+    // Shown with the link when no job in experience.ts is current.
+    open: string;
+    link: { text: string; href: string };
+  };
   metrics: {
     label: string;
     // The post category whose posts count as talks.
@@ -57,6 +62,13 @@ export interface SectionHeading {
   icon: string;
 }
 
+export interface Service {
+  icon: string;
+  title: string;
+  description: string;
+  evidence: string;
+}
+
 export interface FindMeLink {
   network: string;
   handle: string;
@@ -74,7 +86,7 @@ export interface AboutPage {
     paragraphs: TextSegment[][];
   };
   findMe: SectionHeading & { links: FindMeLink[] };
-  stack: SectionHeading;
+  services: SectionHeading;
   experience: SectionHeading;
   projects: SectionHeading;
 }

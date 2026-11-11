@@ -3,9 +3,11 @@ import { Picture } from "astro:assets";
 import MainLayout from "../layouts/MainLayout.astro";
 import PostCard from "../components/PostCard.astro";
 import Link from "../components/Link.astro";
+import { Icon } from "astro-icon/components";
 import profile from "../assets/images/profile.webp";
+import { experience } from "../data/experience";
 import { landing } from "../data/landing";
-import { formatBlogPosts, getExperienceInYears } from "../js/utils";
+import { formatBlogPosts, getExperienceInYears, selectNow } from "../js/utils";
 import type { Post } from "../types/posts";
 
 const allPosts = import.meta.glob("./blog/*.md", {
@@ -14,6 +16,7 @@ const allPosts = import.meta.glob("./blog/*.md", {
 
 const posts: Post[] = await formatBlogPosts(allPosts);
 const { hero, now, metrics, latestPosts } = landing;
+const current = selectNow(experience, now);
 const talks = posts.filter((post) => post.frontmatter.category === metrics.talksCategory).length;
 const stats = [
   { value: `${talks}`, label: metrics.talks, highlight: true },
@@ -58,19 +61,23 @@ const stats = [
             ))
           }
         </div>
-        <div class="communities intro" style="--step: 5">
-          <p>{hero.communitiesLabel}</p>
-          <ul class="chips">
-            {hero.communities.map((community) => <li class="chip">{community}</li>)}
-          </ul>
-        </div>
       </div>
     </div>
   </section>
   <section class="now">
     <div class="container">
       <span class="label">{now.label}</span>
-      <p>{now.text}</p>
+      <p>
+        {current.text}
+        {
+          current.link && (
+            <a href={current.link.href}>
+              {current.link.text}
+              <Icon name="mdi:arrow-right" aria-hidden="true" />
+            </a>
+          )
+        }
+      </p>
     </div>
   </section>
   <section class="container metrics" aria-label={metrics.label}>
@@ -102,3 +109,35 @@ const stats = [
     </div>
   </section>
 </MainLayout>
+
+<script>
+  // Counts each metric up from 0 once the metrics scroll into view. The HTML keeps the final
+  // values, so crawlers and readers without JavaScript or with reduced motion see them as is.
+  const numbers = [...document.querySelectorAll<HTMLElement>("section.metrics strong")];
+  if (numbers.length && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const DURATION = 400;
+    const STAGGER = 120;
+    const counters = numbers.map((number) => {
+      const [, prefix = "", digits = "0"] = number.textContent!.trim().match(/^(\D*)(\d+)$/) ?? [];
+      const show = (value: number) => (number.textContent = `${prefix}${value}`);
+      show(0);
+      return { show, target: Number(digits) };
+    });
+    const count = ({ show, target }: (typeof counters)[number], delay: number) => {
+      let start: number | undefined;
+      const step = (time: number) => {
+        start ??= time + delay;
+        const progress = Math.min(Math.max((time - start) / DURATION, 0), 1);
+        show(Math.round(target * (1 - (1 - progress) ** 3)));
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      observer.disconnect();
+      counters.forEach((counter, index) => count(counter, index * STAGGER));
+    });
+    observer.observe(numbers[0].closest("section")!);
+  }
+</script>

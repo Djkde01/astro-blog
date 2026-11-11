@@ -28,12 +28,14 @@ export const landing: Landing = {
         icon: { name: "mdi:github", side: "left" },
       },
     ],
-    communitiesLabel: "Organizo y hablo en",
-    communities: ["Backbone UTP", "GDG Pereira", "Software Freedom Day"],
   },
+  // selectNow() in src/js/utils.js picks the text: `working` while a job in experience.ts
+  // runs to "Actualidad", otherwise `open` with its link.
   now: {
     label: "Ahora",
-    text: "Fullstack Developer en Curoo y mentor en la comunidad Backbone UTP",
+    working: "{job} y mentor en la comunidad Backbone UTP",
+    open: "Mentor en la comunidad Backbone UTP y abierto a colaboraciones.",
+    link: { text: "Hablemos", href: "mailto:djkde.co@gmail.com" },
   },
   metrics: {
     label: "Métricas",

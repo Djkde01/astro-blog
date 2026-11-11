@@ -1,7 +1,7 @@
 import type { AboutPage } from "../types/sections";
 
 // Every string on the About page. Edit the copy here; src/pages/about.astro only reads it.
-// The stack lives in stack.ts, the jobs in experience.ts and the projects in projects.ts.
+// The service cards live in services.ts, the jobs in experience.ts and the projects in projects.ts.
 export const about: AboutPage = {
   title: "Acerca - Sergio Estrella (Djkde)",
   intro: {
@@ -34,7 +34,7 @@ export const about: AboutPage = {
       { network: "Email", handle: "djkde.co@gmail.com", href: "mailto:djkde.co@gmail.com", icon: "mdi:email-outline" },
     ],
   },
-  stack: { title: "Stack actual", icon: "mdi:layers-triple-outline" },
+  services: { title: "Servicios", icon: "mdi:handshake-outline" },
   experience: { title: "Mi Experiencia", icon: "mdi:briefcase" },
   projects: { title: "Mis proyectos", icon: "mdi:code-tags" },
 };

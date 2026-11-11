@@ -513,23 +513,6 @@ button {
 /* posts */
 
 /* landing */
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2xs);
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.chip {
-  padding: 0.3em 0.9em;
-  background-color: hsl(var(--muted));
-  border: var(--border-sm) solid hsl(var(--txt) / 0.12);
-  border-radius: var(--radius-full);
-  font-size: var(--fs-sm);
-}
-
 .about-band {
   /* the page continues below with no band of its own, so the glow must end inside this one */
   background: radial-gradient(ellipse 70% 55% at 20% 50%, hsl(var(--accent) / 0.16), transparent);
@@ -626,32 +609,6 @@ button {
     }
   }
 
-  & .communities {
-    display: grid;
-    gap: var(--space-2xs);
-    justify-items: inherit;
-
-    & p {
-      font-size: var(--fs-sm);
-    }
-
-    & .chips {
-      justify-content: center;
-      padding: 0;
-      margin: 0;
-    }
-
-    @media (--md) {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: var(--space-xs);
-
-      & .chips {
-        justify-content: start;
-      }
-    }
-  }
 }
 
 /* The hero enters once from the first paint; no-preference keeps it still by default. */
@@ -667,6 +624,11 @@ button {
     opacity: 0;
     transform: translateY(12px);
   }
+}
+
+/* The Ahora strip runs edge to edge. main otherwise shrinks to its 1500 px content and would cut it. */
+main:has(> .now) {
+  justify-self: stretch;
 }
 
 .now {
@@ -702,43 +664,60 @@ button {
       border-radius: var(--radius-full);
     }
   }
+
+  & p {
+    font-size: 1rem;
+  }
+
+  & a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25em;
+    color: hsl(var(--accent-text));
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+
+    & svg {
+      width: 1em;
+      height: 1em;
+    }
+  }
 }
 
 .metrics ul {
   display: flex;
-  gap: var(--space-md);
+  justify-content: center;
   list-style: none;
   padding: 0;
-  padding-block: var(--space-sm);
-
-  @media (--md) {
-    gap: var(--space-xl);
-  }
+  padding-block: var(--space-xl);
 }
 
 .metrics li {
   display: grid;
-  gap: 0.2em;
+  flex: 0 1 16rem;
+  justify-items: center;
   align-content: start;
+  gap: 0.4em;
+  padding-inline: var(--space-xs);
+  text-align: center;
 
   &:not(:first-child) {
     border-inline-start: var(--border-sm) solid hsl(var(--txt) / 0.12);
-    padding-inline-start: var(--space-md);
-
-    @media (--md) {
-      padding-inline-start: var(--space-xl);
-    }
   }
 
   & strong {
-    font-size: var(--fs-xl);
-    font-weight: 700;
+    font-size: clamp(2.75rem, 1.6rem + 4.8vw, 5rem);
+    font-weight: 800;
     line-height: var(--lh-1);
+    letter-spacing: -0.02em;
+    /* every digit has the same width, so the count-up never shifts the layout */
     font-variant-numeric: tabular-nums;
   }
 
   & span {
-    font-size: var(--fs-sm);
+    color: hsl(var(--txt) / 0.75);
+    font-size: clamp(0.8rem, 0.7rem + 0.5vw, 1.1rem);
   }
 
   &.highlight strong {
@@ -746,14 +725,31 @@ button {
   }
 }
 
-/* about: the labeled links and the stack */
+/* about: the labeled links and the services */
 .encuentrame,
-.stack {
+.services {
   & .title {
     display: flex;
     align-items: center;
     gap: var(--space-xs);
     margin-block-end: var(--space-sm);
+  }
+}
+
+/* the dark icon tile on find-me links and service cards */
+.icon-box {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  background-color: hsl(var(--txt));
+  border-radius: var(--radius-md);
+  color: hsl(var(--bkg));
+
+  & svg {
+    width: 1.4rem;
+    height: 1.4rem;
   }
 }
 
@@ -792,21 +788,6 @@ button {
     }
   }
 
-  & .icon-box {
-    display: grid;
-    place-items: center;
-    width: 2.75rem;
-    height: 2.75rem;
-    background-color: hsl(var(--txt));
-    border-radius: var(--radius-md);
-    color: hsl(var(--bkg));
-
-    & svg {
-      width: 1.4rem;
-      height: 1.4rem;
-    }
-  }
-
   & .text {
     display: grid;
     min-width: 0;
@@ -826,6 +807,55 @@ button {
     width: 1.1rem;
     height: 1.1rem;
     transition: transform var(--transition-ease-fast);
+  }
+}
+
+.service-cards {
+  display: grid;
+  gap: var(--space-xs);
+  list-style: none;
+  padding: 0;
+
+  @media (--md) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (--lg) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  & li {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-sm);
+    background-color: hsl(var(--muted));
+    border: var(--border-sm) solid hsl(var(--txt) / 0.08);
+    border-radius: var(--radius-lg);
+  }
+
+  & h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: var(--lh-1-1);
+  }
+
+  & p {
+    font-size: 0.95rem;
+  }
+
+  & p:not(.evidence) {
+    margin-block-end: var(--space-xs);
+  }
+
+  /* the proof line sits at the bottom, so it lines up across a row of cards */
+  & .evidence {
+    margin-block-start: auto;
+    padding-inline-start: 0.6em;
+    border-inline-start: var(--border-md) solid hsl(var(--accent));
+    color: hsl(var(--accent-text));
+    font-size: var(--fs-sm);
+    font-weight: 600;
   }
 }
 
@@ -1092,8 +1122,9 @@ header {
   }
   & .project-card {
     display: grid;
-    position: relative;
-    gap: var(--space-md);
+    /* tag, image, text: only the text row takes a taller neighbour's spare height, so titles in a row line up */
+    grid-template-rows: auto auto 1fr;
+    gap: var(--space-sm);
     padding: var(--space-md);
     align-self: stretch;
     /* a subtle surface, so the card reads apart from the page without a heavy shadow */
@@ -1106,10 +1137,7 @@ header {
     }
   }
   & .project-tag {
-    margin: var(--space-md);
-    position: absolute;
-    top: 0;
-    right: 0;
+    justify-self: end;
     padding: var(--space-2xs) var(--space-xs);
     border-radius: var(--radius-sm);
     font-size: var(--fs-sm);
@@ -1142,10 +1170,11 @@ header {
   }
   .text-container {
     display: grid;
-    gap: var(--space-xs);
+    /* the description takes the spare height, so the buttons sit at the bottom of the card */
+    grid-template-rows: auto 1fr auto;
+    gap: var(--space-sm);
   }
   .description {
-    margin-top: var(--space-md);
     color: var(--color-gray-700);
     @media (prefers-color-scheme: dark) {
       color: var(--color-gray-400);
@@ -1155,12 +1184,14 @@ header {
   .project-link {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: flex-start;
-    margin-top: var(--space-lg);
-    gap: var(--space-lg);
-    @media (--lg) {
-      margin-top: var(--space-md);
+    gap: var(--space-xs);
+    margin-top: var(--space-2xs);
+
+    /* the hero's button size, so Código and Proyecto fit one row in a three-column card */
+    & .link {
+      padding-block: var(--space-2xs);
+      font-size: 1rem;
+      font-weight: 600;
     }
   }
 }

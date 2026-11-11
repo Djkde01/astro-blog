@@ -8,7 +8,7 @@ import Section from "../components/Section.astro";
 import profile from "../assets/images/profile.webp";
 import { about } from "../data/about";
 import { experience } from "../data/experience";
-import { stack } from "../data/stack";
+import { services } from "../data/services";
 import { getExperienceInYears } from "../js/utils";
 
 const { intro, findMe } = about;
@@ -64,9 +64,18 @@ const years = `${getExperienceInYears()}`;
       }
     </ul>
   </Section>
-  <Section class="stack" icon={about.stack.icon} title={about.stack.title}>
-    <ul class="chips">
-      {stack.map((item) => <li class="chip">{item}</li>)}
+  <Section class="services" icon={about.services.icon} title={about.services.title}>
+    <ul class="service-cards">
+      {
+        services.map(({ icon, title, description, evidence }) => (
+          <li>
+            <span class="icon-box"><Icon name={icon} aria-hidden="true" /></span>
+            <h3>{title}</h3>
+            <p>{description}</p>
+            <p class="evidence">{evidence}</p>
+          </li>
+        ))
+      }
     </ul>
   </Section>
   <Section class="experience" icon={about.experience.icon} title={about.experience.title}>
