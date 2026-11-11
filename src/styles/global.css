@@ -685,6 +685,16 @@ main:has(> .now) {
   }
 }
 
+/* text for screen readers only */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 .metrics ul {
   display: flex;
   justify-content: center;
@@ -715,7 +725,7 @@ main:has(> .now) {
     font-variant-numeric: tabular-nums;
   }
 
-  & span {
+  & .label {
     color: hsl(var(--txt) / 0.75);
     font-size: clamp(0.8rem, 0.7rem + 0.5vw, 1.1rem);
   }

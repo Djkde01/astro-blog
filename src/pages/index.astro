@@ -85,8 +85,11 @@ const stats = [
       {
         stats.map(({ value, label, highlight }) => (
           <li class:list={{ highlight }}>
-            <strong>{value}</strong>
-            <span>{label}</span>
+            <strong>
+              <span class="count" aria-hidden="true">{value}</span>
+              <span class="visually-hidden">{value}</span>
+            </strong>
+            <span class="label">{label}</span>
           </li>
         ))
       }
@@ -111,9 +114,10 @@ const stats = [
 </MainLayout>
 
 <script>
-  // Counts each metric up from 0 once the metrics scroll into view. The HTML keeps the final
-  // values, so crawlers and readers without JavaScript or with reduced motion see them as is.
-  const numbers = [...document.querySelectorAll<HTMLElement>("section.metrics strong")];
+  // Counts each metric up from 0 once the metrics scroll into view. Only the visible copy of each
+  // number moves: screen readers read a hidden copy that always holds the final value, and the
+  // HTML keeps the final values for crawlers and for readers without JavaScript or with reduced motion.
+  const numbers = [...document.querySelectorAll<HTMLElement>("section.metrics .count")];
   if (numbers.length && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
     const DURATION = 400;
     const STAGGER = 120;

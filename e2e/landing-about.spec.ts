@@ -91,8 +91,12 @@ test("AC-metrics-computed: the metrics are computed from the posts and the start
   }
 
   await page.goto("/");
+  // The visible number and its label; screen readers get the same number from a hidden copy.
   const metrics = page.locator("section.metrics li");
-  expect(trimmed(await metrics.allInnerTexts())).toEqual([
+  const visible = await metrics.evaluateAll((items) =>
+    items.map((item) => `${item.querySelector(".count")!.textContent!.trim()} ${item.querySelector(".label")!.textContent!.trim()}`),
+  );
+  expect(visible).toEqual([
     `${charlas} ${landing.metrics.talks}`,
     `+${getExperienceInYears()} ${landing.metrics.years}`,
     `${posts} ${landing.metrics.posts}`,
@@ -109,7 +113,7 @@ test("AC-metrics-computed: the metrics are computed from the posts and the start
           return {
             size: parseFloat(getComputedStyle(number).fontSize),
             numberBottom: number.getBoundingClientRect().bottom,
-            labelTop: item.querySelector("span")!.getBoundingClientRect().top,
+            labelTop: item.querySelector(".label")!.getBoundingClientRect().top,
             left: box.left,
             right: box.right,
           };
@@ -293,15 +297,16 @@ test("AC-about-order: About's sections read find-me, services, experience, proje
 const servedMetrics = async (page: Page) => {
   const html = await (await page.request.get("/")).text();
   const section = html.slice(html.indexOf('class="container metrics"'));
-  return [...section.matchAll(/<strong[^>]*>([^<]*)<\/strong>/g)].slice(0, 3).map(([, value]) => value.trim());
+  return [...section.matchAll(/<span class="count"[^>]*>([^<]*)<\/span>/g)].slice(0, 3).map(([, value]) => value.trim());
 };
-const numbers = (page: Page) => page.locator("section.metrics strong").allTextContents();
+const numbers = (page: Page) => page.locator("section.metrics .count").allTextContents();
+const spokenNumbers = (page: Page) => page.locator("section.metrics .visually-hidden").allTextContents();
 // Records every text each metric number shows from now on.
 const recordNumbers = (page: Page) =>
   page.evaluate(() => {
     const seen: string[][] = [];
     (window as unknown as { seen: string[][] }).seen = seen;
-    document.querySelectorAll("section.metrics strong").forEach((number, index) => {
+    document.querySelectorAll("section.metrics .count").forEach((number, index) => {
       seen[index] = [number.textContent!.trim()];
       new MutationObserver(() => seen[index].push(number.textContent!.trim())).observe(number, { childList: true, characterData: true, subtree: true });
     });
@@ -319,16 +324,22 @@ test.describe("with motion allowed", () => {
 
     await page.setViewportSize({ width: 1280, height: 400 });
     await page.goto("/");
+    // Off screen, the visible numbers wait at 0 while screen readers get the final values.
+    expect(await numbers(page)).toEqual(served.map((value) => value.replace(/\d+/, "0")));
+    expect(trimmed(await spokenNumbers(page))).toEqual(served);
     await recordNumbers(page);
     await page.locator("section.metrics").scrollIntoViewIfNeeded();
     await expect.poll(() => numbers(page)).toEqual(served);
+    expect(trimmed(await spokenNumbers(page))).toEqual(served);
     const seen = await seenNumbers(page);
     for (const [index, values] of seen.entries()) {
-      expect(values.some((value) => toNumber(value) < toNumber(served[index]))).toBe(true);
+      const target = toNumber(served[index]);
+      // A real count passes through values between 0 and the target.
+      if (target > 1) expect(values.some((value) => toNumber(value) > 0 && toNumber(value) < target)).toBe(true);
       // The prefix stays while counting.
       for (const value of values) expect(value.replace(/\d/g, "")).toBe(served[index].replace(/\d/g, ""));
     }
-    const fontVariant = await page.locator("section.metrics strong").first().evaluate((number) => getComputedStyle(number).fontVariantNumeric);
+    const fontVariant = await page.locator("section.metrics .count").first().evaluate((number) => getComputedStyle(number).fontVariantNumeric);
     expect(fontVariant).toContain("tabular-nums");
   });
 });
