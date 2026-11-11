@@ -148,7 +148,7 @@ Goal: keep the article in one column at all breakpoints; move category and relat
 
 ### Changes
 
-The design reference is `designs/phase-2-post-page.pen`, signed by the owner.
+The design reference is the post-page frames of `designs/site.pen`, signed by the owner.
 
 - In [`src/styles/global.css`](../src/styles/global.css), drop the two-column grid on `.post-content`. The article and its footer are capped at `var(--content-lg)` (65ch) and centred.
 - In [`src/layouts/BlogPostLayout.astro`](../src/layouts/BlogPostLayout.astro), replace the sidebar with a post footer under the article, `<aside aria-label="Sigue leyendo">`: a thin divider, the chip of this post's category only, then three posts. The posts stack under a gold top line each: the title, the description cut to one line, the author and date, and the cover image on the right.
@@ -195,6 +195,8 @@ Goal: add subtle but distinctive motion that respects accessibility and performa
 Goal: lift the landing and about pages from "simple" to "intentional", reusing existing tokens.
 
 ### Changes
+
+The design reference is the landing and About frames of `designs/site.pen` (mockup v2), signed by the owner.
 
 - **Landing** ([`src/pages/index.astro`](../src/pages/index.astro)):
   - Replace the single avatar + paragraph with a richer hero: name + role + 1-line value prop + CTA cluster (Conoceme más, Contáctame, GitHub).

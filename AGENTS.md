@@ -38,6 +38,7 @@ DWP standard: 7.0.0 (onboarded 2026-11-04; skill 7.9.0)
 ├── README.md                 # Human-facing overview
 ├── PRODUCT.md                # Product truth for design work
 ├── astro.config.mjs          # Site URL and integrations
+├── designs/site.pen          # Signed pen.dev designs: post page, landing and About
 ├── docs/                     # Product, roadmap and engineering guides
 ├── public/                   # Static assets: images, RSS stylesheet, favicon
 ├── src/

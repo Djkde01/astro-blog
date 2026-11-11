@@ -48,6 +48,7 @@ This is a **single-package Astro site** (not a monorepo). The site is actively m
 
 ```text
 /
+├── designs/site.pen        Signed pen.dev designs: post page, landing and About
 ├── docs/                   Product, roadmap and engineering guides
 ├── e2e/                    Playwright tests
 ├── tests/                  Unit tests
