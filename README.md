@@ -9,8 +9,8 @@ This is a **single-package Astro site** (not a monorepo). The site is actively m
 **What exists today**
 
 - Static site generation with Astro 7
-- Home page with intro and latest posts
-- About page with bio, experience, and projects
+- Home page with hero, an "Ahora" strip, metrics, and latest posts
+- About page with bio, find-me links, services, experience, and projects
 - Paginated blog index, category archives, and related posts
 - RSS feed and sitemap generation at build time
 - SEO metadata and JSON-LD structured data
@@ -51,9 +51,9 @@ This is a **single-package Astro site** (not a monorepo). The site is actively m
 ├── docs/                   Product, roadmap and engineering guides
 ├── e2e/                    Playwright tests
 ├── tests/                  Unit tests
-├── public/                 Static assets copied as-is (profile and inline images, RSS stylesheet)
+├── public/                 Static assets copied as-is (inline images, RSS stylesheet)
 ├── src/
-│   ├── assets/images/      Post covers and project images, served as AVIF with a WebP fallback
+│   ├── assets/images/      Post covers, project images and the profile photo, served as AVIF with a WebP fallback
 │   ├── components/         Reusable UI (Nav, PostCard, Seo, LiteYoutube, etc.)
 │   ├── data/               Site metadata and navigation data
 │   ├── js/                 Utilities (formatBlogPosts, slugify, JSON-LD)
