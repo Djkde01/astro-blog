@@ -67,12 +67,11 @@ const years = `${getExperienceInYears()}`;
   <Section class="services" icon={about.services.icon} title={about.services.title}>
     <ul class="service-cards">
       {
-        services.map(({ icon, title, description, evidence }) => (
+        services.map(({ icon, title, description }) => (
           <li>
             <span class="icon-box"><Icon name={icon} aria-hidden="true" /></span>
             <h3>{title}</h3>
             <p>{description}</p>
-            <p class="evidence">{evidence}</p>
           </li>
         ))
       }

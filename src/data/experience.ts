@@ -8,6 +8,7 @@ export const experience: Experience[] = [
     period: "Agosto 2026 - Noviembre 2026",
     description:
       "Llevé a producción agentes de crédito para 3 clientes en Estados Unidos con React, Supabase y PostgreSQL, con protección de PII y registro de eventos.",
+    link: "https://fusefinance.com/",
   },
   {
     title: "Fullstack Developer - Curoo",

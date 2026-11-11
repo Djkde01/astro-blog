@@ -205,7 +205,7 @@ test("AC-encuentrame: About lists four labeled links with their handles", async 
   }
 });
 
-test("AC-services: Servicios shows four cards from services.ts, four columns wide at 1280 px and one at 375 px", async ({ page }) => {
+test("AC-services: Servicios shows four cards from services.ts with an icon, a title and a description, four columns wide at 1280 px and one at 375 px", async ({ page }) => {
   for (const width of WIDTHS) {
     await test.step(`at ${width} px`, async () => {
       await page.setViewportSize({ width, height: 900 });
@@ -214,20 +214,17 @@ test("AC-services: Servicios shows four cards from services.ts, four columns wid
       await expect(section.getByRole("heading", { name: about.services.title, level: 2 })).toBeVisible();
       const cards = section.locator("li");
       await expect(cards).toHaveCount(services.length);
-      for (const [index, { title, description, evidence }] of services.entries()) {
+      for (const [index, { title, description }] of services.entries()) {
         const card = cards.nth(index);
         await expect(card.getByRole("heading", { name: title })).toBeVisible();
-        await expect(card).toContainText(description);
-        await expect(card.locator(".evidence")).toHaveText(evidence);
+        // The description is the card's only text after the title: no highlighted proof line.
+        await expect(card.locator("p")).toHaveText([description]);
         await expect(card.locator("svg")).toHaveAttribute("aria-hidden", "true");
       }
       const boxes = await positions(cards);
-      const evidence = await cards.locator(".evidence").evaluateAll((lines) => lines.map((line) => Math.round(line.getBoundingClientRect().bottom)));
       if (width === 1280) {
         for (const box of boxes) expect(box.top).toBe(boxes[0].top);
         expect(new Set(boxes.map((box) => box.left)).size).toBe(services.length);
-        // The evidence line is pinned to the bottom of cards of equal height.
-        for (const bottom of evidence) expect(bottom).toBe(evidence[0]);
       } else {
         for (const box of boxes) expect(box.left).toBe(boxes[0].left);
         for (const [index, box] of boxes.entries()) if (index > 0) expect(box.top).toBeGreaterThan(boxes[index - 1].top);
@@ -247,6 +244,7 @@ test("AC-experience-cv: the timeline lists the five jobs of the CV, with Saber m
     "Web UI Developer - Globant",
   ]);
   await expect(section).not.toContainText("Backbone");
+  await expect(section.locator("ol > li").first().getByRole("link", { name: "Saber más" })).toHaveAttribute("href", "https://fusefinance.com/");
   const items = section.locator("ol > li");
   await expect(items).toHaveCount(experience.length);
   for (const [index, { link }] of experience.entries()) {
@@ -283,8 +281,14 @@ test("AC-project-cards: each card's buttons share a row, and titles of cards in 
   expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBe(0);
 });
 
-test("AC-about-order: About's sections read find-me, services, experience, projects", async ({ page }) => {
+test("AC-about-order: About's sections read find-me, services, experience, projects, under an intro band that spans the viewport", async ({ page }) => {
+  await page.setViewportSize({ width: 1920, height: 900 });
   await page.goto("/about");
+  // The band carries the glow, so a band narrower than the viewport cuts it.
+  const band = (await page.locator(".about-band").boundingBox())!;
+  const viewport = await page.evaluate(() => document.documentElement.clientWidth);
+  expect(band.x).toBe(0);
+  expect(band.width).toBe(viewport);
   expect(trimmed(await page.locator("main section h2").allTextContents())).toEqual([
     about.findMe.title,
     about.services.title,

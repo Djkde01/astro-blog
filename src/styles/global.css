@@ -626,8 +626,8 @@ button {
   }
 }
 
-/* The Ahora strip runs edge to edge. main otherwise shrinks to its 1500 px content and would cut it. */
-main:has(> .now) {
+/* The Ahora strip and the About band run edge to edge. main otherwise shrinks to its 1500 px content and would cut them. */
+main:has(> .now, > .about-band) {
   justify-self: stretch;
 }
 
@@ -852,20 +852,6 @@ main:has(> .now) {
 
   & p {
     font-size: 0.95rem;
-  }
-
-  & p:not(.evidence) {
-    margin-block-end: var(--space-xs);
-  }
-
-  /* the proof line sits at the bottom, so it lines up across a row of cards */
-  & .evidence {
-    margin-block-start: auto;
-    padding-inline-start: 0.6em;
-    border-inline-start: var(--border-md) solid hsl(var(--accent));
-    color: hsl(var(--accent-text));
-    font-size: var(--fs-sm);
-    font-weight: 600;
   }
 }
 
