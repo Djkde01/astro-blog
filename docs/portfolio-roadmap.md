@@ -205,7 +205,7 @@ Goal: lift the landing and about pages from "simple" to "intentional", reusing e
 - **About** ([`src/pages/about.astro`](../src/pages/about.astro)):
   - Promote `getExperienceInYears()` into a reusable helper in `src/js/utils.js`.
   - Replace bare social icon row with a labeled "Encuéntrame" block (icon + handle text).
-  - Add a "Servicios" section of four cards (icon, title, description, evidence line), typed in `src/data/services.ts`. It replaced the earlier "Stack actual" chip group.
+  - Add a "Servicios" section of four cards (icon, title, description), typed in `src/data/services.ts`. It replaced the earlier "Stack actual" chip group.
   - Update "Mi Experiencia" to the CV: five jobs, Fuse to Globant, with "Saber más" only where a link exists.
 - **Editable copy**: every string on both pages lives in typed files under `src/data/`.
 
