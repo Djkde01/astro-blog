@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { formatBlogPosts, selectRelatedPosts, slugify } from "../src/js/utils.js";
+import { formatBlogPosts, getExperienceInYears, selectNow, selectRelatedPosts, slugify } from "../src/js/utils.js";
 
 const post = (title, date, extra = {}) => ({
   url: `/blog/${title}`,
@@ -87,5 +87,33 @@ describe("selectRelatedPosts", () => {
 describe("slugify", () => {
   it("lowercases and joins words the way category routes expect", () => {
     assert.equal(slugify("Marca Personal"), "marca-personal");
+  });
+});
+
+describe("getExperienceInYears", () => {
+  it("counts full years from May 2021", () => {
+    assert.equal(getExperienceInYears(new Date(2026, 3, 30)), 4);
+    assert.equal(getExperienceInYears(new Date(2026, 4, 1)), 5);
+    assert.equal(getExperienceInYears(new Date(2026, 10, 9)), 5);
+  });
+});
+
+describe("selectNow", () => {
+  const now = {
+    label: "Ahora",
+    working: "{job} y mentor",
+    open: "Abierto a colaboraciones.",
+    link: { text: "Hablemos", href: "mailto:someone@example.com" },
+  };
+  const job = (title, period) => ({ title, period, description: "" });
+
+  it("names the job whose period ends in Actualidad, as role en company", () => {
+    const experience = [job("Engineer - Past Co", "Enero 2020 - Junio 2021"), job("Developer - Acme", "Julio 2025 - Actualidad")];
+    assert.deepEqual(selectNow(experience, now), { text: "Developer en Acme y mentor" });
+  });
+
+  it("falls back to the open text and the link when no job is current", () => {
+    const experience = [job("Developer - Acme", "Julio 2025 - Agosto 2026")];
+    assert.deepEqual(selectNow(experience, now), { text: "Abierto a colaboraciones.", link: now.link });
   });
 });

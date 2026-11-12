@@ -42,17 +42,20 @@ h6 {
   --txt--light: var(--_hue) 40% 5%;
   --accent--light: var(--_hue) 55% 50%;
   --muted--light: var(--_hue) 30% 99%;
+  --accent-text--light: var(--_hue) 55% 28%;
   /* Dark Mode */
   --bkg--dark: var(--_hue) 15% 10%;
   --txt--dark: var(--_hue) 20% 85%;
   --accent--dark: var(--_hue) 50% 50%;
   --muted--dark: var(--_hue) 20% 2%;
+  --accent-text--dark: var(--_hue) 60% 68%;
 
   --bkg: var(--bkg--light);
   --bkg-circle: var(--_hue) 20% 80%;
   --txt: var(--txt--light);
   --accent: var(--accent--light);
   --muted: var(--muted--light);
+  --accent-text: var(--accent-text--light);
 
   --bkg-warning: var(--_hue) 50% 50%;
   --bkg-success: var(--_successHue) 50% 50%;
@@ -142,6 +145,7 @@ h6 {
     --txt: var(--txt--dark);
     --accent: var(--accent--dark);
     --muted: var(--muted--dark);
+    --accent-text: var(--accent-text--dark);
     --bkg-warning: var(--_hue) 50% 30%;
     --bkg-success: var(--_successHue) 50% 30%;
     --text-warning: var(--_hue) 50% 90%;
@@ -467,7 +471,8 @@ button {
     border-radius: var(--radius-full);
     height: 300px;
     width: min(300px, 100%);
-    box-shadow: var(--shadow-lg);
+    outline: var(--border-sm) solid hsl(var(--accent));
+    outline-offset: 6px;
     object-fit: cover;
     object-position: center;
 
@@ -476,25 +481,379 @@ button {
     }
   }
 
+  /* the optimized photo's wrapper should not become the grid item */
+  & picture {
+    display: contents;
+  }
+
+  /* with display: contents on the parent, each source would take a grid cell */
+  & source {
+    display: none;
+  }
+
   & .content {
     display: grid;
     gap: var(--space-xs);
     max-width: var(--content-md);
+
+    & h1 {
+      font-size: clamp(2.4rem, 1.4rem + 2.2vw, 3.4rem);
+    }
+
     & .focus-primary {
-      color: hsl(var(--accent));
+      color: hsl(var(--accent-text));
+      font-weight: 700;
     }
     &-secondary {
       color: hsl(var(--txt));
-    }
-
-    & .contact {
-      display: flex;
-      gap: var(--space-xs);
     }
   }
 }
 
 /* posts */
+
+/* landing */
+.about-band {
+  /* the page continues below with no band of its own, so the glow must end inside this one */
+  background: radial-gradient(ellipse 70% 55% at 20% 50%, hsl(var(--accent) / 0.16), transparent);
+  /* keeps .about's margin inside the band */
+  display: flow-root;
+}
+
+.hero {
+  background: radial-gradient(ellipse 70% 100% at 20% 50%, hsl(var(--accent) / 0.16), transparent);
+
+  & .container {
+    display: grid;
+    gap: var(--space-lg);
+    justify-items: center;
+    text-align: center;
+    padding-block: var(--space-xl);
+
+    @media (--md) {
+      grid-template-columns: auto 1fr;
+      justify-items: start;
+      align-items: center;
+      text-align: start;
+      gap: var(--space-xl);
+      padding-inline: clamp(var(--space-md), 8vw, var(--space-3xl));
+    }
+  }
+
+  & picture {
+    display: block;
+  }
+
+  & img {
+    width: min(300px, 70vw);
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--radius-full);
+    outline: var(--border-sm) solid hsl(var(--accent));
+    outline-offset: 6px;
+  }
+
+  & .content {
+    display: grid;
+    gap: var(--space-sm);
+    justify-items: inherit;
+  }
+
+  & h1 {
+    font-size: clamp(2.4rem, 1.4rem + 2.2vw, 3.4rem);
+    line-height: var(--lh-1-1);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  & .role {
+    color: hsl(var(--accent-text));
+    font-size: var(--fs-md);
+    font-weight: 600;
+    line-height: var(--lh-1-1);
+    text-wrap: balance;
+  }
+
+  & .value {
+    font-size: var(--fs-md);
+    max-width: var(--content-md);
+  }
+
+  & .actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xs);
+    width: 100%;
+
+    & .link {
+      justify-content: center;
+      width: auto;
+      padding-block: var(--space-2xs);
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    & .link:first-child {
+      grid-column: 1 / -1;
+    }
+
+    & .bordered {
+      border-width: 2px;
+    }
+
+    @media (--md) {
+      display: flex;
+      flex-wrap: wrap;
+      width: auto;
+    }
+  }
+
+}
+
+/* The hero enters once from the first paint; no-preference keeps it still by default. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero .intro {
+    animation: hero-in 400ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--step, 0) * 70ms);
+  }
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+/* The Ahora strip and the About band run edge to edge. main otherwise shrinks to its 1500 px content and would cut them. */
+main:has(> .now, > .about-band) {
+  justify-self: stretch;
+}
+
+.now {
+  background-color: hsl(var(--muted));
+  border-block: var(--border-sm) solid hsl(var(--txt) / 0.08);
+
+  & .container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2xs) var(--space-sm);
+    padding-block: var(--space-sm);
+  }
+
+  & .label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.25em 0.8em;
+    background-color: hsl(var(--accent) / 0.18);
+    border-radius: var(--radius-full);
+    color: hsl(var(--accent-text));
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    &::before {
+      content: "";
+      width: 0.5em;
+      height: 0.5em;
+      background-color: hsl(var(--accent));
+      border-radius: var(--radius-full);
+    }
+  }
+
+  & p {
+    font-size: 1rem;
+  }
+
+  & a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25em;
+    color: hsl(var(--accent-text));
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+
+    & svg {
+      width: 1em;
+      height: 1em;
+    }
+  }
+}
+
+/* text for screen readers only */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.metrics ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  padding-block: var(--space-xl);
+}
+
+.metrics li {
+  display: grid;
+  flex: 0 1 16rem;
+  justify-items: center;
+  align-content: start;
+  gap: 0.4em;
+  padding-inline: var(--space-xs);
+  text-align: center;
+
+  &:not(:first-child) {
+    border-inline-start: var(--border-sm) solid hsl(var(--txt) / 0.12);
+  }
+
+  & strong {
+    font-size: clamp(2.75rem, 1.6rem + 4.8vw, 5rem);
+    font-weight: 800;
+    line-height: var(--lh-1);
+    letter-spacing: -0.02em;
+    /* every digit has the same width, so the count-up never shifts the layout */
+    font-variant-numeric: tabular-nums;
+  }
+
+  & .label {
+    color: hsl(var(--txt) / 0.75);
+    font-size: clamp(0.8rem, 0.7rem + 0.5vw, 1.1rem);
+  }
+
+  &.highlight strong {
+    color: hsl(var(--accent-text));
+  }
+}
+
+/* about: the labeled links and the services */
+.encuentrame,
+.services {
+  & .title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-block-end: var(--space-sm);
+  }
+}
+
+/* the dark icon tile on find-me links and service cards */
+.icon-box {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  background-color: hsl(var(--txt));
+  border-radius: var(--radius-md);
+  color: hsl(var(--bkg));
+
+  & svg {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+}
+
+.find-me {
+  display: grid;
+  gap: var(--space-xs);
+  list-style: none;
+  padding: 0;
+
+  @media (--md) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (--lg) {
+    /* the email is the longest handle; the extra share keeps it on one line */
+    grid-template-columns: repeat(3, 1fr) 1.2fr;
+  }
+
+  & a {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-2xs);
+    padding: var(--space-xs);
+    background-color: hsl(var(--muted));
+    border: var(--border-sm) solid hsl(var(--txt) / 0.08);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+
+    &:hover {
+      border-color: hsl(var(--accent));
+    }
+
+    &:hover .arrow {
+      transform: translate(2px, -2px);
+    }
+  }
+
+  & .text {
+    display: grid;
+    min-width: 0;
+
+    & small {
+      font-size: var(--fs-sm);
+    }
+
+    & strong {
+      font-size: 0.9rem;
+      font-weight: 600;
+      overflow-wrap: anywhere;
+    }
+  }
+
+  & .arrow {
+    width: 1.1rem;
+    height: 1.1rem;
+    transition: transform var(--transition-ease-fast);
+  }
+}
+
+.service-cards {
+  display: grid;
+  gap: var(--space-xs);
+  list-style: none;
+  padding: 0;
+
+  @media (--md) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (--lg) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  & li {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-sm);
+    background-color: hsl(var(--muted));
+    border: var(--border-sm) solid hsl(var(--txt) / 0.08);
+    border-radius: var(--radius-lg);
+  }
+
+  & h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: var(--lh-1-1);
+  }
+
+  & p {
+    font-size: 0.95rem;
+  }
+}
 
 .post-container {
   margin-block: var(--space-md);
@@ -553,6 +912,8 @@ button {
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
   align-self: stretch;
+  /* the content row takes the spare height, so buttons line up across a row */
+  grid-template-rows: auto auto 1fr;
 
   & .badge {
     --accent: var(--txt);
@@ -575,6 +936,7 @@ button {
   & .content {
     display: grid;
     gap: var(--space-xs);
+    grid-template-rows: auto 1fr auto;
   }
 }
 
@@ -756,8 +1118,9 @@ header {
   }
   & .project-card {
     display: grid;
-    position: relative;
-    gap: var(--space-md);
+    /* tag, image, text: only the text row takes a taller neighbour's spare height, so titles in a row line up */
+    grid-template-rows: auto auto 1fr;
+    gap: var(--space-sm);
     padding: var(--space-md);
     align-self: stretch;
     /* a subtle surface, so the card reads apart from the page without a heavy shadow */
@@ -770,10 +1133,7 @@ header {
     }
   }
   & .project-tag {
-    margin: var(--space-md);
-    position: absolute;
-    top: 0;
-    right: 0;
+    justify-self: end;
     padding: var(--space-2xs) var(--space-xs);
     border-radius: var(--radius-sm);
     font-size: var(--fs-sm);
@@ -806,10 +1166,11 @@ header {
   }
   .text-container {
     display: grid;
-    gap: var(--space-xs);
+    /* the description takes the spare height, so the buttons sit at the bottom of the card */
+    grid-template-rows: auto 1fr auto;
+    gap: var(--space-sm);
   }
   .description {
-    margin-top: var(--space-md);
     color: var(--color-gray-700);
     @media (prefers-color-scheme: dark) {
       color: var(--color-gray-400);
@@ -818,12 +1179,15 @@ header {
 
   .project-link {
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-    margin-top: var(--space-lg);
-    gap: var(--space-lg);
-    @media (--lg) {
-      margin-top: var(--space-md);
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-top: var(--space-2xs);
+
+    /* the hero's button size, so Código and Proyecto fit one row in a three-column card */
+    & .link {
+      padding-block: var(--space-2xs);
+      font-size: 1rem;
+      font-weight: 600;
     }
   }
 }

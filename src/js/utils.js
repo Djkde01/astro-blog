@@ -72,3 +72,22 @@ function sortPosts(sortType, posts) {
       return posts;
   }
 }
+
+// Full years since the first job, in May 2021. `now` is a parameter so a test can pin it.
+export function getExperienceInYears(now = new Date()) {
+  const start = new Date(2021, 4, 1);
+  const hadAnniversary = now >= new Date(now.getFullYear(), start.getMonth(), start.getDate());
+  return now.getFullYear() - start.getFullYear() - (hadAnniversary ? 0 : 1);
+}
+
+// The text of the landing's Ahora strip. `experience` comes from src/data/experience.ts and
+// `now` from landing.now. The current job is the entry whose period ends in "Actualidad";
+// its "<role> - <company>" title fills "{job}" in the working text as "<role> en <company>".
+// With no current job, the open text comes back with its link.
+export function selectNow(experience, now) {
+  const current = experience.find(({ period }) => period.trim().endsWith("Actualidad"));
+  if (!current) return { text: now.open, link: now.link };
+  const split = current.title.lastIndexOf(" - ");
+  const job = split === -1 ? current.title : `${current.title.slice(0, split)} en ${current.title.slice(split + 3)}`;
+  return { text: now.working.replace("{job}", job) };
+}

@@ -12,8 +12,8 @@ src/pages/blog/*.md ──> import.meta.glob ──> formatBlogPosts() ──> p
 
 | Route | Source | Notes |
 |-------|--------|-------|
-| `/` | `src/pages/index.astro` | Introduction and the 3 latest posts |
-| `/about` | `src/pages/about.astro` | Bio, experience (inline array), projects |
+| `/` | `src/pages/index.astro` | Hero, current focus, metrics and the 3 latest posts, with all copy from `src/data/landing.ts` |
+| `/about` | `src/pages/about.astro` | Bio, contact links, services, experience, projects, with all copy from `src/data/about.ts` |
 | `/blog/`, `/blog/2/` | `src/pages/blog/[...page].astro` | Pagination, 6 posts per page |
 | `/blog/<file>` | `src/pages/blog/<file>.md` | One route per Markdown file |
 | `/category/<slug>` | `src/pages/category/[category].astro` | One route per category in use |
@@ -50,11 +50,11 @@ A change to discovery or to the frontmatter shape must reach all six. RSS is the
 
 ## Images
 
-Post covers and project images live in `src/assets/images/`. A post's `image.src` names its file there, such as `/src/assets/images/post-1.webp`, and `resolveImage()` in `src/js/images.js` turns it into an imported image. An unknown path throws and stops the build.
+Post covers, project images and the profile photo live in `src/assets/images/`. A post's `image.src` names its file there, such as `/src/assets/images/post-1.webp`, and `resolveImage()` in `src/js/images.js` turns it into an imported image. An unknown path throws and stops the build.
 
 `PostCard`, `PostHeader` and `Projects` render those images with `<Picture>`, which emits AVIF with a WebP fallback at two widths each, using Astro's optional `sharp` at build time. Their public URLs are hashed files under `/_astro/`. `Seo.astro` and `jsonLD.js` use `socialImageUrl()` for absolute social image URLs.
 
-Everything else stays in `public/images/` and is served as-is: `default.webp`, the social fallback, `profile.webp`, and the images inside post bodies.
+Everything else stays in `public/images/` and is served as-is: `default.webp`, the social fallback, and the images inside post bodies.
 
 ## Agent harness
 
