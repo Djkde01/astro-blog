@@ -320,6 +320,12 @@ button {
     color: hsl(var(--bkg));
   }
 
+  /* The accent fill is mid-lightness in both themes, so its text stays dark: the light
+     background on it reads at about 2.3:1, under the 4.5:1 floor. */
+  &.secondary.filled {
+    color: hsl(var(--txt--light));
+  }
+
   &.bordered {
     border-color: var(--type);
   }

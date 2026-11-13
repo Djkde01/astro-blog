@@ -3,7 +3,7 @@
 | File | Purpose | Read by |
 |------|---------|---------|
 | `navData.js` | Navigation links | `Nav.astro` |
-| `siteData.json` | Default title, description and social image | `Seo.astro`, `jsonLD.js` |
+| `siteData.json` | Default title, description and social image. `{years}` in the description is replaced by the computed years of experience | `MainLayout.astro`, `Seo.astro`, `jsonLD.js` |
 | `projects.ts` | Project cards on About. `status` is `"deployed"` or `"development"`; the component maps it to its label and class | `Projects.astro` |
 | `experience.ts` | Work experience on About. A `period` ending in "Actualidad" marks the current job, which the landing's Ahora strip names | `about.astro`, `index.astro` through `selectNow()` |
 | `landing.ts` | Every string on the landing: hero, the Ahora strip, metric labels, post list title. `now.working` fills `{job}` with the current job; `now.open` and `now.link` show when no job is current. Edit copy here | `index.astro` |
