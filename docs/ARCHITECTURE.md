@@ -14,7 +14,7 @@ src/pages/blog/*.md ──> import.meta.glob ──> formatBlogPosts() ──> p
 |-------|--------|-------|
 | `/` | `src/pages/index.astro` | Hero, current focus, metrics and the 3 latest posts, with all copy from `src/data/landing.ts` |
 | `/about` | `src/pages/about.astro` | Bio, contact links, services, experience, projects, with all copy from `src/data/about.ts` |
-| `/enlaces` | `src/pages/enlaces.astro` | Link hub for social bios, out of the nav. Every link opens in a new tab and a click sends one `link_click` event; all copy from `src/data/links.ts` |
+| `/enlaces` | `src/pages/enlaces.astro` | Link hub for social bios. It is out of the nav and renders without it (`MainLayout` `nav={false}`). Every link opens in a new tab and a click sends one `link_click` event; all copy from `src/data/links.ts` |
 | `/blog/`, `/blog/2/` | `src/pages/blog/[...page].astro` | Pagination, 6 posts per page |
 | `/blog/<file>` | `src/pages/blog/<file>.md` | One route per Markdown file |
 | `/category/<slug>` | `src/pages/category/[category].astro` | One route per category in use |

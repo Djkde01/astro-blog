@@ -11,7 +11,7 @@ const highlighted = linkHub.links.filter((link) => link.highlighted);
 const rest = linkHub.links.filter((link) => !link.highlighted);
 ---
 
-<MainLayout title={linkHub.title} description={linkHub.description}>
+<MainLayout title={linkHub.title} description={linkHub.description} nav={false}>
   <section class="links-band">
     <div class="container link-hub">
       <header>

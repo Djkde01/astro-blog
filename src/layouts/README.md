@@ -2,7 +2,7 @@
 
 | Layout | Purpose |
 |--------|---------|
-| `MainLayout` | Shell for every page: `<html lang="es">`, head, nav, footer, font and global CSS |
+| `MainLayout` | Shell for every page: `<html lang="es">`, head, nav, footer, font and global CSS. `nav={false}` drops the nav (used by `/enlaces`) |
 | `MainHead` | The `<head>`: analytics through Partytown, SEO tags, and the Lite YouTube helper |
 | `BlogPostLayout` | Post page: header, content and sidebar with categories and related posts. Posts select it in their `layout` frontmatter |
 

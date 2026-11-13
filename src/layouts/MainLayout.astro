@@ -20,6 +20,7 @@ interface Props {
     image?: string;
   };
   robots?: string;
+  nav?: boolean;
 }
 
 const {
@@ -28,13 +29,14 @@ const {
   image,
   frontmatter,
   robots,
+  nav = true,
 } = Astro.props as Props;
 ---
 
 <html lang="es">
   <MainHead {title} {description} {image} {frontmatter} {robots} />
   <body>
-    <Nav />
+    {nav && <Nav />}
     <main>
       <slot>
         <h1>Hello, world!</h1>

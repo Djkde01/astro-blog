@@ -138,3 +138,11 @@ test("AC-discoverable: /enlaces is out of the nav, in the sitemap and indexable"
   const sitemap = await (await request.get("/sitemap-0.xml")).text();
   expect(sitemap).toContain("<loc>https://sergioestrella.com/enlaces/</loc>");
 });
+
+test("AC-no-nav: /enlaces has no site nav, and other pages keep it", async ({ page }) => {
+  await page.goto("/enlaces");
+  await expect(page.locator('nav[aria-label="Primary"]')).toHaveCount(0);
+  await expect(page.locator("main header h1")).toHaveText(landing.hero.name);
+  await page.goto("/");
+  await expect(page.locator('nav[aria-label="Primary"]')).toBeVisible();
+});
