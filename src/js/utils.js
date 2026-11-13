@@ -80,14 +80,54 @@ export function getExperienceInYears(now = new Date()) {
   return now.getFullYear() - start.getFullYear() - (hadAnniversary ? 0 : 1);
 }
 
-// The text of the landing's Ahora strip. `experience` comes from src/data/experience.ts and
-// `now` from landing.now. The current job is the entry whose period ends in "Actualidad";
-// its "<role> - <company>" title fills "{job}" in the working text as "<role> en <company>".
+// The entries a page shows: drafts are placeholders, rendered under `astro dev` only.
+// Pages pass `import.meta.env.DEV`; tests pass a boolean.
+export function published(entries, includeDrafts) {
+  return includeDrafts ? entries : entries.filter(({ draft }) => !draft);
+}
+
+// A talk's ISO date ("2025-11-29") as "29 nov 2025".
+export function formatTalkDate(date) {
+  return new Intl.DateTimeFormat("es", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" })
+    .format(new Date(`${date}T00:00:00Z`))
+    .replace(".", "");
+}
+
+// A talk dated on or after `today` is upcoming. The day is the build's, so a deploy that is not
+// rebuilt after the talk keeps showing it as upcoming.
+export function isUpcoming({ date }, today = new Date()) {
+  return date >= today.toISOString().slice(0, 10);
+}
+
+// The text of the landing's Ahora strip. `experience` comes from src/data/experience.ts, `now`
+// from landing.now and `talks` from src/data/talks.ts. The earliest published talk dated on or
+// after `today` comes first, with a link to its registration, post, slides or recording.
+// Otherwise the current job is the entry whose period ends in "Actualidad"; its
+// "<role> - <company>" title fills "{job}" in the working text as "<role> en <company>".
 // With no current job, the open text comes back with its link.
-export function selectNow(experience, now) {
+export function selectNow(experience, now, talks = [], today = new Date()) {
+  const [next] = talks
+    .filter((talk) => !talk.draft && isUpcoming(talk, today))
+    .toSorted((a, b) => a.date.localeCompare(b.date));
+  if (next) {
+    const text = now.upcoming.text
+      .replace("{talk}", next.title)
+      .replace("{event}", next.event)
+      .replace("{date}", formatTalkDate(next.date));
+    const href = next.registration ?? (next.post && `/blog/${next.post}`) ?? next.slides ?? next.recording;
+    return href ? { text, link: { text: now.upcoming.link, href } } : { text };
+  }
   const current = experience.find(({ period }) => period.trim().endsWith("Actualidad"));
   if (!current) return { text: now.open, link: now.link };
   const split = current.title.lastIndexOf(" - ");
   const job = split === -1 ? current.title : `${current.title.slice(0, split)} en ${current.title.slice(split + 3)}`;
   return { text: now.working.replace("{job}", job) };
+}
+
+// The post a talk or a community event names by slug. `posts` comes from formatBlogPosts, so a
+// draft or future post is missing, and the build stops rather than link to a page that is not there.
+export function findPost(posts, slug) {
+  const post = posts.find(({ url }) => url === `/blog/${slug}`);
+  if (!post) throw new Error(`No published post at src/pages/blog/${slug}.md`);
+  return post;
 }

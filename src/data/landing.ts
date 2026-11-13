@@ -29,17 +29,18 @@ export const landing: Landing = {
       },
     ],
   },
-  // selectNow() in src/js/utils.js picks the text: `working` while a job in experience.ts
-  // runs to "Actualidad", otherwise `open` with its link.
+  // selectNow() in src/js/utils.js picks the text: `upcoming` while a published talk in talks.ts
+  // is upcoming, then `working` while a job in experience.ts runs to "Actualidad", otherwise `open`
+  // with its link.
   now: {
     label: "Ahora",
     working: "{job} y mentor en la comunidad Backbone UTP",
     open: "Mentor en la comunidad Backbone UTP y abierto a colaboraciones.",
     link: { text: "Hablemos", href: "mailto:djkde.co@gmail.com" },
+    upcoming: { text: "Próxima charla: {talk} en {event}, {date}.", link: "Ver detalles" },
   },
   metrics: {
     label: "Métricas",
-    talksCategory: "Charlas",
     talks: "charlas",
     years: "años de experiencia",
     posts: "posts",

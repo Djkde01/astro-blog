@@ -36,5 +36,21 @@ export const about: AboutPage = {
   },
   services: { title: "Servicios", icon: "mdi:handshake-outline" },
   experience: { title: "Mi Experiencia", icon: "mdi:briefcase" },
+  talks: {
+    title: "Charlas",
+    icon: "mdi:microphone-variant",
+    upcoming: "Próxima",
+    links: { registration: "Inscripción", slides: "Slides", recording: "Grabación", post: "Post" },
+  },
+  community: {
+    title: "Comunidad",
+    icon: "mdi:account-group",
+    organizers: "Organizo",
+    collaborators: "He colaborado con",
+    link: "Sitio web",
+    events: "Eventos",
+  },
+  clients: { title: "Clientes", icon: "mdi:handshake", employer: "Empresa", freelance: "Freelance" },
+  testimonials: { title: "Testimonios", icon: "mdi:comment-quote" },
   projects: { title: "Mis proyectos", icon: "mdi:code-tags" },
 };
