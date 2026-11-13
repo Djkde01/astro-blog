@@ -13,6 +13,7 @@ export default {
       hooks: {
         "astro:config:setup": ({ injectRoute }) => {
           injectRoute({ pattern: "/e2e/jsonld-fixture", entrypoint: "./e2e/pages/jsonld-fixture.astro" });
+          injectRoute({ pattern: "/e2e/sections-fixture", entrypoint: "./e2e/pages/sections-fixture.astro" });
         },
       },
     },

@@ -1,0 +1,28 @@
+---
+// The Phase 5 sections with fixture data, in the end-to-end build only; see e2e/astro.config.mjs.
+// The real data keeps Clientes and Testimonios hidden, so their rendering is proved here.
+import MainLayout from "../../src/layouts/MainLayout.astro";
+import Clients from "../../src/components/sections/Clients.astro";
+import Community from "../../src/components/sections/Community.astro";
+import Talks from "../../src/components/sections/Talks.astro";
+import Testimonials from "../../src/components/sections/Testimonials.astro";
+import { about } from "../../src/data/about";
+import { formatBlogPosts } from "../../src/js/utils";
+import type { Post } from "../../src/types/posts";
+import { fixtureClients, fixtureCommunity, fixtureTalks, fixtureTestimonials } from "../sections-fixture-data";
+
+const posts: Post[] = await formatBlogPosts(import.meta.glob("../../src/pages/blog/*.md", { eager: true }));
+---
+
+<MainLayout title="Sections fixture">
+  <div id="fixture">
+    <Talks talks={fixtureTalks} labels={about.talks} posts={posts} />
+    <Community community={fixtureCommunity} labels={about.community} posts={posts} />
+    <Clients clients={fixtureClients} labels={about.clients} />
+    <Testimonials testimonials={fixtureTestimonials} labels={about.testimonials} />
+  </div>
+  <div id="empty-talks"><Talks talks={[]} labels={about.talks} posts={posts} /></div>
+  <div id="empty-community"><Community community={[]} labels={about.community} posts={posts} /></div>
+  <div id="empty-clients"><Clients clients={[]} labels={about.clients} /></div>
+  <div id="empty-testimonials"><Testimonials testimonials={[]} labels={about.testimonials} /></div>
+</MainLayout>

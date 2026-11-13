@@ -1,0 +1,31 @@
+---
+import Card from "../Card.astro";
+import Section from "../Section.astro";
+import type { AboutPage, Testimonial } from "../../types/sections";
+
+interface Props {
+  testimonials: Testimonial[];
+  labels: AboutPage["testimonials"];
+}
+
+const { testimonials, labels } = Astro.props;
+---
+
+{
+  testimonials.length > 0 && (
+    <Section class="testimonials section-accent" icon={labels.icon} title={labels.title}>
+      <div class="card-grid">
+        {testimonials.map(({ name, role, company, quote }) => (
+          <Card>
+            <figure class="testimonial">
+              <blockquote>{quote}</blockquote>
+              <figcaption>
+                <strong>{name}</strong> · {role}, {company}
+              </figcaption>
+            </figure>
+          </Card>
+        ))}
+      </div>
+    </Section>
+  )
+}
