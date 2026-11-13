@@ -4,8 +4,8 @@
 document.querySelectorAll("a[data-link-id]").forEach((link) => {
   link.addEventListener("click", () => {
     try {
-      // SPIKE: debug_mode makes the event visible in GA DebugView. T-page removes it.
-      window.gtag?.("event", "link_click", { link_id: link.dataset.linkId, debug_mode: true });
+      // Only the link id: no personal data goes into event parameters.
+      window.gtag?.("event", "link_click", { link_id: link.dataset.linkId });
     } catch {
       // Analytics is best-effort.
     }

@@ -95,6 +95,8 @@ export interface HubLink {
   id: string;
   label: string;
   href: string;
+  // An astro-icon name from the mdi set.
+  icon: string;
   description?: string;
   highlighted: boolean;
 }

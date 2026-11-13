@@ -126,6 +126,7 @@ test("AC-header: the page opens with the profile picture, the name and the role"
   await expect(page.locator("h1")).toHaveCount(1);
   await expect(header.locator("h1")).toHaveText(landing.hero.name);
   await expect(header).toContainText(landing.hero.role);
+  await expect(header).toContainText(landing.hero.value);
 });
 
 test("AC-discoverable: /enlaces is out of the nav, in the sitemap and indexable", async ({ page, request }) => {
