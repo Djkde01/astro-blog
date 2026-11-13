@@ -89,3 +89,20 @@ export interface AboutPage {
   experience: SectionHeading;
   projects: SectionHeading;
 }
+
+// One link on /enlaces. `id` is the link_id sent to analytics: keep it when the label or href changes.
+export interface HubLink {
+  id: string;
+  label: string;
+  href: string;
+  description?: string;
+  highlighted: boolean;
+}
+
+export interface LinkHub {
+  title: string;
+  description: string;
+  newTabNote: string;
+  // In page order: the highlighted links render first, as cards.
+  links: HubLink[];
+}

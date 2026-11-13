@@ -1,0 +1,61 @@
+---
+import { Picture } from "astro:assets";
+import MainLayout from "../layouts/MainLayout.astro";
+import profile from "../assets/images/profile.webp";
+import { landing } from "../data/landing";
+import { linkHub } from "../data/links";
+
+const { hero } = landing;
+const highlighted = linkHub.links.filter((link) => link.highlighted);
+const rest = linkHub.links.filter((link) => !link.highlighted);
+---
+
+<MainLayout title={linkHub.title} description={linkHub.description}>
+  <div class="container link-hub">
+    <header>
+      <Picture
+        src={profile}
+        alt={hero.photoAlt}
+        width="120"
+        height="120"
+        widths={[120, 240]}
+        sizes="120px"
+        formats={["avif"]}
+        fallbackFormat="webp"
+        quality={70}
+        loading="eager"
+      />
+      <h1>{hero.name}</h1>
+      <p>{hero.role}</p>
+    </header>
+    <ul data-links="highlighted">
+      {
+        highlighted.map(({ id, label, href, description }) => (
+          <li>
+            <a href={href} target="_blank" rel="noopener" data-link-id={id}>
+              <span class="link-label">{label}</span>
+              <span class="link-description">{description}</span>
+              <span class="visually-hidden">{linkHub.newTabNote}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <ul data-links="all">
+      {
+        rest.map(({ id, label, href }) => (
+          <li>
+            <a href={href} target="_blank" rel="noopener" data-link-id={id}>
+              <span class="link-label">{label}</span>
+              <span class="visually-hidden">{linkHub.newTabNote}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</MainLayout>
+
+<script>
+  import "../js/linkClicks.js";
+</script>
