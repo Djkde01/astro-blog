@@ -7,6 +7,9 @@ import "../styles/global.css";
 import MainHead from "./MainHead.astro";
 import Footer from "../components/Footer.astro";
 import Nav from "../components/Nav.astro";
+import siteData from "../data/siteData.json";
+import { getExperienceInYears } from "../js/utils";
+
 interface Props {
   title?: string;
   description?: string;
@@ -20,8 +23,8 @@ interface Props {
 }
 
 const {
-  title = "Sergio Estrella (Djkde) - Desarrollador Fullstack con +4 años de experiencia",
-  description = "Sergio Estrella es un desarrollador Fullstack con más de 4 años de experiencia en el desarrollo de aplicaciones web y móviles. Ha trabajado con tecnologías como React, NodeJS, Express, MongoDB, MySQL, Prisma, NextJS, Astro, Webpack, Babel, TypeScript, JavaScript, HTML, CSS, SCSS, TailwindCSS, Jest, React Testing Library, Cypress, Git, GitHub, Bitbucket, Netlify, Vercel, Heroku, AWS, Google Cloud, Firebase, Docker, Linux, entre otras.",
+  title = siteData.title,
+  description = siteData.description.replaceAll("{years}", `${getExperienceInYears()}`),
   image,
   frontmatter,
   robots,

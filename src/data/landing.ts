@@ -10,7 +10,7 @@ export const landing: Landing = {
     value: "Mejorando la vida de las personas a través de la tecnología.",
     buttons: [
       {
-        text: "Conoceme más",
+        text: "Conóceme más",
         href: "/about",
         variant: "solid",
         icon: { name: "mdi:arrow-right", side: "right" },

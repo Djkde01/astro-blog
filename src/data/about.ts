@@ -10,7 +10,7 @@ export const about: AboutPage = {
     greetingEmoji: "👋",
     paragraphs: [
       [
-        { text: "¡Que bueno verte! Soy Sergio Estrella, también conocido en internet como Djkde, un " },
+        { text: "¡Qué bueno verte! Soy Sergio Estrella, también conocido en internet como Djkde, un " },
         { text: "Desarrollador Fullstack y organizador de comunidad", highlight: true },
         { text: " con " },
         { text: "+{years} años de experiencia", highlight: true },
