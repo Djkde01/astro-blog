@@ -18,6 +18,7 @@ It gives Sergio one place to publish what he learns, share his talks and show hi
 
 - A home page with a hero, his current focus, metrics and the three latest posts.
 - An about page with his bio, contact links, the services he offers, work experience and projects.
+- A link hub at `/enlaces` for social bios, which counts the links opened with a Google Analytics event.
 - A paginated blog, category pages and related posts.
 - An RSS feed, a sitemap, and metadata for search engines and social sharing.
 

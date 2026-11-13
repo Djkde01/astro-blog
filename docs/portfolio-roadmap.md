@@ -351,6 +351,13 @@ Goal: one public page at a descriptive route that gathers the owner's links for 
 - A small script sends one `link_click` event with the `link_id` when a link is opened.
 - Link to the hub from each profile with `utm_source` (for example `?utm_source=instagram`). This needs no code, and Google Analytics then reports where visits came from.
 
+### What was built (PLAN_011)
+
+- Highlighted cards for the blog and the next event, then plain buttons for LinkedIn, GitHub, Backbone UTP and Platzi, from a mockup the owner signed in `designs/site.pen`. The page stays out of the nav and is indexed.
+- Every link opens in a new tab with `rel="noopener"` and a hidden "(se abre en una pestaña nueva)". The owner chose the new tab; it also keeps the page, and its analytics worker, alive while the event goes out.
+- Partytown forwards `gtag` as well as `dataLayer.push`, and `globalFns: ["gtag"]` puts `MainHead`'s inline `gtag` on the worker's window, because Partytown runs inline scripts inside a function. A main-thread push would serialize gtag's `Arguments` object, the likely cause of the reported loss of custom events.
+- A spike on a deploy preview, sending a temporary `debug_mode`, showed `link_click` with its `link_id` in GA DebugView for every link before the page was styled. The shipped event carries only `link_id`.
+
 ### What the metrics can answer
 
 - **Who visits:** aggregate figures only, such as visits, country, device and traffic source. The site cannot and should not identify individual visitors. Google Analytics already collects these figures for every page.

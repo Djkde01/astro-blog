@@ -64,6 +64,7 @@ This is a **single-package Astro site** (not a monorepo). The site is actively m
 │   │   ├── category/       Category archive routes
 │   │   ├── index.astro     Home page
 │   │   ├── about.astro     About / portfolio page
+│   │   ├── enlaces.astro   Link hub for social bios
 │   │   └── rss.xml.js      RSS endpoint
 │   ├── styles/             Global CSS
 │   └── types/              TypeScript interfaces
