@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { formatBlogPosts, getExperienceInYears, selectNow, selectRelatedPosts, slugify } from "../src/js/utils.js";
+import { findPost, formatBlogPosts, getExperienceInYears, isUpcoming, selectNow, selectRelatedPosts, slugify } from "../src/js/utils.js";
 
 const post = (title, date, extra = {}) => ({
   url: `/blog/${title}`,
@@ -115,5 +115,27 @@ describe("selectNow", () => {
   it("falls back to the open text and the link when no job is current", () => {
     const experience = [job("Developer - Acme", "Julio 2025 - Agosto 2026")];
     assert.deepEqual(selectNow(experience, now), { text: "Abierto a colaboraciones.", link: now.link });
+  });
+});
+
+describe("isUpcoming", () => {
+  const today = new Date("2026-11-13T12:00:00Z");
+
+  it("counts a talk dated today or later as upcoming, and an earlier one as given", () => {
+    assert.equal(isUpcoming({ date: "2026-11-13" }, today), true);
+    assert.equal(isUpcoming({ date: "2026-12-01" }, today), true);
+    assert.equal(isUpcoming({ date: "2026-11-12" }, today), false);
+  });
+});
+
+describe("findPost", () => {
+  const posts = [post("uno", "2025-01-01"), post("dos", "2025-02-01")];
+
+  it("finds the post a slug names", () => {
+    assert.equal(findPost(posts, "dos"), posts[1]);
+  });
+
+  it("stops the build when no published post has the slug", () => {
+    assert.throws(() => findPost(posts, "tres"), /No published post at src\/pages\/blog\/tres\.md/);
   });
 });
