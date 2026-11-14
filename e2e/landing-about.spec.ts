@@ -284,7 +284,7 @@ test("AC-project-cards: each card's buttons share a row, and titles of cards in 
   expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBe(0);
 });
 
-test("AC-about-order: About's sections read find-me, services, experience, talks, community, projects, under an intro band that spans the viewport", async ({ page }) => {
+test("AC-about-order: About's sections read find-me, services, experience, talks, community, testimonials, projects, under an intro band that spans the viewport", async ({ page }) => {
   await page.setViewportSize({ width: 1920, height: 900 });
   await page.goto("/about");
   // The band carries the glow, so a band narrower than the viewport cuts it.
@@ -298,6 +298,7 @@ test("AC-about-order: About's sections read find-me, services, experience, talks
     about.experience.title,
     about.talks.title,
     about.community.title,
+    about.testimonials.title,
     about.projects.title,
   ]);
 });

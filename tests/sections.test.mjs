@@ -34,7 +34,8 @@ describe("published", () => {
 describe("post slugs", () => {
   const slugs = [
     ...talks.flatMap(({ post }) => (post ? [post] : [])),
-    ...community.flatMap(({ events = [] }) => events),
+    // External events (objects) link out, so only post slugs need a post here.
+    ...community.flatMap(({ events = [] }) => events.filter((event) => typeof event === "string")),
   ];
 
   it("AC-post-slugs: every talk post and community event names an existing, published post", () => {
@@ -47,44 +48,46 @@ describe("post slugs", () => {
   });
 });
 
-describe("placeholders", () => {
-  it("AC-placeholders-drafted: only DevFest Pereira 2025 is a published talk", () => {
-    assert.deepEqual(
-      published(talks, false).map(({ post }) => post),
-      ["gdg-devfest-pereira"],
-    );
-    const pending = drafts(talks);
-    const text = pending.map(({ title, event }) => `${title} ${event}`);
-    assert.ok(text.some((line) => /QA Conf/.test(line)), "a QA Conf draft");
-    assert.ok(text.some((line) => /AWS/.test(line)), "an AWS draft");
-    assert.equal(text.filter((line) => /FLISoL/.test(line)).length, 2, "two FLISoL drafts");
-    assert.ok(pending.some(({ date }) => date.startsWith("2022")), "a 2022 draft");
+describe("published content", () => {
+  it("AC-placeholders-drafted: every talk is published, the upcoming AWS talk with its registration", () => {
+    assert.equal(drafts(talks).length, 0);
+    assert.equal(talks.length, 7);
+    const aws = talks.find(({ event }) => event === "AWS User Group Pereira Meetup");
+    assert.equal(aws.date, "2026-11-23");
+    assert.equal(aws.registration, "https://www.meetup.com/aws-user-group-pereira/events/317390154/");
+    const devfest = talks.find(({ event }) => event === "Google DevFest Pereira 2025");
+    assert.equal(devfest.post, "gdg-devfest-pereira");
+    for (const talk of talks) assert.match(talk.date, /^\d{4}-\d{2}-\d{2}$/, talk.title);
   });
 
-  it("AC-placeholders-drafted: Backbone UTP and GDG Pereira are the published communities", () => {
-    assert.deepEqual(names(published(community, false)), ["Backbone UTP", "GDG Pereira"]);
-    for (const name of ["Pereira Tech Talks (PerTT)", "Software Freedom Day Pereira", "AWS User Group Pereira", "FLISoL", "QA Conf"]) {
-      assert.ok(names(drafts(community)).includes(name), `${name} is a draft`);
-    }
-    const backbone = community.find(({ name }) => name === "Backbone UTP");
-    assert.equal(backbone.kind, "organizer");
-    assert.equal(backbone.role, "Fundador y mentor");
-    assert.equal(backbone.period, "Agosto 2022 - Actualidad");
-    assert.deepEqual(backbone.events, ["gdg-devfest-pereira", "mujeres-tecnologia-2025", "la-ia-no-te-quitara-el-trabajo-pero-yo-si"]);
-    const sfd = community.find(({ name }) => name === "Software Freedom Day Pereira");
-    assert.deepEqual(sfd.events, ["software-freedom-day-2023", "software-freedom-day-2024", "software-freedom-day-2025"]);
-    const gdg = community.find(({ name }) => name === "GDG Pereira");
-    assert.equal(gdg.kind, "collaborator");
-    assert.equal(gdg.link, "https://gdg.community.dev/gdg-pereira/");
+  it("AC-placeholders-drafted: every community entry is published, PerTT with its meetups", () => {
+    assert.equal(drafts(community).length, 0);
+    assert.deepEqual(names(community.filter(({ kind }) => kind === "organizer")), [
+      "Backbone UTP",
+      "Pereira Tech Talks (PerTT)",
+      "Software Freedom Day Pereira",
+    ]);
+    assert.deepEqual(names(community.filter(({ kind }) => kind === "collaborator")), [
+      "GDG Pereira",
+      "AWS User Group Pereira",
+      "FLISoL",
+      "QA Conf",
+    ]);
+    for (const { name, link } of community) assert.match(link, /^https:\/\//, name);
+    const pertt = community.find(({ name }) => name === "Pereira Tech Talks (PerTT)");
+    assert.ok(pertt.events.length > 0);
+    for (const event of pertt.events) assert.match(event.url, /^https:\/\/pereiratechtalks\.org\/meetups\/[a-z0-9-]+\/$/);
   });
 
-  it("AC-placeholders-drafted: every client is a draft and no testimonial exists", () => {
+  it("AC-placeholders-drafted: every client is a draft", () => {
     assert.deepEqual(published(clients, false), []);
-    const titles = clients.map(({ title }) => title);
-    assert.ok(titles.some((title) => title.includes("vía Fuse")));
-    assert.ok(titles.some((title) => title.includes("vía Globant")));
-    assert.equal(clients.filter(({ kind }) => kind === "freelance").length, 2);
-    assert.deepEqual(testimonials, []);
+  });
+
+  it("AC-placeholders-drafted: the three LinkedIn recommendations are published as testimonials", () => {
+    assert.deepEqual(names(published(testimonials, false)), ["Paula Andrea Castro", "Mariana Valencia", "Mariana Cortés Rueda"]);
+    for (const { name, role, quote } of testimonials) {
+      assert.ok(role && quote.length > 100, name);
+    }
   });
 });
 

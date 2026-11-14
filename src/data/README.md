@@ -11,10 +11,10 @@
 | `links.ts` | Every string on `/enlaces`: page title and description, the hidden new-tab note, and the links in page order. Each link's `id` is the `link_id` sent to analytics, so keep it when the label or URL changes. `next-event` keeps its id from one event to the next; edit its `href` and `description` by hand | `enlaces.astro` |
 | `services.ts` | The service cards under "Servicios" on About: icon, title and description | `about.astro` |
 
-| `talks.ts` | Sergio's own talks, not the events he organized. `date` is ISO; a talk dated on or after the build day is upcoming. `post` names its post's slug, whose cover and link the card takes | `about.astro` (Charlas), `index.astro` (the charlas metric and Ahora) |
-| `community.ts` | `kind: "organizer"` renders a card with role, period, link and `events` (post slugs) as chips; `"collaborator"` renders one chip | `about.astro` (Comunidad) |
+| `talks.ts` | Sergio's own talks, not the events he organized. `date` is ISO; a talk dated on or after the build day is upcoming. `post` names its post's slug, whose cover and link the card takes; a talk without a post takes `image`, a `.webp` under `src/assets/images/` | `about.astro` (Charlas), `index.astro` (the charlas metric and Ahora) |
+| `community.ts` | `kind: "organizer"` renders a card with role, period, link and `events` as chips: a post slug links to the post, and `{ title, url }` links to an event published elsewhere, in a new tab; `"collaborator"` renders one chip | `about.astro` (Comunidad) |
 | `clients.ts` | `kind: "employer"` credits the employer, never its client; `"freelance"` is a direct client. Each has a role and a one-line outcome | `about.astro` (Clientes) |
-| `testimonials.ts` | Quotes with name, role and company. Add one only with the consent of the person quoted, and keep the proof outside the repository | `about.astro` (Testimonios) |
+| `testimonials.ts` | Quotes with name, role and an optional company: the recommendations people wrote publicly on Sergio's LinkedIn profile, word for word. Add one only with the owner's approval | `about.astro` (Testimonios) |
 
 **Drafts.** An entry in `talks.ts`, `community.ts`, `clients.ts` or `testimonials.ts` with `draft: true` is a placeholder: it shows under `pnpm run dev` and never in a build (`published()` in `src/js/utils.js`). A section with nothing published is not rendered. To publish an entry, fill it in and delete its `draft` line.
 
