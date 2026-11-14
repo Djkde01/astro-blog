@@ -45,7 +45,7 @@ export const talks: Talk[] = [
   {
     title: "Conversatorio PerTT: ¿Qué es una Hackathon?",
     event: "Pereira Tech Talks",
-    date: "2025-10-25",
+    date: "2025-10-29",
     place: "Universidad Tecnológica de Pereira, Sala Magistral 1",
     language: "Español",
     image: "/src/assets/images/talk-conversatorio-hackathon.webp",
