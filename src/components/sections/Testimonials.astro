@@ -20,7 +20,7 @@ const { testimonials, labels } = Astro.props;
             <figure class="testimonial">
               <blockquote>{quote}</blockquote>
               <figcaption>
-                <strong>{name}</strong> · {role}, {company}
+                <strong>{name}</strong> · {company ? `${role}, ${company}` : role}
               </figcaption>
             </figure>
           </Card>

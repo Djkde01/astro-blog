@@ -19,6 +19,9 @@ const postTitle = (slug: string) =>
     .match(/^title:\s*(.+)$/m)![1]
     .trim()
     .replace(/^"(.*)"$/, "$1");
+// A post slug links to its post; an external event links out under its own title.
+const eventChip = (event: string | { title: string; url: string }) =>
+  typeof event === "string" ? [postTitle(event), `/blog/${event}`] : [event.title, event.url];
 const talkTag = (date: string) => (isUpcoming({ date }, new Date()) ? about.talks.upcoming : date.slice(0, 4));
 
 // The first non-transparent background behind an element, as [r, g, b].
@@ -108,7 +111,7 @@ test("AC-community-section: Comunidad shows the organizer cards with event chips
     const chips = await card.locator(".card-chips a").evaluateAll((anchors) =>
       anchors.map((anchor) => [anchor.textContent!.replace(/\s+/g, " ").trim(), anchor.getAttribute("href")]),
     );
-    expect(chips).toEqual((entry.events ?? []).map((slug) => [postTitle(slug), `/blog/${slug}`]));
+    expect(chips).toEqual((entry.events ?? []).map(eventChip));
   }
 
   const collaborators = builtCommunity.filter(({ kind }) => kind === "collaborator");
@@ -117,6 +120,34 @@ test("AC-community-section: Comunidad shows the organizer cards with event chips
     anchors.map((anchor) => [anchor.textContent!.replace(/\s+/g, " ").trim(), anchor.getAttribute("href")]),
   );
   expect(chips).toEqual(collaborators.map(({ name, link }) => [name, link]));
+});
+
+test("AC-community-section: an external event chip links out in a new tab", async ({ page }) => {
+  await page.goto(FIXTURE);
+  const chip = page.locator("#fixture section.community .card-chips a", { hasText: "Meetup externo de prueba" });
+  await expect(chip).toHaveAttribute("href", "https://example.com/meetup");
+  await expect(chip).toHaveAttribute("target", "_blank");
+  const post = page.locator("#fixture section.community .card-chips a").first();
+  await expect(post).toHaveAttribute("href", "/blog/software-freedom-day-2024");
+  await expect(post).not.toHaveAttribute("target", "_blank");
+});
+
+test("AC-community-section: a long event list shows six chips and folds the rest behind a toggle", async ({ page }) => {
+  await page.goto("/about");
+  const cards = page.locator("section.community .organizers article.content-card");
+  for (const [index, entry] of builtCommunity.filter(({ kind }) => kind === "organizer").entries()) {
+    const card = cards.nth(index);
+    const total = (entry.events ?? []).length;
+    const toggle = card.locator("details.more-chips");
+    if (total <= 6) {
+      await expect(toggle).toHaveCount(0);
+      continue;
+    }
+    await expect(card.locator(".card-chips a:visible")).toHaveCount(6);
+    await expect(toggle.locator("summary")).toHaveText(about.community.more.replace("{count}", `${total - 6}`));
+    await toggle.locator("summary").click();
+    await expect(card.locator(".card-chips a:visible")).toHaveCount(total);
+  }
 });
 
 test("AC-clients-section: Clientes groups the clients into Empresa and Freelance", async ({ page }) => {
@@ -145,16 +176,17 @@ test("AC-testimonials-section: Testimonios shows each quote in a figure with its
   await expect(figures).toHaveCount(fixtureTestimonials.length);
   for (const [index, { quote, name, role, company }] of fixtureTestimonials.entries()) {
     await expect(figures.nth(index).locator("blockquote")).toHaveText(quote);
-    const caption = figures.nth(index).locator("figcaption");
-    for (const part of [name, role, company]) await expect(caption).toContainText(part);
+    // The company is optional: without one, the caption ends at the role.
+    const caption = await figures.nth(index).locator("figcaption").textContent();
+    expect(squash(caption)).toBe(`${name} · ${role}${company ? `, ${company}` : ""}`);
   }
 });
 
 test("AC-empty-hidden: a section with nothing published renders nothing", async ({ page }) => {
   await page.goto("/about");
   const headings = await page.locator("main section h2").allTextContents();
+  // Every client is still a draft, so Clientes stays hidden on the built site.
   expect(headings.map(squash)).not.toContain(about.clients.title);
-  expect(headings.map(squash)).not.toContain(about.testimonials.title);
 
   await page.goto(FIXTURE);
   for (const name of ["talks", "community", "clients", "testimonials"]) {

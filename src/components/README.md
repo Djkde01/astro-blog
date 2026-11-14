@@ -13,7 +13,7 @@ Astro components for the site's UI. Styles live in `src/styles/global.css`, so m
 | `Pagination` | Previous and next links on the blog index |
 | `Card` | The card primitive (`Card.astro`): optional tag, image (through `<Picture>`), title (`h3`, or `h4` with `level={4}` inside a subgroup), description, CTA buttons and a slot. Project, talk, client and testimonial cards render through it |
 | `Projects` | Project cards through `Card`, from `src/data/projects.ts`; maps each `status` to its label and class. Its script reveals the cards with `revealCards()` |
-| `sections/` | `Talks`, `Community`, `Clients` and `Testimonials` on About. Each receives its published entries and labels as props, renders nothing when given none, and carries an accent hue through the `section-accent` class. `e2e/pages/sections-fixture.astro` renders them with fixture data in the end-to-end build |
+| `sections/` | `Talks`, `Community`, `Clients` and `Testimonials` on About. Each receives its published entries and labels as props, renders nothing when given none, and carries an accent hue through the `section-accent` class. `Community` folds an organizer's event chips past the sixth behind a `<details>` toggle. `e2e/pages/sections-fixture.astro` renders them with fixture data in the end-to-end build |
 | `Section` | A section of About: `title`, `icon` and `class` props, and a slot for its content |
 | `ExperienceItem` | One job on the about page |
 | `Seo` | Canonical, social and JSON-LD tags |

@@ -49,6 +49,7 @@ export const about: AboutPage = {
     collaborators: "He colaborado con",
     link: "Sitio web",
     events: "Eventos",
+    more: "Ver {count} más",
   },
   clients: { title: "Clientes", icon: "mdi:handshake", employer: "Empresa", freelance: "Freelance" },
   testimonials: { title: "Testimonios", icon: "mdi:comment-quote" },

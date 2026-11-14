@@ -93,7 +93,14 @@ export interface AboutPage {
     upcoming: string;
     links: { registration: string; slides: string; recording: string; post: string };
   };
-  community: SectionHeading & { organizers: string; collaborators: string; link: string; events: string };
+  community: SectionHeading & {
+    organizers: string;
+    collaborators: string;
+    link: string;
+    events: string;
+    // The toggle over the folded event chips; "{count}" is how many it hides.
+    more: string;
+  };
   clients: SectionHeading & { employer: string; freelance: string };
   testimonials: SectionHeading;
   projects: SectionHeading;
@@ -138,6 +145,11 @@ export interface Talk {
   draft?: boolean;
 }
 
+export interface ExternalEvent {
+  title: string;
+  url: string;
+}
+
 export interface CommunityEntry {
   name: string;
   // Organizers render as cards; collaborators as one row of chips.
@@ -145,8 +157,9 @@ export interface CommunityEntry {
   role?: string;
   period?: string;
   link?: string;
-  // Slugs of the event posts under src/pages/blog/, shown as chips on an organizer's card.
-  events?: string[];
+  // Chips on an organizer's card: the slug of an event post under src/pages/blog/, or an
+  // event published elsewhere, which links out in a new tab.
+  events?: (string | ExternalEvent)[];
   draft?: boolean;
 }
 
@@ -161,11 +174,12 @@ export interface Client {
   draft?: boolean;
 }
 
-// Published only with the consent of the person quoted; the proof stays outside the repository.
+// Published only with the owner's approval: each quote is a recommendation its author wrote publicly for Sergio.
 export interface Testimonial {
   name: string;
   role: string;
-  company: string;
+  // Left out when the source does not name one; the caption then ends at the role.
+  company?: string;
   quote: string;
   draft?: boolean;
 }

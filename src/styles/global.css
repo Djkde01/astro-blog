@@ -1260,6 +1260,29 @@ a.chip:focus-visible {
   border-color: hsl(var(--section-accent, var(--accent)));
 }
 
+/* the event chips past the first six, folded behind a native toggle */
+.more-chips > summary {
+  width: fit-content;
+  cursor: pointer;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: hsl(var(--section-accent-text, var(--txt)));
+}
+
+.more-chips[open] > summary {
+  margin-bottom: var(--space-xs);
+}
+
+/* organizer cards: the chips sit under the role, and a taller neighbour's spare height goes above the button */
+.community .card-body {
+  display: flex;
+  flex-direction: column;
+
+  & .card-ctas {
+    margin-top: auto;
+  }
+}
+
 .card-chips-label {
   font-size: var(--fs-sm);
   color: var(--color-gray-700);

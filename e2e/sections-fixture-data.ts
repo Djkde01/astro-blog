@@ -21,7 +21,7 @@ export const fixtureCommunity: CommunityEntry[] = [
     role: "Organizador",
     period: "2024 - Actualidad",
     link: "https://example.com/comunidad",
-    events: ["software-freedom-day-2024"],
+    events: ["software-freedom-day-2024", { title: "Meetup externo de prueba", url: "https://example.com/meetup" }],
   },
   { name: "Comunidad aliada", kind: "collaborator", link: "https://example.com/aliada" },
 ];
@@ -35,4 +35,5 @@ export const fixtureClients: Client[] = [
 export const fixtureTestimonials: Testimonial[] = [
   { name: "Ana Prueba", role: "Líder técnica", company: "Empresa Uno", quote: "Una cita de prueba sobre el trabajo en equipo." },
   { name: "Luis Ejemplo", role: "Gerente", company: "Empresa Dos", quote: "Otra cita de prueba sobre los resultados." },
+  { name: "Sin Empresa", role: "Mentora", quote: "Una cita de prueba sin empresa." },
 ];
