@@ -51,7 +51,8 @@ Community and talks are what set him apart (owner, 2026-11-06). He organizes and
 - Work experience: `src/data/experience.ts` (Fuse, Curoo, Selaski, Platzi, Globant). Backbone UTP lives in `community.ts`.
 - Projects: `src/data/projects.ts`, with images.
 - Profile photo: `src/assets/images/profile.webp`.
-- Absent, and not to be invented: published testimonials, client names, and any metric beyond what the data computes. Testimonials need consent from the person quoted, and nothing naming a third party leaves draft without the owner's word.
+- Testimonials: public LinkedIn recommendations written for Sergio, quoted word for word.
+- Absent, and not to be invented: client names, and any metric beyond what the data computes. Nothing naming a third party is published without the owner's word.
 
 ## Product Principles
 

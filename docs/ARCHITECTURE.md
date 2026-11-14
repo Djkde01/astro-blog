@@ -35,7 +35,7 @@ There is no content collection. Each consumer finds posts with its own `import.m
 | `src/layouts/BlogPostLayout.astro` | `../pages/blog/*.md` | Posts under the article, through `selectRelatedPosts()` |
 | `src/components/CategoryCloud.astro` | `../pages/blog/*.md` | Category list and counts |
 | `src/pages/rss.xml.js` | `./blog/**/*.md` | Feed |
-| `src/pages/about.astro` | `./blog/*.md` | Covers and links of the talks in `src/data/talks.ts` and the event chips in `src/data/community.ts`, both named by slug through `findPost()`, which stops the build on a missing or unpublished post |
+| `src/pages/about.astro` | `./blog/*.md` | Covers and links of the talks in `src/data/talks.ts` and the post event chips in `src/data/community.ts`, both named by slug through `findPost()`, which stops the build on a missing or unpublished post |
 
 A change to discovery or to the frontmatter shape must reach all seven. RSS is the only consumer that also reads nested folders, so posts must stay flat.
 

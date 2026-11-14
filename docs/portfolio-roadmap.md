@@ -220,17 +220,17 @@ The design reference is the landing and About frames of `designs/site.pen` (mock
 
 ## 8. Phase 5 — New Sections (Talks, Community, Clients, Testimonials)
 
-Goal: add the four sections, reusing the data layer from earlier phases. Settled through grilling on 2026-11-12 and delivered by PLAN_009; the signed frames are 5, 6 and 7 in `designs/site.pen`.
+Goal: add the four sections, reusing the data layer from earlier phases. Settled through grilling on 2026-11-12 and delivered by PLAN_009; the signed frames are 7, 8 and 9 in `designs/site.pen`.
 
 ### Components and data
 
 - `src/data/talks.ts`, `src/data/community.ts`, `src/data/clients.ts` and `src/data/testimonials.ts`, typed in `src/types/sections.ts`.
 - **Talks source** (settles Phase 0's direction): only 1 of the 6 posts in `Charlas` is a talk Sergio gave; the others are events he organized or another speaker's talk. So `talks.ts` lists **only his talks**, and a talk may name its post with a `post` slug, from which the card takes its cover and a "Post" link. The event posts appear in Comunidad, as chips under the community that organized them.
-- **Drafts**: an entry with `draft: true` is a placeholder still to fill in. `published()` in `src/js/utils.js` keeps it under `astro dev` and drops it from every build, and a section with nothing published renders nothing. The talks the owner still has to fill in (QA Conf, AWS, FLISoL, one from 2022), the PerTT and Software Freedom Day organizer cards, three collaborator chips and every client start as drafts.
+- **Drafts**: an entry with `draft: true` is a placeholder still to fill in. `published()` in `src/js/utils.js` keeps it under `astro dev` and drops it from every build, and a section with nothing published renders nothing. The owner filled in the talks and community entries on 2026-11-13, so only the clients remain drafts: Clientes stays hidden, because the clients show in the experience timeline and there is not enough freelance work to show yet.
 - `src/components/sections/Talks.astro` — Sergio's talks, newest first: title, event, date, place, language, and Inscripción, Slides, Grabación or Post links where the data has them. An upcoming talk is tagged "Próxima".
-- `src/components/sections/Community.astro` — "Organizo" cards with role, period, link and event chips (posts named by slug, resolved through `formatBlogPosts()`), and a "He colaborado con" chip row. Backbone UTP moved here from the experience timeline, and the chips Phase 4 removed from the hero came back here.
+- `src/components/sections/Community.astro` — "Organizo" cards with role, period, link and event chips, and a "He colaborado con" chip row. A chip is a post named by slug, resolved through `formatBlogPosts()`, or an event published elsewhere as `{ title, url }`, such as the Pereira Tech Talks meetups, which opens in a new tab. A card shows six chips and folds the rest behind a native `<details>` toggle, "Ver N más". Backbone UTP moved here from the experience timeline, and the chips Phase 4 removed from the hero came back here.
 - `src/components/sections/Clients.astro` — two subgroups, **Empresa** and **Freelance**, each card with role and outcome. Empresa entries credit the employer and never name its client ("· vía Fuse").
-- `src/components/sections/Testimonials.astro` — quote cards with attribution; empty, so hidden, until a testimonial arrives with consent.
+- `src/components/sections/Testimonials.astro` — quote cards with attribution: the recommendations people wrote publicly on Sergio's LinkedIn profile, word for word, published with the owner's approval. The company is optional.
 - `src/components/Card.astro` — the card primitive (tag, image through `<Picture>`, title, description, CTAs and a slot). Project, talk and client cards render through it, and a testimonial's `figure` sits in its slot.
 - Section icons `mdi:microphone-variant`, `mdi:account-group`, `mdi:handshake` and `mdi:comment-quote`, and four accent hues in [`src/styles/global.css`](../src/styles/global.css), `--accent-talks`, `--accent-community`, `--accent-clients` and `--accent-testimonials`, each `calc(var(--_hue) + offset)` with `--accent`'s saturation and lightness in light and dark. They color the icon box, card tags and card borders only.
 - **Ahora**: `selectNow()` invites to the earliest published talk dated on or after the build day, ahead of the job and community text. The day is the **build** day: a deploy that is not rebuilt after the talk keeps inviting to it.
@@ -245,7 +245,7 @@ Goal: add the four sections, reusing the data layer from earlier phases. Settled
 
 - Empty data arrays render nothing (section hidden, not empty); drafts never reach a build.
 - Logos and photos go under `src/assets/images/` and render through `<Picture>`, as post covers do.
-- Testimonials require explicit consent from the person quoted before publishing, and nothing naming a third party leaves draft without the owner's word.
+- Testimonials and anything naming a third party are published only with the owner's approval.
 
 ---
 
@@ -375,7 +375,35 @@ Goal: one public page at a descriptive route that gathers the owner's links for 
 
 ---
 
-## 12. Suggested Architecture (Visual)
+## 12. Phase 9 — Posts for the Talks
+
+Goal: a blog post for each talk in `src/data/talks.ts` that has none yet, so every Charlas card links to a written version and takes its cover from the post.
+
+### Talks without a post
+
+- "De documento a video: explicaciones narradas con IA en AWS por menos de un dólar", AWS User Group Pereira Meetup, 2026-11-23. Write it after the talk, with its slides and recording once they exist.
+- "Spec Driven Development: Calidad asegurada desde el requerimiento", QA Conf, 2026-09-05. It has slides and a recording.
+- "El Open Source en tiempos de IA", FLISoL 2026, 2026-05-07. It has slides.
+- "Conversatorio PerTT: ¿Qué es una Hackathon?", Pereira Tech Talks, 2025. A panel, with no slides or recording.
+- "De usuarios a creadores: Open Source para transformar la industria y Latinoamérica", FLISoL 2024. It has slides.
+- "Introducción a Load Testing y Observability con K6 y New Relic", Noche de liderazgo y testing, 2022-05-12. It has slides and a recording.
+- "Herramientas IA para desarrollo web", Google DevFest Pereira 2025. Its card links to `gdg-devfest-pereira`, a post about the event; a post about the talk itself is optional.
+
+### Changes
+
+- One post per talk under `src/pages/blog/`, in the `Charlas` category, with the frontmatter every post needs (`title`, `description`, `date`, `category`, `image` with `src` and `alt`).
+- Set each talk's `post` to the new slug in `src/data/talks.ts`. The card then takes the post's cover and a "Post" button, so the talk's `image` can be deleted.
+- Talks with a recording can start from Phase 6's transcript tool, which drafts a post from a transcript.
+
+### Guardrails
+
+- Posts go through `formatBlogPosts()`, so a post with `draft: true` or a future date is not published, and `findPost()` stops the build if a talk names it. Publish the post before linking it.
+- Write the posts in Spanish, like the rest of the blog.
+- A post naming another speaker or a third party needs the owner's approval before it is published.
+
+---
+
+## 13. Suggested Architecture (Visual)
 
 ```mermaid
 flowchart TD
@@ -452,7 +480,7 @@ flowchart TD
 
 ---
 
-## 13. Validation Plan
+## 14. Validation Plan
 
 Each phase's plan selects its gates from [`docs/TESTING_GUIDE.md`](TESTING_GUIDE.md). A criterion closes only on a gate or on the owner's sign-off.
 
@@ -483,7 +511,7 @@ These checks have no automated gate, so run them by hand or ask for the owner's 
 
 ---
 
-## 14. Sequencing Summary
+## 15. Sequencing Summary
 
 | Phase | Scope | Breaking? | Depends on |
 |-------|-------|-----------|------------|
@@ -496,6 +524,7 @@ These checks have no automated gate, so run them by hand or ask for the owner's 
 | 6 | Transcript → post tool | No | 0 |
 | 7 | CI pipelines + lint + pre-push hook | No | — |
 | 8 | Link hub + click metrics | No | 0 |
+| 9 | Posts for the talks | No | 5 (6 optional) |
 
 Phase numbers identify the work, and this table sets the dependencies. Phases 7 and 8 do not depend on Phases 1 to 6, and Phase 7 should run first so that later phases land with CI.
 
