@@ -14,7 +14,11 @@ export default defineConfig({
     sitemap(),
     partytown({
       config: {
-        forward: ["dataLayer.push"],
+        // Main-thread gtag() calls run the worker's gtag, which pushes a real Arguments object.
+        // globalFns exposes MainHead's inline gtag on the worker's window; Partytown scopes it otherwise.
+        // See docs/portfolio-roadmap.md, Phase 8.
+        forward: ["dataLayer.push", "gtag"],
+        globalFns: ["gtag"],
       },
     }),
     icon(),

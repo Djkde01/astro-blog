@@ -1,0 +1,70 @@
+---
+import { Picture } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import MainLayout from "../layouts/MainLayout.astro";
+import profile from "../assets/images/profile.webp";
+import { landing } from "../data/landing";
+import { linkHub } from "../data/links";
+
+const { hero } = landing;
+const highlighted = linkHub.links.filter((link) => link.highlighted);
+const rest = linkHub.links.filter((link) => !link.highlighted);
+---
+
+<MainLayout title={linkHub.title} description={linkHub.description} nav={false}>
+  <section class="links-band">
+    <div class="container link-hub">
+      <header>
+        <Picture
+          src={profile}
+          alt={hero.photoAlt}
+          width="132"
+          height="132"
+          widths={[132, 264]}
+          sizes="132px"
+          formats={["avif"]}
+          fallbackFormat="webp"
+          quality={70}
+          loading="eager"
+          fetchpriority="high"
+        />
+        <h1>{hero.name}</h1>
+        <p>{hero.role}. {hero.value}</p>
+      </header>
+      <ul class="link-cards" data-links="highlighted">
+        {
+          highlighted.map(({ id, icon, label, href, description }) => (
+            <li>
+              <a href={href} target="_blank" rel="noopener" data-link-id={id}>
+                <span class="icon-box">
+                  <Icon name={icon} />
+                </span>
+                <Icon name="mdi:arrow-top-right" class="arrow" />
+                <span class="link-label">{label}</span>
+                <span class="link-description">{description}</span>
+                <span class="visually-hidden">{linkHub.newTabNote}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <ul class="link-buttons" data-links="all">
+        {
+          rest.map(({ id, icon, label, href }) => (
+            <li>
+              <a href={href} target="_blank" rel="noopener" data-link-id={id}>
+                <Icon name={icon} />
+                <span class="link-label">{label}</span>
+                <span class="visually-hidden">{linkHub.newTabNote}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</MainLayout>
+
+<script>
+  import "../js/linkClicks.js";
+</script>

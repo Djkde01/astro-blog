@@ -12,6 +12,8 @@ The Google Analytics ID in `src/layouts/MainHead.astro` is public by design.
 
 - Google Analytics runs in a worker through Partytown. Keep it off the main thread.
 - Test runs must not reach it. `e2e/fixtures.ts` aborts those requests, so specs import `test` from there.
+- `/enlaces` sends one custom event, `link_click`, whose only parameter is `link_id`, the link's id from `src/data/links.ts`. No personal data goes into event parameters. A missing or failing `gtag` never stops the link from opening.
+- Links that open in a new tab carry `rel="noopener"`, so the opened page cannot reach `window.opener`.
 - Adding another third-party script or embed is a decision for the owner, because it affects readers' privacy.
 
 ## Continuous integration

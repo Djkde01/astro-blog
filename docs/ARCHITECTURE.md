@@ -14,6 +14,7 @@ src/pages/blog/*.md ──> import.meta.glob ──> formatBlogPosts() ──> p
 |-------|--------|-------|
 | `/` | `src/pages/index.astro` | Hero, current focus, metrics and the 3 latest posts, with all copy from `src/data/landing.ts` |
 | `/about` | `src/pages/about.astro` | Bio, contact links, services, experience, projects, with all copy from `src/data/about.ts` |
+| `/enlaces` | `src/pages/enlaces.astro` | Link hub for social bios. It is out of the nav and renders without it (`MainLayout` `nav={false}`). Every link opens in a new tab and a click sends one `link_click` event; all copy from `src/data/links.ts` |
 | `/blog/`, `/blog/2/` | `src/pages/blog/[...page].astro` | Pagination, 6 posts per page |
 | `/blog/<file>` | `src/pages/blog/<file>.md` | One route per Markdown file |
 | `/category/<slug>` | `src/pages/category/[category].astro` | One route per category in use |
@@ -40,7 +41,7 @@ A change to discovery or to the frontmatter shape must reach all six. RSS is the
 ## Page composition
 
 - `MainLayout` wraps every page with `MainHead`, `Nav` and `Footer`, and imports the font and `global.css`.
-- `MainHead` holds the Google Analytics tag, which runs in a worker through Partytown, and loads the Lite YouTube helper globally.
+- `MainHead` holds the Google Analytics tag, which runs in a worker through Partytown, and loads the Lite YouTube helper globally. `astro.config.mjs` forwards `gtag` to that worker and exposes its inline `gtag` with `globalFns`, so a main-thread `gtag("event", …)` call reaches Google Analytics. `/enlaces` relies on it for `link_click`.
 - `Seo` writes canonical, Open Graph and Twitter tags, plus JSON-LD from `src/js/jsonLD.js`.
 - `BlogPostLayout` adds the post header, the content in one column, and a footer with the post's category and three posts to read next. Astro picks it through each post's `layout` frontmatter.
 
