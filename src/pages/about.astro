@@ -5,14 +5,26 @@ import MainLayout from "../layouts/MainLayout.astro";
 import ExperienceItem from "../components/ExperienceItem.astro";
 import Projects from "../components/Projects.astro";
 import Section from "../components/Section.astro";
+import Clients from "../components/sections/Clients.astro";
+import Community from "../components/sections/Community.astro";
+import Talks from "../components/sections/Talks.astro";
+import Testimonials from "../components/sections/Testimonials.astro";
 import profile from "../assets/images/profile.webp";
 import { about } from "../data/about";
+import { clients } from "../data/clients";
+import { community } from "../data/community";
 import { experience } from "../data/experience";
 import { services } from "../data/services";
-import { getExperienceInYears } from "../js/utils";
+import { talks } from "../data/talks";
+import { testimonials } from "../data/testimonials";
+import { formatBlogPosts, getExperienceInYears, published } from "../js/utils";
+import type { Post } from "../types/posts";
 
 const { intro, findMe } = about;
 const years = `${getExperienceInYears()}`;
+// Talks and community events link to posts; drafts show only under `astro dev`.
+const posts: Post[] = await formatBlogPosts(import.meta.glob("./blog/*.md", { eager: true }));
+const dev = import.meta.env.DEV;
 ---
 
 <MainLayout title={about.title}>
@@ -88,6 +100,10 @@ const years = `${getExperienceInYears()}`;
       }
     </ol>
   </Section>
+  <Talks talks={published(talks, dev)} labels={about.talks} posts={posts} />
+  <Community community={published(community, dev)} labels={about.community} posts={posts} />
+  <Clients clients={published(clients, dev)} labels={about.clients} />
+  <Testimonials testimonials={published(testimonials, dev)} labels={about.testimonials} />
   <Section class="projects" icon={about.projects.icon} title={about.projects.title}>
     <Projects />
   </Section>

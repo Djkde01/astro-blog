@@ -1,0 +1,93 @@
+---
+import Card from "../Card.astro";
+import Section from "../Section.astro";
+import { findPost } from "../../js/utils";
+import type { Post } from "../../types/posts";
+import type { AboutPage, CommunityEntry } from "../../types/sections";
+
+interface Props {
+  community: CommunityEntry[];
+  labels: AboutPage["community"];
+  // From formatBlogPosts, to resolve each event chip's post.
+  posts: Post[];
+}
+
+const { community, labels, posts } = Astro.props;
+// A card shows its first chips; the rest fold behind a native <details> toggle.
+const VISIBLE_CHIPS = 6;
+// A post slug becomes a chip to its post; an external event links out in a new tab.
+const chipsOf = (events: NonNullable<CommunityEntry["events"]>) =>
+  events.map((event) => {
+    if (typeof event !== "string") return { text: event.title, href: event.url, external: true };
+    const post = findPost(posts, event);
+    return { text: post.frontmatter.title, href: post.url, external: false };
+  });
+const organizers = community
+  .filter(({ kind }) => kind === "organizer")
+  .map((entry) => ({ ...entry, chips: chipsOf(entry.events ?? []) }));
+const collaborators = community.filter(({ kind }) => kind === "collaborator");
+---
+
+{
+  community.length > 0 && (
+    <Section class="community section-accent" icon={labels.icon} title={labels.title}>
+      {organizers.length > 0 && (
+        <div class="organizers">
+          <h3 class="h3">{labels.organizers}</h3>
+          <div class="card-grid">
+            {organizers.map(({ name, role, period, link, chips }) => {
+              const list = (group: typeof chips) => (
+                <ul class="card-chips chips">
+                  {group.map(({ text, href, external }) => (
+                    <li>
+                      <a class="chip" href={href} {...(external ? { target: "_blank", rel: "noopener" } : {})}>
+                        {text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              );
+              const folded = chips.slice(VISIBLE_CHIPS);
+              return (
+                <Card
+                  level={4}
+                  title={name}
+                  tag={period}
+                  description={role}
+                  ctas={link ? [{ text: labels.link, href: link, icon: "mdi:open-in-new" }] : []}
+                >
+                  {chips.length > 0 && <p class="card-chips-label">{labels.events}</p>}
+                  {chips.length > 0 && list(chips.slice(0, VISIBLE_CHIPS))}
+                  {folded.length > 0 && (
+                    <details class="more-chips">
+                      <summary>{labels.more.replace("{count}", `${folded.length}`)}</summary>
+                      {list(folded)}
+                    </details>
+                  )}
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+      )}
+      {collaborators.length > 0 && (
+        <div class="collaborators">
+          <h3 class="h3">{labels.collaborators}</h3>
+          <ul class="chips">
+            {collaborators.map(({ name, link }) => (
+              <li>
+                {link ? (
+                  <a class="chip" href={link} target="_blank" rel="noopener">
+                    {name}
+                  </a>
+                ) : (
+                  <span class="chip">{name}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </Section>
+  )
+}

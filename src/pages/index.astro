@@ -7,8 +7,10 @@ import { Icon } from "astro-icon/components";
 import profile from "../assets/images/profile.webp";
 import { experience } from "../data/experience";
 import { landing } from "../data/landing";
-import { formatBlogPosts, getExperienceInYears, selectNow } from "../js/utils";
+import { talks as talkList } from "../data/talks";
+import { formatBlogPosts, getExperienceInYears, isUpcoming, published, selectNow } from "../js/utils";
 import type { Post } from "../types/posts";
+import type { Talk } from "../types/sections";
 
 const allPosts = import.meta.glob("./blog/*.md", {
   eager: true, // This ensures we get the module content directly
@@ -16,8 +18,10 @@ const allPosts = import.meta.glob("./blog/*.md", {
 
 const posts: Post[] = await formatBlogPosts(allPosts);
 const { hero, now, metrics, latestPosts } = landing;
-const current = selectNow(experience, now);
-const talks = posts.filter((post) => post.frontmatter.category === metrics.talksCategory).length;
+const shownTalks: Talk[] = published(talkList, import.meta.env.DEV);
+const current = selectNow(experience, now, shownTalks);
+// Talks already given; an upcoming talk counts once its day has passed and the site is rebuilt.
+const talks = shownTalks.filter((talk) => !isUpcoming(talk)).length;
 const stats = [
   { value: `${talks}`, label: metrics.talks, highlight: true },
   { value: `+${getExperienceInYears()}`, label: metrics.years, highlight: false },

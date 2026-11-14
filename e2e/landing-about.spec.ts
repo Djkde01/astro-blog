@@ -4,7 +4,8 @@ import { about } from "../src/data/about";
 import { experience } from "../src/data/experience";
 import { landing } from "../src/data/landing";
 import { services } from "../src/data/services";
-import { getExperienceInYears, selectNow, slugify } from "../src/js/utils.js";
+import { talks } from "../src/data/talks";
+import { getExperienceInYears, published, selectNow } from "../src/js/utils.js";
 
 const WIDTHS = [1280, 375];
 const trimmed = (texts: string[]) => texts.map((text) => text.replace(/\s+/g, " ").trim());
@@ -60,7 +61,7 @@ test("AC-now-strip: the Ahora strip sits between the hero and the metrics, spans
   await page.setViewportSize({ width: 1920, height: 900 });
   await page.goto("/");
   const strip = page.locator("section.now");
-  const { text, link } = selectNow(experience, landing.now);
+  const { text, link } = selectNow(experience, landing.now, published(talks, false));
   await expect(strip).toContainText(landing.now.label);
   await expect(strip).toContainText(text);
   if (link) {
@@ -82,9 +83,11 @@ test("AC-now-strip: the Ahora strip sits between the hero and the metrics, spans
   expect(label.x).toBeCloseTo(heading.x, 0);
 });
 
-test("AC-metrics-computed: the metrics are computed from the posts and the start date, charlas first", async ({ page }) => {
-  await page.goto(`/category/${slugify(landing.metrics.talksCategory)}/`);
-  const charlas = await page.locator("article.card").count();
+test("AC-metrics-computed: the metrics are computed from the talks, the posts and the start date, charlas first", async ({ page }) => {
+  // Phase 5: charlas counts the talks already given, not the posts in the Charlas category.
+  await page.goto("/about");
+  const tags = await page.locator("section.talks .card-tag").allTextContents();
+  const charlas = tags.filter((tag) => tag.trim() !== about.talks.upcoming).length;
   let posts = 0;
   for (let number = 1; (await page.goto(number === 1 ? "/blog/" : `/blog/${number}/`))?.ok(); number++) {
     posts += await page.locator("article.card").count();
@@ -261,7 +264,7 @@ test("AC-project-cards: each card's buttons share a row, and titles of cards in 
       await page.goto("/about");
       const cards = page.locator("article.project-card");
       for (const card of await cards.all()) {
-        const buttons = await positions(card.locator(".project-link a"));
+        const buttons = await positions(card.locator(".card-ctas a"));
         for (const button of buttons) expect(button.top).toBe(buttons[0].top);
       }
       const boxes = await positions(cards);
@@ -281,7 +284,7 @@ test("AC-project-cards: each card's buttons share a row, and titles of cards in 
   expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBe(0);
 });
 
-test("AC-about-order: About's sections read find-me, services, experience, projects, under an intro band that spans the viewport", async ({ page }) => {
+test("AC-about-order: About's sections read find-me, services, experience, talks, community, testimonials, projects, under an intro band that spans the viewport", async ({ page }) => {
   await page.setViewportSize({ width: 1920, height: 900 });
   await page.goto("/about");
   // The band carries the glow, so a band narrower than the viewport cuts it.
@@ -293,6 +296,9 @@ test("AC-about-order: About's sections read find-me, services, experience, proje
     about.findMe.title,
     about.services.title,
     about.experience.title,
+    about.talks.title,
+    about.community.title,
+    about.testimonials.title,
     about.projects.title,
   ]);
 });

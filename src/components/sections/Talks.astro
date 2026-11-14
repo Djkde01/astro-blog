@@ -1,0 +1,47 @@
+---
+import Card from "../Card.astro";
+import Section from "../Section.astro";
+import { resolveImage } from "../../js/images";
+import { findPost, formatTalkDate, isUpcoming } from "../../js/utils";
+import type { Post } from "../../types/posts";
+import type { AboutPage, Talk } from "../../types/sections";
+
+interface Props {
+  talks: Talk[];
+  labels: AboutPage["talks"];
+  // From formatBlogPosts, to resolve each talk's post and cover.
+  posts: Post[];
+}
+
+const { talks, labels, posts } = Astro.props;
+const newestFirst = talks.toSorted((a, b) => b.date.localeCompare(a.date));
+---
+
+{
+  newestFirst.length > 0 && (
+    <Section class="talks section-accent" icon={labels.icon} title={labels.title}>
+      <div class="card-grid">
+        {newestFirst.map((talk) => {
+          const post = talk.post ? findPost(posts, talk.post) : undefined;
+          const image = post ? resolveImage(post.frontmatter.image.src) : talk.image && resolveImage(talk.image);
+          const ctas = [
+            { text: labels.links.registration, href: talk.registration, icon: "mdi:ticket-outline" },
+            { text: labels.links.slides, href: talk.slides, icon: "mdi:presentation" },
+            { text: labels.links.recording, href: talk.recording, icon: "mdi:play-circle-outline" },
+            { text: labels.links.post, href: post?.url, icon: "mdi:text-box-outline" },
+          ].filter((cta): cta is { text: string; href: string; icon: string } => Boolean(cta.href));
+          return (
+            <Card
+              title={talk.title}
+              tag={isUpcoming(talk) ? labels.upcoming : talk.date.slice(0, 4)}
+              description={[talk.event, formatTalkDate(talk.date), talk.place, talk.language].join(" · ")}
+              image={image || undefined}
+              imageAlt={post ? post.frontmatter.image.alt : talk.title}
+              ctas={ctas}
+            />
+          );
+        })}
+      </div>
+    </Section>
+  )
+}
