@@ -670,6 +670,11 @@ main:has(> .now, > .about-band) {
   justify-self: stretch;
 }
 
+/* the body centers main vertically; Charlas sits at the top, so filtering down to a few talks never moves its title */
+main:has(> .talks) {
+  align-self: start;
+}
+
 .now {
   background-color: hsl(var(--muted));
   border-block: var(--border-sm) solid hsl(var(--txt) / 0.08);

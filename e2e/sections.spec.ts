@@ -119,6 +119,26 @@ test("AC-talks-year-filter: a year chip above Charlas shows only that year's tal
   await choose(about.talks.filter.all, builtTalks);
 });
 
+test("AC-talks-filter-pinned: the title and the year chips stay at the top when a filter leaves few talks", async ({
+  page,
+}) => {
+  const years = [...new Set(builtTalks.map(({ date }) => date.slice(0, 4)))];
+  // The year with the fewest talks leaves the page shorter than the window.
+  const fewest = years.toSorted(
+    (a, b) => builtTalks.filter(({ date }) => date.startsWith(a)).length - builtTalks.filter(({ date }) => date.startsWith(b)).length,
+  )[0];
+  // A tall window, so one year's talks no longer fill it.
+  await page.setViewportSize({ width: 1280, height: 1600 });
+  await page.goto("/charlas");
+  const title = page.locator("section.talks h1");
+  const filter = page.getByRole("group", { name: about.talks.filter.label });
+  const tops = async () => [(await title.boundingBox())!.y, (await filter.boundingBox())!.y];
+  const before = await tops();
+  await filter.getByRole("button", { name: fewest, exact: true }).click();
+  expect(await page.evaluate(() => document.documentElement.scrollHeight <= innerHeight)).toBe(true);
+  expect(await tops()).toEqual(before);
+});
+
 test("AC-community-section: Comunidad shows the organizer cards with event chips and the collaborator chips", async ({ page }) => {
   await page.goto("/comunidad");
   const section = page.locator("section.community");
