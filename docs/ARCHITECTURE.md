@@ -13,7 +13,9 @@ src/pages/blog/*.md ──> import.meta.glob ──> formatBlogPosts() ──> p
 | Route | Source | Notes |
 |-------|--------|-------|
 | `/` | `src/pages/index.astro` | Hero, current focus, metrics and the 3 latest posts, with all copy from `src/data/landing.ts` |
-| `/about` | `src/pages/about.astro` | Bio, contact links, services, experience, talks, community, clients, testimonials, projects, with all copy from `src/data/about.ts` |
+| `/about` | `src/pages/about.astro` | Bio, contact links, services, experience, clients, testimonials, projects, with all copy from `src/data/about.ts` |
+| `/charlas` | `src/pages/charlas.astro` | Sergio's talks from `src/data/talks.ts`, in the nav |
+| `/comunidad` | `src/pages/comunidad.astro` | The communities he organizes and collaborates with, from `src/data/community.ts`, in the nav |
 | `/enlaces` | `src/pages/enlaces.astro` | Link hub for social bios. It is out of the nav and renders without it (`MainLayout` `nav={false}`). Every link opens in a new tab and a click sends one `link_click` event; all copy from `src/data/links.ts` |
 | `/blog/`, `/blog/2/` | `src/pages/blog/[...page].astro` | Pagination, 6 posts per page |
 | `/blog/<file>` | `src/pages/blog/<file>.md` | One route per Markdown file |
@@ -35,7 +37,7 @@ There is no content collection. Each consumer finds posts with its own `import.m
 | `src/layouts/BlogPostLayout.astro` | `../pages/blog/*.md` | Posts under the article, through `selectRelatedPosts()` |
 | `src/components/CategoryCloud.astro` | `../pages/blog/*.md` | Category list and counts |
 | `src/pages/rss.xml.js` | `./blog/**/*.md` | Feed |
-| `src/pages/about.astro` | `./blog/*.md` | Covers and links of the talks in `src/data/talks.ts` and the post event chips in `src/data/community.ts`, both named by slug through `findPost()`, which stops the build on a missing or unpublished post |
+| `src/pages/charlas.astro`, `src/pages/comunidad.astro` | `./blog/*.md` | Covers and links of the talks in `src/data/talks.ts` and the post event chips in `src/data/community.ts`, both named by slug through `findPost()`, which stops the build on a missing or unpublished post |
 
 A change to discovery or to the frontmatter shape must reach all seven. RSS is the only consumer that also reads nested folders, so posts must stay flat.
 

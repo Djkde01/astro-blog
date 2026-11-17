@@ -238,8 +238,8 @@ Goal: add the four sections, reusing the data layer from earlier phases. Settled
 
 ### Placement
 
-- [`src/pages/about.astro`](../src/pages/about.astro): Encuéntrame → Servicios → Mi Experiencia → Charlas → Comunidad → Clientes → Testimonios → Mis proyectos.
-- Optional later: promote each to its own page (e.g., `/talks`, `/community`) and add to [`src/data/navData.js`](../src/data/navData.js). Defer until each section has enough content to justify a page.
+- [`src/pages/about.astro`](../src/pages/about.astro): Encuéntrame → Servicios → Mi Experiencia → Clientes → Testimonios → Mis proyectos.
+- Charlas and Comunidad are pages of their own, [`/charlas`](../src/pages/charlas.astro) and [`/comunidad`](../src/pages/comunidad.astro), linked from the navbar in [`src/data/navData.js`](../src/data/navData.js). Each section's title is its page's `h1`.
 
 ### Guardrails
 
