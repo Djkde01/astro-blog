@@ -19,7 +19,7 @@ const newestFirst = talks.toSorted((a, b) => b.date.localeCompare(a.date));
 
 {
   newestFirst.length > 0 && (
-    <Section class="talks section-accent" icon={labels.icon} title={labels.title}>
+    <Section class="talks section-accent" icon={labels.icon} title={labels.title} level={1}>
       <div class="card-grid">
         {newestFirst.map((talk) => {
           const post = talk.post ? findPost(posts, talk.post) : undefined;
@@ -32,6 +32,7 @@ const newestFirst = talks.toSorted((a, b) => b.date.localeCompare(a.date));
           ].filter((cta): cta is { text: string; href: string; icon: string } => Boolean(cta.href));
           return (
             <Card
+              level={2}
               title={talk.title}
               tag={isUpcoming(talk) ? labels.upcoming : talk.date.slice(0, 4)}
               description={[talk.event, formatTalkDate(talk.date), talk.place, talk.language].join(" · ")}

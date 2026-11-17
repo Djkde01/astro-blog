@@ -30,10 +30,10 @@ const collaborators = community.filter(({ kind }) => kind === "collaborator");
 
 {
   community.length > 0 && (
-    <Section class="community section-accent" icon={labels.icon} title={labels.title}>
+    <Section class="community section-accent" icon={labels.icon} title={labels.title} level={1}>
       {organizers.length > 0 && (
         <div class="organizers">
-          <h3 class="h3">{labels.organizers}</h3>
+          <h2 class="h3">{labels.organizers}</h2>
           <div class="card-grid">
             {organizers.map(({ name, role, period, link, chips }) => {
               const list = (group: typeof chips) => (
@@ -50,7 +50,7 @@ const collaborators = community.filter(({ kind }) => kind === "collaborator");
               const folded = chips.slice(VISIBLE_CHIPS);
               return (
                 <Card
-                  level={4}
+                  level={3}
                   title={name}
                   tag={period}
                   description={role}
@@ -72,7 +72,7 @@ const collaborators = community.filter(({ kind }) => kind === "collaborator");
       )}
       {collaborators.length > 0 && (
         <div class="collaborators">
-          <h3 class="h3">{labels.collaborators}</h3>
+          <h2 class="h3">{labels.collaborators}</h2>
           <ul class="chips">
             {collaborators.map(({ name, link }) => (
               <li>

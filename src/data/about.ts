@@ -39,12 +39,20 @@ export const about: AboutPage = {
   talks: {
     title: "Charlas",
     icon: "mdi:microphone-variant",
+    page: {
+      title: "Charlas - Sergio Estrella (Djkde)",
+      description: "Charlas de Sergio Estrella sobre desarrollo web, IA, testing y open source, con sus slides y grabaciones.",
+    },
     upcoming: "Próxima",
     links: { registration: "Inscripción", slides: "Slides", recording: "Grabación", post: "Post" },
   },
   community: {
     title: "Comunidad",
     icon: "mdi:account-group",
+    page: {
+      title: "Comunidad - Sergio Estrella (Djkde)",
+      description: "Las comunidades tech de Pereira que Sergio Estrella organiza y con las que colabora.",
+    },
     organizers: "Organizo",
     collaborators: "He colaborado con",
     link: "Sitio web",

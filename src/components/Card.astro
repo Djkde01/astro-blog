@@ -11,8 +11,8 @@ interface Cta {
 
 interface Props {
   title?: string;
-  // 3 in a section, 4 inside a subgroup that has its own h3.
-  level?: 3 | 4;
+  // One below its section's heading: 3 under an h2, 4 inside a subgroup that has its own h3.
+  level?: 2 | 3 | 4;
   tag?: string;
   // Extra classes for the tag, such as the project status colors.
   tagClass?: string;
@@ -24,7 +24,7 @@ interface Props {
 }
 
 const { title, level = 3, tag, tagClass, description, image, imageAlt = "", ctas = [], class: className } = Astro.props;
-const Heading = level === 4 ? "h4" : "h3";
+const Heading = `h${level}` as const;
 // Links that leave the site open in a new tab, as the project links always did.
 const external = (href: string) => /^https?:/.test(href);
 ---

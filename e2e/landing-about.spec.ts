@@ -85,7 +85,7 @@ test("AC-now-strip: the Ahora strip sits between the hero and the metrics, spans
 
 test("AC-metrics-computed: the metrics are computed from the talks, the posts and the start date, charlas first", async ({ page }) => {
   // Phase 5: charlas counts the talks already given, not the posts in the Charlas category.
-  await page.goto("/about");
+  await page.goto("/charlas");
   const tags = await page.locator("section.talks .card-tag").allTextContents();
   const charlas = tags.filter((tag) => tag.trim() !== about.talks.upcoming).length;
   let posts = 0;
@@ -284,7 +284,7 @@ test("AC-project-cards: each card's buttons share a row, and titles of cards in 
   expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBe(0);
 });
 
-test("AC-about-order: About's sections read find-me, services, experience, talks, community, testimonials, projects, under an intro band that spans the viewport", async ({ page }) => {
+test("AC-about-order: About's sections read find-me, services, experience, testimonials, projects, under an intro band that spans the viewport", async ({ page }) => {
   await page.setViewportSize({ width: 1920, height: 900 });
   await page.goto("/about");
   // The band carries the glow, so a band narrower than the viewport cuts it.
@@ -296,8 +296,6 @@ test("AC-about-order: About's sections read find-me, services, experience, talks
     about.findMe.title,
     about.services.title,
     about.experience.title,
-    about.talks.title,
-    about.community.title,
     about.testimonials.title,
     about.projects.title,
   ]);

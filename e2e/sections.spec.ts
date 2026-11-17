@@ -52,7 +52,7 @@ async function expectTalkCards(page: Page) {
   await expect(cards).toHaveCount(builtTalks.length);
   for (const [index, talk] of builtTalks.entries()) {
     const card = cards.nth(index);
-    await expect(card.locator("h3")).toHaveText(talk.title);
+    await expect(card.locator("h2")).toHaveText(talk.title);
     await expect(card.locator(".card-tag")).toHaveText(talkTag(talk.date));
     for (const part of [talk.event, formatTalkDate(talk.date), talk.language]) {
       await expect(card).toContainText(part);
@@ -75,15 +75,15 @@ test("AC-talks-section: Charlas lists the published talks, newest first, with th
   for (const width of WIDTHS) {
     await test.step(`at ${width} px`, async () => {
       await page.setViewportSize({ width, height: 900 });
-      await page.goto("/about");
-      await expect(page.locator("section.talks h2")).toHaveText(about.talks.title);
+      await page.goto("/charlas");
+      await expect(page.locator("section.talks h1")).toHaveText(about.talks.title);
       await expectTalkCards(page);
     });
   }
 });
 
 test("AC-talks-metric: the charlas metric counts the talks already given", async ({ page }) => {
-  await page.goto("/about");
+  await page.goto("/charlas");
   const tags = await page.locator("section.talks .card-tag").allTextContents();
   const given = tags.filter((tag) => squash(tag) !== about.talks.upcoming).length;
   expect(given).toBeGreaterThan(0);
@@ -92,17 +92,17 @@ test("AC-talks-metric: the charlas metric counts the talks already given", async
 });
 
 test("AC-community-section: Comunidad shows the organizer cards with event chips and the collaborator chips", async ({ page }) => {
-  await page.goto("/about");
+  await page.goto("/comunidad");
   const section = page.locator("section.community");
-  await expect(section.locator("h2")).toHaveText(about.community.title);
+  await expect(section.locator("h1")).toHaveText(about.community.title);
 
   const organizers = builtCommunity.filter(({ kind }) => kind === "organizer");
   const cards = section.locator(".organizers article.content-card");
-  await expect(section.locator(".organizers h3")).toHaveText(about.community.organizers);
+  await expect(section.locator(".organizers h2")).toHaveText(about.community.organizers);
   await expect(cards).toHaveCount(organizers.length);
   for (const [index, entry] of organizers.entries()) {
     const card = cards.nth(index);
-    await expect(card.locator("h4")).toHaveText(entry.name);
+    await expect(card.locator("h3")).toHaveText(entry.name);
     await expect(card.locator(".card-tag")).toHaveText(entry.period!);
     await expect(card).toContainText(entry.role!);
     if (entry.link) {
@@ -115,7 +115,7 @@ test("AC-community-section: Comunidad shows the organizer cards with event chips
   }
 
   const collaborators = builtCommunity.filter(({ kind }) => kind === "collaborator");
-  await expect(section.locator(".collaborators h3")).toHaveText(about.community.collaborators);
+  await expect(section.locator(".collaborators h2")).toHaveText(about.community.collaborators);
   const chips = await section.locator(".collaborators li a").evaluateAll((anchors) =>
     anchors.map((anchor) => [anchor.textContent!.replace(/\s+/g, " ").trim(), anchor.getAttribute("href")]),
   );
@@ -133,7 +133,7 @@ test("AC-community-section: an external event chip links out in a new tab", asyn
 });
 
 test("AC-community-section: a long event list shows six chips and folds the rest behind a toggle", async ({ page }) => {
-  await page.goto("/about");
+  await page.goto("/comunidad");
   const cards = page.locator("section.community .organizers article.content-card");
   for (const [index, entry] of builtCommunity.filter(({ kind }) => kind === "organizer").entries()) {
     const card = cards.nth(index);
@@ -148,6 +148,29 @@ test("AC-community-section: a long event list shows six chips and folds the rest
     await toggle.locator("summary").click();
     await expect(card.locator(".card-chips a:visible")).toHaveCount(total);
   }
+});
+
+test("AC-section-pages: the navbar links to Charlas and Comunidad, each its own page with one h1", async ({ page }) => {
+  const pages = [
+    { path: "/charlas", section: "talks", labels: about.talks },
+    { path: "/comunidad", section: "community", labels: about.community },
+  ];
+  for (const { path, section, labels } of pages) {
+    await test.step(path, async () => {
+      await page.goto("/");
+      await page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: labels.title }).click();
+      await expect(page).toHaveURL(path);
+      await expect(page).toHaveTitle(labels.page.title);
+      await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", labels.page.description);
+      await expect(page.locator("h1")).toHaveCount(1);
+      await expect(page.locator(`section.${section} h1`)).toHaveText(labels.title);
+      const link = page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: labels.title });
+      await expect(link).toHaveAttribute("aria-current", "page");
+    });
+  }
+  // About no longer carries them.
+  await page.goto("/about");
+  await expect(page.locator("section.talks, section.community")).toHaveCount(0);
 });
 
 test("AC-clients-section: Clientes groups the clients into Empresa and Freelance", async ({ page }) => {

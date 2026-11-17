@@ -76,6 +76,11 @@ export interface FindMeLink {
   icon: string;
 }
 
+export interface PageMeta {
+  title: string;
+  description: string;
+}
+
 export interface AboutPage {
   title: string;
   intro: {
@@ -88,12 +93,16 @@ export interface AboutPage {
   findMe: SectionHeading & { links: FindMeLink[] };
   services: SectionHeading;
   experience: SectionHeading;
+  // Charlas and Comunidad are pages of their own, /charlas and /comunidad; `page` holds their
+  // <title> and meta description.
   talks: SectionHeading & {
+    page: PageMeta;
     // The tag of an upcoming talk; a past talk shows its year.
     upcoming: string;
     links: { registration: string; slides: string; recording: string; post: string };
   };
   community: SectionHeading & {
+    page: PageMeta;
     organizers: string;
     collaborators: string;
     link: string;
