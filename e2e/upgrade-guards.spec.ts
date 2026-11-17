@@ -1,4 +1,5 @@
 import { expect, test } from "./fixtures";
+import { about } from "../src/data/about";
 
 test("AC-about-spacing: inline highlights on the about page keep their spaces", async ({ page }) => {
   await page.goto("/about");
@@ -9,7 +10,7 @@ test("AC-about-spacing: inline highlights on the about page keep their spaces", 
 
 test("AC-icons-render: the nav, footer and about icons draw inside their boxes", async ({ page }) => {
   await page.goto("/about");
-  for (const name of ["MainIcon", "mdi:rss", "mdi:briefcase"]) {
+  for (const name of ["MainIcon", "mdi:rss", about.experience.icon]) {
     const svg = page.locator(`svg[data-icon="${name}"]`).first();
     await expect(svg).toBeVisible();
     const drawn = await svg.evaluate((node) => {

@@ -1,6 +1,8 @@
 ---
+import { Icon } from "astro-icon/components";
 import Card from "../Card.astro";
 import Section from "../Section.astro";
+import { resolveImage } from "../../js/images";
 import { findPost } from "../../js/utils";
 import type { Post } from "../../types/posts";
 import type { AboutPage, CommunityEntry } from "../../types/sections";
@@ -35,7 +37,7 @@ const collaborators = community.filter(({ kind }) => kind === "collaborator");
         <div class="organizers">
           <h2 class="h3">{labels.organizers}</h2>
           <div class="card-grid">
-            {organizers.map(({ name, role, period, link, chips }) => {
+            {organizers.map(({ name, role, period, link, image, chips }) => {
               const list = (group: typeof chips) => (
                 <ul class="card-chips chips">
                   {group.map(({ text, href, external }) => (
@@ -54,6 +56,8 @@ const collaborators = community.filter(({ kind }) => kind === "collaborator");
                   title={name}
                   tag={period}
                   description={role}
+                  image={image ? resolveImage(image) : undefined}
+                  imageAlt={name}
                   ctas={link ? [{ text: labels.link, href: link, icon: "mdi:open-in-new" }] : []}
                 >
                   {chips.length > 0 && <p class="card-chips-label">{labels.events}</p>}
@@ -73,18 +77,27 @@ const collaborators = community.filter(({ kind }) => kind === "collaborator");
       {collaborators.length > 0 && (
         <div class="collaborators">
           <h2 class="h3">{labels.collaborators}</h2>
-          <ul class="chips">
-            {collaborators.map(({ name, link }) => (
-              <li>
-                {link ? (
-                  <a class="chip" href={link} target="_blank" rel="noopener">
-                    {name}
-                  </a>
-                ) : (
-                  <span class="chip">{name}</span>
-                )}
-              </li>
-            ))}
+          <ul class="find-me">
+            {collaborators.map(({ name, link, icon = "mdi:account-group-outline" }) => {
+              const content = (
+                <>
+                  <span class="icon-box"><Icon name={icon} aria-hidden="true" /></span>
+                  <span class="text"><strong>{name}</strong></span>
+                </>
+              );
+              return (
+                <li>
+                  {link ? (
+                    <a href={link} target="_blank" rel="noopener">
+                      {content}
+                      <Icon name="mdi:arrow-top-right" class="arrow" aria-hidden="true" />
+                    </a>
+                  ) : (
+                    <span>{content}</span>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}

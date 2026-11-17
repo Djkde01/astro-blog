@@ -22,6 +22,7 @@ const postTitle = (slug: string) =>
 // A post slug links to its post; an external event links out under its own title.
 const eventChip = (event: string | { title: string; url: string }) =>
   typeof event === "string" ? [postTitle(event), `/blog/${event}`] : [event.title, event.url];
+const postDate = (slug: string) => readFileSync(`src/pages/blog/${slug}.md`, "utf8").match(/^date:\s*(\S+)/m)![1];
 const talkTag = (date: string) => (isUpcoming({ date }, new Date()) ? about.talks.upcoming : date.slice(0, 4));
 
 // The first non-transparent background behind an element, as [r, g, b].
@@ -112,6 +113,10 @@ test("AC-community-section: Comunidad shows the organizer cards with event chips
       anchors.map((anchor) => [anchor.textContent!.replace(/\s+/g, " ").trim(), anchor.getAttribute("href")]),
     );
     expect(chips).toEqual((entry.events ?? []).map(eventChip));
+    // Newest first: the events backed by a post must come in descending date order.
+    const dates = (entry.events ?? []).filter((event) => typeof event === "string").map(postDate);
+    expect(dates).toEqual(dates.toSorted().reverse());
+    if (entry.image) await expect(card.locator('picture source[type="image/avif"]')).toHaveCount(1);
   }
 
   const collaborators = builtCommunity.filter(({ kind }) => kind === "collaborator");
@@ -120,6 +125,8 @@ test("AC-community-section: Comunidad shows the organizer cards with event chips
     anchors.map((anchor) => [anchor.textContent!.replace(/\s+/g, " ").trim(), anchor.getAttribute("href")]),
   );
   expect(chips).toEqual(collaborators.map(({ name, link }) => [name, link]));
+  // Each collaborator shows its icon.
+  await expect(section.locator(".collaborators li a .icon-box svg")).toHaveCount(collaborators.length);
 });
 
 test("AC-community-section: an external event chip links out in a new tab", async ({ page }) => {
@@ -220,11 +227,13 @@ test("AC-empty-hidden: a section with nothing published renders nothing", async 
 
 test("AC-section-images: a card image renders through <Picture> with an AVIF source", async ({ page }) => {
   await page.goto(FIXTURE);
-  const picture = page.locator("#fixture section.talks article.content-card picture").first();
-  await expect(picture.locator('source[type="image/avif"]')).toHaveCount(1);
-  const img = picture.locator("img");
-  await expect(img).toHaveAttribute("width", /\d+/);
-  await expect(img).toHaveAttribute("height", /\d+/);
+  for (const name of ["talks", "community"]) {
+    const picture = page.locator(`#fixture section.${name} article.content-card picture`).first();
+    await expect(picture.locator('source[type="image/avif"]')).toHaveCount(1);
+    const img = picture.locator("img");
+    await expect(img).toHaveAttribute("width", /\d+/);
+    await expect(img).toHaveAttribute("height", /\d+/);
+  }
 });
 
 test("AC-projects-regression: Mis proyectos still shows every project through the card primitive", async ({ page }) => {
@@ -265,4 +274,21 @@ test("AC-section-accents: each section has its own accent, and tag text stays re
       expect(new Set(accents).size).toBe(4);
     });
   }
+});
+
+test("AC-section-icons: every section heading icon is the same size, on a tile of its section's color", async ({ page }) => {
+  const styles: string[] = [];
+  for (const path of ["/about", "/charlas", "/comunidad", FIXTURE]) {
+    await page.goto(path);
+    for (const svg of await page.locator("main section > .title svg").all()) {
+      const style = await svg.evaluate((element) => {
+        const { backgroundColor, borderRadius, padding, width, height } = getComputedStyle(element);
+        return { backgroundColor, shape: [borderRadius, padding, width, height].join(" ") };
+      });
+      expect(style.backgroundColor, `${path} icon tile`).not.toMatch(/rgba\(0, 0, 0, 0\)|transparent/);
+      styles.push(style.shape);
+    }
+  }
+  expect(styles.length).toBeGreaterThan(5);
+  expect(new Set(styles).size).toBe(1);
 });

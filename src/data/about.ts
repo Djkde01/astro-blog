@@ -35,10 +35,10 @@ export const about: AboutPage = {
     ],
   },
   services: { title: "Servicios", icon: "mdi:handshake-outline" },
-  experience: { title: "Mi Experiencia", icon: "mdi:briefcase" },
+  experience: { title: "Mi Experiencia", icon: "mdi:briefcase-outline" },
   talks: {
     title: "Charlas",
-    icon: "mdi:microphone-variant",
+    icon: "mdi:microphone-outline",
     page: {
       title: "Charlas - Sergio Estrella (Djkde)",
       description: "Charlas de Sergio Estrella sobre desarrollo web, IA, testing y open source, con sus slides y grabaciones.",
@@ -48,7 +48,7 @@ export const about: AboutPage = {
   },
   community: {
     title: "Comunidad",
-    icon: "mdi:account-group",
+    icon: "mdi:account-group-outline",
     page: {
       title: "Comunidad - Sergio Estrella (Djkde)",
       description: "Las comunidades tech de Pereira que Sergio Estrella organiza y con las que colabora.",
@@ -59,7 +59,7 @@ export const about: AboutPage = {
     events: "Eventos",
     more: "Ver {count} más",
   },
-  clients: { title: "Clientes", icon: "mdi:handshake", employer: "Empresa", freelance: "Freelance" },
-  testimonials: { title: "Testimonios", icon: "mdi:comment-quote" },
+  clients: { title: "Clientes", icon: "mdi:office-building-outline", employer: "Empresa", freelance: "Freelance" },
+  testimonials: { title: "Testimonios", icon: "mdi:comment-quote-outline" },
   projects: { title: "Mis proyectos", icon: "mdi:code-tags" },
 };

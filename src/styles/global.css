@@ -441,15 +441,24 @@ button {
   }
 }
 
+/* A section's heading: its icon sits on a tile of the section's color, the site accent by default. */
+section > .title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-sm);
+
+  & svg {
+    flex-shrink: 0;
+    padding: 0.4rem;
+    border-radius: var(--radius-md);
+    background-color: hsl(var(--section-accent, var(--accent)));
+    color: hsl(var(--bkg));
+  }
+}
+
 /* Work experience */
 .experience {
-  & .title {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    justify-content: flex-start;
-    margin-bottom: var(--space-sm);
-  }
   & ol {
     list-style: none;
     position: relative;
@@ -765,18 +774,7 @@ main:has(> .now, > .about-band) {
   }
 }
 
-/* about: the labeled links and the services */
-.encuentrame,
-.services {
-  & .title {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    margin-block-end: var(--space-sm);
-  }
-}
-
-/* the dark icon tile on find-me links and service cards */
+/* the dark icon tile on find-me links, service cards and community collaborators */
 .icon-box {
   display: grid;
   place-items: center;
@@ -808,7 +806,8 @@ main:has(> .now, > .about-band) {
     grid-template-columns: repeat(3, 1fr) 1.2fr;
   }
 
-  & a {
+  & a,
+  & li > span {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: center;
@@ -1125,13 +1124,6 @@ header {
 }
 
 .projects {
-  & .title {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    justify-content: flex-start;
-    margin-bottom: var(--space-sm);
-  }
   & .content {
     margin-block: var(--space-md);
     display: grid;
@@ -1365,20 +1357,6 @@ a.chip:focus-visible {
   @media (prefers-color-scheme: dark) {
     --section-accent: var(--section-hue) 50% 50%;
     --section-accent-text: var(--section-hue) 60% 68%;
-  }
-
-  & > .title {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    margin-bottom: var(--space-sm);
-
-    & svg {
-      padding: 0.4rem;
-      border-radius: var(--radius-md);
-      background-color: hsl(var(--section-accent));
-      color: hsl(var(--bkg));
-    }
   }
 
   & .content-card {

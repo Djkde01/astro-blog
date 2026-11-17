@@ -12,7 +12,7 @@
 | `services.ts` | The service cards under "Servicios" on About: icon, title and description | `about.astro` |
 
 | `talks.ts` | Sergio's own talks, not the events he organized. `date` is ISO; a talk dated on or after the build day is upcoming. `post` names its post's slug, whose cover and link the card takes; a talk without a post takes `image`, a `.webp` under `src/assets/images/` | `charlas.astro`, `index.astro` (the charlas metric and Ahora) |
-| `community.ts` | `kind: "organizer"` renders a card with role, period, link and `events` as chips: a post slug links to the post, and `{ title, url }` links to an event published elsewhere, in a new tab; `"collaborator"` renders one chip | `comunidad.astro` |
+| `community.ts` | `kind: "organizer"` renders a card with role, period, link, an optional `image` under `src/assets/images/`, and `events` as chips, listed newest first: a post slug links to the post, and `{ title, url }` links to an event published elsewhere, in a new tab; `"collaborator"` renders a link with its mdi `icon` | `comunidad.astro` |
 | `clients.ts` | `kind: "employer"` credits the employer, never its client; `"freelance"` is a direct client. Each has a role and a one-line outcome | `about.astro` (Clientes) |
 | `testimonials.ts` | Quotes with name, role and an optional company: the recommendations people wrote publicly on Sergio's LinkedIn profile, word for word. Add one only with the owner's approval | `about.astro` (Testimonios) |
 

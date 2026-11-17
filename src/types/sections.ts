@@ -166,8 +166,12 @@ export interface CommunityEntry {
   role?: string;
   period?: string;
   link?: string;
-  // Chips on an organizer's card: the slug of an event post under src/pages/blog/, or an
-  // event published elsewhere, which links out in a new tab.
+  // An organizer card's image, a path under src/assets/images/.
+  image?: string;
+  // A collaborator's astro-icon name, from the mdi set.
+  icon?: string;
+  // Chips on an organizer's card, newest first: the slug of an event post under
+  // src/pages/blog/, or an event published elsewhere, which links out in a new tab.
   events?: (string | ExternalEvent)[];
   draft?: boolean;
 }
