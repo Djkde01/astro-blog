@@ -21,7 +21,7 @@ export const fixtureCommunity: CommunityEntry[] = [
     role: "Organizador",
     period: "2024 - Actualidad",
     link: "https://example.com/comunidad",
-    image: "/src/assets/images/backbone.webp",
+    logo: "/src/assets/images/backbone-logo.svg",
     events: ["software-freedom-day-2024", { title: "Meetup externo de prueba", url: "https://example.com/meetup" }],
   },
   { name: "Comunidad aliada", kind: "collaborator", link: "https://example.com/aliada", icon: "mdi:account-group-outline" },

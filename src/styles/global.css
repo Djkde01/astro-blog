@@ -1180,12 +1180,31 @@ header {
     box-shadow: var(--shadow-md);
   }
   /* a card without a tag or an image keeps its body in the last row */
-  &:not(:has(> .card-tag, > picture)) {
+  &:not(:has(> .card-tag, > picture, > .card-logo)) {
     grid-template-rows: 1fr;
   }
-  &:has(> .card-tag):not(:has(> picture)),
-  &:has(> picture):not(:has(> .card-tag)) {
+  &:has(> .card-tag):not(:has(> picture, > .card-logo)),
+  &:has(> picture, > .card-logo):not(:has(> .card-tag)) {
     grid-template-rows: auto 1fr;
+  }
+
+  /* a logo shows whole on a light plate in both themes, so dark and colored logos keep contrast */
+  & .card-logo {
+    display: grid;
+    place-items: center;
+    padding: var(--space-md);
+    background-color: hsl(var(--muted--light));
+    border: var(--border-sm) solid hsl(var(--txt) / 0.08);
+    border-radius: var(--radius-md);
+
+    & img {
+      width: auto;
+      max-width: 100%;
+      height: 3.5rem;
+      object-fit: contain;
+      box-shadow: none;
+      border-radius: 0;
+    }
   }
 
   & img {

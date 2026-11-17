@@ -3,7 +3,7 @@ import type { CommunityEntry } from "../types/sections";
 // Pereira Tech Talks meetups held in 2025 and 2026, from https://pereiratechtalks.org/meetups/.
 const pertt = (slug: string, title: string) => ({ title, url: `https://pereiratechtalks.org/meetups/${slug}/` });
 
-// Comunidad on /comunidad. Organizers render as cards with their `image`, their `events` as chips,
+// Comunidad on /comunidad. Organizers render as cards with their `logo`, their `events` as chips,
 // newest first: a post slug links to the post, an external event links out. Collaborators render
 // as links with their `icon`.
 // `draft: true` marks an entry still to confirm, shown under `pnpm run dev` only.
@@ -14,6 +14,7 @@ export const community: CommunityEntry[] = [
     role: "Fundador y mentor",
     period: "Agosto 2022 - Actualidad",
     link: "https://backboneutp.com",
+    logo: "/src/assets/images/backbone-logo.svg",
     events: ["gdg-devfest-pereira", "mujeres-tecnologia-2025", "la-ia-no-te-quitara-el-trabajo-pero-yo-si"],
   },
   {
@@ -22,6 +23,7 @@ export const community: CommunityEntry[] = [
     role: "Organizador",
     period: "2025 - Actualidad",
     link: "https://pereiratechtalks.org/",
+    logo: "/src/assets/images/pertt-logo.webp",
     events: [
       pertt("october-meetup-2026", "Meetup de octubre 2026"),
       pertt("open-cowork-i", "Open Cowork I"),
@@ -52,6 +54,7 @@ export const community: CommunityEntry[] = [
     role: "Organizador",
     period: "2023 - Actualidad",
     link: "https://backboneutp.com/",
+    logo: "/src/assets/images/sfd-logo.svg",
     events: ["software-freedom-day-2025", "software-freedom-day-2024", "software-freedom-day-2023"],
   },
   { name: "GDG Pereira", kind: "collaborator", link: "https://gdg.community.dev/gdg-pereira/", icon: "mdi:google" },

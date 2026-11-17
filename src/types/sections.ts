@@ -166,8 +166,8 @@ export interface CommunityEntry {
   role?: string;
   period?: string;
   link?: string;
-  // An organizer card's image, a path under src/assets/images/.
-  image?: string;
+  // An organizer card's logo, a path under src/assets/images/; it sits on a light plate.
+  logo?: string;
   // A collaborator's astro-icon name, from the mdi set.
   icon?: string;
   // Chips on an organizer's card, newest first: the slug of an event post under

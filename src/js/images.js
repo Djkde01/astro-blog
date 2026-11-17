@@ -1,4 +1,4 @@
-const images = import.meta.glob("/src/assets/images/*.webp", { eager: true });
+const images = import.meta.glob("/src/assets/images/*.{webp,svg}", { eager: true });
 
 export function resolveImage(src) {
   const image = images[src];

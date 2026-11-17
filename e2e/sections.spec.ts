@@ -116,7 +116,7 @@ test("AC-community-section: Comunidad shows the organizer cards with event chips
     // Newest first: the events backed by a post must come in descending date order.
     const dates = (entry.events ?? []).filter((event) => typeof event === "string").map(postDate);
     expect(dates).toEqual(dates.toSorted().reverse());
-    if (entry.image) await expect(card.locator('picture source[type="image/avif"]')).toHaveCount(1);
+    if (entry.logo) await expect(card.locator(".card-logo img")).toHaveCount(1);
   }
 
   const collaborators = builtCommunity.filter(({ kind }) => kind === "collaborator");
@@ -127,6 +127,18 @@ test("AC-community-section: Comunidad shows the organizer cards with event chips
   expect(chips).toEqual(collaborators.map(({ name, link }) => [name, link]));
   // Each collaborator shows its icon.
   await expect(section.locator(".collaborators li a .icon-box svg")).toHaveCount(collaborators.length);
+
+  // A logo sits on the same light plate in both themes, so dark and colored logos keep their contrast.
+  const plates: string[] = [];
+  for (const colorScheme of ["light", "dark"] as const) {
+    await page.emulateMedia({ colorScheme });
+    const backgrounds = await section
+      .locator(".card-logo")
+      .evaluateAll((elements) => elements.map((element) => getComputedStyle(element).backgroundColor));
+    expect(backgrounds).toHaveLength(organizers.filter(({ logo }) => logo).length);
+    plates.push(...backgrounds);
+  }
+  expect(new Set(plates).size).toBe(1);
 });
 
 test("AC-community-section: an external event chip links out in a new tab", async ({ page }) => {
@@ -227,13 +239,11 @@ test("AC-empty-hidden: a section with nothing published renders nothing", async 
 
 test("AC-section-images: a card image renders through <Picture> with an AVIF source", async ({ page }) => {
   await page.goto(FIXTURE);
-  for (const name of ["talks", "community"]) {
-    const picture = page.locator(`#fixture section.${name} article.content-card picture`).first();
-    await expect(picture.locator('source[type="image/avif"]')).toHaveCount(1);
-    const img = picture.locator("img");
-    await expect(img).toHaveAttribute("width", /\d+/);
-    await expect(img).toHaveAttribute("height", /\d+/);
-  }
+  const picture = page.locator("#fixture section.talks article.content-card picture").first();
+  await expect(picture.locator('source[type="image/avif"]')).toHaveCount(1);
+  const img = picture.locator("img");
+  await expect(img).toHaveAttribute("width", /\d+/);
+  await expect(img).toHaveAttribute("height", /\d+/);
 });
 
 test("AC-projects-regression: Mis proyectos still shows every project through the card primitive", async ({ page }) => {
