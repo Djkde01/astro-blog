@@ -4,7 +4,7 @@ Personal blog and portfolio of Sergio Estrella (Djkde), built with Astro as a st
 
 DWP standard: 7.0.0 (onboarded 2026-11-04; skill 7.9.0)
 
-> **State of the repository:** the site is live and maintained. Product work is listed in [docs/portfolio-roadmap.md](docs/portfolio-roadmap.md), Phase 0's decisions are settled, Phases 1, 2, 3, 4, 7 and 8 are done, and none of the other phases has started. Each phase becomes a Deep Work Plan when work begins.
+> **State of the repository:** the site is live and maintained. Product work is listed in [docs/portfolio-roadmap.md](docs/portfolio-roadmap.md), Phase 0's decisions are settled, Phases 1, 2, 3, 4, 7 and 8 are done, and Phases 5 and 6 are in progress on their feature branches (PLAN_009 and PLAN_010). Each phase becomes a Deep Work Plan when work begins.
 
 ## Documentation index
 
@@ -76,6 +76,7 @@ DWP standard: 7.0.0 (onboarded 2026-11-04; skill 7.9.0)
 
 - The active DWP plan is the only planning document. Do not create `odd/tasks/` files, SDD artifacts or Superpowers plans.
 - `docs/portfolio-roadmap.md` is a backlog that plans draw from, not a plan. Do not track task state in it.
+- The owner's Obsidian vault mirrors this repo under `projects/astro-blog/` as a read model; the DWP plan stays the only planning document. When the `project-brain` skill is installed, run its sync after `/dwp-create`, when an execute or resume run stops, and after a merge.
 - For anything above a micro-tier plan, run grilling before `/dwp-create`. The skill is global on the owner's machine; without it, settle the open decisions with the owner, one question at a time.
 - `/grilling` may ask a full round of questions. Everywhere else, ask one question at a time.
 
