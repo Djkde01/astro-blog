@@ -44,6 +44,7 @@ export const about: AboutPage = {
       description: "Charlas de Sergio Estrella sobre desarrollo web, IA, testing y open source, con sus slides y grabaciones.",
     },
     upcoming: "Próxima",
+    filter: { label: "Filtrar por año", all: "Todas" },
     links: { registration: "Inscripción", slides: "Slides", recording: "Grabación", post: "Post" },
   },
   community: {

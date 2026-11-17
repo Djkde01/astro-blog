@@ -5,7 +5,7 @@ const pertt = (slug: string, title: string) => ({ title, url: `https://pereirate
 
 // Comunidad on /comunidad. Organizers render as cards with their `logo`, their `events` as chips,
 // newest first: a post slug links to the post, an external event links out. Collaborators render
-// as links with their `icon`.
+// as links with their `logo`, or their `icon` when they have none.
 // `draft: true` marks an entry still to confirm, shown under `pnpm run dev` only.
 export const community: CommunityEntry[] = [
   {
@@ -57,8 +57,8 @@ export const community: CommunityEntry[] = [
     logo: "/src/assets/images/sfd-logo.svg",
     events: ["software-freedom-day-2025", "software-freedom-day-2024", "software-freedom-day-2023"],
   },
-  { name: "GDG Pereira", kind: "collaborator", link: "https://gdg.community.dev/gdg-pereira/", icon: "mdi:google" },
+  { name: "GDG Pereira", kind: "collaborator", link: "https://gdg.community.dev/gdg-pereira/", logo: "/src/assets/images/gdg-logo.webp" },
   { name: "AWS User Group Pereira", kind: "collaborator", link: "https://www.meetup.com/aws-user-group-pereira/", icon: "mdi:aws" },
-  { name: "FLISoL", kind: "collaborator", link: "https://flisolpereira.vercel.app/", icon: "mdi:penguin" },
-  { name: "QA Conf", kind: "collaborator", link: "https://qaconf.co/", icon: "mdi:test-tube" },
+  { name: "FLISoL", kind: "collaborator", link: "https://flisolpereira.vercel.app/", logo: "/src/assets/images/flisol-logo.svg" },
+  { name: "QA Conf", kind: "collaborator", link: "https://qaconf.co/", logo: "/src/assets/images/qaconf-logo.webp" },
 ];

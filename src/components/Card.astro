@@ -23,16 +23,29 @@ interface Props {
   logo?: ImageMetadata;
   ctas?: Cta[];
   class?: string;
+  // Data attributes land on the card's <article>, for scripts such as the Charlas year filter.
+  [data: `data-${string}`]: string;
 }
 
-const { title, level = 3, tag, tagClass, description, image, imageAlt = "", logo, ctas = [], class: className } =
-  Astro.props;
+const {
+  title,
+  level = 3,
+  tag,
+  tagClass,
+  description,
+  image,
+  imageAlt = "",
+  logo,
+  ctas = [],
+  class: className,
+  ...data
+} = Astro.props;
 const Heading = `h${level}` as const;
 // Links that leave the site open in a new tab, as the project links always did.
 const external = (href: string) => /^https?:/.test(href);
 ---
 
-<article class:list={["content-card", className]}>
+<article class:list={["content-card", className]} {...data}>
   {tag && <span class:list={["card-tag", tagClass]}>{tag}</span>}
   {
     image && (

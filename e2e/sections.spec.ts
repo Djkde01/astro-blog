@@ -92,6 +92,33 @@ test("AC-talks-metric: the charlas metric counts the talks already given", async
   await expect(page.locator("section.metrics li").first().locator(".count")).toHaveText(`${given}`);
 });
 
+test("AC-talks-year-filter: a year chip above Charlas shows only that year's talks, and Todas shows them all", async ({
+  page,
+}) => {
+  const years = [...new Set(builtTalks.map(({ date }) => date.slice(0, 4)))];
+  expect(years.length).toBeGreaterThan(1);
+  await page.goto("/charlas");
+  const filter = page.getByRole("group", { name: about.talks.filter.label });
+  const chips = filter.getByRole("button");
+  await expect(chips).toHaveText([about.talks.filter.all, ...years]);
+  const visibleTitles = page.locator("section.talks article.content-card:visible h2");
+  const firstCard = await page.locator("section.talks article.content-card").first().boundingBox();
+  const bar = await filter.boundingBox();
+  expect(bar!.y + bar!.height).toBeLessThanOrEqual(firstCard!.y);
+
+  const choose = async (name: string, shown: typeof builtTalks) => {
+    const chip = filter.getByRole("button", { name, exact: true });
+    await chip.click();
+    await expect(chip).toHaveAttribute("aria-pressed", "true");
+    await expect(filter.locator('[aria-pressed="true"]')).toHaveCount(1);
+    await expect(visibleTitles).toHaveText(shown.map(({ title }) => title));
+  };
+  for (const year of years) {
+    await choose(year, builtTalks.filter(({ date }) => date.startsWith(year)));
+  }
+  await choose(about.talks.filter.all, builtTalks);
+});
+
 test("AC-community-section: Comunidad shows the organizer cards with event chips and the collaborator chips", async ({ page }) => {
   await page.goto("/comunidad");
   const section = page.locator("section.community");
@@ -125,8 +152,17 @@ test("AC-community-section: Comunidad shows the organizer cards with event chips
     anchors.map((anchor) => [anchor.textContent!.replace(/\s+/g, " ").trim(), anchor.getAttribute("href")]),
   );
   expect(chips).toEqual(collaborators.map(({ name, link }) => [name, link]));
-  // Each collaborator shows its icon.
-  await expect(section.locator(".collaborators li a .icon-box svg")).toHaveCount(collaborators.length);
+  // Each collaborator shows its logo, decorative since the name follows, or else its icon.
+  const tiles = section.locator(".collaborators li a .icon-box");
+  for (const [index, { logo }] of collaborators.entries()) {
+    const tile = tiles.nth(index);
+    if (logo) await expect(tile.locator('img[alt=""]')).toHaveCount(1);
+    else await expect(tile.locator("svg")).toHaveCount(1);
+  }
+  // The collaborators' heading sits clear of the organizer cards above it.
+  const lastCard = await section.locator(".organizers article.content-card").last().boundingBox();
+  const heading = await section.locator(".collaborators h2").boundingBox();
+  expect(heading!.y - (lastCard!.y + lastCard!.height)).toBeGreaterThanOrEqual(32);
 
   // A logo sits on the same light plate in both themes, so dark and colored logos keep their contrast.
   const plates: string[] = [];

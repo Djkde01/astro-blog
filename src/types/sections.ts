@@ -99,6 +99,8 @@ export interface AboutPage {
     page: PageMeta;
     // The tag of an upcoming talk; a past talk shows its year.
     upcoming: string;
+    // The year chips above the talks: the group's accessible name, and the chip that shows every year.
+    filter: { label: string; all: string };
     links: { registration: string; slides: string; recording: string; post: string };
   };
   community: SectionHeading & {
@@ -166,9 +168,10 @@ export interface CommunityEntry {
   role?: string;
   period?: string;
   link?: string;
-  // An organizer card's logo, a path under src/assets/images/; it sits on a light plate.
+  // A logo, a path under src/assets/images/: on a light plate on an organizer card, and on the
+  // dark tile of a collaborator link, where it replaces the icon.
   logo?: string;
-  // A collaborator's astro-icon name, from the mdi set.
+  // A collaborator's astro-icon name, from the mdi set, used when it has no logo.
   icon?: string;
   // Chips on an organizer's card, newest first: the slug of an event post under
   // src/pages/blog/, or an event published elsewhere, which links out in a new tab.

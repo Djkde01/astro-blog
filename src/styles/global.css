@@ -1295,6 +1295,43 @@ a.chip:focus-visible {
   border-color: hsl(var(--section-accent, var(--accent)));
 }
 
+/* the year chips above the talks; the pressed one is filled */
+.year-filter {
+  margin-top: var(--space-sm);
+
+  /* undoes the global button's fixed square, shadow, hover color and color fade, which lagged on unpressing */
+  & button.chip {
+    display: inline-block;
+    transition: none;
+    width: auto;
+    height: auto;
+    background: none;
+    box-shadow: none;
+    font: inherit;
+    font-size: var(--fs-sm);
+
+    &:hover,
+    &:focus-visible {
+      color: inherit;
+      border-color: hsl(var(--section-accent, var(--accent)));
+    }
+
+    /* the section's text color, dark in light mode and light in dark mode, keeps the label readable */
+    &[aria-pressed="true"] {
+      background-color: hsl(var(--section-accent-text, var(--txt)));
+      border-color: hsl(var(--section-accent-text, var(--txt)));
+      color: hsl(var(--bkg));
+      font-weight: 600;
+    }
+  }
+}
+
+/* display rules above would otherwise win over the hidden attribute */
+.year-filter[hidden],
+.content-card[hidden] {
+  display: none;
+}
+
 /* the event chips past the first six, folded behind a native toggle */
 .more-chips > summary {
   width: fit-content;
@@ -1315,6 +1352,27 @@ a.chip:focus-visible {
 
   & .card-ctas {
     margin-top: auto;
+  }
+}
+
+/* the collaborators sit apart from the organizer cards, under a heading with room of its own */
+.community .collaborators {
+  margin-top: var(--space-lg);
+
+  & > h2 {
+    margin-bottom: var(--space-sm);
+  }
+}
+
+/* a collaborator's tile stays dark in both themes, since FLISoL's and QA Conf's logos are drawn for a dark ground */
+.collaborator-tile {
+  background-color: hsl(var(--txt--light));
+  color: hsl(var(--bkg--light));
+
+  & img {
+    width: 1.9rem;
+    height: 1.9rem;
+    object-fit: contain;
   }
 }
 

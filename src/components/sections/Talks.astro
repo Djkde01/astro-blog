@@ -15,11 +15,25 @@ interface Props {
 
 const { talks, labels, posts } = Astro.props;
 const newestFirst = talks.toSorted((a, b) => b.date.localeCompare(a.date));
+// The year chips, newest first; a filter needs at least two years to choose between.
+const years = [...new Set(newestFirst.map(({ date }) => date.slice(0, 4)))];
 ---
 
 {
   newestFirst.length > 0 && (
     <Section class="talks section-accent" icon={labels.icon} title={labels.title} level={1}>
+      {years.length > 1 && (
+        <div class="year-filter chips" role="group" aria-label={labels.filter.label} hidden>
+          <button type="button" class="chip" data-year="" aria-pressed="true">
+            {labels.filter.all}
+          </button>
+          {years.map((year) => (
+            <button type="button" class="chip" data-year={year} aria-pressed="false">
+              {year}
+            </button>
+          ))}
+        </div>
+      )}
       <div class="card-grid">
         {newestFirst.map((talk) => {
           const post = talk.post ? findPost(posts, talk.post) : undefined;
@@ -39,6 +53,7 @@ const newestFirst = talks.toSorted((a, b) => b.date.localeCompare(a.date));
               image={image || undefined}
               imageAlt={post ? post.frontmatter.image.alt : talk.title}
               ctas={ctas}
+              data-year={talk.date.slice(0, 4)}
             />
           );
         })}
@@ -46,3 +61,19 @@ const newestFirst = talks.toSorted((a, b) => b.date.localeCompare(a.date));
     </Section>
   )
 }
+
+<script>
+  // The year chips show only that year's talks. Without JavaScript the chips stay hidden and every talk shows.
+  for (const filter of document.querySelectorAll<HTMLElement>(".year-filter")) {
+    const chips = filter.querySelectorAll<HTMLButtonElement>("button");
+    const cards = filter.nextElementSibling!.querySelectorAll<HTMLElement>(".content-card");
+    filter.hidden = false;
+    filter.addEventListener("click", (event) => {
+      const chosen = (event.target as Element).closest("button");
+      if (!chosen) return;
+      const year = chosen.dataset.year;
+      chips.forEach((chip) => chip.setAttribute("aria-pressed", `${chip === chosen}`));
+      cards.forEach((card) => (card.hidden = Boolean(year) && card.dataset.year !== year));
+    });
+  }
+</script>

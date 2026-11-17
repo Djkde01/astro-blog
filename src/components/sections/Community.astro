@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
 import Card from "../Card.astro";
 import Section from "../Section.astro";
 import { resolveImage } from "../../js/images";
@@ -77,10 +78,13 @@ const collaborators = community.filter(({ kind }) => kind === "collaborator");
         <div class="collaborators">
           <h2 class="h3">{labels.collaborators}</h2>
           <ul class="find-me">
-            {collaborators.map(({ name, link, icon = "mdi:account-group-outline" }) => {
+            {collaborators.map(({ name, link, logo, icon = "mdi:account-group-outline" }) => {
+              // A logo wins over the icon; both sit on the same dark tile, in either theme.
               const content = (
                 <>
-                  <span class="icon-box"><Icon name={icon} aria-hidden="true" /></span>
+                  <span class="icon-box collaborator-tile">
+                    {logo ? <Image src={resolveImage(logo)} alt="" height={64} /> : <Icon name={icon} aria-hidden="true" />}
+                  </span>
                   <span class="text"><strong>{name}</strong></span>
                 </>
               );
