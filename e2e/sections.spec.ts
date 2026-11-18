@@ -280,6 +280,54 @@ test("AC-testimonials-section: Testimonios shows each quote in a figure with its
   }
 });
 
+test("AC-testimonial-author-bottom: each testimonial's name and role sit at the bottom of its card", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/about");
+  const cards = page.locator("section.testimonials article.content-card");
+  expect(await cards.count()).toBeGreaterThan(1);
+  // The gap from each caption to its card's bottom edge: equal on every card, whatever the quote's length.
+  const gaps = await cards.evaluateAll((all) =>
+    all.map((card) => Math.round(card.getBoundingClientRect().bottom - card.querySelector("figcaption")!.getBoundingClientRect().bottom)),
+  );
+  expect(new Set(gaps).size).toBe(1);
+});
+
+// Records every opacity the motion script writes on the cards, from now on.
+const recordOpacities = (page: Page) =>
+  page.evaluate(() => {
+    const seen: string[] = [];
+    (window as unknown as { seenOpacities: string[] }).seenOpacities = seen;
+    new MutationObserver((records) => {
+      for (const { target } of records) seen.push((target as HTMLElement).style.opacity);
+    }).observe(document.querySelector("section.talks .card-grid")!, { attributes: true, attributeFilter: ["style"], subtree: true });
+  });
+const seenOpacities = (page: Page) => page.evaluate(() => (window as unknown as { seenOpacities: string[] }).seenOpacities);
+
+test.describe("with motion allowed", () => {
+  test.use({ contextOptions: { reducedMotion: "no-preference" } });
+
+  test("AC-talks-filter-motion: the talks a year chip shows fade in, and end visible and still", async ({ page }) => {
+    await page.goto("/charlas");
+    const filter = page.getByRole("group", { name: about.talks.filter.label });
+    const shown = page.locator("section.talks article.content-card:visible");
+    for (const name of ["2025", about.talks.filter.all]) {
+      await recordOpacities(page);
+      await filter.getByRole("button", { name, exact: true }).click();
+      await expect.poll(async () => (await seenOpacities(page)).some((opacity) => opacity !== "" && Number(opacity) < 1)).toBe(true);
+      await expect.poll(() => shown.evaluateAll((cards) => cards.every((card) => getComputedStyle(card).opacity === "1"))).toBe(true);
+      await expect.poll(() => shown.evaluateAll((cards) => cards.every((card) => card.style.transform === ""))).toBe(true);
+    }
+  });
+});
+
+test("AC-talks-filter-motion: with reduced motion a year chip shows its talks at once, with no fade", async ({ page }) => {
+  await page.goto("/charlas");
+  await recordOpacities(page);
+  await page.getByRole("group", { name: about.talks.filter.label }).getByRole("button", { name: "2025", exact: true }).click();
+  await page.waitForTimeout(300);
+  expect(await seenOpacities(page)).toEqual([]);
+});
+
 test("AC-empty-hidden: a section with nothing published renders nothing", async ({ page }) => {
   await page.goto("/about");
   const headings = await page.locator("main section h2").allTextContents();

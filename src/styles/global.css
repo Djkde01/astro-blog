@@ -1395,9 +1395,15 @@ a.chip:focus-visible {
   align-items: baseline;
 }
 
+/* a testimonial fills its card, and the quote takes the spare height, so every name and role sit at the bottom */
+.testimonials .card-body {
+  grid-template-rows: 1fr;
+}
+
 .testimonial {
   margin: 0;
   display: grid;
+  grid-template-rows: 1fr auto;
   gap: var(--space-sm);
 
   & blockquote {

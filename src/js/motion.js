@@ -32,3 +32,23 @@ export function revealCards(selector) {
     });
   });
 }
+
+// Fades in the cards a filter has just shown. Under prefers-reduced-motion they appear at once.
+export function showCards(cards) {
+  if (!window.matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
+  gsap.fromTo(
+    cards,
+    // The hover lift's CSS transition would trail every frame of the tween.
+    { opacity: 0, y: 12, transition: "none" },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.4,
+      stagger: 0.06,
+      ease: "power2.out",
+      // A quick second click restarts the fade instead of stacking a second one.
+      overwrite: true,
+      clearProps: "transform,opacity,transition",
+    },
+  );
+}

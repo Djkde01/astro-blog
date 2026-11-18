@@ -5,7 +5,7 @@
 | `utils.js` | `formatBlogPosts()`, `selectRelatedPosts()`, `selectNow()`, `slugify()`, `formatDate()`, `getExperienceInYears()`, and for Phase 5 `published()`, `formatTalkDate()`, `isUpcoming()` and `findPost()` | `tests/utils.test.mjs` and `tests/sections.test.mjs` cover all but `formatDate()`, which has no test |
 | `jsonLD.js` | Builds the JSON-LD script for `Seo.astro` with `JSON.stringify`, escaping `<` | The build and `e2e/jsonld.spec.ts`; it reads `import.meta.env` and cannot load under plain Node |
 | `images.js` | `resolveImage()` maps a post's `image.src` to its file in `src/assets/images/` and throws on an unknown path; `socialImageUrl()` returns its absolute URL | The build and `e2e/images*.spec.ts`; it reads `import.meta.glob` and cannot load under plain Node |
-| `motion.js` | `revealCards(selector)`: GSAP with ScrollTrigger reveals the matching cards once each as they scroll into view. Cards on screen at load stay still, and nothing runs under `prefers-reduced-motion` | `e2e/motion.spec.ts` |
+| `motion.js` | `revealCards(selector)`: GSAP with ScrollTrigger reveals the matching cards once each as they scroll into view. Cards on screen at load stay still, and nothing runs under `prefers-reduced-motion`. `showCards(cards)`: fades in the cards a filter has just shown, as the Charlas year chips do; under `prefers-reduced-motion` they appear at once | `e2e/motion.spec.ts`, `e2e/sections.spec.ts` |
 | `linkClicks.js` | On `/enlaces`, sends `gtag("event", "link_click", { link_id })` for each link opened. It looks `gtag` up at click time and swallows its errors, so the link always opens | `e2e/link-hub.spec.ts` |
 | `nav.js` | Marks the current navigation link with `aria-current` | Not tested |
 

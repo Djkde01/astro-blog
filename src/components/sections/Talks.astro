@@ -63,6 +63,8 @@ const years = [...new Set(newestFirst.map(({ date }) => date.slice(0, 4)))];
 }
 
 <script>
+  import { showCards } from "../../js/motion";
+
   // The year chips show only that year's talks. Without JavaScript the chips stay hidden and every talk shows.
   for (const filter of document.querySelectorAll<HTMLElement>(".year-filter")) {
     const chips = filter.querySelectorAll<HTMLButtonElement>("button");
@@ -74,6 +76,7 @@ const years = [...new Set(newestFirst.map(({ date }) => date.slice(0, 4)))];
       const year = chosen.dataset.year;
       chips.forEach((chip) => chip.setAttribute("aria-pressed", `${chip === chosen}`));
       cards.forEach((card) => (card.hidden = Boolean(year) && card.dataset.year !== year));
+      showCards([...cards].filter((card) => !card.hidden));
     });
   }
 </script>
