@@ -1,0 +1,92 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image, Picture } from "astro:assets";
+import Link from "./Link.astro";
+
+interface Cta {
+  text: string;
+  href: string;
+  icon?: string;
+}
+
+interface Props {
+  title?: string;
+  // One below its section's heading: 3 under an h2, 4 inside a subgroup that has its own h3.
+  level?: 2 | 3 | 4;
+  tag?: string;
+  // Extra classes for the tag, such as the project status colors.
+  tagClass?: string;
+  description?: string;
+  image?: ImageMetadata;
+  imageAlt?: string;
+  // A logo instead of an image: shown whole on a light plate, and decorative, since the title names it.
+  logo?: ImageMetadata;
+  ctas?: Cta[];
+  class?: string;
+  // Data attributes land on the card's <article>, for scripts such as the Charlas year filter.
+  [data: `data-${string}`]: string;
+}
+
+const {
+  title,
+  level = 3,
+  tag,
+  tagClass,
+  description,
+  image,
+  imageAlt = "",
+  logo,
+  ctas = [],
+  class: className,
+  ...data
+} = Astro.props;
+const Heading = `h${level}` as const;
+// Links that leave the site open in a new tab, as the project links always did.
+const external = (href: string) => /^https?:/.test(href);
+---
+
+<article class:list={["content-card", className]} {...data}>
+  {tag && <span class:list={["card-tag", tagClass]}>{tag}</span>}
+  {
+    image && (
+      <Picture
+        src={image}
+        alt={imageAlt}
+        width="400"
+        height="250"
+        widths={[400, 800]}
+        sizes="(min-width: 1024px) 50vw, 100vw"
+        formats={["avif"]}
+        fallbackFormat="webp"
+        quality={60}
+      />
+    )
+  }
+  {
+    logo && (
+      <div class="card-logo">
+        <Image src={logo} alt="" height={112} />
+      </div>
+    )
+  }
+  <div class="card-body">
+    {title && <Heading class="card-title h3">{title}</Heading>}
+    {description && <p class="card-description">{description}</p>}
+    <slot />
+    {
+      ctas.length > 0 && (
+        <div class="card-ctas">
+          {ctas.map(({ text, href, icon }) => (
+            <Link
+              text={text}
+              href={href}
+              style="primary"
+              icon={icon ? { name: icon, side: "left" } : undefined}
+              {...(external(href) ? { target: "_blank", rel: "noopener" } : {})}
+            />
+          ))}
+        </div>
+      )
+    }
+  </div>
+</article>

@@ -1,6 +1,5 @@
 ---
-import Link from "./Link.astro";
-import { Picture } from "astro:assets";
+import Card from "./Card.astro";
 import { resolveImage } from "../js/images";
 import { projects } from "../data/projects";
 import type { ProjectStatus } from "../types/sections";
@@ -14,45 +13,19 @@ const STATUS_LABELS: Record<ProjectStatus, string> = {
 <div class="content">
   {
     projects.map(({ image, title, description, link, github, status }) => (
-      <article class="project-card">
-        <span class={`project-tag project-${status}`}>{STATUS_LABELS[status]}</span>
-        <Picture
-          src={resolveImage(image)}
-          alt={title}
-          width="400"
-          height="250"
-          widths={[400, 800]}
-          sizes="(min-width: 1024px) 50vw, 100vw"
-          formats={["avif"]}
-          fallbackFormat="webp"
-          quality={60}
-        />
-
-        <div class="text-container">
-          <h3 class="h3">{title}</h3>
-          <p class="description">{description}</p>
-          <section class="project-link">
-            {github && (
-              <Link
-                text="Código"
-                href={github}
-                style="primary"
-                target="_blank"
-                icon={{ name: "mdi:github", side: "left" }}
-              />
-            )}
-            {link && (
-              <Link
-                text="Proyecto"
-                href={link}
-                style="primary"
-                target="_blank"
-                icon={{ name: "mdi:open-in-new", side: "left" }}
-              />
-            )}
-          </section>
-        </div>
-      </article>
+      <Card
+        class="project-card"
+        tag={STATUS_LABELS[status]}
+        tagClass={`project-tag project-${status}`}
+        image={resolveImage(image)}
+        imageAlt={title}
+        title={title}
+        description={description}
+        ctas={[
+          ...(github ? [{ text: "Código", href: github, icon: "mdi:github" }] : []),
+          ...(link ? [{ text: "Proyecto", href: link, icon: "mdi:open-in-new" }] : []),
+        ]}
+      />
     ))
   }
 </div>

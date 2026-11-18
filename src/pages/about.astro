@@ -5,14 +5,20 @@ import MainLayout from "../layouts/MainLayout.astro";
 import ExperienceItem from "../components/ExperienceItem.astro";
 import Projects from "../components/Projects.astro";
 import Section from "../components/Section.astro";
+import Clients from "../components/sections/Clients.astro";
+import Testimonials from "../components/sections/Testimonials.astro";
 import profile from "../assets/images/profile.webp";
 import { about } from "../data/about";
+import { clients } from "../data/clients";
 import { experience } from "../data/experience";
 import { services } from "../data/services";
-import { getExperienceInYears } from "../js/utils";
+import { testimonials } from "../data/testimonials";
+import { getExperienceInYears, published } from "../js/utils";
 
 const { intro, findMe } = about;
 const years = `${getExperienceInYears()}`;
+// Drafts show only under `astro dev`.
+const dev = import.meta.env.DEV;
 ---
 
 <MainLayout title={about.title}>
@@ -88,6 +94,8 @@ const years = `${getExperienceInYears()}`;
       }
     </ol>
   </Section>
+  <Clients clients={published(clients, dev)} labels={about.clients} />
+  <Testimonials testimonials={published(testimonials, dev)} labels={about.testimonials} />
   <Section class="projects" icon={about.projects.icon} title={about.projects.title}>
     <Projects />
   </Section>

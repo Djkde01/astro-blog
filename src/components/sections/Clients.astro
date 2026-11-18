@@ -1,0 +1,42 @@
+---
+import { Icon } from "astro-icon/components";
+import Card from "../Card.astro";
+import Section from "../Section.astro";
+import { resolveImage } from "../../js/images";
+import type { AboutPage, Client } from "../../types/sections";
+
+interface Props {
+  clients: Client[];
+  labels: AboutPage["clients"];
+}
+
+const { clients, labels } = Astro.props;
+const groups = [
+  { kind: "employer", title: labels.employer },
+  { kind: "freelance", title: labels.freelance },
+]
+  .map((group) => ({ ...group, clients: clients.filter(({ kind }) => kind === group.kind) }))
+  .filter((group) => group.clients.length > 0);
+---
+
+{
+  groups.length > 0 && (
+    <Section class="clients section-accent" icon={labels.icon} title={labels.title}>
+      {groups.map(({ kind, title, clients }) => (
+        <div class:list={["client-group", kind]}>
+          <h3 class="h3">{title}</h3>
+          <div class="card-grid">
+            {clients.map(({ title, role, outcome, image }) => (
+              <Card level={4} title={title} description={role} image={image ? resolveImage(image) : undefined} imageAlt={title}>
+                <p class="card-outcome">
+                  <Icon name="mdi:trending-up" aria-hidden="true" />
+                  {outcome}
+                </p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      ))}
+    </Section>
+  )
+}

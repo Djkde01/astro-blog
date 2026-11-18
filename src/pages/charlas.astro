@@ -1,0 +1,16 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Talks from "../components/sections/Talks.astro";
+import { about } from "../data/about";
+import { talks } from "../data/talks";
+import { formatBlogPosts, published } from "../js/utils";
+import type { Post } from "../types/posts";
+
+// A talk links to its post and takes its cover; drafts show only under `astro dev`.
+const posts: Post[] = await formatBlogPosts(import.meta.glob("./blog/*.md", { eager: true }));
+const { page } = about.talks;
+---
+
+<MainLayout title={page.title} description={page.description}>
+  <Talks talks={published(talks, import.meta.env.DEV)} labels={about.talks} posts={posts} />
+</MainLayout>

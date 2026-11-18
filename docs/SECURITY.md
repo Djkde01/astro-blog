@@ -39,7 +39,7 @@ Post frontmatter is written by the owner, so it is trusted today. Keep it safe t
 
 ## Personal data and consent
 
-- Testimonials need explicit consent from the person quoted before publishing, as the roadmap requires.
+- Testimonials are recommendations their authors wrote publicly for Sergio, such as on LinkedIn. Quote them word for word, and publish one only with the owner's approval.
 - Client names must not imply ownership of an employer's projects. See Phase 0 of the [roadmap](portfolio-roadmap.md).
 - Do not publish a person's photo or name from a talk or event in a new way without the owner confirming it.
 

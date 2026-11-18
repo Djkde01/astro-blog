@@ -32,8 +32,8 @@ Community and talks are what set him apart (owner, 2026-11-06). He organizes and
 
 ## Capabilities and Constraints
 
-- Today: a home with a hero, current focus, metrics and the three latest posts; an About page with bio, contact links, services, experience and projects; a paginated blog, category pages, related posts; RSS, sitemap, SEO and social metadata.
-- Planned, in order of the roadmap: talks, community, clients and testimonials sections (Phase 5), a transcript-to-post tool (Phase 6) and a link hub at `/enlaces` with click metrics (Phase 8).
+- Today: a home with a hero, current focus, metrics and the three latest posts; an About page with bio, contact links, services, experience, talks, community, clients, testimonials and projects; a paginated blog, category pages, related posts; RSS, sitemap, SEO and social metadata.
+- Planned, in order of the roadmap: a transcript-to-post tool (Phase 6) and a link hub at `/enlaces` with click metrics (Phase 8).
 - All site copy is Spanish; code and docs are English. No other languages.
 - Non-goals: a CMS or database, comments, accounts, anything needing a server, and a full visual rewrite. The roadmap adds to the current design rather than replacing it.
 - Category is the only taxonomy; multi-tag posts are deferred.
@@ -46,11 +46,13 @@ Community and talks are what set him apart (owner, 2026-11-06). He organizes and
 
 ## Evidence on Hand
 
-- Posts: 8 in `src/pages/blog/`, 6 in the category `Charlas`, with covers in `src/assets/images/`.
-- Work experience: `src/data/experience.ts` (Curoo, Backbone, Selaski, Platzi, Globant).
+- Posts: 8 in `src/pages/blog/`, 6 in the category `Charlas`, with covers in `src/assets/images/`. Only one of those 6 is a talk Sergio gave (DevFest Pereira 2025); the others are events he organized or another speaker's talk.
+- Talks, community roles, clients and testimonials: `src/data/talks.ts`, `community.ts`, `clients.ts` and `testimonials.ts`. Entries marked `draft` are placeholders the owner still fills in, and never reach the build.
+- Work experience: `src/data/experience.ts` (Fuse, Curoo, Selaski, Platzi, Globant). Backbone UTP lives in `community.ts`.
 - Projects: `src/data/projects.ts`, with images.
 - Profile photo: `src/assets/images/profile.webp`.
-- Absent, and not to be invented: testimonials, a clients list, community roles beyond `experience.ts`, talks without a post, and any metric beyond what the data computes. Each is gathered with the owner before the phase that uses it; testimonials also need consent from the person quoted.
+- Testimonials: public LinkedIn recommendations written for Sergio, quoted word for word.
+- Absent, and not to be invented: client names, and any metric beyond what the data computes. Nothing naming a third party is published without the owner's word.
 
 ## Product Principles
 

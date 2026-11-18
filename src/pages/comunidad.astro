@@ -1,0 +1,16 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Community from "../components/sections/Community.astro";
+import { about } from "../data/about";
+import { community } from "../data/community";
+import { formatBlogPosts, published } from "../js/utils";
+import type { Post } from "../types/posts";
+
+// An event chip links to its post; drafts show only under `astro dev`.
+const posts: Post[] = await formatBlogPosts(import.meta.glob("./blog/*.md", { eager: true }));
+const { page } = about.community;
+---
+
+<MainLayout title={page.title} description={page.description}>
+  <Community community={published(community, import.meta.env.DEV)} labels={about.community} posts={posts} />
+</MainLayout>

@@ -1069,15 +1069,17 @@
             72,
             40
           ],
+          "justifyContent": "center",
           "alignItems": "center",
           "children": [
             {
               "type": "frame",
               "id": "I1Ged",
               "name": "Metric charlas",
+              "width": 260,
               "layout": "vertical",
               "gap": 6,
-              "padding": 0,
+              "alignItems": "center",
               "children": [
                 {
                   "type": "text",
@@ -1085,11 +1087,11 @@
                   "name": "Number",
                   "fill": "$accent-text",
                   "content": "6",
+                  "lineHeight": 1,
                   "fontFamily": "Montserrat",
                   "fontSize": 80,
                   "fontWeight": "700",
-                  "letterSpacing": -2,
-                  "lineHeight": 1
+                  "letterSpacing": -2
                 },
                 {
                   "type": "text",
@@ -1097,14 +1099,12 @@
                   "name": "Label",
                   "fill": "$muted",
                   "content": "charlas",
+                  "textAlign": "center",
                   "fontFamily": "Montserrat",
                   "fontSize": 17,
-                  "fontWeight": "normal",
-                  "textAlign": "center"
+                  "fontWeight": "normal"
                 }
-              ],
-              "alignItems": "center",
-              "width": 260
+              ]
             },
             {
               "type": "rectangle",
@@ -1118,9 +1118,10 @@
               "type": "frame",
               "id": "NeptT",
               "name": "Metric años de experiencia",
+              "width": 260,
               "layout": "vertical",
               "gap": 6,
-              "padding": 0,
+              "alignItems": "center",
               "children": [
                 {
                   "type": "text",
@@ -1128,11 +1129,11 @@
                   "name": "Number",
                   "fill": "$text",
                   "content": "+5",
+                  "lineHeight": 1,
                   "fontFamily": "Montserrat",
                   "fontSize": 80,
                   "fontWeight": "700",
-                  "letterSpacing": -2,
-                  "lineHeight": 1
+                  "letterSpacing": -2
                 },
                 {
                   "type": "text",
@@ -1140,14 +1141,12 @@
                   "name": "Label",
                   "fill": "$muted",
                   "content": "años de experiencia",
+                  "textAlign": "center",
                   "fontFamily": "Montserrat",
                   "fontSize": 17,
-                  "fontWeight": "normal",
-                  "textAlign": "center"
+                  "fontWeight": "normal"
                 }
-              ],
-              "alignItems": "center",
-              "width": 260
+              ]
             },
             {
               "type": "rectangle",
@@ -1161,9 +1160,10 @@
               "type": "frame",
               "id": "x9DTWl",
               "name": "Metric posts",
+              "width": 260,
               "layout": "vertical",
               "gap": 6,
-              "padding": 0,
+              "alignItems": "center",
               "children": [
                 {
                   "type": "text",
@@ -1171,11 +1171,11 @@
                   "name": "Number",
                   "fill": "$text",
                   "content": "8",
+                  "lineHeight": 1,
                   "fontFamily": "Montserrat",
                   "fontSize": 80,
                   "fontWeight": "700",
-                  "letterSpacing": -2,
-                  "lineHeight": 1
+                  "letterSpacing": -2
                 },
                 {
                   "type": "text",
@@ -1183,18 +1183,14 @@
                   "name": "Label",
                   "fill": "$muted",
                   "content": "posts",
+                  "textAlign": "center",
                   "fontFamily": "Montserrat",
                   "fontSize": 17,
-                  "fontWeight": "normal",
-                  "textAlign": "center"
+                  "fontWeight": "normal"
                 }
-              ],
-              "alignItems": "center",
-              "width": 260
+              ]
             }
-          ],
-          "justifyContent": "center",
-          "gap": 0
+          ]
         },
         {
           "type": "frame",
@@ -1651,14 +1647,14 @@
                   "children": [
                     {
                       "type": "text",
+                      "id": "rZ7e8",
                       "name": "Now Line End",
                       "fill": "$text",
                       "content": "abierto a colaboraciones.",
                       "lineHeight": 1.45,
                       "fontFamily": "Montserrat",
                       "fontSize": 16,
-                      "fontWeight": "500",
-                      "id": "rZ7e8"
+                      "fontWeight": "500"
                     },
                     {
                       "type": "frame",
@@ -1707,6 +1703,8 @@
             32,
             16
           ],
+          "justifyContent": "center",
+          "alignItems": "center",
           "children": [
             {
               "type": "frame",
@@ -1715,6 +1713,7 @@
               "width": "fill_container",
               "layout": "vertical",
               "gap": 6,
+              "alignItems": "center",
               "children": [
                 {
                   "type": "text",
@@ -1722,11 +1721,11 @@
                   "name": "Number",
                   "fill": "$accent-text",
                   "content": "6",
+                  "lineHeight": 1,
                   "fontFamily": "Montserrat",
                   "fontSize": 44,
                   "fontWeight": "700",
-                  "letterSpacing": -1,
-                  "lineHeight": 1
+                  "letterSpacing": -1
                 },
                 {
                   "type": "text",
@@ -1737,13 +1736,12 @@
                   "width": "fill_container",
                   "content": "charlas",
                   "lineHeight": 1.3,
+                  "textAlign": "center",
                   "fontFamily": "Montserrat",
                   "fontSize": 13,
-                  "fontWeight": "normal",
-                  "textAlign": "center"
+                  "fontWeight": "normal"
                 }
-              ],
-              "alignItems": "center"
+              ]
             },
             {
               "type": "rectangle",
@@ -1760,6 +1758,7 @@
               "width": "fill_container",
               "layout": "vertical",
               "gap": 6,
+              "alignItems": "center",
               "children": [
                 {
                   "type": "text",
@@ -1767,11 +1766,11 @@
                   "name": "Number",
                   "fill": "$text",
                   "content": "+5",
+                  "lineHeight": 1,
                   "fontFamily": "Montserrat",
                   "fontSize": 44,
                   "fontWeight": "700",
-                  "letterSpacing": -1,
-                  "lineHeight": 1
+                  "letterSpacing": -1
                 },
                 {
                   "type": "text",
@@ -1782,13 +1781,12 @@
                   "width": "fill_container",
                   "content": "años de experiencia",
                   "lineHeight": 1.3,
+                  "textAlign": "center",
                   "fontFamily": "Montserrat",
                   "fontSize": 13,
-                  "fontWeight": "normal",
-                  "textAlign": "center"
+                  "fontWeight": "normal"
                 }
-              ],
-              "alignItems": "center"
+              ]
             },
             {
               "type": "rectangle",
@@ -1805,6 +1803,7 @@
               "width": "fill_container",
               "layout": "vertical",
               "gap": 6,
+              "alignItems": "center",
               "children": [
                 {
                   "type": "text",
@@ -1812,11 +1811,11 @@
                   "name": "Number",
                   "fill": "$text",
                   "content": "8",
+                  "lineHeight": 1,
                   "fontFamily": "Montserrat",
                   "fontSize": 44,
                   "fontWeight": "700",
-                  "letterSpacing": -1,
-                  "lineHeight": 1
+                  "letterSpacing": -1
                 },
                 {
                   "type": "text",
@@ -1827,17 +1826,14 @@
                   "width": "fill_container",
                   "content": "posts",
                   "lineHeight": 1.3,
+                  "textAlign": "center",
                   "fontFamily": "Montserrat",
                   "fontSize": 13,
-                  "fontWeight": "normal",
-                  "textAlign": "center"
+                  "fontWeight": "normal"
                 }
-              ],
-              "alignItems": "center"
+              ]
             }
-          ],
-          "justifyContent": "center",
-          "alignItems": "center"
+          ]
         },
         {
           "type": "frame",
@@ -3506,8 +3502,8 @@
               "id": "a0uqd",
               "name": "Cards",
               "width": "fill_container",
-              "gap": 10,
               "layout": "vertical",
+              "gap": 10,
               "children": [
                 {
                   "type": "frame",
@@ -6431,56 +6427,3867 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "Asf4i",
+      "x": 7100,
+      "y": 600,
+      "name": "7 · About Phase 5 — Desktop",
+      "clip": true,
+      "width": 1280,
+      "fill": "$bg",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "nsNHy",
+          "name": "Charlas",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            40,
+            40,
+            48,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "P1imt",
+              "name": "Heading",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Zgmfl",
+                  "name": "Icon Box",
+                  "width": 40,
+                  "height": 40,
+                  "fill": "$charlas-accent",
+                  "cornerRadius": 8,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "ikgxa",
+                      "name": "Icon",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "microphone",
+                      "library": "phosphor",
+                      "weight": 500,
+                      "fill": "$bg"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "FGgR4",
+                  "name": "Title (h2)",
+                  "fill": "$text",
+                  "content": "Charlas",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 30,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "jfZwG",
+              "name": "Cards",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "id": "z5HagJ",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Herramientas de IA para desarrollo web",
+                  "width": "fill_container",
+                  "stroke": "$charlas-accent",
+                  "descendants": {
+                    "cBGmK": {
+                      "fill": "#00000000",
+                      "stroke": "$charlas-accent",
+                      "strokeWidth": 1
+                    },
+                    "wdhrD": {
+                      "content": "2025",
+                      "fill": "$charlas-accent-text"
+                    },
+                    "hiIt4": {
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "../src/assets/images/post-devfest.webp",
+                        "mode": "cover"
+                      }
+                    },
+                    "GbOwS": {
+                      "content": "Herramientas de IA para desarrollo web"
+                    },
+                    "Zbgty": {
+                      "content": "GDG DevFest Pereira · 29 nov 2025 · Pereira · Español",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "FFFE6": {
+                      "enabled": true
+                    },
+                    "FFFE6/rsBhT": {
+                      "icon": "play-circle"
+                    },
+                    "FFFE6/qQdrm": {
+                      "content": "Grabación"
+                    },
+                    "vfCZu/rsBhT": {
+                      "icon": "article"
+                    },
+                    "vfCZu/qQdrm": {
+                      "content": "Post"
+                    }
+                  }
+                },
+                {
+                  "type": "frame",
+                  "id": "OCXM6",
+                  "name": "Column",
+                  "width": "fill_container",
+                  "height": 400,
+                  "layout": "vertical",
+                  "gap": 24,
+                  "children": [
+                    {
+                      "id": "NWSJ2",
+                      "type": "ref",
+                      "ref": "YigSS",
+                      "name": "Charla en AWS Community Day",
+                      "width": "fill_container",
+                      "stroke": "$charlas-accent",
+                      "height": "fill_container",
+                      "descendants": {
+                        "cBGmK": {
+                          "fill": "#00000000",
+                          "stroke": "$charlas-accent",
+                          "strokeWidth": 1
+                        },
+                        "wdhrD": {
+                          "content": "Próxima",
+                          "fill": "$charlas-accent-text"
+                        },
+                        "hiIt4": {
+                          "enabled": false
+                        },
+                        "GbOwS": {
+                          "content": "Charla en AWS Community Day"
+                        },
+                        "Zbgty": {
+                          "content": "AWS User Group Pereira · Fecha por confirmar · Español",
+                          "fill": "$muted",
+                          "fontSize": 14,
+                          "fontWeight": "500"
+                        },
+                        "FFFE6": {
+                          "enabled": true
+                        },
+                        "FFFE6/rsBhT": {
+                          "icon": "ticket"
+                        },
+                        "FFFE6/qQdrm": {
+                          "content": "Inscripción"
+                        },
+                        "vfCZu": {
+                          "enabled": false
+                        }
+                      }
+                    },
+                    {
+                      "id": "C4z2z",
+                      "type": "ref",
+                      "ref": "YigSS",
+                      "name": "Charla en QA Conf",
+                      "width": "fill_container",
+                      "stroke": "$charlas-accent",
+                      "height": "fill_container",
+                      "descendants": {
+                        "cBGmK": {
+                          "fill": "#00000000",
+                          "stroke": "$charlas-accent",
+                          "strokeWidth": 1
+                        },
+                        "wdhrD": {
+                          "content": "2026",
+                          "fill": "$charlas-accent-text"
+                        },
+                        "hiIt4": {
+                          "enabled": false
+                        },
+                        "GbOwS": {
+                          "content": "Charla en QA Conf"
+                        },
+                        "Zbgty": {
+                          "content": "QA Conf · 2026 · Español",
+                          "fill": "$muted",
+                          "fontSize": 14,
+                          "fontWeight": "500"
+                        },
+                        "OKSMK": {
+                          "enabled": false
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "uKWYZ",
+          "name": "Comunidad",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            40,
+            40,
+            48,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "xbIPi",
+              "name": "Heading",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Vtf7j",
+                  "name": "Icon Box",
+                  "width": 40,
+                  "height": 40,
+                  "fill": "$comunidad-accent",
+                  "cornerRadius": 8,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "Irf0d",
+                      "name": "Icon",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "users",
+                      "library": "phosphor",
+                      "weight": 500,
+                      "fill": "$bg"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "nIhJg",
+                  "name": "Title (h2)",
+                  "fill": "$text",
+                  "content": "Comunidad",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 30,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "O3JcYk",
+              "name": "Subheading (h3)",
+              "fill": "$text",
+              "content": "Organizo",
+              "fontFamily": "Montserrat",
+              "fontSize": 20,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "PtveR",
+              "name": "Organizo Cards",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "id": "CJqRl",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Backbone UTP",
+                  "width": "fill_container",
+                  "stroke": "$comunidad-accent",
+                  "height": 351,
+                  "descendants": {
+                    "cBGmK": {
+                      "fill": "#00000000",
+                      "stroke": "$comunidad-accent",
+                      "strokeWidth": 1
+                    },
+                    "wdhrD": {
+                      "content": "Agosto 2022 - Actualidad",
+                      "fill": "$comunidad-accent-text"
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "Backbone UTP"
+                    },
+                    "Zbgty": {
+                      "content": "Fundador y mentor",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "OKSMK": {
+                      "type": "frame",
+                      "id": "X9Pq3n",
+                      "name": "Extras",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 14,
+                      "padding": [
+                        8,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "id": "G1U1o",
+                          "type": "ref",
+                          "ref": "Zewml",
+                          "name": "Sitio web",
+                          "descendants": {
+                            "rsBhT": {
+                              "icon": "arrow-square-out"
+                            },
+                            "qQdrm": {
+                              "content": "Sitio web"
+                            }
+                          }
+                        },
+                        {
+                          "type": "frame",
+                          "id": "AOxMo",
+                          "name": "Eventos",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "tvS5g",
+                              "name": "Label",
+                              "fill": "$muted",
+                              "content": "Eventos",
+                              "fontFamily": "Montserrat",
+                              "fontSize": 12,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "id": "gVR99",
+                              "type": "ref",
+                              "ref": "V3qpE9",
+                              "name": "GDG DevFest Pereira 2025",
+                              "descendants": {
+                                "bl99Z": {
+                                  "content": "GDG DevFest Pereira 2025",
+                                  "fontSize": 13
+                                }
+                              }
+                            },
+                            {
+                              "id": "M5ajQ",
+                              "type": "ref",
+                              "ref": "V3qpE9",
+                              "name": "GDG Pereira - Mujeres en Tecnología",
+                              "width": "fill_container",
+                              "cornerRadius": 12,
+                              "descendants": {
+                                "bl99Z": {
+                                  "content": "GDG Pereira - Mujeres en Tecnología",
+                                  "fontSize": 13,
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "lineHeight": 1.4
+                                }
+                              }
+                            },
+                            {
+                              "id": "iW7DL",
+                              "type": "ref",
+                              "ref": "V3qpE9",
+                              "name": "La IA no te quitará el trabajo, pero YO Sí",
+                              "width": "fill_container",
+                              "cornerRadius": 12,
+                              "descendants": {
+                                "bl99Z": {
+                                  "content": "La IA no te quitará el trabajo, pero YO Sí",
+                                  "fontSize": 13,
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "lineHeight": 1.4
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "nECuh",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Pereira Tech Talks (PerTT)",
+                  "width": "fill_container",
+                  "stroke": "$comunidad-accent",
+                  "height": 351,
+                  "descendants": {
+                    "cBGmK": {
+                      "fill": "#00000000",
+                      "stroke": "$comunidad-accent",
+                      "strokeWidth": 1
+                    },
+                    "wdhrD": {
+                      "content": "2025 - Actualidad",
+                      "fill": "$comunidad-accent-text"
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "Pereira Tech Talks (PerTT)"
+                    },
+                    "Zbgty": {
+                      "content": "Organizador",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "OKSMK": {
+                      "enabled": false
+                    }
+                  }
+                },
+                {
+                  "id": "LXaoZ",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Software Freedom Day Pereira",
+                  "width": "fill_container",
+                  "stroke": "$comunidad-accent",
+                  "height": 351,
+                  "descendants": {
+                    "cBGmK": {
+                      "fill": "#00000000",
+                      "stroke": "$comunidad-accent",
+                      "strokeWidth": 1
+                    },
+                    "wdhrD": {
+                      "content": "2023 - Actualidad",
+                      "fill": "$comunidad-accent-text"
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "Software Freedom Day Pereira"
+                    },
+                    "Zbgty": {
+                      "content": "Organizador",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "OKSMK": {
+                      "type": "frame",
+                      "id": "nIF8F",
+                      "name": "Extras",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 14,
+                      "padding": [
+                        8,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "C2U0w",
+                          "name": "Eventos",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "YsOxn",
+                              "name": "Label",
+                              "fill": "$muted",
+                              "content": "Eventos",
+                              "fontFamily": "Montserrat",
+                              "fontSize": 12,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "id": "vAdBH",
+                              "type": "ref",
+                              "ref": "V3qpE9",
+                              "name": "Software Freedom Day 2023",
+                              "descendants": {
+                                "bl99Z": {
+                                  "content": "Software Freedom Day 2023",
+                                  "fontSize": 13
+                                }
+                              }
+                            },
+                            {
+                              "id": "jxtBo",
+                              "type": "ref",
+                              "ref": "V3qpE9",
+                              "name": "2024",
+                              "descendants": {
+                                "bl99Z": {
+                                  "content": "2024",
+                                  "fontSize": 13
+                                }
+                              }
+                            },
+                            {
+                              "id": "AeBm3",
+                              "type": "ref",
+                              "ref": "V3qpE9",
+                              "name": "2025",
+                              "descendants": {
+                                "bl99Z": {
+                                  "content": "2025",
+                                  "fontSize": 13
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "qNzKV",
+              "name": "Subheading (h3)",
+              "fill": "$text",
+              "content": "He colaborado con",
+              "fontFamily": "Montserrat",
+              "fontSize": 20,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "VFTbB",
+              "name": "Colaboraciones",
+              "gap": 10,
+              "children": [
+                {
+                  "id": "D0IQvJ",
+                  "type": "ref",
+                  "ref": "V3qpE9",
+                  "name": "GDG Pereira",
+                  "descendants": {
+                    "bl99Z": {
+                      "content": "GDG Pereira"
+                    }
+                  }
+                },
+                {
+                  "id": "F1m7ZV",
+                  "type": "ref",
+                  "ref": "V3qpE9",
+                  "name": "AWS User Group Pereira",
+                  "descendants": {
+                    "bl99Z": {
+                      "content": "AWS User Group Pereira"
+                    }
+                  }
+                },
+                {
+                  "id": "wM2My",
+                  "type": "ref",
+                  "ref": "V3qpE9",
+                  "name": "FLISoL",
+                  "descendants": {
+                    "bl99Z": {
+                      "content": "FLISoL"
+                    }
+                  }
+                },
+                {
+                  "id": "uZCwK",
+                  "type": "ref",
+                  "ref": "V3qpE9",
+                  "name": "QA Conf",
+                  "descendants": {
+                    "bl99Z": {
+                      "content": "QA Conf"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "pWBQV",
+          "name": "Clientes",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            40,
+            40,
+            48,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "Y73ts",
+              "name": "Heading",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "NYRA5",
+                  "name": "Icon Box",
+                  "width": 40,
+                  "height": 40,
+                  "fill": "$clientes-accent",
+                  "cornerRadius": 8,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "rSHvj",
+                      "name": "Icon",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "handshake",
+                      "library": "phosphor",
+                      "weight": 500,
+                      "fill": "$bg"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "QiD2u",
+                  "name": "Title (h2)",
+                  "fill": "$text",
+                  "content": "Clientes",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 30,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "z2zvtv",
+              "name": "Subheading (h3)",
+              "fill": "$text",
+              "content": "Empresa",
+              "fontFamily": "Montserrat",
+              "fontSize": 20,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "Sb2e6",
+              "name": "Empresa Cards",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "id": "B4v63z",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "3 clientes fintech en EE. UU. · vía Fuse",
+                  "width": "fill_container",
+                  "stroke": "$clientes-accent",
+                  "height": 177,
+                  "descendants": {
+                    "W8Iva": {
+                      "enabled": false
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "3 clientes fintech en EE. UU. · vía Fuse"
+                    },
+                    "Zbgty": {
+                      "content": "Forward Deployed Engineer",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "OKSMK": {
+                      "type": "frame",
+                      "id": "ji79P",
+                      "name": "Outcome",
+                      "width": "fill_container",
+                      "gap": 10,
+                      "padding": [
+                        4,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "Lp334",
+                          "name": "Icon",
+                          "width": 18,
+                          "height": 18,
+                          "icon": "trend-up",
+                          "library": "phosphor",
+                          "weight": 500,
+                          "fill": "$text"
+                        },
+                        {
+                          "type": "text",
+                          "id": "xQGgW",
+                          "name": "Resultado",
+                          "fill": "$text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Agentes de crédito en producción con protección de PII",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Montserrat",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "LUNep",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Plataforma de streaming con +25 M de usuarios · vía Globant",
+                  "width": "fill_container",
+                  "stroke": "$clientes-accent",
+                  "height": 177,
+                  "descendants": {
+                    "W8Iva": {
+                      "enabled": false
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "Plataforma de streaming con +25 M de usuarios · vía Globant"
+                    },
+                    "Zbgty": {
+                      "content": "Web UI Developer",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "OKSMK": {
+                      "type": "frame",
+                      "id": "mzLlE",
+                      "name": "Outcome",
+                      "width": "fill_container",
+                      "gap": 10,
+                      "padding": [
+                        4,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "W5j3W",
+                          "name": "Icon",
+                          "width": 18,
+                          "height": 18,
+                          "icon": "trend-up",
+                          "library": "phosphor",
+                          "weight": 500,
+                          "fill": "$text"
+                        },
+                        {
+                          "type": "text",
+                          "id": "p4rvoz",
+                          "name": "Resultado",
+                          "fill": "$text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Tiempo de respuesta de la API de 120 ms a 60 ms",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Montserrat",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "so2KC",
+              "name": "Subheading (h3)",
+              "fill": "$text",
+              "content": "Freelance",
+              "fontFamily": "Montserrat",
+              "fontSize": 20,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "ShMMO",
+              "name": "Freelance Cards",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "id": "sL3iT",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Cliente freelance",
+                  "width": "fill_container",
+                  "stroke": "$clientes-accent",
+                  "height": 153,
+                  "descendants": {
+                    "W8Iva": {
+                      "enabled": false
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "Cliente freelance"
+                    },
+                    "Zbgty": {
+                      "content": "Rol",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "OKSMK": {
+                      "type": "frame",
+                      "id": "Nrh5v",
+                      "name": "Outcome",
+                      "width": "fill_container",
+                      "gap": 10,
+                      "padding": [
+                        4,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "xgtrx",
+                          "name": "Icon",
+                          "width": 18,
+                          "height": 18,
+                          "icon": "trend-up",
+                          "library": "phosphor",
+                          "weight": 500,
+                          "fill": "$text"
+                        },
+                        {
+                          "type": "text",
+                          "id": "AelTj",
+                          "name": "Resultado",
+                          "fill": "$text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Resultado en una línea",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Montserrat",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "D5w6r",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Cliente freelance",
+                  "width": "fill_container",
+                  "stroke": "$clientes-accent",
+                  "height": 153,
+                  "descendants": {
+                    "W8Iva": {
+                      "enabled": false
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "Cliente freelance"
+                    },
+                    "Zbgty": {
+                      "content": "Rol",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "OKSMK": {
+                      "type": "frame",
+                      "id": "O6kpCg",
+                      "name": "Outcome",
+                      "width": "fill_container",
+                      "gap": 10,
+                      "padding": [
+                        4,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "hE724",
+                          "name": "Icon",
+                          "width": 18,
+                          "height": 18,
+                          "icon": "trend-up",
+                          "library": "phosphor",
+                          "weight": 500,
+                          "fill": "$text"
+                        },
+                        {
+                          "type": "text",
+                          "id": "K7Eu4",
+                          "name": "Resultado",
+                          "fill": "$text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Resultado en una línea",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Montserrat",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "P6gaB",
+          "name": "Testimonios",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            40,
+            40,
+            48,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "ZXlrg",
+              "name": "Heading",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "YCJ5Z",
+                  "name": "Icon Box",
+                  "width": 40,
+                  "height": 40,
+                  "fill": "$testimonios-accent",
+                  "cornerRadius": 8,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "vovRJ",
+                      "name": "Icon",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "quotes",
+                      "library": "phosphor",
+                      "weight": 500,
+                      "fill": "$bg"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "n1nOm",
+                  "name": "Title (h2)",
+                  "fill": "$text",
+                  "content": "Testimonios",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 30,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "E0BoZ",
+              "name": "Testimonios Cards",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "twowm",
+                  "name": "Testimonio",
+                  "width": "fill_container",
+                  "height": 178,
+                  "fill": "$surface",
+                  "cornerRadius": 13,
+                  "stroke": "$testimonios-accent",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 28,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "h2aSUz",
+                      "name": "Blockquote",
+                      "width": "fill_container",
+                      "stroke": "$rule",
+                      "strokeWidth": {
+                        "left": 3
+                      },
+                      "layout": "vertical",
+                      "padding": [
+                        2,
+                        0,
+                        2,
+                        18
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Tpoa5",
+                          "name": "Quote",
+                          "fill": "$text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Texto del testimonio. Aquí irá una cita breve de una persona con la que trabajé, sobre el resultado del proyecto y la forma de trabajar en equipo.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Montserrat",
+                          "fontSize": 17,
+                          "fontWeight": "normal",
+                          "fontStyle": "italic"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "HtW4y",
+                      "name": "Attribution",
+                      "fill": "$muted",
+                      "content": "Nombre Apellido · Rol, Empresa",
+                      "fontFamily": "Montserrat",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "k69bVX",
+                  "name": "Testimonio",
+                  "width": "fill_container",
+                  "height": 178,
+                  "fill": "$surface",
+                  "cornerRadius": 13,
+                  "stroke": "$testimonios-accent",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 28,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "vmzpE",
+                      "name": "Blockquote",
+                      "width": "fill_container",
+                      "stroke": "$rule",
+                      "strokeWidth": {
+                        "left": 3
+                      },
+                      "layout": "vertical",
+                      "padding": [
+                        2,
+                        0,
+                        2,
+                        18
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "X6WY3U",
+                          "name": "Quote",
+                          "fill": "$text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Texto del testimonio. Aquí irá una cita breve de una persona con la que trabajé, sobre el resultado del proyecto y la forma de trabajar en equipo.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Montserrat",
+                          "fontSize": 17,
+                          "fontWeight": "normal",
+                          "fontStyle": "italic"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "bHxBf",
+                      "name": "Attribution",
+                      "fill": "$muted",
+                      "content": "Nombre Apellido · Rol, Empresa",
+                      "fontFamily": "Montserrat",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "KFnVb",
+      "x": 8800,
+      "y": 600,
+      "name": "8 · About Phase 5 — Phone",
+      "clip": true,
+      "width": 375,
+      "fill": "$bg",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "J7guG",
+          "name": "Charlas",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            28,
+            16,
+            36,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "irIdr",
+              "name": "Heading",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "AKNA6",
+                  "name": "Icon Box",
+                  "width": 34,
+                  "height": 34,
+                  "fill": "$charlas-accent",
+                  "cornerRadius": 8,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "f2UIaw",
+                      "name": "Icon",
+                      "width": 17,
+                      "height": 17,
+                      "icon": "microphone",
+                      "library": "phosphor",
+                      "weight": 500,
+                      "fill": "$bg"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "oZXPW",
+                  "name": "Title (h2)",
+                  "fill": "$text",
+                  "content": "Charlas",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 24,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "WzXIi",
+              "name": "Cards",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "id": "T7S9A",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Herramientas de IA para desarrollo web",
+                  "width": "fill_container",
+                  "stroke": "$charlas-accent",
+                  "padding": 20,
+                  "descendants": {
+                    "cBGmK": {
+                      "fill": "#00000000",
+                      "stroke": "$charlas-accent",
+                      "strokeWidth": 1
+                    },
+                    "wdhrD": {
+                      "content": "2025",
+                      "fill": "$charlas-accent-text"
+                    },
+                    "hiIt4": {
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "../src/assets/images/post-devfest.webp",
+                        "mode": "cover"
+                      }
+                    },
+                    "GbOwS": {
+                      "content": "Herramientas de IA para desarrollo web"
+                    },
+                    "Zbgty": {
+                      "content": "GDG DevFest Pereira · 29 nov 2025 · Pereira · Español",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "FFFE6": {
+                      "enabled": true
+                    },
+                    "FFFE6/rsBhT": {
+                      "icon": "play-circle"
+                    },
+                    "FFFE6/qQdrm": {
+                      "content": "Grabación"
+                    },
+                    "vfCZu/rsBhT": {
+                      "icon": "article"
+                    },
+                    "vfCZu/qQdrm": {
+                      "content": "Post"
+                    }
+                  }
+                },
+                {
+                  "id": "u5dlNN",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Charla en AWS Community Day",
+                  "width": "fill_container",
+                  "stroke": "$charlas-accent",
+                  "padding": 20,
+                  "descendants": {
+                    "cBGmK": {
+                      "fill": "#00000000",
+                      "stroke": "$charlas-accent",
+                      "strokeWidth": 1
+                    },
+                    "wdhrD": {
+                      "content": "Próxima",
+                      "fill": "$charlas-accent-text"
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "Charla en AWS Community Day"
+                    },
+                    "Zbgty": {
+                      "content": "AWS User Group Pereira · Fecha por confirmar · Español",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "FFFE6": {
+                      "enabled": true
+                    },
+                    "FFFE6/rsBhT": {
+                      "icon": "ticket"
+                    },
+                    "FFFE6/qQdrm": {
+                      "content": "Inscripción"
+                    },
+                    "vfCZu": {
+                      "enabled": false
+                    }
+                  }
+                },
+                {
+                  "id": "f3wrW",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Charla en QA Conf",
+                  "width": "fill_container",
+                  "stroke": "$charlas-accent",
+                  "padding": 20,
+                  "descendants": {
+                    "cBGmK": {
+                      "fill": "#00000000",
+                      "stroke": "$charlas-accent",
+                      "strokeWidth": 1
+                    },
+                    "wdhrD": {
+                      "content": "2026",
+                      "fill": "$charlas-accent-text"
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "Charla en QA Conf"
+                    },
+                    "Zbgty": {
+                      "content": "QA Conf · 2026 · Español",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "OKSMK": {
+                      "enabled": false
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "h9g4Cm",
+          "name": "Comunidad",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            28,
+            16,
+            36,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "pqXq4",
+              "name": "Heading",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "k32Imt",
+                  "name": "Icon Box",
+                  "width": 34,
+                  "height": 34,
+                  "fill": "$comunidad-accent",
+                  "cornerRadius": 8,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "dUqGh",
+                      "name": "Icon",
+                      "width": 17,
+                      "height": 17,
+                      "icon": "users",
+                      "library": "phosphor",
+                      "weight": 500,
+                      "fill": "$bg"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "jBwWS",
+                  "name": "Title (h2)",
+                  "fill": "$text",
+                  "content": "Comunidad",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 24,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "r3ay4",
+              "name": "Subheading (h3)",
+              "fill": "$text",
+              "content": "Organizo",
+              "fontFamily": "Montserrat",
+              "fontSize": 18,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "Z9M5s",
+              "name": "Organizo Cards",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "id": "LSUPl",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Backbone UTP",
+                  "width": "fill_container",
+                  "stroke": "$comunidad-accent",
+                  "padding": 20,
+                  "descendants": {
+                    "cBGmK": {
+                      "fill": "#00000000",
+                      "stroke": "$comunidad-accent",
+                      "strokeWidth": 1
+                    },
+                    "wdhrD": {
+                      "content": "Agosto 2022 - Actualidad",
+                      "fill": "$comunidad-accent-text"
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "Backbone UTP"
+                    },
+                    "Zbgty": {
+                      "content": "Fundador y mentor",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "OKSMK": {
+                      "type": "frame",
+                      "id": "F0tdpR",
+                      "name": "Extras",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 14,
+                      "padding": [
+                        8,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "id": "wpg1p",
+                          "type": "ref",
+                          "ref": "Zewml",
+                          "name": "Sitio web",
+                          "descendants": {
+                            "rsBhT": {
+                              "icon": "arrow-square-out"
+                            },
+                            "qQdrm": {
+                              "content": "Sitio web"
+                            }
+                          }
+                        },
+                        {
+                          "type": "frame",
+                          "id": "y3sCdf",
+                          "name": "Eventos",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "SJms0",
+                              "name": "Label",
+                              "fill": "$muted",
+                              "content": "Eventos",
+                              "fontFamily": "Montserrat",
+                              "fontSize": 12,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "id": "MorOj",
+                              "type": "ref",
+                              "ref": "V3qpE9",
+                              "name": "GDG DevFest Pereira 2025",
+                              "descendants": {
+                                "bl99Z": {
+                                  "content": "GDG DevFest Pereira 2025",
+                                  "fontSize": 13
+                                }
+                              }
+                            },
+                            {
+                              "id": "jNQLc",
+                              "type": "ref",
+                              "ref": "V3qpE9",
+                              "name": "GDG Pereira - Mujeres en Tecnología",
+                              "width": "fill_container",
+                              "cornerRadius": 12,
+                              "descendants": {
+                                "bl99Z": {
+                                  "content": "GDG Pereira - Mujeres en Tecnología",
+                                  "fontSize": 13,
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "lineHeight": 1.4
+                                }
+                              }
+                            },
+                            {
+                              "id": "IvGKm",
+                              "type": "ref",
+                              "ref": "V3qpE9",
+                              "name": "La IA no te quitará el trabajo, pero YO Sí",
+                              "width": "fill_container",
+                              "cornerRadius": 12,
+                              "descendants": {
+                                "bl99Z": {
+                                  "content": "La IA no te quitará el trabajo, pero YO Sí",
+                                  "fontSize": 13,
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "lineHeight": 1.4
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "U8lmJ",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Pereira Tech Talks (PerTT)",
+                  "width": "fill_container",
+                  "stroke": "$comunidad-accent",
+                  "padding": 20,
+                  "descendants": {
+                    "cBGmK": {
+                      "fill": "#00000000",
+                      "stroke": "$comunidad-accent",
+                      "strokeWidth": 1
+                    },
+                    "wdhrD": {
+                      "content": "2025 - Actualidad",
+                      "fill": "$comunidad-accent-text"
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "Pereira Tech Talks (PerTT)"
+                    },
+                    "Zbgty": {
+                      "content": "Organizador",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "OKSMK": {
+                      "enabled": false
+                    }
+                  }
+                },
+                {
+                  "id": "vU65P",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Software Freedom Day Pereira",
+                  "width": "fill_container",
+                  "stroke": "$comunidad-accent",
+                  "padding": 20,
+                  "descendants": {
+                    "cBGmK": {
+                      "fill": "#00000000",
+                      "stroke": "$comunidad-accent",
+                      "strokeWidth": 1
+                    },
+                    "wdhrD": {
+                      "content": "2023 - Actualidad",
+                      "fill": "$comunidad-accent-text"
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "Software Freedom Day Pereira"
+                    },
+                    "Zbgty": {
+                      "content": "Organizador",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "OKSMK": {
+                      "type": "frame",
+                      "id": "LZrLB",
+                      "name": "Extras",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 14,
+                      "padding": [
+                        8,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Ni56S",
+                          "name": "Eventos",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "uR2oL",
+                              "name": "Label",
+                              "fill": "$muted",
+                              "content": "Eventos",
+                              "fontFamily": "Montserrat",
+                              "fontSize": 12,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "id": "h41gp",
+                              "type": "ref",
+                              "ref": "V3qpE9",
+                              "name": "Software Freedom Day 2023",
+                              "descendants": {
+                                "bl99Z": {
+                                  "content": "Software Freedom Day 2023",
+                                  "fontSize": 13
+                                }
+                              }
+                            },
+                            {
+                              "id": "GMBSo",
+                              "type": "ref",
+                              "ref": "V3qpE9",
+                              "name": "2024",
+                              "descendants": {
+                                "bl99Z": {
+                                  "content": "2024",
+                                  "fontSize": 13
+                                }
+                              }
+                            },
+                            {
+                              "id": "b9O2bm",
+                              "type": "ref",
+                              "ref": "V3qpE9",
+                              "name": "2025",
+                              "descendants": {
+                                "bl99Z": {
+                                  "content": "2025",
+                                  "fontSize": 13
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "q8Vh7f",
+              "name": "Subheading (h3)",
+              "fill": "$text",
+              "content": "He colaborado con",
+              "fontFamily": "Montserrat",
+              "fontSize": 18,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "v2eSKq",
+              "name": "Colaboraciones",
+              "layout": "vertical",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "mZdF6",
+                  "name": "Row",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "id": "u2rl9",
+                      "type": "ref",
+                      "ref": "V3qpE9",
+                      "name": "GDG Pereira",
+                      "descendants": {
+                        "bl99Z": {
+                          "content": "GDG Pereira"
+                        }
+                      }
+                    },
+                    {
+                      "id": "JQIxZ",
+                      "type": "ref",
+                      "ref": "V3qpE9",
+                      "name": "FLISoL",
+                      "descendants": {
+                        "bl99Z": {
+                          "content": "FLISoL"
+                        }
+                      }
+                    },
+                    {
+                      "id": "q0cbr6",
+                      "type": "ref",
+                      "ref": "V3qpE9",
+                      "name": "QA Conf",
+                      "descendants": {
+                        "bl99Z": {
+                          "content": "QA Conf"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "c1cWBx",
+                  "name": "Row",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "id": "mIowr",
+                      "type": "ref",
+                      "ref": "V3qpE9",
+                      "name": "AWS User Group Pereira",
+                      "descendants": {
+                        "bl99Z": {
+                          "content": "AWS User Group Pereira"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "V4QVF7",
+          "name": "Clientes",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            28,
+            16,
+            36,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "D4DFR",
+              "name": "Heading",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "okka4",
+                  "name": "Icon Box",
+                  "width": 34,
+                  "height": 34,
+                  "fill": "$clientes-accent",
+                  "cornerRadius": 8,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "mB6Dg",
+                      "name": "Icon",
+                      "width": 17,
+                      "height": 17,
+                      "icon": "handshake",
+                      "library": "phosphor",
+                      "weight": 500,
+                      "fill": "$bg"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "yfhN5",
+                  "name": "Title (h2)",
+                  "fill": "$text",
+                  "content": "Clientes",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 24,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "Wpu7l",
+              "name": "Subheading (h3)",
+              "fill": "$text",
+              "content": "Empresa",
+              "fontFamily": "Montserrat",
+              "fontSize": 18,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "a5GMH",
+              "name": "Empresa Cards",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "id": "PlEWQ",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "3 clientes fintech en EE. UU. · vía Fuse",
+                  "width": "fill_container",
+                  "stroke": "$clientes-accent",
+                  "padding": 20,
+                  "descendants": {
+                    "W8Iva": {
+                      "enabled": false
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "3 clientes fintech en EE. UU. · vía Fuse"
+                    },
+                    "Zbgty": {
+                      "content": "Forward Deployed Engineer",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "OKSMK": {
+                      "type": "frame",
+                      "id": "uebgz",
+                      "name": "Outcome",
+                      "width": "fill_container",
+                      "gap": 10,
+                      "padding": [
+                        4,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "Z6zzh",
+                          "name": "Icon",
+                          "width": 18,
+                          "height": 18,
+                          "icon": "trend-up",
+                          "library": "phosphor",
+                          "weight": 500,
+                          "fill": "$text"
+                        },
+                        {
+                          "type": "text",
+                          "id": "O2f1J0",
+                          "name": "Resultado",
+                          "fill": "$text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Agentes de crédito en producción con protección de PII",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Montserrat",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "mTHBI",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Plataforma de streaming con +25 M de usuarios · vía Globant",
+                  "width": "fill_container",
+                  "stroke": "$clientes-accent",
+                  "padding": 20,
+                  "descendants": {
+                    "W8Iva": {
+                      "enabled": false
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "Plataforma de streaming con +25 M de usuarios · vía Globant"
+                    },
+                    "Zbgty": {
+                      "content": "Web UI Developer",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "OKSMK": {
+                      "type": "frame",
+                      "id": "mkFHi",
+                      "name": "Outcome",
+                      "width": "fill_container",
+                      "gap": 10,
+                      "padding": [
+                        4,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "M7SPjF",
+                          "name": "Icon",
+                          "width": 18,
+                          "height": 18,
+                          "icon": "trend-up",
+                          "library": "phosphor",
+                          "weight": 500,
+                          "fill": "$text"
+                        },
+                        {
+                          "type": "text",
+                          "id": "DU6VE",
+                          "name": "Resultado",
+                          "fill": "$text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Tiempo de respuesta de la API de 120 ms a 60 ms",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Montserrat",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "tXwqn",
+              "name": "Subheading (h3)",
+              "fill": "$text",
+              "content": "Freelance",
+              "fontFamily": "Montserrat",
+              "fontSize": 18,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "J3WIO6",
+              "name": "Freelance Cards",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "id": "vunDg",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Cliente freelance",
+                  "width": "fill_container",
+                  "stroke": "$clientes-accent",
+                  "padding": 20,
+                  "descendants": {
+                    "W8Iva": {
+                      "enabled": false
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "Cliente freelance"
+                    },
+                    "Zbgty": {
+                      "content": "Rol",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "OKSMK": {
+                      "type": "frame",
+                      "id": "H93iAP",
+                      "name": "Outcome",
+                      "width": "fill_container",
+                      "gap": 10,
+                      "padding": [
+                        4,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "Vtn19",
+                          "name": "Icon",
+                          "width": 18,
+                          "height": 18,
+                          "icon": "trend-up",
+                          "library": "phosphor",
+                          "weight": 500,
+                          "fill": "$text"
+                        },
+                        {
+                          "type": "text",
+                          "id": "shi35",
+                          "name": "Resultado",
+                          "fill": "$text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Resultado en una línea",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Montserrat",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "fKU55",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Cliente freelance",
+                  "width": "fill_container",
+                  "stroke": "$clientes-accent",
+                  "padding": 20,
+                  "descendants": {
+                    "W8Iva": {
+                      "enabled": false
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "Cliente freelance"
+                    },
+                    "Zbgty": {
+                      "content": "Rol",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "OKSMK": {
+                      "type": "frame",
+                      "id": "t735y5",
+                      "name": "Outcome",
+                      "width": "fill_container",
+                      "gap": 10,
+                      "padding": [
+                        4,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "u9CKp",
+                          "name": "Icon",
+                          "width": 18,
+                          "height": 18,
+                          "icon": "trend-up",
+                          "library": "phosphor",
+                          "weight": 500,
+                          "fill": "$text"
+                        },
+                        {
+                          "type": "text",
+                          "id": "pzHtB",
+                          "name": "Resultado",
+                          "fill": "$text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Resultado en una línea",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Montserrat",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "FtIt6",
+          "name": "Testimonios",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            28,
+            16,
+            36,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "xHYnP",
+              "name": "Heading",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "eIPky",
+                  "name": "Icon Box",
+                  "width": 34,
+                  "height": 34,
+                  "fill": "$testimonios-accent",
+                  "cornerRadius": 8,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "p0hx9",
+                      "name": "Icon",
+                      "width": 17,
+                      "height": 17,
+                      "icon": "quotes",
+                      "library": "phosphor",
+                      "weight": 500,
+                      "fill": "$bg"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "Y0Hlk",
+                  "name": "Title (h2)",
+                  "fill": "$text",
+                  "content": "Testimonios",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 24,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ZB8QK",
+              "name": "Testimonios Cards",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "eHXUc",
+                  "name": "Testimonio",
+                  "width": "fill_container",
+                  "fill": "$surface",
+                  "cornerRadius": 13,
+                  "stroke": "$testimonios-accent",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "cEQtP",
+                      "name": "Blockquote",
+                      "width": "fill_container",
+                      "stroke": "$rule",
+                      "strokeWidth": {
+                        "left": 3
+                      },
+                      "layout": "vertical",
+                      "padding": [
+                        2,
+                        0,
+                        2,
+                        18
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Pv6KT",
+                          "name": "Quote",
+                          "fill": "$text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Texto del testimonio. Aquí irá una cita breve de una persona con la que trabajé, sobre el resultado del proyecto y la forma de trabajar en equipo.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Montserrat",
+                          "fontSize": 16,
+                          "fontWeight": "normal",
+                          "fontStyle": "italic"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "nmDVO",
+                      "name": "Attribution",
+                      "fill": "$muted",
+                      "content": "Nombre Apellido · Rol, Empresa",
+                      "fontFamily": "Montserrat",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "nTwWg",
+                  "name": "Testimonio",
+                  "width": "fill_container",
+                  "fill": "$surface",
+                  "cornerRadius": 13,
+                  "stroke": "$testimonios-accent",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "glwz0",
+                      "name": "Blockquote",
+                      "width": "fill_container",
+                      "stroke": "$rule",
+                      "strokeWidth": {
+                        "left": 3
+                      },
+                      "layout": "vertical",
+                      "padding": [
+                        2,
+                        0,
+                        2,
+                        18
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "mHaZw",
+                          "name": "Quote",
+                          "fill": "$text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Texto del testimonio. Aquí irá una cita breve de una persona con la que trabajé, sobre el resultado del proyecto y la forma de trabajar en equipo.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Montserrat",
+                          "fontSize": 16,
+                          "fontWeight": "normal",
+                          "fontStyle": "italic"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "cz8K4",
+                      "name": "Attribution",
+                      "fill": "$muted",
+                      "content": "Nombre Apellido · Rol, Empresa",
+                      "fontFamily": "Montserrat",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "EE5sC",
+      "x": 9600,
+      "y": 600,
+      "name": "9 · About Phase 5 — Desktop dark",
+      "theme": {
+        "mode": "dark"
+      },
+      "clip": true,
+      "width": 1280,
+      "fill": "$bg",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "Jltmu",
+          "name": "Charlas",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            40,
+            40,
+            48,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "s9gUvS",
+              "name": "Heading",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "DpVXT",
+                  "name": "Icon Box",
+                  "width": 40,
+                  "height": 40,
+                  "fill": "$charlas-accent",
+                  "cornerRadius": 8,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "Ca9EA",
+                      "name": "Icon",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "microphone",
+                      "library": "phosphor",
+                      "weight": 500,
+                      "fill": "$bg"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "BmCJn",
+                  "name": "Title (h2)",
+                  "fill": "$text",
+                  "content": "Charlas",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 30,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "X9cNy",
+              "name": "Cards",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "id": "f984eY",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Herramientas de IA para desarrollo web",
+                  "width": "fill_container",
+                  "stroke": "$charlas-accent",
+                  "descendants": {
+                    "cBGmK": {
+                      "fill": "#00000000",
+                      "stroke": "$charlas-accent",
+                      "strokeWidth": 1
+                    },
+                    "wdhrD": {
+                      "content": "2025",
+                      "fill": "$charlas-accent-text"
+                    },
+                    "hiIt4": {
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "../src/assets/images/post-devfest.webp",
+                        "mode": "cover"
+                      }
+                    },
+                    "GbOwS": {
+                      "content": "Herramientas de IA para desarrollo web"
+                    },
+                    "Zbgty": {
+                      "content": "GDG DevFest Pereira · 29 nov 2025 · Pereira · Español",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "FFFE6": {
+                      "enabled": true
+                    },
+                    "FFFE6/rsBhT": {
+                      "icon": "play-circle"
+                    },
+                    "FFFE6/qQdrm": {
+                      "content": "Grabación"
+                    },
+                    "vfCZu/rsBhT": {
+                      "icon": "article"
+                    },
+                    "vfCZu/qQdrm": {
+                      "content": "Post"
+                    }
+                  }
+                },
+                {
+                  "type": "frame",
+                  "id": "s1UsTL",
+                  "name": "Column",
+                  "width": "fill_container",
+                  "height": 400,
+                  "layout": "vertical",
+                  "gap": 24,
+                  "children": [
+                    {
+                      "id": "Z7Igld",
+                      "type": "ref",
+                      "ref": "YigSS",
+                      "name": "Charla en AWS Community Day",
+                      "width": "fill_container",
+                      "stroke": "$charlas-accent",
+                      "height": "fill_container",
+                      "descendants": {
+                        "cBGmK": {
+                          "fill": "#00000000",
+                          "stroke": "$charlas-accent",
+                          "strokeWidth": 1
+                        },
+                        "wdhrD": {
+                          "content": "Próxima",
+                          "fill": "$charlas-accent-text"
+                        },
+                        "hiIt4": {
+                          "enabled": false
+                        },
+                        "GbOwS": {
+                          "content": "Charla en AWS Community Day"
+                        },
+                        "Zbgty": {
+                          "content": "AWS User Group Pereira · Fecha por confirmar · Español",
+                          "fill": "$muted",
+                          "fontSize": 14,
+                          "fontWeight": "500"
+                        },
+                        "FFFE6": {
+                          "enabled": true
+                        },
+                        "FFFE6/rsBhT": {
+                          "icon": "ticket"
+                        },
+                        "FFFE6/qQdrm": {
+                          "content": "Inscripción"
+                        },
+                        "vfCZu": {
+                          "enabled": false
+                        }
+                      }
+                    },
+                    {
+                      "id": "kTgxN",
+                      "type": "ref",
+                      "ref": "YigSS",
+                      "name": "Charla en QA Conf",
+                      "width": "fill_container",
+                      "stroke": "$charlas-accent",
+                      "height": "fill_container",
+                      "descendants": {
+                        "cBGmK": {
+                          "fill": "#00000000",
+                          "stroke": "$charlas-accent",
+                          "strokeWidth": 1
+                        },
+                        "wdhrD": {
+                          "content": "2026",
+                          "fill": "$charlas-accent-text"
+                        },
+                        "hiIt4": {
+                          "enabled": false
+                        },
+                        "GbOwS": {
+                          "content": "Charla en QA Conf"
+                        },
+                        "Zbgty": {
+                          "content": "QA Conf · 2026 · Español",
+                          "fill": "$muted",
+                          "fontSize": 14,
+                          "fontWeight": "500"
+                        },
+                        "OKSMK": {
+                          "enabled": false
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Glgbq",
+          "name": "Comunidad",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            40,
+            40,
+            48,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "V8v5zV",
+              "name": "Heading",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "PValq",
+                  "name": "Icon Box",
+                  "width": 40,
+                  "height": 40,
+                  "fill": "$comunidad-accent",
+                  "cornerRadius": 8,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "MXiNh",
+                      "name": "Icon",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "users",
+                      "library": "phosphor",
+                      "weight": 500,
+                      "fill": "$bg"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "s9fyT",
+                  "name": "Title (h2)",
+                  "fill": "$text",
+                  "content": "Comunidad",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 30,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "k1XtOl",
+              "name": "Subheading (h3)",
+              "fill": "$text",
+              "content": "Organizo",
+              "fontFamily": "Montserrat",
+              "fontSize": 20,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "Q9fhe",
+              "name": "Organizo Cards",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "id": "y6d7ri",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Backbone UTP",
+                  "width": "fill_container",
+                  "stroke": "$comunidad-accent",
+                  "height": 351,
+                  "descendants": {
+                    "cBGmK": {
+                      "fill": "#00000000",
+                      "stroke": "$comunidad-accent",
+                      "strokeWidth": 1
+                    },
+                    "wdhrD": {
+                      "content": "Agosto 2022 - Actualidad",
+                      "fill": "$comunidad-accent-text"
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "Backbone UTP"
+                    },
+                    "Zbgty": {
+                      "content": "Fundador y mentor",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "OKSMK": {
+                      "type": "frame",
+                      "id": "gCZEK",
+                      "name": "Extras",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 14,
+                      "padding": [
+                        8,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "id": "SgD78",
+                          "type": "ref",
+                          "ref": "Zewml",
+                          "name": "Sitio web",
+                          "descendants": {
+                            "rsBhT": {
+                              "icon": "arrow-square-out"
+                            },
+                            "qQdrm": {
+                              "content": "Sitio web"
+                            }
+                          }
+                        },
+                        {
+                          "type": "frame",
+                          "id": "M5Dvq",
+                          "name": "Eventos",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "uv49i",
+                              "name": "Label",
+                              "fill": "$muted",
+                              "content": "Eventos",
+                              "fontFamily": "Montserrat",
+                              "fontSize": 12,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "id": "d6XWnX",
+                              "type": "ref",
+                              "ref": "V3qpE9",
+                              "name": "GDG DevFest Pereira 2025",
+                              "descendants": {
+                                "bl99Z": {
+                                  "content": "GDG DevFest Pereira 2025",
+                                  "fontSize": 13
+                                }
+                              }
+                            },
+                            {
+                              "id": "G0EKX",
+                              "type": "ref",
+                              "ref": "V3qpE9",
+                              "name": "GDG Pereira - Mujeres en Tecnología",
+                              "width": "fill_container",
+                              "cornerRadius": 12,
+                              "descendants": {
+                                "bl99Z": {
+                                  "content": "GDG Pereira - Mujeres en Tecnología",
+                                  "fontSize": 13,
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "lineHeight": 1.4
+                                }
+                              }
+                            },
+                            {
+                              "id": "sYi40",
+                              "type": "ref",
+                              "ref": "V3qpE9",
+                              "name": "La IA no te quitará el trabajo, pero YO Sí",
+                              "width": "fill_container",
+                              "cornerRadius": 12,
+                              "descendants": {
+                                "bl99Z": {
+                                  "content": "La IA no te quitará el trabajo, pero YO Sí",
+                                  "fontSize": 13,
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "lineHeight": 1.4
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "xvfmj",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Pereira Tech Talks (PerTT)",
+                  "width": "fill_container",
+                  "stroke": "$comunidad-accent",
+                  "height": 351,
+                  "descendants": {
+                    "cBGmK": {
+                      "fill": "#00000000",
+                      "stroke": "$comunidad-accent",
+                      "strokeWidth": 1
+                    },
+                    "wdhrD": {
+                      "content": "2025 - Actualidad",
+                      "fill": "$comunidad-accent-text"
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "Pereira Tech Talks (PerTT)"
+                    },
+                    "Zbgty": {
+                      "content": "Organizador",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "OKSMK": {
+                      "enabled": false
+                    }
+                  }
+                },
+                {
+                  "id": "p19jF2",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Software Freedom Day Pereira",
+                  "width": "fill_container",
+                  "stroke": "$comunidad-accent",
+                  "height": 351,
+                  "descendants": {
+                    "cBGmK": {
+                      "fill": "#00000000",
+                      "stroke": "$comunidad-accent",
+                      "strokeWidth": 1
+                    },
+                    "wdhrD": {
+                      "content": "2023 - Actualidad",
+                      "fill": "$comunidad-accent-text"
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "Software Freedom Day Pereira"
+                    },
+                    "Zbgty": {
+                      "content": "Organizador",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "OKSMK": {
+                      "type": "frame",
+                      "id": "Jukuj",
+                      "name": "Extras",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 14,
+                      "padding": [
+                        8,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "CtlmK",
+                          "name": "Eventos",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "O0tu7",
+                              "name": "Label",
+                              "fill": "$muted",
+                              "content": "Eventos",
+                              "fontFamily": "Montserrat",
+                              "fontSize": 12,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "id": "vBc8J",
+                              "type": "ref",
+                              "ref": "V3qpE9",
+                              "name": "Software Freedom Day 2023",
+                              "descendants": {
+                                "bl99Z": {
+                                  "content": "Software Freedom Day 2023",
+                                  "fontSize": 13
+                                }
+                              }
+                            },
+                            {
+                              "id": "pEnqC",
+                              "type": "ref",
+                              "ref": "V3qpE9",
+                              "name": "2024",
+                              "descendants": {
+                                "bl99Z": {
+                                  "content": "2024",
+                                  "fontSize": 13
+                                }
+                              }
+                            },
+                            {
+                              "id": "n69Ald",
+                              "type": "ref",
+                              "ref": "V3qpE9",
+                              "name": "2025",
+                              "descendants": {
+                                "bl99Z": {
+                                  "content": "2025",
+                                  "fontSize": 13
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "JAGrB",
+              "name": "Subheading (h3)",
+              "fill": "$text",
+              "content": "He colaborado con",
+              "fontFamily": "Montserrat",
+              "fontSize": 20,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "WnIGL",
+              "name": "Colaboraciones",
+              "gap": 10,
+              "children": [
+                {
+                  "id": "k89Mi",
+                  "type": "ref",
+                  "ref": "V3qpE9",
+                  "name": "GDG Pereira",
+                  "descendants": {
+                    "bl99Z": {
+                      "content": "GDG Pereira"
+                    }
+                  }
+                },
+                {
+                  "id": "EEkWs",
+                  "type": "ref",
+                  "ref": "V3qpE9",
+                  "name": "AWS User Group Pereira",
+                  "descendants": {
+                    "bl99Z": {
+                      "content": "AWS User Group Pereira"
+                    }
+                  }
+                },
+                {
+                  "id": "SG8A9",
+                  "type": "ref",
+                  "ref": "V3qpE9",
+                  "name": "FLISoL",
+                  "descendants": {
+                    "bl99Z": {
+                      "content": "FLISoL"
+                    }
+                  }
+                },
+                {
+                  "id": "G0IoFA",
+                  "type": "ref",
+                  "ref": "V3qpE9",
+                  "name": "QA Conf",
+                  "descendants": {
+                    "bl99Z": {
+                      "content": "QA Conf"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "GjNZf",
+          "name": "Clientes",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            40,
+            40,
+            48,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "WvK35",
+              "name": "Heading",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "aO60Z",
+                  "name": "Icon Box",
+                  "width": 40,
+                  "height": 40,
+                  "fill": "$clientes-accent",
+                  "cornerRadius": 8,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "Y5J36",
+                      "name": "Icon",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "handshake",
+                      "library": "phosphor",
+                      "weight": 500,
+                      "fill": "$bg"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "j0fezU",
+                  "name": "Title (h2)",
+                  "fill": "$text",
+                  "content": "Clientes",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 30,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "u6qp9",
+              "name": "Subheading (h3)",
+              "fill": "$text",
+              "content": "Empresa",
+              "fontFamily": "Montserrat",
+              "fontSize": 20,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "awyOO",
+              "name": "Empresa Cards",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "id": "It4WT",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "3 clientes fintech en EE. UU. · vía Fuse",
+                  "width": "fill_container",
+                  "stroke": "$clientes-accent",
+                  "height": 177,
+                  "descendants": {
+                    "W8Iva": {
+                      "enabled": false
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "3 clientes fintech en EE. UU. · vía Fuse"
+                    },
+                    "Zbgty": {
+                      "content": "Forward Deployed Engineer",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "OKSMK": {
+                      "type": "frame",
+                      "id": "uqjmg",
+                      "name": "Outcome",
+                      "width": "fill_container",
+                      "gap": 10,
+                      "padding": [
+                        4,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "F53OyC",
+                          "name": "Icon",
+                          "width": 18,
+                          "height": 18,
+                          "icon": "trend-up",
+                          "library": "phosphor",
+                          "weight": 500,
+                          "fill": "$text"
+                        },
+                        {
+                          "type": "text",
+                          "id": "G4LNJ",
+                          "name": "Resultado",
+                          "fill": "$text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Agentes de crédito en producción con protección de PII",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Montserrat",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "YW5PA",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Plataforma de streaming con +25 M de usuarios · vía Globant",
+                  "width": "fill_container",
+                  "stroke": "$clientes-accent",
+                  "height": 177,
+                  "descendants": {
+                    "W8Iva": {
+                      "enabled": false
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "Plataforma de streaming con +25 M de usuarios · vía Globant"
+                    },
+                    "Zbgty": {
+                      "content": "Web UI Developer",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "OKSMK": {
+                      "type": "frame",
+                      "id": "dN13f",
+                      "name": "Outcome",
+                      "width": "fill_container",
+                      "gap": 10,
+                      "padding": [
+                        4,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "osKgo",
+                          "name": "Icon",
+                          "width": 18,
+                          "height": 18,
+                          "icon": "trend-up",
+                          "library": "phosphor",
+                          "weight": 500,
+                          "fill": "$text"
+                        },
+                        {
+                          "type": "text",
+                          "id": "q09APz",
+                          "name": "Resultado",
+                          "fill": "$text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Tiempo de respuesta de la API de 120 ms a 60 ms",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Montserrat",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "D6Z9Yg",
+              "name": "Subheading (h3)",
+              "fill": "$text",
+              "content": "Freelance",
+              "fontFamily": "Montserrat",
+              "fontSize": 20,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "B34jpd",
+              "name": "Freelance Cards",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "id": "toYJu",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Cliente freelance",
+                  "width": "fill_container",
+                  "stroke": "$clientes-accent",
+                  "height": 153,
+                  "descendants": {
+                    "W8Iva": {
+                      "enabled": false
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "Cliente freelance"
+                    },
+                    "Zbgty": {
+                      "content": "Rol",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "OKSMK": {
+                      "type": "frame",
+                      "id": "Oa90n",
+                      "name": "Outcome",
+                      "width": "fill_container",
+                      "gap": 10,
+                      "padding": [
+                        4,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "isFnF",
+                          "name": "Icon",
+                          "width": 18,
+                          "height": 18,
+                          "icon": "trend-up",
+                          "library": "phosphor",
+                          "weight": 500,
+                          "fill": "$text"
+                        },
+                        {
+                          "type": "text",
+                          "id": "s2UG8x",
+                          "name": "Resultado",
+                          "fill": "$text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Resultado en una línea",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Montserrat",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "BnuOr",
+                  "type": "ref",
+                  "ref": "YigSS",
+                  "name": "Cliente freelance",
+                  "width": "fill_container",
+                  "stroke": "$clientes-accent",
+                  "height": 153,
+                  "descendants": {
+                    "W8Iva": {
+                      "enabled": false
+                    },
+                    "hiIt4": {
+                      "enabled": false
+                    },
+                    "GbOwS": {
+                      "content": "Cliente freelance"
+                    },
+                    "Zbgty": {
+                      "content": "Rol",
+                      "fill": "$muted",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    "OKSMK": {
+                      "type": "frame",
+                      "id": "AOs6Y",
+                      "name": "Outcome",
+                      "width": "fill_container",
+                      "gap": 10,
+                      "padding": [
+                        4,
+                        0,
+                        0,
+                        0
+                      ],
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "cpyj4",
+                          "name": "Icon",
+                          "width": 18,
+                          "height": 18,
+                          "icon": "trend-up",
+                          "library": "phosphor",
+                          "weight": 500,
+                          "fill": "$text"
+                        },
+                        {
+                          "type": "text",
+                          "id": "X5MrdJ",
+                          "name": "Resultado",
+                          "fill": "$text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Resultado en una línea",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Montserrat",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "VOiCn",
+          "name": "Testimonios",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            40,
+            40,
+            48,
+            40
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "E7ORu",
+              "name": "Heading",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "AdN7x",
+                  "name": "Icon Box",
+                  "width": 40,
+                  "height": 40,
+                  "fill": "$testimonios-accent",
+                  "cornerRadius": 8,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "b66qfs",
+                      "name": "Icon",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "quotes",
+                      "library": "phosphor",
+                      "weight": 500,
+                      "fill": "$bg"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "N5ZthS",
+                  "name": "Title (h2)",
+                  "fill": "$text",
+                  "content": "Testimonios",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 30,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "sRWIa",
+              "name": "Testimonios Cards",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "FPVfx",
+                  "name": "Testimonio",
+                  "width": "fill_container",
+                  "height": 178,
+                  "fill": "$surface",
+                  "cornerRadius": 13,
+                  "stroke": "$testimonios-accent",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 28,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "foUdF",
+                      "name": "Blockquote",
+                      "width": "fill_container",
+                      "stroke": "$rule",
+                      "strokeWidth": {
+                        "left": 3
+                      },
+                      "layout": "vertical",
+                      "padding": [
+                        2,
+                        0,
+                        2,
+                        18
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "RfNsl",
+                          "name": "Quote",
+                          "fill": "$text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Texto del testimonio. Aquí irá una cita breve de una persona con la que trabajé, sobre el resultado del proyecto y la forma de trabajar en equipo.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Montserrat",
+                          "fontSize": 17,
+                          "fontWeight": "normal",
+                          "fontStyle": "italic"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "wBiCR",
+                      "name": "Attribution",
+                      "fill": "$muted",
+                      "content": "Nombre Apellido · Rol, Empresa",
+                      "fontFamily": "Montserrat",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "YqAGA",
+                  "name": "Testimonio",
+                  "width": "fill_container",
+                  "height": 178,
+                  "fill": "$surface",
+                  "cornerRadius": 13,
+                  "stroke": "$testimonios-accent",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 28,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "uvkIE",
+                      "name": "Blockquote",
+                      "width": "fill_container",
+                      "stroke": "$rule",
+                      "strokeWidth": {
+                        "left": 3
+                      },
+                      "layout": "vertical",
+                      "padding": [
+                        2,
+                        0,
+                        2,
+                        18
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Vs8Go",
+                          "name": "Quote",
+                          "fill": "$text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Texto del testimonio. Aquí irá una cita breve de una persona con la que trabajé, sobre el resultado del proyecto y la forma de trabajar en equipo.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Montserrat",
+                          "fontSize": 17,
+                          "fontWeight": "normal",
+                          "fontStyle": "italic"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "ohWGF",
+                      "name": "Attribution",
+                      "fill": "$muted",
+                      "content": "Nombre Apellido · Rol, Empresa",
+                      "fontFamily": "Montserrat",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "note",
+      "id": "p3oZ5",
+      "x": 8412,
+      "y": 640,
+      "name": "Hue · Charlas",
+      "width": 300,
+      "height": 96,
+      "content": "Charlas · hue 344 (44 + 300)\nClaro: hsl(344 55% 50%) · texto hsl(344 55% 28%)\nOscuro: hsl(344 50% 50%) · texto hsl(344 60% 68%)\nVariables: $charlas-accent, $charlas-accent-text"
+    },
+    {
+      "type": "note",
+      "id": "NeukV",
+      "x": 8412,
+      "y": 1192,
+      "name": "Hue · Comunidad",
+      "width": 300,
+      "height": 96,
+      "content": "Comunidad · hue 144 (44 + 100)\nClaro: hsl(144 55% 50%) · texto hsl(144 55% 28%)\nOscuro: hsl(144 50% 50%) · texto hsl(144 60% 68%)\nVariables: $comunidad-accent, $comunidad-accent-text"
+    },
+    {
+      "type": "note",
+      "id": "T5jwb8",
+      "x": 8412,
+      "y": 1846,
+      "name": "Hue · Clientes",
+      "width": 300,
+      "height": 96,
+      "content": "Clientes · hue 204 (44 + 160)\nClaro: hsl(204 55% 50%) · texto hsl(204 55% 28%)\nOscuro: hsl(204 50% 50%) · texto hsl(204 60% 68%)\nVariables: $clientes-accent, $clientes-accent-text"
+    },
+    {
+      "type": "note",
+      "id": "UwJoh",
+      "x": 8412,
+      "y": 2448,
+      "name": "Hue · Testimonios",
+      "width": 300,
+      "height": 96,
+      "content": "Testimonios · hue 264 (44 + 220)\nClaro: hsl(264 55% 50%) · texto hsl(264 55% 28%)\nOscuro: hsl(264 50% 50%) · texto hsl(264 60% 68%)\nVariables: $testimonios-accent, $testimonios-accent-text"
+    },
+    {
+      "type": "note",
+      "id": "W8ARIS",
+      "x": 9207,
+      "y": 628,
+      "name": "Hue · Charlas",
+      "width": 300,
+      "height": 96,
+      "content": "Charlas · hue 344 (44 + 300)\nClaro: hsl(344 55% 50%) · texto hsl(344 55% 28%)\nOscuro: hsl(344 50% 50%) · texto hsl(344 60% 68%)\nVariables: $charlas-accent, $charlas-accent-text"
+    },
+    {
+      "type": "note",
+      "id": "MtR8M",
+      "x": 9207,
+      "y": 1597,
+      "name": "Hue · Comunidad",
+      "width": 300,
+      "height": 96,
+      "content": "Comunidad · hue 144 (44 + 100)\nClaro: hsl(144 55% 50%) · texto hsl(144 55% 28%)\nOscuro: hsl(144 50% 50%) · texto hsl(144 60% 68%)\nVariables: $comunidad-accent, $comunidad-accent-text"
+    },
+    {
+      "type": "note",
+      "id": "ZohAd",
+      "x": 9207,
+      "y": 2721,
+      "name": "Hue · Clientes",
+      "width": 300,
+      "height": 96,
+      "content": "Clientes · hue 204 (44 + 160)\nClaro: hsl(204 55% 50%) · texto hsl(204 55% 28%)\nOscuro: hsl(204 50% 50%) · texto hsl(204 60% 68%)\nVariables: $clientes-accent, $clientes-accent-text"
+    },
+    {
+      "type": "note",
+      "id": "dpZ23",
+      "x": 9207,
+      "y": 3673,
+      "name": "Hue · Testimonios",
+      "width": 300,
+      "height": 96,
+      "content": "Testimonios · hue 264 (44 + 220)\nClaro: hsl(264 55% 50%) · texto hsl(264 55% 28%)\nOscuro: hsl(264 50% 50%) · texto hsl(264 60% 68%)\nVariables: $testimonios-accent, $testimonios-accent-text"
+    },
+    {
+      "type": "note",
+      "id": "IPc2N",
+      "x": 10912,
+      "y": 640,
+      "name": "Hue · Charlas",
+      "width": 300,
+      "height": 96,
+      "content": "Charlas · hue 344 (44 + 300)\nClaro: hsl(344 55% 50%) · texto hsl(344 55% 28%)\nOscuro: hsl(344 50% 50%) · texto hsl(344 60% 68%)\nVariables: $charlas-accent, $charlas-accent-text"
+    },
+    {
+      "type": "note",
+      "id": "u5UhU",
+      "x": 10912,
+      "y": 1192,
+      "name": "Hue · Comunidad",
+      "width": 300,
+      "height": 96,
+      "content": "Comunidad · hue 144 (44 + 100)\nClaro: hsl(144 55% 50%) · texto hsl(144 55% 28%)\nOscuro: hsl(144 50% 50%) · texto hsl(144 60% 68%)\nVariables: $comunidad-accent, $comunidad-accent-text"
+    },
+    {
+      "type": "note",
+      "id": "qhFo6",
+      "x": 10912,
+      "y": 1846,
+      "name": "Hue · Clientes",
+      "width": 300,
+      "height": 96,
+      "content": "Clientes · hue 204 (44 + 160)\nClaro: hsl(204 55% 50%) · texto hsl(204 55% 28%)\nOscuro: hsl(204 50% 50%) · texto hsl(204 60% 68%)\nVariables: $clientes-accent, $clientes-accent-text"
+    },
+    {
+      "type": "note",
+      "id": "AbDXN",
+      "x": 10912,
+      "y": 2448,
+      "name": "Hue · Testimonios",
+      "width": 300,
+      "height": 96,
+      "content": "Testimonios · hue 264 (44 + 220)\nClaro: hsl(264 55% 50%) · texto hsl(264 55% 28%)\nOscuro: hsl(264 50% 50%) · texto hsl(264 60% 68%)\nVariables: $testimonios-accent, $testimonios-accent-text"
     }
   ],
+  "themes": {
+    "mode": [
+      "light",
+      "dark"
+    ]
+  },
   "variables": {
     "bg": {
       "type": "color",
-      "value": "#F9F8F5"
+      "value": [
+        {
+          "value": "#F9F8F5",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#1D1B16",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
     },
     "text": {
       "type": "color",
-      "value": "#120F08"
+      "value": [
+        {
+          "value": "#120F08",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#E0DCD1",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
     },
     "accent": {
       "type": "color",
-      "value": "#C6A039"
+      "value": [
+        {
+          "value": "#C6A039",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#BF9D40",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
     },
     "accent-text": {
       "type": "color",
-      "value": "#7A621F"
+      "value": [
+        {
+          "value": "#7A621F",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#DEC47C",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
     },
     "surface": {
       "type": "color",
-      "value": "#FDFDFC"
+      "value": [
+        {
+          "value": "#FDFDFC",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#060604",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
     },
     "border": {
       "type": "color",
-      "value": "#120F0814"
+      "value": [
+        {
+          "value": "#120F0814",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#E0DCD114",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
     },
     "muted": {
       "type": "color",
-      "value": "#5E5645"
+      "value": [
+        {
+          "value": "#5E5645",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#AEA898",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
     },
     "warning-bg": {
       "type": "color",
-      "value": "#C6A039"
+      "value": [
+        {
+          "value": "#C6A039",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#735E26",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
     },
     "warning-text": {
       "type": "color",
-      "value": "#261F0D"
+      "value": [
+        {
+          "value": "#261F0D",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#F2EBD9",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
     },
     "success-bg": {
       "type": "color",
-      "value": "#40BF66"
+      "value": [
+        {
+          "value": "#40BF66",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#26733D",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
     },
     "success-text": {
       "type": "color",
-      "value": "#0D2614"
+      "value": [
+        {
+          "value": "#0D2614",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#D9F2E0",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
     },
     "bkg-circle": {
       "type": "color",
-      "value": "#D6D1C2"
+      "value": [
+        {
+          "value": "#D6D1C2",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#635736",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
     },
     "font": {
       "type": "string",
@@ -6488,7 +10295,157 @@
     },
     "rule": {
       "type": "color",
-      "value": "#120F0826"
+      "value": [
+        {
+          "value": "#120F0826",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#E0DCD126",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "charlas-accent": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#C6395F",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#BF4062",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "charlas-accent-text": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#6F2035",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#DE7C97",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "comunidad-accent": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#39C671",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#40BF73",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "comunidad-accent-text": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#206F40",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#7CDEA4",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "clientes-accent": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#398EC6",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#408CBF",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "clientes-accent-text": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#204F6F",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#7CB7DE",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "testimonios-accent": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#7139C6",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#7340BF",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "testimonios-accent-text": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#40206F",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#A47CDE",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
     }
-  }
+  },
+  "fileToken": "ca0ce3ab-87f2-406c-9e35-daffe8fd897b"
 }

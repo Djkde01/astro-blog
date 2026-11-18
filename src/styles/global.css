@@ -359,16 +359,40 @@ button {
   background-color: hsl(var(--muted));
   box-shadow: var(--shadow-sm);
 
+  /* Four links do not fit beside the logo on a phone: below --md they take their own
+     centered row, with smaller buttons that keep it to one line down to 320px. */
   & ul {
     display: flex;
-    gap: var(--space-sm);
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0;
+
+    @media (--md) {
+      gap: var(--space-sm);
+    }
+  }
+
+  & .link {
+    padding-inline: var(--space-2xs);
+    font-size: var(--fs-sm);
+
+    @media (--md) {
+      padding-inline: var(--space-sm);
+      font-size: var(--fs-md);
+    }
   }
 }
 
 .navbar {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: var(--space-2xs);
   align-items: center;
+
+  @media (--md) {
+    justify-content: space-between;
+  }
   width: 100%;
   max-width: 1500px;
   margin-inline: auto;
@@ -417,15 +441,24 @@ button {
   }
 }
 
+/* A section's heading: its icon sits on a tile of the section's color, the site accent by default. */
+section > .title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-sm);
+
+  & svg {
+    flex-shrink: 0;
+    padding: 0.4rem;
+    border-radius: var(--radius-md);
+    background-color: hsl(var(--section-accent, var(--accent)));
+    color: hsl(var(--bkg));
+  }
+}
+
 /* Work experience */
 .experience {
-  & .title {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    justify-content: flex-start;
-    margin-bottom: var(--space-sm);
-  }
   & ol {
     list-style: none;
     position: relative;
@@ -637,6 +670,11 @@ main:has(> .now, > .about-band) {
   justify-self: stretch;
 }
 
+/* the body centers main vertically; Charlas sits at the top, so filtering down to a few talks never moves its title */
+main:has(> .talks) {
+  align-self: start;
+}
+
 .now {
   background-color: hsl(var(--muted));
   border-block: var(--border-sm) solid hsl(var(--txt) / 0.08);
@@ -741,18 +779,7 @@ main:has(> .now, > .about-band) {
   }
 }
 
-/* about: the labeled links and the services */
-.encuentrame,
-.services {
-  & .title {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    margin-block-end: var(--space-sm);
-  }
-}
-
-/* the dark icon tile on find-me links and service cards */
+/* the dark icon tile on find-me links, service cards and community collaborators */
 .icon-box {
   display: grid;
   place-items: center;
@@ -784,7 +811,8 @@ main:has(> .now, > .about-band) {
     grid-template-columns: repeat(3, 1fr) 1.2fr;
   }
 
-  & a {
+  & a,
+  & li > span {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: center;
@@ -897,9 +925,9 @@ main:has(> .now, > .about-band) {
 }
 
 /* cards */
-/* hover lift on post and project cards; the reduced-motion rule zeroes the transition */
+/* hover lift on post and content cards; the reduced-motion rule zeroes the transition */
 .card,
-.project-card {
+.content-card {
   transition:
     transform var(--transition-ease-fast),
     box-shadow var(--transition-ease-fast);
@@ -1101,13 +1129,6 @@ header {
 }
 
 .projects {
-  & .title {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    justify-content: flex-start;
-    margin-bottom: var(--space-sm);
-  }
   & .content {
     margin-block: var(--space-md);
     display: grid;
@@ -1120,22 +1141,6 @@ header {
     @media (--xl) {
       grid-template-columns: repeat(3, minmax(200px, 1fr));
       gap: var(--space-lg);
-    }
-  }
-  & .project-card {
-    display: grid;
-    /* tag, image, text: only the text row takes a taller neighbour's spare height, so titles in a row line up */
-    grid-template-rows: auto auto 1fr;
-    gap: var(--space-sm);
-    padding: var(--space-md);
-    align-self: stretch;
-    /* a subtle surface, so the card reads apart from the page without a heavy shadow */
-    background-color: hsl(var(--muted));
-    border: var(--border-sm) solid hsl(var(--txt) / 0.08);
-    border-radius: var(--radius-lg);
-    &:hover,
-    &:focus-within {
-      box-shadow: var(--shadow-md);
     }
   }
   & .project-tag {
@@ -1160,41 +1165,299 @@ header {
     background-color: hsl(var(--bkg-warning));
   }
 
+}
+
+/* Phase 5: the card primitive (src/components/Card.astro) and the About sections. */
+
+.content-card {
+  display: grid;
+  /* tag, image, body: only the body row takes a taller neighbour's spare height, so titles in a row line up */
+  grid-template-rows: auto auto 1fr;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  align-self: stretch;
+  /* a subtle surface, so the card reads apart from the page without a heavy shadow */
+  background-color: hsl(var(--muted));
+  border: var(--border-sm) solid hsl(var(--txt) / 0.08);
+  border-radius: var(--radius-lg);
+  &:hover,
+  &:focus-within {
+    box-shadow: var(--shadow-md);
+  }
+  /* a card without a tag or an image keeps its body in the last row */
+  &:not(:has(> .card-tag, > picture, > .card-logo)) {
+    grid-template-rows: 1fr;
+  }
+  &:has(> .card-tag):not(:has(> picture, > .card-logo)),
+  &:has(> picture, > .card-logo):not(:has(> .card-tag)) {
+    grid-template-rows: auto 1fr;
+  }
+
+  /* a logo shows whole on a light plate in both themes, so dark and colored logos keep contrast */
+  & .card-logo {
+    display: grid;
+    place-items: center;
+    padding: var(--space-md);
+    background-color: hsl(var(--muted--light));
+    border: var(--border-sm) solid hsl(var(--txt) / 0.08);
+    border-radius: var(--radius-md);
+
+    & img {
+      width: auto;
+      max-width: 100%;
+      height: 3.5rem;
+      object-fit: contain;
+      box-shadow: none;
+      border-radius: 0;
+    }
+  }
+
   & img {
     box-shadow: var(--shadow-sm);
     object-fit: cover;
     overflow: hidden;
     border-radius: var(--radius-md);
-    &:hover {
-      border-color: var(--color-gray-700);
-      background-color: var(--color-gray-800-50);
-    }
   }
-  .text-container {
-    display: grid;
-    /* the description takes the spare height, so the buttons sit at the bottom of the card */
-    grid-template-rows: auto 1fr auto;
-    gap: var(--space-sm);
-  }
-  .description {
-    color: var(--color-gray-700);
-    @media (prefers-color-scheme: dark) {
-      color: var(--color-gray-400);
-    }
-  }
+}
 
-  .project-link {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
-    margin-top: var(--space-2xs);
+.card-tag {
+  justify-self: end;
+  padding: var(--space-2xs) var(--space-xs);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  pointer-events: none;
+}
 
-    /* the hero's button size, so Código and Proyecto fit one row in a three-column card */
-    & .link {
-      padding-block: var(--space-2xs);
-      font-size: 1rem;
+.card-body {
+  display: grid;
+  /* the description takes the spare height, so the buttons sit at the bottom of the card */
+  grid-template-rows: auto 1fr auto;
+  gap: var(--space-sm);
+  align-content: start;
+}
+
+.card-description {
+  color: var(--color-gray-700);
+  @media (prefers-color-scheme: dark) {
+    color: var(--color-gray-400);
+  }
+}
+
+.card-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-2xs);
+
+  /* the hero's button size, so two buttons fit one row in a three-column card */
+  & .link {
+    padding-block: var(--space-2xs);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+}
+
+.project-tag {
+  text-transform: uppercase;
+}
+
+.card-grid {
+  margin-block: var(--space-md);
+  display: grid;
+  gap: var(--space-xs);
+  align-items: start;
+
+  @media (--lg) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (--xl) {
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    gap: var(--space-lg);
+  }
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs) var(--space-xs);
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  display: inline-block;
+  padding: 0.25em var(--space-xs);
+  border: var(--border-sm) solid hsl(var(--txt) / 0.15);
+  border-radius: var(--radius-full);
+  font-size: var(--fs-sm);
+  color: inherit;
+  text-decoration: none;
+}
+
+a.chip:hover,
+a.chip:focus-visible {
+  border-color: hsl(var(--section-accent, var(--accent)));
+}
+
+/* the year chips above the talks; the pressed one is filled */
+.year-filter {
+  margin-top: var(--space-sm);
+
+  /* undoes the global button's fixed square, shadow, hover color and color fade, which lagged on unpressing */
+  & button.chip {
+    display: inline-block;
+    transition: none;
+    width: auto;
+    height: auto;
+    background: none;
+    box-shadow: none;
+    font: inherit;
+    font-size: var(--fs-sm);
+
+    &:hover,
+    &:focus-visible {
+      color: inherit;
+      border-color: hsl(var(--section-accent, var(--accent)));
+    }
+
+    /* the section's text color, dark in light mode and light in dark mode, keeps the label readable */
+    &[aria-pressed="true"] {
+      background-color: hsl(var(--section-accent-text, var(--txt)));
+      border-color: hsl(var(--section-accent-text, var(--txt)));
+      color: hsl(var(--bkg));
       font-weight: 600;
     }
+  }
+}
+
+/* display rules above would otherwise win over the hidden attribute */
+.year-filter[hidden],
+.content-card[hidden] {
+  display: none;
+}
+
+/* the event chips past the first six, folded behind a native toggle */
+.more-chips > summary {
+  width: fit-content;
+  cursor: pointer;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: hsl(var(--section-accent-text, var(--txt)));
+}
+
+.more-chips[open] > summary {
+  margin-bottom: var(--space-xs);
+}
+
+/* organizer cards: the chips sit under the role, and a taller neighbour's spare height goes above the button */
+.community .card-body {
+  display: flex;
+  flex-direction: column;
+
+  & .card-ctas {
+    margin-top: auto;
+  }
+}
+
+/* the collaborators sit apart from the organizer cards, under a heading with room of its own */
+.community .collaborators {
+  margin-top: var(--space-lg);
+
+  & > h2 {
+    margin-bottom: var(--space-sm);
+  }
+}
+
+/* a collaborator's tile stays dark in both themes, since FLISoL's and QA Conf's logos are drawn for a dark ground */
+.collaborator-tile {
+  background-color: hsl(var(--txt--light));
+  color: hsl(var(--bkg--light));
+
+  & img {
+    width: 1.9rem;
+    height: 1.9rem;
+    object-fit: contain;
+  }
+}
+
+.card-chips-label {
+  font-size: var(--fs-sm);
+  color: var(--color-gray-700);
+  @media (prefers-color-scheme: dark) {
+    color: var(--color-gray-400);
+  }
+}
+
+.card-outcome {
+  display: flex;
+  gap: var(--space-2xs);
+  align-items: baseline;
+}
+
+/* a testimonial fills its card, and the quote takes the spare height, so every name and role sit at the bottom */
+.testimonials .card-body {
+  grid-template-rows: 1fr;
+}
+
+.testimonial {
+  margin: 0;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: var(--space-sm);
+
+  & blockquote {
+    margin: 0;
+    padding-inline-start: var(--space-sm);
+    border-inline-start: 3px solid hsl(var(--section-accent));
+    font-style: italic;
+  }
+}
+
+/*
+ * Section accents. Each --accent-<section> is a hue derived from --_hue, so light and dark stay
+ * coherent; the colors take --accent's saturation and lightness. They color only the heading's
+ * icon box, card tags and card borders, never running text.
+ */
+:root {
+  --accent-talks: calc(var(--_hue) + 300);
+  --accent-community: calc(var(--_hue) + 100);
+  --accent-clients: calc(var(--_hue) + 160);
+  --accent-testimonials: calc(var(--_hue) + 220);
+}
+
+.talks {
+  --section-hue: var(--accent-talks);
+}
+.community {
+  --section-hue: var(--accent-community);
+}
+.clients {
+  --section-hue: var(--accent-clients);
+}
+.testimonials {
+  --section-hue: var(--accent-testimonials);
+}
+
+.section-accent {
+  --section-accent: var(--section-hue) 55% 50%;
+  --section-accent-text: var(--section-hue) 55% 28%;
+  @media (prefers-color-scheme: dark) {
+    --section-accent: var(--section-hue) 50% 50%;
+    --section-accent-text: var(--section-hue) 60% 68%;
+  }
+
+  & .content-card {
+    border-color: hsl(var(--section-accent));
+  }
+
+  & .card-tag {
+    color: hsl(var(--section-accent-text));
+    border: var(--border-sm) solid hsl(var(--section-accent));
+  }
+
+  & h3 {
+    margin-block-start: var(--space-md);
   }
 }
 
